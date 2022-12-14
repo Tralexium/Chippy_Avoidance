@@ -1,0 +1,43 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode cull_front, unshaded;
+
+uniform sampler2D tex : hint_albedo;
+uniform float horizon_point : hint_range(0.0, 1.0) = 0.5;
+uniform float horizon_length;
+uniform float ground_horizon_length;
+uniform float horizon_blend_length;
+uniform vec4 sky_col : hint_color;
+uniform vec4 horizon_col : hint_color;
+uniform vec4 ground_col : hint_color;
+uniform vec4 pit_col : hint_color;
+
+
+void fragment() {
+	vec4 _final_col = vec4(0.0);
+	
+	if(UV.y > horizon_point + horizon_blend_length) {
+		_final_col = mix(horizon_col, sky_col, smoothstep(horizon_point + horizon_blend_length, horizon_point + horizon_length, UV.y));
+	}
+	else if (UV.y < horizon_point + horizon_blend_length && UV.y > horizon_point - horizon_blend_length) {
+		_final_col = mix(ground_col, horizon_col, smoothstep(horizon_point - horizon_blend_length, horizon_point + horizon_blend_length, UV.y));
+	}
+	else {
+		_final_col = mix(pit_col, ground_col, smoothstep(horizon_point - ground_horizon_length, horizon_point - horizon_blend_length, UV.y));
+	}
+	
+	ALBEDO = _final_col.rgb * texture(tex, UV*vec2(1.5, .75)).rgb;
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/horizon_point = 0.359
+shader_param/horizon_length = 0.195
+shader_param/ground_horizon_length = 0.279
+shader_param/horizon_blend_length = 0.102
+shader_param/sky_col = Color( 0.945098, 0.8, 1, 1 )
+shader_param/horizon_col = Color( 0.552941, 0.968627, 0.94902, 1 )
+shader_param/ground_col = Color( 0.505882, 0.666667, 0.917647, 1 )
+shader_param/pit_col = Color( 0.0784314, 0.0392157, 0.164706, 1 )

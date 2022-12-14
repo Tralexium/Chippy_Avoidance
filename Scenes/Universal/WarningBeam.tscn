@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Universal/WarningBeam.gd" type="Script" id=1]
+[ext_resource path="res://Assets/white_square.png" type="Texture" id=2]
+
+[node name="WarningBeam" type="Sprite3D"]
+transform = Transform( 1, 0, 0, 0, 500, 0, 0, 0, 1, 0, 0, 0 )
+offset = Vector2( 0, -16 )
+modulate = Color( 1, 0.27451, 0.27451, 1 )
+billboard = 2
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Shaders/skybox_shader.tres" type="Material" id=1]
+[ext_resource path="res://Scenes/Skybox.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+params_cull_mode = 1
+
+[sub_resource type="SphereMesh" id=2]
+material = SubResource( 1 )
+radius = 400.0
+height = 400.0
+rings = 64
+
+[node name="Skybox" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0 )
+material_override = ExtResource( 1 )
+mesh = SubResource( 2 )
+script = ExtResource( 2 )

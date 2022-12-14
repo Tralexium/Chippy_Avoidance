@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/crosshair.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Universal/Crosshair.gd" type="Script" id=2]
+
+[node name="Crosshair" type="Sprite3D"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+modulate = Color( 1, 0.345098, 0.345098, 1 )
+pixel_size = 0.006
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
