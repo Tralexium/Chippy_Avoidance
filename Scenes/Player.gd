@@ -25,6 +25,7 @@ onready var n_collision_shape: CollisionShape = $CollisionShape
 onready var n_animation_player : AnimationPlayer = $AnimationPlayer
 onready var n_hitbox_shape: CollisionShape = $Hitbox/CollisionShape
 onready var n_camera_pos: Position3D = $"%CameraPos"
+onready var n_shadow_guide: RayCast = $ShadowGuide
 
 
 func _ready() -> void:
@@ -90,8 +91,10 @@ func _apply_velocity() -> void:
 	
 	# Jump/Y Axis
 	if is_on_floor():
+		n_shadow_guide.hidden = true
 		snap_vector = Vector3.DOWN
 	if input_vector.y > 0:
+		n_shadow_guide.hidden = false
 		velocity.y = jump_vel
 		snap_vector = Vector3.ZERO
 	

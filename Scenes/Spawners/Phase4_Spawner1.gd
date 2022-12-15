@@ -27,7 +27,6 @@ func set_get_enabled(value: bool) -> void:
 		step_timer.start(spawn_freq)
 	else:
 		step_timer.stop()
-		shrink_scythes()
 
 
 func spawn_scythe_random() -> void:

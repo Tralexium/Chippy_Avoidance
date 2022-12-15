@@ -25,6 +25,7 @@ func set_active(value: bool) -> void:
 		return
 	if active:
 		show_pillars()
+		fallen_pillars.clear()
 	else:
 		hide_pillars()
 	
@@ -48,6 +49,7 @@ func show_pillars() -> void:
 	for pillar in pillars:
 		pillar.show()
 		pillar.find_node("CollisionShape").disabled = false
+		pillar.animation_player.play("RESET")
 
 
 func hide_pillars() -> void:
@@ -56,14 +58,14 @@ func hide_pillars() -> void:
 		pillar.find_node("CollisionShape").disabled = true
 
 
-func pulse_pillars_down(starting_pos: Vector2, ripple_speed: float) -> void:
+func pulse_pillars_down(starting_pos: Vector2, ripple_speed: float = 1.0) -> void:
 	for pillar in pillars:
 		var pillar_xz = Vector2(pillar.global_translation.x, pillar.global_translation.z)
 		var delay = starting_pos.distance_to(pillar_xz) / (pillar_offset*ripple_speed)
 		pillar.bounce_down(delay, 1.5)
 
 
-func pulse_pillars_up(starting_pos: Vector2, ripple_speed: float) -> void:
+func pulse_pillars_up(starting_pos: Vector2, ripple_speed: float = 1.0) -> void:
 	for pillar in pillars:
 		var pillar_xz = Vector2(pillar.global_translation.x, pillar.global_translation.z)
 		var delay = starting_pos.distance_to(pillar_xz) / (pillar_offset*ripple_speed)
