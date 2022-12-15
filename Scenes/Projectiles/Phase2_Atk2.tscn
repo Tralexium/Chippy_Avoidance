@@ -9,7 +9,7 @@ extents = Vector3( 0.310823, 0.658155, 0.0231924 )
 [sub_resource type="PrismMesh" id=2]
 size = Vector3( 2, 2, 0.05 )
 
-[node name="Phase2_Atk2" type="Spatial"]
+[node name="Phase2_Atk2" type="Spatial" groups=["hazard"]]
 transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, 0 )
 script = ExtResource( 1 )
 

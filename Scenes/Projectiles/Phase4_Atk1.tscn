@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Resources/Materials/hazard_mat.tres" type="Material" id=1]
+[ext_resource path="res://Resources/Meshes/circle_scythe.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Projectiles/Phase4_Atk1.gd" type="Script" id=4]
+
+[sub_resource type="CylinderShape" id=1]
+height = 0.749017
+radius = 2.8
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1.2, 0.1, 0.2, 1, 1, 0.309804, 0.309804, 0 )
+
+[node name="Phase4_Atk1" type="Spatial" groups=["hazard"]]
+script = ExtResource( 4 )
+
+[node name="Hazard" type="Area" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Hazard"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+material_override = ExtResource( 1 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("../Hazard")
+
+[node name="Trail3D" type="ImmediateGeometry" parent="."]
+material_override = SubResource( 5 )
+script = ExtResource( 3 )
+distance = 0.5
+segments = 15
+lifetime = 1.0
+base_width = 5.0
+width_profile = SubResource( 4 )
+color_gradient = SubResource( 3 )
+alignment = "Normal"
+axe = "X"
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+aabb = AABB( -20, -20, -20, 40, 40, 40 )
+
+[connection signal="camera_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_camera_exited"]

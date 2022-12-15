@@ -17,8 +17,6 @@ onready var camera: Camera = $SpringArm/Camera
 
 func _ready() -> void:
 	set_as_toplevel(true)
-	shift_cam_instant(Vector3(0, 8, 0), Vector3.ZERO, 30.0)
-	switch_projection()
 
 
 func _process(delta: float) -> void:
@@ -46,8 +44,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			spring_arm.spring_length = min(100.0, spring_arm.spring_length + zoom_len)
 
 
-func switch_projection() -> void:
-	if camera.projection == Camera.PROJECTION_PERSPECTIVE:
+func switch_projection(ortho: bool = false) -> void:
+	if ortho:
 		camera.projection = Camera.PROJECTION_ORTHOGONAL
 	else:
 		camera.projection = Camera.PROJECTION_PERSPECTIVE

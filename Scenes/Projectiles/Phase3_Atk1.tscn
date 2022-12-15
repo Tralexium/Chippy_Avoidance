@@ -9,7 +9,7 @@ extents = Vector3( 3, 3, 3 )
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 6, 6, 6 )
 
-[node name="Phase3_Atk1" type="Spatial"]
+[node name="Phase3_Atk1" type="Spatial" groups=["hazard"]]
 script = ExtResource( 2 )
 
 [node name="Hazard" type="Area" parent="."]

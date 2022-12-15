@@ -6,7 +6,7 @@ export var spawning := false setget set_spawning
 export var spawn_frequency := 0.2 setget set_spawn_frequency
 export var spawn_amount := 1
 export var projectile_spacing := 1.1
-export var projectile_spawn_area := 30
+export var projectile_spawn_area := 20
 
 var spawn_positions := []
 var is_ready := false

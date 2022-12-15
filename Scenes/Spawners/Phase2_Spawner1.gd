@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
 
 func set_enabled(value: bool) -> void:
 	enabled = value
+	auto_shoot.stop()
 	if not is_ready:
 		return
 	if enabled:

@@ -15,7 +15,7 @@ height = 10.0
 [sub_resource type="Animation" id=6]
 resource_name = "explosion"
 
-[node name="Phase2_Atk3" type="KinematicBody"]
+[node name="Phase2_Atk3" type="KinematicBody" groups=["hazard"]]
 collision_layer = 4
 script = ExtResource( 2 )
 

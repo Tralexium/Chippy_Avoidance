@@ -10,7 +10,7 @@ radius = 1.5
 radius = 1.5
 height = 3.0
 
-[node name="Phase2_Atk1" type="Spatial"]
+[node name="Phase2_Atk1" type="Spatial" groups=["hazard"]]
 script = ExtResource( 2 )
 
 [node name="Hitbox" type="Area" parent="."]

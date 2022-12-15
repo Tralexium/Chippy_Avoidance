@@ -8,7 +8,7 @@
 
 [sub_resource type="SphereMesh" id=2]
 
-[node name="Phase1_Atk1" type="KinematicBody"]
+[node name="Phase1_Atk1" type="KinematicBody" groups=["hazard"]]
 collision_layer = 4
 script = ExtResource( 2 )
 

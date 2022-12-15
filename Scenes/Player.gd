@@ -117,6 +117,13 @@ func _apply_velocity() -> void:
 		n_mesh.transform.basis = Basis(lerped_quat)
 
 
+func stop_cam_movement() -> void:
+	if n_camera_pos.tween != null:
+		n_camera_pos.tween.kill()
+	n_camera_pos._on_SpringArm_finished_camera_rotation()
+	n_camera_pos.shake_cam(0.0, 0.0)
+
+
 func _animations() -> void:
 	pass
 

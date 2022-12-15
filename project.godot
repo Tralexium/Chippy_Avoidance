@@ -18,6 +18,10 @@ config/icon="res://icon.png"
 
 Globals="*res://Globals/Globals.gd"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg" )
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
@@ -72,6 +76,16 @@ cam_zoom_out={
 restart={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+dev_skip_phase_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+dev_skip_phase_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777236,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
