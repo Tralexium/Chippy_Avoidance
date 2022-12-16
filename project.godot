@@ -18,6 +18,11 @@ config/icon="res://icon.png"
 
 Globals="*res://Globals/Globals.gd"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/Trail/plugin.cfg" )
@@ -105,4 +110,5 @@ common/physics_interpolation=true
 
 [rendering]
 
+quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"

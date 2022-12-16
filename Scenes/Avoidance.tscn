@@ -32,6 +32,8 @@ rings = 64
 
 [sub_resource type="Environment" id=7]
 ambient_light_color = Color( 0.788235, 0.666667, 0.921569, 1 )
+dof_blur_far_distance = 50.0
+dof_blur_far_transition = 50.0
 glow_enabled = true
 glow_intensity = 2.0
 
@@ -415,7 +417,7 @@ tracks/0/keys = {
 "args": [ Vector3( 0, 0, 9 ), Vector3( -70, 0, 0 ), 0.25, 1, 7, 20.0 ],
 "method": "shift_cam"
 }, {
-"args": [ Vector3( 0, 0, 5 ), Vector3( -55, 0, 0 ), 1.0, 1, 7, 55.0 ],
+"args": [ Vector3( 0, 0, 9 ), Vector3( -45, 0, 0 ), 1.0, 1, 7, 55.0 ],
 "method": "shift_cam"
 } ]
 }
@@ -455,7 +457,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 24.58, 33.77, 35.55, 35.85, 36.15, 36.45, 36.75, 37.05, 37.35, 37.65, 41, 43.09, 53.1, 56.67, 56.77, 56.87, 58, 58.23, 58.46, 58.69, 58.92, 60.21 ),
+"times": PoolRealArray( 24.58, 33.77, 35.55, 35.85, 36.15, 36.45, 36.75, 37.05, 37.35, 37.65, 41, 43.09, 53.1, 56.67, 56.77, 56.87, 58, 58.23, 58.46, 58.69, 58.92, 62.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ Vector2( -15, -15 ), 12.0 ],
@@ -1082,34 +1084,34 @@ tracks/39/keys = {
 "args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 1 ],
-"method": "shoot_specific"
-}, {
-"args": [ 2 ],
-"method": "shoot_specific"
-}, {
-"args": [ 3 ],
-"method": "shoot_specific"
-}, {
-"args": [ 4 ],
-"method": "shoot_specific"
-}, {
-"args": [ 5 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
 "args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 1 ],
-"method": "shoot_specific"
-}, {
-"args": [ 2 ],
+"args": [ 3 ],
 "method": "shoot_specific"
 }, {
 "args": [ 3 ],
 "method": "shoot_specific"
 }, {
-"args": [ 4 ],
+"args": [ 3 ],
+"method": "shoot_specific"
+}, {
+"args": [ 1 ],
+"method": "shoot_specific"
+}, {
+"args": [ 1 ],
+"method": "shoot_specific"
+}, {
+"args": [ 1 ],
+"method": "shoot_specific"
+}, {
+"args": [ 5 ],
+"method": "shoot_specific"
+}, {
+"args": [ 5 ],
 "method": "shoot_specific"
 }, {
 "args": [ 5 ],
