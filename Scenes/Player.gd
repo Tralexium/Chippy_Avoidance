@@ -51,6 +51,8 @@ func die() -> void:
 func _physics_process(delta: float) -> void:
 	if cam_follow_y:
 		n_camera_pos.translation.y = lerp(n_camera_pos.translation.y, translation.y, 0.2)
+	else:
+		n_camera_pos.translation.y = 0.0
 	if is_dead:
 		return
 	

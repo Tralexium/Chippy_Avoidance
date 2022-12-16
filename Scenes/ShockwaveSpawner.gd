@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	spike_ring.rotation_degrees.y -= rotate_spd * delta
 
 
-func _on_Timer_timeout() -> void:
+func smash() -> void:
 	animation_player.play("smash")
 	var ring_inst := RING.instance()
 	add_child(ring_inst)

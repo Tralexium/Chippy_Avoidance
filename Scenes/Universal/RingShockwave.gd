@@ -1,11 +1,12 @@
 extends Area
 
-export var ring_target_scale := 20.0
+export var ring_target_scale := 25.0
 export var ring_expand_dur := 3.0
 onready var mesh_instance: MeshInstance = $MeshInstance
 
 
 func _ready() -> void:
+	set_as_toplevel(true)
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_parallel()
 	tween.tween_property(self, "scale", Vector3(ring_target_scale, 0.0, ring_target_scale), ring_expand_dur)
 	tween.tween_callback(self, "_fade_out").set_delay(ring_expand_dur - 0.5)

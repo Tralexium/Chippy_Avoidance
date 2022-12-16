@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Terrain/FallingPillar.gd" type="Script" id=1]
 
@@ -63,6 +63,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 0.5, -2, -2, 0.5 ),
 "update": 0,
 "values": [ Vector3( 0, -75, 0 ), Vector3( 0, -76, 0 ), Vector3( 0, -74.9, 0 ), Vector3( 0, -75, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "bounce_down_hard"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.8, 1 ),
+"transitions": PoolRealArray( 0.5, -2, -2, 0.5 ),
+"update": 0,
+"values": [ Vector3( 0, -75, 0 ), Vector3( 0, -80, 0 ), Vector3( 0, -74.9, 0 ), Vector3( 0, -75, 0 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -172,6 +187,7 @@ root_node = NodePath("../KinematicBody")
 playback_process_mode = 0
 anims/RESET = SubResource( 3 )
 anims/bounce_down = SubResource( 4 )
+anims/bounce_down_hard = SubResource( 9 )
 anims/bounce_up = SubResource( 5 )
 anims/fall = SubResource( 7 )
 anims/rise = SubResource( 8 )

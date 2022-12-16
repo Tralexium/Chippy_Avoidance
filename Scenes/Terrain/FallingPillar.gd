@@ -30,6 +30,15 @@ func bounce_down(delay: float, speed_multiplier: float = 1.0) -> void:
 		animation_player.play("bounce_down")
 
 
+func bounce_down_hard(delay: float, speed_multiplier: float = 1.0) -> void:
+	animation_player.playback_speed = speed_multiplier
+	if delay > 0.0:
+		bounce_delay.start(delay)
+		delayed_anim = "bounce_down_hard"
+	else:
+		animation_player.play("bounce_down_hard")
+
+
 func bounce_up(delay: float, speed_multiplier: float = 1.0) -> void:
 	animation_player.playback_speed = speed_multiplier
 	if delay > 0.0:

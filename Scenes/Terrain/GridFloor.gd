@@ -58,14 +58,22 @@ func hide_pillars() -> void:
 		pillar.find_node("CollisionShape").disabled = true
 
 
-func pulse_pillars_down(starting_pos: Vector2, ripple_speed: float = 1.0) -> void:
+func pulse_pillars_down(starting_pos: Vector2, ripple_speed: float = 10.0) -> void:
 	for pillar in pillars:
 		var pillar_xz = Vector2(pillar.global_translation.x, pillar.global_translation.z)
 		var delay = starting_pos.distance_to(pillar_xz) / (pillar_offset*ripple_speed)
 		pillar.bounce_down(delay, 1.5)
 
 
-func pulse_pillars_up(starting_pos: Vector2, ripple_speed: float = 1.0) -> void:
+func pulse_pillars_down_at_player(ripple_speed: float = 10.0) -> void:
+	var player_pos : Vector3 = get_tree().get_nodes_in_group("player")[0].global_translation
+	var starting_pos := Vector2(player_pos.x, player_pos.z)
+	for pillar in pillars:
+		var pillar_xz = Vector2(pillar.global_translation.x, pillar.global_translation.z)
+		var delay = starting_pos.distance_to(pillar_xz) / (pillar_offset*ripple_speed)
+		pillar.bounce_down_hard(delay, 1.5)
+
+func pulse_pillars_up(starting_pos: Vector2, ripple_speed: float = 10.0) -> void:
 	for pillar in pillars:
 		var pillar_xz = Vector2(pillar.global_translation.x, pillar.global_translation.z)
 		var delay = starting_pos.distance_to(pillar_xz) / (pillar_offset*ripple_speed)
