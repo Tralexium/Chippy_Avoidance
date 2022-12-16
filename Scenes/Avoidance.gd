@@ -1,6 +1,6 @@
 extends Spatial
 
-export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8]
+export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0]
 
 var current_phase := 0
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
@@ -15,6 +15,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if !Globals.debug_mode:
+		return
 	if Input.is_action_just_pressed("dev_skip_phase_up"):
 		fast_forward_phase(1)
 	if Input.is_action_just_pressed("dev_skip_phase_down"):

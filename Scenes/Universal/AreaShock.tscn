@@ -9,7 +9,7 @@ height = 0.01
 [sub_resource type="CylinderMesh" id=2]
 height = 0.01
 
-[node name="AreaShock" type="Area"]
+[node name="AreaShock" type="Area" groups=["hazard"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 2 )

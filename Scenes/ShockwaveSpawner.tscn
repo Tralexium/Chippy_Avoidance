@@ -1,0 +1,164 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Resources/Materials/hazard_mat.tres" type="Material" id=1]
+[ext_resource path="res://Scenes/ShockwaveSpawner.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Meshes/shockwave_ring_smasher.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://Resources/Meshes/shockwave_ring.tres" type="ArrayMesh" id=4]
+
+[sub_resource type="SphereShape" id=1]
+radius = 1.5
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Smashers/SmasherTop:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.5, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Smashers/SmasherTop2:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.5, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpikeRing:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 3, 3, 3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Smashers/SmasherTop:material_override:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1.30196, 0.25098, 0.34902, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Smashers/SmasherTop2:material_override:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1.30196, 0.25098, 0.34902, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SpikeRing:material_override:albedo_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1.30196, 0.25098, 0.34902, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "smash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Smashers/SmasherTop:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.5, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Smashers/SmasherTop2:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.5, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SpikeRing:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 4.5, 3, 4.5 ), Vector3( 3, 3, 3 ) ]
+}
+
+[node name="ShockwaveSpawner" type="Spatial" groups=["hazard"]]
+script = ExtResource( 2 )
+
+[node name="Hitbox" type="Area" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
+shape = SubResource( 1 )
+
+[node name="Smashers" type="Position3D" parent="."]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+
+[node name="SmasherTop" type="MeshInstance" parent="Smashers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+material_override = ExtResource( 1 )
+mesh = ExtResource( 3 )
+skeleton = NodePath("../..")
+
+[node name="SmasherTop2" type="MeshInstance" parent="Smashers"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.5, 0 )
+material_override = ExtResource( 1 )
+mesh = ExtResource( 3 )
+skeleton = NodePath("../..")
+
+[node name="SpikeRing" type="MeshInstance" parent="."]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+material_override = ExtResource( 1 )
+mesh = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/smash = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

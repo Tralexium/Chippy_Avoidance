@@ -6,6 +6,10 @@ export var ground_col = Color("81aaea")
 export var pit_col = Color("140a2a")
 
 
+func _ready() -> void:
+	scale = Vector3.ONE * 2.0
+
+
 func change_skybox_colors(_sky_col: Color, _horizon_col: Color, _ground_col: Color, _pit_col: Color, duration: float):
 	if duration > 0.0:
 		var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_parallel()

@@ -1,20 +1,23 @@
 extends KinematicBody
 
-export var walk_vel := 2.0
-export var walk_speed := 15.0
-export var walk_friction := 0.5
-export var jump_vel := 25.0
-export var gravity := 1.0
-export var max_fall_vel := 30.0
+export var walk_speed := 16.0
+export var jump_vel := 35.0
+export var djump_vel := 30.0
+export var flying_vel := 73.0
+export var gravity := 1.9
+export var max_fall_vel := 100.0
 export var input_buffer_dur := 0.1
 export var coyote_time_dur := 0.2
-export var cam_follow := false
+export var lock_2d := false
+export var flying := false
+export var cam_follow_y := false
 
 export var hp := 3 setget set_hp
 
 var input_vector := Vector3.ZERO
 var velocity := Vector3.ZERO
 var snap_vector := Vector3.DOWN
+var has_djump := false
 var is_dead := false
 var coyote_time := 0.0
 var input_buffer_time := 0.0
@@ -45,12 +48,9 @@ func die() -> void:
 	n_collision_shape.set_deferred("disabled", true)
 
 
-func _process(delta: float) -> void:
-	if cam_follow:
-		n_camera_pos.translation = translation
-
-
 func _physics_process(delta: float) -> void:
+	if cam_follow_y:
+		n_camera_pos.translation.y = lerp(n_camera_pos.translation.y, translation.y, 0.2)
 	if is_dead:
 		return
 	
@@ -79,30 +79,39 @@ func _get_input() -> void:
 	input_vector.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 	input_vector.z = Input.get_action_strength("player_backward") - Input.get_action_strength("player_forward")
 	input_vector = input_vector.rotated(Vector3.UP, n_camera_pos.rotation.y).normalized()
+	if lock_2d:
+		input_vector.z = 0.0
+		translation.z = lerp(translation.z, 0.0, 0.5)
 	if (Input.is_action_just_pressed("player_jump") or buffered_input == "player_jump") and (is_on_floor() or coyote_time > 0.0):
+		has_djump = true
 		input_vector.y = 1
 		coyote_time = 0.0
+	elif Input.is_action_just_pressed("player_jump") and has_djump:
+		has_djump = false
+		input_vector.y = 1
 
 
 func _apply_velocity() -> void:
 	var delta = get_physics_process_delta_time()
 	
-	velocity.y = 0.0 if is_on_floor() else min(max_fall_vel, velocity.y - gravity)
+	velocity.y = 0.0 if is_on_floor() else max(-max_fall_vel, velocity.y - gravity)
 	
 	# Jump/Y Axis
 	if is_on_floor():
 		n_shadow_guide.hidden = true
 		snap_vector = Vector3.DOWN
-	if input_vector.y > 0:
+	if input_vector.y > 0 or flying:
 		n_shadow_guide.hidden = false
-		velocity.y = jump_vel
+		velocity.y = jump_vel if has_djump else djump_vel
+		if flying:
+			velocity.y = flying_vel
 		snap_vector = Vector3.ZERO
 	
 	# X&Z Axis
 	velocity.x = input_vector.x * walk_speed
 	velocity.z = input_vector.z * walk_speed
 
-	if Input.is_action_just_released("player_jump") and velocity.y > 0.0:
+	if !flying and Input.is_action_just_released("player_jump") and velocity.y > 0.0:
 		velocity.y *= 0.5
 	
 	# Rotate the player mesh based on camera's orientation / movement
@@ -125,6 +134,7 @@ func stop_cam_movement() -> void:
 		n_camera_pos.tween.kill()
 	n_camera_pos._on_SpringArm_finished_camera_rotation()
 	n_camera_pos.shake_cam(0.0, 0.0)
+	n_camera_pos.global_translation = Vector3.ZERO
 
 
 func _animations() -> void:
