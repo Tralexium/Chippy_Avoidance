@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Building Blocks/PillarGround.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Universal/ProjectileRing.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Universal/BasicProjectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Universal/PathPlatformSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/ShockwaveSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Terrain/CubeGround.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Projectiles/Phase5_Atk1.tscn" type="PackedScene" id=8]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 32, 21, 0, 0, 0, 0, 0, 0, 0, 47, 21, 0, 0, 0, 0, 0, 0, 0, 47, 21, 30, 0, 0, 0, 0, 0, 0, 47, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 48, 0, 0, 0, 0, 0, 0, 49, 0, 48, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
+
+[node name="Phase7_Platforming" type="Spatial"]
+
+[node name="Solids" type="Position3D" parent="."]
+
+[node name="PillarGround" parent="Solids" instance=ExtResource( 1 )]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -150.038, 0 )
+
+[node name="PillarGround2" parent="Solids" instance=ExtResource( 1 )]
+transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 5, 29, -146.038, 19 )
+
+[node name="PillarGround3" parent="Solids" instance=ExtResource( 1 )]
+transform = Transform( 8, 0, 0, 0, 1, 0, 0, 0, 8, 47, -150.038, 32 )
+
+[node name="PillarGround4" parent="Solids" instance=ExtResource( 1 )]
+transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 77, -157.038, 45 )
+
+[node name="PathPlatformSpawner" parent="Solids" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 97, -7, 30 )
+curve = SubResource( 1 )
+platforms = 4
+move_speed = 0.2
+
+[node name="PathPlatformSpawner2" parent="Solids" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 208, 13, 44 )
+platforms = 5
+move_speed = 0.2
+
+[node name="PathPlatformSpawner3" parent="Solids" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 263, 13, 64 )
+curve = SubResource( 2 )
+platforms = 6
+move_speed = -0.2
+
+[node name="CubeGround" parent="Solids" instance=ExtResource( 7 )]
+transform = Transform( 25, 0, 0, 0, 2, 0, 0, 0, 5, 176, 15, 44 )
+
+[node name="Hazards" type="Position3D" parent="."]
+
+[node name="ProjectileRing" parent="Hazards" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 77, -5.0383, 45 )
+projectile = ExtResource( 3 )
+radius = 0.0
+ring_segments = 8
+ring_padding = 2.0
+y_rotation_spd = -3.0
+
+[node name="ProjectileRing2" parent="Hazards" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 163, 26.9617, 44 )
+projectile = ExtResource( 3 )
+projectile_count = 4
+radius = 4.0
+
+[node name="ProjectileRing3" parent="Hazards" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 176, 26.9617, 44 )
+projectile = ExtResource( 3 )
+projectile_count = 4
+radius = 4.0
+y_rotation_spd = -3.0
+
+[node name="ProjectileRing4" parent="Hazards" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 190, 26.9617, 44 )
+projectile = ExtResource( 3 )
+projectile_count = 4
+radius = 4.0
+
+[node name="ShockwaveSpawner" parent="Hazards" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 256, 16, 35 )
+auto_shoot_freq = 6.0
+ring_target_scale = 10.0
+ring_expand_dur = 2.0
+
+[node name="ShockwaveSpawner2" parent="Hazards" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 288, 16, 88 )
+auto_shoot_freq = 6.0
+auto_shoot_offset = 2.0
+ring_target_scale = 10.0
+ring_expand_dur = 2.0
+
+[node name="ShockwaveSpawner3" parent="Hazards" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 228, 16, 112 )
+auto_shoot_freq = 6.0
+auto_shoot_offset = 1.0
+ring_target_scale = 10.0
+ring_expand_dur = 2.0
+
+[node name="Phase5_Atk1" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 113, -3, 30 )
+
+[node name="Phase5_Atk2" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 113, -3, 22 )
+
+[node name="Phase5_Atk9" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 47, 4, 32 )
+
+[node name="Phase5_Atk3" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 113, -3, 38 )
+
+[node name="Phase5_Atk4" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 144, -3, 60 )
+
+[node name="Phase5_Atk7" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 137, -3, 60 )
+
+[node name="Phase5_Atk8" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 130, -3, 60 )
+
+[node name="Phase5_Atk5" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 144, 4, 60 )
+
+[node name="Phase5_Atk6" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 144, 11, 60 )
+
+[node name="Phase5_Atk10" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 228, 18, 64 )
+
+[node name="Phase5_Atk13" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 238, 18, 64 )
+
+[node name="Phase5_Atk12" parent="Hazards" instance=ExtResource( 8 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 248, 18, 64 )

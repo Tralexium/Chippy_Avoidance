@@ -12,6 +12,7 @@ var ring_array := []
 
 
 func _ready() -> void:
+	$Icon.hide()
 	scale = Vector3.ZERO
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "scale", Vector3.ONE, 0.5)

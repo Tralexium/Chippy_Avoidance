@@ -3,10 +3,9 @@
 [ext_resource path="res://Scenes/Universal/PathPlatformSpawner.gd" type="Script" id=1]
 
 [sub_resource type="Curve3D" id=1]
-resource_local_to_scene = true
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+"points": PoolVector3Array(  ),
+"tilts": PoolRealArray(  )
 }
 
 [node name="PathPlatformSpawner" type="Path"]

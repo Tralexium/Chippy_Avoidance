@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CylinderShape" id=1]
+height = 300.0
+
+[sub_resource type="CylinderMesh" id=2]
+height = 300.0
+
+[node name="PillarGround" type="StaticBody"]
+transform = Transform( 20, 0, 0, 0, 0.2, 0, 0, 0, 20, 0, -30.0383, 0 )
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 2 )
