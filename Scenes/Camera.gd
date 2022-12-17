@@ -33,8 +33,8 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Globals.debug_mode:
 		if event is InputEventMouseMotion and Input.is_action_pressed("cam_rotate"):
-			spring_arm.rotation_degrees.x -= event.relative.y * mouse_sens
-			spring_arm.rotation_degrees.x = clamp(rotation_degrees.x, -90.0, 30.0)
+			rotation_degrees.x -= event.relative.y * mouse_sens
+			rotation_degrees.x = clamp(rotation_degrees.x, -90.0, 30.0)
 			
 			rotation_degrees.y -= event.relative.x * mouse_sens
 			rotation_degrees.y = wrapf(rotation_degrees.y, 0.0, 360.0)

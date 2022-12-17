@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/platform_path_orb.png" type="Texture" id=1]
+
+[node name="PathOrb" type="Sprite3D"]
+pixel_size = 0.001
+billboard = 1
+texture = ExtResource( 1 )
