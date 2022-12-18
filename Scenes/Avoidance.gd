@@ -1,6 +1,6 @@
 extends Spatial
 
-export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5]
+export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44]
 
 var current_phase := 0
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer

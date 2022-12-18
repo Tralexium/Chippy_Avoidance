@@ -4,7 +4,7 @@ export var air_borne_dur := 2.0
 export var fall_gravity := 10.0
 export var bounce_gravity := 1.0
 export var bounce_force := 20.0
-export var bounce_max_angle := 10.0
+export var bounce_max_angle := 5.0
 export var bounce_in_z_axis := false
 
 var velocity := Vector3.ZERO
@@ -19,7 +19,7 @@ onready var collision_shape: CollisionShape = $CollisionShape
 func _ready() -> void:
 	mesh.scale = Vector3.ZERO
 	warning_beam.warning_dur = air_borne_dur
-	warning_beam.starting_scale = 10.0
+	warning_beam.starting_scale = 8.0
 	var tween := create_tween().set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_ELASTIC).tween_property(mesh, "scale", Vector3.ONE, 0.5)
 	tween.tween_callback(self, "fall").set_delay(air_borne_dur - 0.5)

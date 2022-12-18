@@ -19,7 +19,7 @@ func shoot_at(target_pos: Vector3, amount: int = 3, speed: float = 30.0, spread_
 		var rotated_vector := dir.rotated(Vector3.UP, proj_angle)
 		if inverse_angle:
 			rotated_vector = rotated_vector.rotated(Vector3.UP, PI)
-		proj_inst.life_time = 1.9 if accel == 0.0 else 0.8
+		proj_inst.life_time = 1.3 if accel == 0.0 else 0.5
 		get_tree().current_scene.add_child(proj_inst)
 		proj_inst.global_translation = global_translation
 		proj_inst.velocity = rotated_vector * speed if accel == 0.0 else rotated_vector

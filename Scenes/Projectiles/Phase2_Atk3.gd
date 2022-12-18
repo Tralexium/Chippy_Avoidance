@@ -18,7 +18,7 @@ onready var crosshair: Sprite3D = $Crosshair
 
 
 func _ready() -> void:
-	warning_beam.warning_dur = air_borne_dur
+	warning_beam.warning_dur = air_borne_dur - 0.2
 	warning_beam.starting_scale = area_radius * 5.0
 	crosshair.warning_dur = air_borne_dur
 	crosshair.starting_scale = area_radius
