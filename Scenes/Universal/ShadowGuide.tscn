@@ -6,7 +6,7 @@
 [node name="ShadowGuide" type="RayCast"]
 enabled = true
 cast_to = Vector3( 0, -100, 0 )
-collision_mask = 5
+collision_mask = 13
 collide_with_areas = true
 script = ExtResource( 2 )
 

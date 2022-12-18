@@ -102,6 +102,7 @@ dev_skip_phase_down={
 3d_physics/layer_2="Player"
 2d_physics/layer_3="Hazard"
 3d_physics/layer_3="Hazard"
+3d_physics/layer_4="ShadowSolid"
 
 [physics]
 

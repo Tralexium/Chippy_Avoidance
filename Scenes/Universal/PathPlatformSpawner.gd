@@ -37,10 +37,10 @@ func _spawn_platforms() -> void:
 	for i in range(platforms):
 		var platform_inst := PLATFORM.instance()
 		var path_follower := PathFollow.new()
+		path_follower.rotation_mode = PathFollow.ROTATION_NONE
 		path_follower.add_child(platform_inst)
 		add_child(path_follower)
 		path_follower.unit_offset = float(i) / float(platforms)
-		path_follower.rotation_mode = PathFollow.ROTATION_NONE
 
 
 func _physics_process(delta: float) -> void:

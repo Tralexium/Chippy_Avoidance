@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Universal/ProjectileRing.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ShockwaveSpawner.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Universal/BasicProjectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Universal/ProjectileRing.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/ShockwaveSpawner.tscn" type="PackedScene" id=5]
+
+[node name="Platforming_Hazards" type="Position3D"]
+
+[node name="ProjectileRing2" type="Spatial" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 42, 12.9617, -1 )
+script = ExtResource( 1 )
+projectile = ExtResource( 3 )
+projectile_count = 3
+radius = 2.0
+ring_segments = 4
+ring_padding = 2.0
+
+[node name="ProjectileRing3" type="Spatial" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 60, 12.9617, -1 )
+script = ExtResource( 1 )
+projectile = ExtResource( 3 )
+projectile_count = 3
+radius = 2.0
+ring_segments = 4
+ring_padding = 2.0
+y_rotation_spd = -3.0
+
+[node name="ShockwaveSpawner" type="Spatial" parent="." groups=["hazard"] instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131, 0, -10 )
+script = ExtResource( 2 )
+auto_shoot_freq = 6.0
+ring_target_scale = 10.0
+ring_expand_dur = 2.0
+
+[node name="ShockwaveSpawner2" type="Spatial" parent="." groups=["hazard"] instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 163, 0, 43 )
+script = ExtResource( 2 )
+auto_shoot_freq = 6.0
+auto_shoot_offset = 2.0
+ring_target_scale = 10.0
+ring_expand_dur = 2.0
+
+[node name="ShockwaveSpawner3" type="Spatial" parent="." groups=["hazard"] instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 103, 0, 67 )
+script = ExtResource( 2 )
+auto_shoot_freq = 6.0
+auto_shoot_offset = 1.0
+ring_target_scale = 10.0
+ring_expand_dur = 2.0

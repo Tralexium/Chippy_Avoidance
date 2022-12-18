@@ -6,6 +6,7 @@
 extents = Vector3( 2.99196, 0.324411, 3.00552 )
 
 [node name="Platform" type="KinematicBody"]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
