@@ -1,17 +1,11 @@
 extends Spatial
 
-export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 62.5]
+export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5]
 
 var current_phase := 0
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var timeline: AnimationPlayer = $Timeline
 onready var player: KinematicBody = $Player
-
-
-func _ready() -> void:
-	pass
-	# Autoplay plays too early before the other resources finish loading
-#	$AudioStreamPlayer.play()
 
 
 func _process(delta: float) -> void:

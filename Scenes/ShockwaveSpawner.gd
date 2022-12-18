@@ -4,7 +4,6 @@ const RING := preload("res://Scenes/Universal/RingShockwave.tscn")
 
 export var auto_shoot := false setget set_auto_shoot
 export var auto_shoot_freq := 5.0
-export var auto_shoot_offset := 0.0
 export var ring_target_scale := 25.0
 export var ring_expand_dur := 3.0
 export var rotate_spd := 100.0
@@ -16,8 +15,12 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var timer: Timer = $Timer
 
 
-func _process(delta: float) -> void:
+func _ready() -> void:
 	is_ready = true
+	set_auto_shoot(auto_shoot)
+
+
+func _process(delta: float) -> void:
 	smashers.rotation_degrees.y += rotate_spd * delta
 	spike_ring.rotation_degrees.y -= rotate_spd * delta
 
@@ -28,7 +31,6 @@ func set_auto_shoot(value: bool) -> void:
 		return
 	if auto_shoot:
 		timer.start(auto_shoot_freq)
-		timer.wait_time = auto_shoot_offset
 	else:
 		timer.stop()
 

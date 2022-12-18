@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var walk_speed := 16.0
+export var walk_speed := 17.0
 export var jump_vel := 35.0
 export var djump_vel := 30.0
 export var flying_vel := 73.0

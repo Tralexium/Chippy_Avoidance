@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Spawners/Phase8_Spawner1.gd" type="Script" id=1]
+
+[node name="Phase8_Spawner1" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Inner" type="Position3D" parent="."]
+
+[node name="Outer" type="Position3D" parent="."]

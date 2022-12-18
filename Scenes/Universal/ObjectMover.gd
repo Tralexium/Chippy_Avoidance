@@ -10,6 +10,7 @@ onready var path_follow: PathFollow = $PathFollow
 
 
 func start() -> void:
+	curve_weight = 0.0
 	tween = create_tween().set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(self, "curve_weight", 1.0, path_duration)
 

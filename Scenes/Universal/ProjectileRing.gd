@@ -39,9 +39,14 @@ func _create_projectiles() -> void:
 
 func _process(delta: float) -> void:
 	# Update the position
-	global_translate(velocity * delta)
+	translation += velocity * delta
 	# Update the Y rotation
-	rotate_y(y_rotation_spd * delta)
+	# Sidenote: Ideally you should point to a 3D position and rotate
+	# the basis towards it. The following is a half-assed solution!
+	if rotation_degrees.z >= 90.0:
+		rotation.x += y_rotation_spd * delta
+	else:
+		rotation.y += y_rotation_spd * delta
 	# Update the ring padding & radius
 	var inst_offset = TAU / projectile_count
 	var padding := 0.0
@@ -58,6 +63,14 @@ func smooth_rotate(target_angle: float, ease_type: int, trans_type: int, duratio
 	y_rotation_spd = 0.0
 	var tween = create_tween().set_ease(ease_type).set_trans(trans_type)
 	tween.tween_property(self, "rotation:y", target_angle, duration)
+
+
+func toggle_hitbox(value: bool) -> void:
+	if !ring_array[0][0].has_variable("disabled"):
+		return
+	for ring in ring_array:
+		for projectile in ring:
+			projectile.disabled = value
 
 
 func shrink() -> void:

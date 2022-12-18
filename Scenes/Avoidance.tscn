@@ -38,6 +38,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Environment" id=7]
 ambient_light_color = Color( 0.788235, 0.666667, 0.921569, 1 )
+fog_height_enabled = true
 dof_blur_far_distance = 50.0
 dof_blur_far_transition = 50.0
 glow_enabled = true
@@ -405,8 +406,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 43.1, 48.32, 53 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 43.1, 48.32, 53, 64.2972, 71.0081, 85.9945 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ Vector3( 0, 8, 0 ), Vector3( 0, 0, 0 ), 30.0 ],
 "method": "shift_cam_instant"
@@ -436,6 +437,15 @@ tracks/0/keys = {
 "method": "shift_cam"
 }, {
 "args": [ Vector3( 0, 0, 9 ), Vector3( -45, 0, 0 ), 1.0, 1, 7, 55.0 ],
+"method": "shift_cam"
+}, {
+"args": [ Vector3( 0, 0, 9 ), Vector3( -40, 0, 0 ), 30.0 ],
+"method": "shift_cam_instant"
+}, {
+"args": [ Vector3( 0, 0, 6 ), Vector3( -60, 0, 0 ), 5.0, 2, 7, 60.0 ],
+"method": "shift_cam"
+}, {
+"args": [ Vector3( 0, 0, 6 ), Vector3( -50, 0, 0 ), 3.0, 2, 7, 45.0 ],
 "method": "shift_cam"
 } ]
 }
@@ -788,10 +798,10 @@ tracks/17/loop_wrap = true
 tracks/17/imported = false
 tracks/17/enabled = true
 tracks/17/keys = {
-"times": PoolRealArray( 0, 47.02 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 47.02, 64.3272 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ false, true, false ]
 }
 tracks/18/type = "value"
 tracks/18/path = NodePath("WorldEnvironment:environment:ambient_light_color")
@@ -1143,10 +1153,10 @@ tracks/40/loop_wrap = true
 tracks/40/imported = false
 tracks/40/enabled = true
 tracks/40/keys = {
-"times": PoolRealArray( 0, 64.3291 ),
-"transitions": PoolRealArray( 0, 0 ),
+"times": PoolRealArray( 0, 64.3291, 86.3695, 89.8851 ),
+"transitions": PoolRealArray( 0, 0, 2, 1 ),
 "update": 0,
-"values": [ Vector3( -163, -700, -95 ), Vector3( -163, 0, -95 ) ]
+"values": [ Vector3( -163, -700, -95 ), Vector3( -163, 0, -95 ), Vector3( -163, 0, -95 ), Vector3( -163, -700, -95 ) ]
 }
 tracks/41/type = "method"
 tracks/41/path = NodePath("CamPath")
@@ -1160,6 +1170,23 @@ tracks/41/keys = {
 "values": [ {
 "args": [  ],
 "method": "start"
+} ]
+}
+tracks/42/type = "method"
+tracks/42/path = NodePath("Phase7_Platforming")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"times": PoolRealArray( 64.3287, 89.8851 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_hazards"
+}, {
+"args": [  ],
+"method": "remove_hazards"
 } ]
 }
 
