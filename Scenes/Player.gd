@@ -29,6 +29,7 @@ onready var n_animation_player : AnimationPlayer = $AnimationPlayer
 onready var n_hitbox_shape: CollisionShape = $Hitbox/CollisionShape
 onready var n_camera_pos: Position3D = $"%CameraPos"
 onready var n_shadow_guide: RayCast = $ShadowGuide
+onready var n_camera: Camera = $CameraPos/SpringArm/Camera
 
 
 func _ready() -> void:
@@ -56,10 +57,18 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 	
+	_debug()
 	_get_input()
 	_apply_velocity()
 	_animations()
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
+
+
+func _debug() -> void:
+	if Input.is_action_just_pressed("click"):
+		var mouse_pos = get_viewport().get_mouse_position()
+		var drop_plane  = Plane.PLANE_XZ
+		global_translation = drop_plane.intersects_ray(n_camera.project_ray_origin(mouse_pos),n_camera.project_ray_normal(mouse_pos))
 
 
 func _input(event: InputEvent) -> void:

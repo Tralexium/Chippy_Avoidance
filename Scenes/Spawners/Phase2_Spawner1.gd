@@ -1,8 +1,11 @@
 extends Spatial
 
 const ORB := preload("res://Scenes/Projectiles/Phase2_Atk1.tscn")
+const ARROW := preload("res://Scenes/Projectiles/Phase2_Atk2.tscn")
+const BOUNCY := preload("res://Scenes/Projectiles/Phase8_Atk1.tscn")
 
 export var enabled := false setget set_enabled
+export var bouncy := false
 export var orb_count := 2
 export var orb_center_distance := 22.0
 export var auto_shoot_freq := 0.05
@@ -44,6 +47,10 @@ func _spawn_orbs() -> void:
 	var offset_angle = TAU / orb_count
 	for i in range(orb_count):
 		var orb_inst = ORB.instance()
+		if bouncy:
+			orb_inst.projectile = BOUNCY
+		else:
+			orb_inst.projectile = ARROW
 		orb_inst.translate(Vector3.RIGHT.rotated(Vector3.UP, offset_angle*i) * orb_center_distance)
 		$Orbs.add_child(orb_inst)
 
@@ -73,7 +80,7 @@ func shoot(amount: int, inverse_angle: bool = false, accel: float = 0.0) -> void
 	if not enabled:
 		return
 	for orb in $Orbs.get_children():
-		orb.shoot_at(Vector3(0.0, translation.y, 0.0), amount, 30.0, deg2rad(90.0), inverse_angle, accel)
+		orb.shoot_at(Vector3(0.0, translation.y, 0.0), amount, 25.0, deg2rad(90.0), inverse_angle, accel)
 
 
 func _on_AutoShoot_timeout() -> void:

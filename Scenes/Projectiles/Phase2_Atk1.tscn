@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Materials/hazard_mat.tres" type="Material" id=1]
 [ext_resource path="res://Scenes/Projectiles/Phase2_Atk1.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Meshes/spiky_sphere.tres" type="ArrayMesh" id=3]
+[ext_resource path="res://Scenes/Projectiles/Phase2_Atk2.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SphereShape" id=1]
 radius = 1.5
@@ -10,6 +11,7 @@ radius = 1.5
 [node name="Phase2_Atk1" type="Spatial" groups=["hazard"]]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
 script = ExtResource( 2 )
+projectile = ExtResource( 4 )
 
 [node name="Hitbox" type="Area" parent="."]
 collision_layer = 4

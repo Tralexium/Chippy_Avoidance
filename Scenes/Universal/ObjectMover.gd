@@ -15,6 +15,14 @@ func start() -> void:
 	tween.tween_property(self, "curve_weight", 1.0, path_duration)
 
 
+func end() -> void:
+	if tween != null and tween.is_running():
+		tween.kill()
+	curve_weight = 1.0
+	path_follow.unit_offset = ease_curve.interpolate(curve_weight)
+	_move_assigned_nodes()
+
+
 func _process(delta: float) -> void:
 	path_follow.unit_offset = ease_curve.interpolate(curve_weight)
 	if tween != null and tween.is_running():

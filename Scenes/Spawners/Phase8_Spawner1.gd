@@ -22,6 +22,8 @@ func set_spinners(value: int) -> void:
 	if !is_ready:
 		return
 	var child_count := $Inner.get_child_count()
+	if spinners == 1:
+		vertical_padding = 0.0
 	if child_count < spinners:
 		for i in range(spinners - child_count):
 			_add_spinner()

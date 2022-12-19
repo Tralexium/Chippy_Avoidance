@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Spawners/Phase8_Spawner2.gd" type="Script" id=1]
+
+[node name="Phase8_Spawner2" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="SpawnFreq" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnFreq" to="." method="_on_SpawnFreq_timeout"]
