@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _debug() -> void:
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_just_pressed("click") and not lock_2d:
 		var mouse_pos = get_viewport().get_mouse_position()
 		var drop_plane  = Plane.PLANE_XZ
 		global_translation = drop_plane.intersects_ray(n_camera.project_ray_origin(mouse_pos),n_camera.project_ray_normal(mouse_pos))
