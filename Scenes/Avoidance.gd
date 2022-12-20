@@ -6,6 +6,7 @@ var current_phase := 0
 onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var timeline: AnimationPlayer = $Timeline
 onready var player: KinematicBody = $Player
+onready var cam_path: Path = $CamPath
 
 
 func _process(delta: float) -> void:
@@ -28,6 +29,7 @@ func fast_forward_phase(skip_phases: int) -> void:
 	var audio_pos : float = phase_time_stamps[current_phase]
 	for hazard in get_tree().get_nodes_in_group("hazard"):
 		hazard.queue_free()
+	cam_path.end()
 	player.stop_cam_movement()
 	audio_stream_player.seek(audio_pos)
 	timeline.seek(audio_pos, true)
