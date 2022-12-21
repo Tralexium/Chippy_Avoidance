@@ -6,6 +6,7 @@ export var djump_vel := 30.0
 export var flying_vel := 73.0
 export var gravity := 1.9
 export var max_fall_vel := 100.0
+export var friction := 20.0
 export var input_buffer_dur := 0.1
 export var coyote_time_dur := 0.2
 export var lock_2d := false
@@ -23,9 +24,9 @@ var coyote_time := 0.0
 var input_buffer_time := 0.0
 var buffered_input := ""
 
-onready var n_mesh : MeshInstance = $MeshInstance
+onready var n_mesh : Spatial = $Mesh/Armature
+onready var n_player_animation_tree: AnimationTree = $Mesh/PlayerAnimationTree
 onready var n_collision_shape: CollisionShape = $CollisionShape
-onready var n_animation_player : AnimationPlayer = $AnimationPlayer
 onready var n_hitbox_shape: CollisionShape = $Hitbox/CollisionShape
 onready var n_camera_pos: Position3D = $"%CameraPos"
 onready var n_shadow_guide: RayCast = $ShadowGuide
@@ -103,7 +104,7 @@ func _get_input() -> void:
 
 
 func _apply_velocity() -> void:
-	var delta = get_physics_process_delta_time()
+	var delta := get_physics_process_delta_time()
 	
 	velocity.y = 0.0 if is_on_floor() else max(-max_fall_vel, velocity.y - gravity)
 	
@@ -119,12 +120,23 @@ func _apply_velocity() -> void:
 		snap_vector = Vector3.ZERO
 	
 	# X&Z Axis
-	velocity.x = input_vector.x * walk_speed
-	velocity.z = input_vector.z * walk_speed
+	var XZ_input := Vector2(input_vector.x, input_vector.z)
+	if XZ_input.length() != 0.0:
+		velocity.x = input_vector.x * walk_speed
+		velocity.z = input_vector.z * walk_speed
+		_rotate_mesh(delta)
+	else:
+		var XZ_velocity := Vector2(velocity.x, velocity.z)
+		var friction_vel := XZ_velocity.linear_interpolate(Vector2.ZERO, friction*delta)
+		velocity.x = friction_vel.x
+		velocity.z = friction_vel.y
 
 	if !flying and Input.is_action_just_released("player_jump") and velocity.y > 0.0:
 		velocity.y *= 0.5
 	
+	
+
+func _rotate_mesh(delta: float) -> void:
 	# Rotate the player mesh based on camera's orientation / movement
 	if Vector2(velocity.x, velocity.z).length() > 0.0:
 		transform = transform.orthonormalized()
@@ -132,10 +144,8 @@ func _apply_velocity() -> void:
 		# Convert basis to quaternion, keep in mind scale is lost
 		var quat := Quat(n_mesh.transform.basis)
 		var target_quat := Quat(Vector3(0.0, look_dir.angle(), 0.0))
-		
 		# Interpolate using spherical-linear interpolation (SLERP).
 		var lerped_quat := quat.slerp(target_quat, delta * 10.0)
-		
 		# Apply lerped orientation
 		n_mesh.transform.basis = Basis(lerped_quat)
 
@@ -149,7 +159,12 @@ func stop_cam_movement() -> void:
 
 
 func _animations() -> void:
-	pass
+	n_player_animation_tree.set_airborne_state(is_on_floor())
+	var run_strength := clamp(Vector2(velocity.x, velocity.z).length() / (walk_speed * .7), 0.0, 1.0)
+	n_player_animation_tree.set_run_strength(run_strength)
+	n_player_animation_tree.set_vertical_velocity(velocity.y, djump_vel)
+	if input_vector.y != 0:
+		n_player_animation_tree.flip_jump()
 
 
 func hit_effects() -> void:

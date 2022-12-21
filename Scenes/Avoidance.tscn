@@ -1404,7 +1404,15 @@ script = ExtResource( 9 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5899, 0 )
 
-[node name="CameraPos" parent="Player" index="4"]
+[node name="AnimationTree" parent="Player/Mesh" index="2"]
+parameters/air_blend/blend_amount = 0
+parameters/flip_jump_one_shot/active = false
+parameters/idle_time_scale/scale = 1.0
+parameters/in_air_state/current = 0
+parameters/run_blend/blend_amount = 0
+parameters/running_time_scale/scale = 1.0
+
+[node name="CameraPos" parent="Player" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="PillarGround" parent="." instance=ExtResource( 16 )]

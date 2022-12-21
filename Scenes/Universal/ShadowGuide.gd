@@ -41,4 +41,4 @@ func set_state(state: int) -> void:
 				shadow.modulate = Color.red
 				return
 		tween = create_tween().set_ease(Tween.EASE_IN)
-		tween.tween_property(shadow, "modulate", col, 0.3)
+		tween.tween_property(shadow, "modulate", col, 0.15)
