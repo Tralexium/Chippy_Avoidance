@@ -190,8 +190,9 @@ script = ExtResource( 9 )
 
 [node name="Controls" type="VBoxContainer" parent="BG/Margin/Contents"]
 visible = false
-margin_right = 1350.0
-margin_bottom = 102.0
+margin_top = 673.0
+margin_right = 798.0
+margin_bottom = 673.0
 custom_constants/separation = 32
 
 [node name="Accessibility" type="VBoxContainer" parent="BG/Margin/Contents"]

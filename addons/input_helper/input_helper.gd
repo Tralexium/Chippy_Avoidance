@@ -1,10 +1,8 @@
 extends Node
 
-
 signal device_changed(device, device_index)
 signal action_key_changed(action_name, key)
 signal action_button_changed(action_name, button)
-
 
 const DEVICE_KEYBOARD = "keyboard"
 const DEVICE_XBOX_CONTROLLER = "xbox"
@@ -12,6 +10,24 @@ const DEVICE_SWITCH_CONTROLLER = "switch"
 const DEVICE_PLAYSTATION_CONTROLLER = "playstation"
 const DEVICE_GENERIC = "generic"
 
+const SONY_GAMEPAD_TEXTURES = {
+	JOY_SONY_X: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Cross.png"),
+	JOY_SONY_SQUARE: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Square.png"),
+	JOY_SONY_TRIANGLE: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Triangle.png"),
+	JOY_SONY_CIRCLE: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Circle.png"),
+	JOY_DPAD_DOWN: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Dpad_Down.png"),
+	JOY_DPAD_LEFT: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Dpad_Left.png"),
+	JOY_DPAD_RIGHT: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Dpad_Right.png"),
+	JOY_DPAD_UP: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Dpad_Up.png"),
+	JOY_L: preload("res://Assets/Controller & Key Prompts/PS4/PS4_L1.png"),
+	JOY_L2: preload("res://Assets/Controller & Key Prompts/PS4/PS4_L2.png"),
+	JOY_L3: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Left_Stick_Click.png"),
+	JOY_R: preload("res://Assets/Controller & Key Prompts/PS4/PS4_R1.png"),
+	JOY_R2: preload("res://Assets/Controller & Key Prompts/PS4/PS4_R2.png"),
+	JOY_R3: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Right_Stick_Click.png"),
+	JOY_START: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Options.png"),
+	JOY_SELECT: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Share.png"),
+}
 
 var deadzone: float = 0.2
 
@@ -87,11 +103,11 @@ func is_valid_key(key: String) -> bool:
 	if key in [
 			"Up", "Down", "Left", "Right", 
 			"Space", "Enter", 
-			"Comma", "Period", 
-			"Slash", "BackSlash", 
-			"Minus", "Equal", 
-			"Semicolon", "Apostrophe",
-			"BracketLeft", "BracketRight"
+			"Slash", "Minus",
+			"Semicolon", "Shift", "Control",
+			"Delete", "Insert", "Home", "End",
+			"PageUp", "PageDown",
+			"Alt", "Tab", "Escape"
 		]: return true
 	return false
 

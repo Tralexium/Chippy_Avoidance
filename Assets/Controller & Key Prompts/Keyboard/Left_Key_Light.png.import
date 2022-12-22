@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Page_Up_Key_Light.png-cb6a3dd06d2779c54b5520f2df407d15.stex"
+path="res://.import/Left_Key_Light.png-7489b04c2c5383564ea2c7f2d0638b39.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Controller & Key Prompts/Keyboard/Page_Up_Key_Light.png"
-dest_files=[ "res://.import/Page_Up_Key_Light.png-cb6a3dd06d2779c54b5520f2df407d15.stex" ]
+source_file="res://Assets/Controller & Key Prompts/Keyboard/Left_Key_Light.png"
+dest_files=[ "res://.import/Left_Key_Light.png-7489b04c2c5383564ea2c7f2d0638b39.stex" ]
 
 [params]
 

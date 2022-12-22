@@ -1,7 +1,7 @@
 extends CenterContainer
 
 
-export var action_name: String = "player_jump"
+export var action_name: String = "jump"
 
 onready var press_a_key_label := $PressAKeyLabel
 onready var vbox := $VBox
@@ -20,16 +20,15 @@ func _ready() -> void:
 func _unhandled_input(event) -> void:
 	if not is_waiting_for_key: return
 	
-	if event is InputEventKey and event.is_pressed():
+	if event is InputEventJoypadButton and event.is_pressed():
 		accept_event()
-		InputHelper.set_action_key(action_name, event.as_text())
+		InputHelper.set_action_button(action_name, event.button_index)
 		self.is_waiting_for_key = false
-		Config.save_data()
 		update_label()
 
 
 func update_label() -> void:
-	current_key_label.text = "ui_accept is currently %s" % InputHelper.get_action_key(action_name)
+	current_key_label.text = "ui_accept is currently %s" % InputHelper.get_action_button(action_name)
 	change_button.grab_focus()
 
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Del_Key_Light.png-fdf8afbd19e1d42825a2d26b3f589203.stex"
+path="res://.import/Escape_Key_Light.png-55008294eeb6ea37040bd1ab3cfea25e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Controller & Key Prompts/Keyboard/Del_Key_Light.png"
-dest_files=[ "res://.import/Del_Key_Light.png-fdf8afbd19e1d42825a2d26b3f589203.stex" ]
+source_file="res://Assets/Controller & Key Prompts/Keyboard/Escape_Key_Light.png"
+dest_files=[ "res://.import/Escape_Key_Light.png-55008294eeb6ea37040bd1ab3cfea25e.stex" ]
 
 [params]
 

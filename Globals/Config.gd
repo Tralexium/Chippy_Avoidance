@@ -94,7 +94,7 @@ func set_vsync(value: bool) -> void:
 
 func get_action_list() -> Array:
 	return [
-		"player_jump", "player_left", "player_right", "player_forward", "player_backward"
+		"jump", "left", "right", "forward", "backward"
 	]
 
 

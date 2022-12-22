@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Arrow_Down_Key_Light.png-3dc71617f034d3b59d1fc9890ecbd324.stex"
+path="res://.import/PageUp_Key_Light.png-1ef2e2cdd9a9bb14a8b4c318555abd96.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Controller & Key Prompts/Keyboard/Arrow_Down_Key_Light.png"
-dest_files=[ "res://.import/Arrow_Down_Key_Light.png-3dc71617f034d3b59d1fc9890ecbd324.stex" ]
+source_file="res://Assets/Controller & Key Prompts/Keyboard/PageUp_Key_Light.png"
+dest_files=[ "res://.import/PageUp_Key_Light.png-1ef2e2cdd9a9bb14a8b4c318555abd96.stex" ]
 
 [params]
 

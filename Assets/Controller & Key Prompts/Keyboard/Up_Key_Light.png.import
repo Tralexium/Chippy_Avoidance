@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Backspace_Alt_Key_Light.png-acb2972c52f42dc3e1627ddf7a3a28b5.stex"
+path="res://.import/Up_Key_Light.png-4a54d13c9be2232554d4454146c539ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Controller & Key Prompts/Keyboard/Backspace_Alt_Key_Light.png"
-dest_files=[ "res://.import/Backspace_Alt_Key_Light.png-acb2972c52f42dc3e1627ddf7a3a28b5.stex" ]
+source_file="res://Assets/Controller & Key Prompts/Keyboard/Up_Key_Light.png"
+dest_files=[ "res://.import/Up_Key_Light.png-4a54d13c9be2232554d4454146c539ae.stex" ]
 
 [params]
 

@@ -74,8 +74,8 @@ func _debug() -> void:
 
 func _input(event: InputEvent) -> void:
 	input_buffer_time = input_buffer_dur
-	if event.is_action_pressed("player_jump") and !is_on_floor():
-		buffered_input = "player_jump"
+	if event.is_action_pressed("jump") and !is_on_floor():
+		buffered_input = "jump"
 
 
 func _get_input() -> void:
@@ -88,17 +88,17 @@ func _get_input() -> void:
 		buffered_input = ""
 	
 	input_vector = Vector3.ZERO
-	input_vector.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
-	input_vector.z = Input.get_action_strength("player_backward") - Input.get_action_strength("player_forward")
+	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	input_vector.z = Input.get_action_strength("backward") - Input.get_action_strength("forward")
 	input_vector = input_vector.rotated(Vector3.UP, n_camera_pos.rotation.y).normalized()
 	if lock_2d:
 		input_vector.z = 0.0
 		translation.z = lerp(translation.z, 0.0, 0.5)
-	if (Input.is_action_just_pressed("player_jump") or buffered_input == "player_jump") and (is_on_floor() or coyote_time > 0.0):
+	if (Input.is_action_just_pressed("jump") or buffered_input == "jump") and (is_on_floor() or coyote_time > 0.0):
 		has_djump = true
 		input_vector.y = 1
 		coyote_time = 0.0
-	elif Input.is_action_just_pressed("player_jump") and has_djump:
+	elif Input.is_action_just_pressed("jump") and has_djump:
 		has_djump = false
 		input_vector.y = 1
 
@@ -131,7 +131,7 @@ func _apply_velocity() -> void:
 		velocity.x = friction_vel.x
 		velocity.z = friction_vel.y
 
-	if !flying and Input.is_action_just_released("player_jump") and velocity.y > 0.0:
+	if !flying and Input.is_action_just_released("jump") and velocity.y > 0.0:
 		velocity.y *= 0.5
 	
 	
