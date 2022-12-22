@@ -1,0 +1,233 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/UI/OptionSelectWidget.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/UI/ResolutionWidget.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/UI/VSyncWidget.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/UI/FullscreenWidget.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/UI/OptionContents.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/UI/BloomWidget.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/UI/ScreenshakeWidget.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/UI/SliderWidget.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=11]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 11 )
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 556.0
+color = Color( 0.0235294, 0, 0.0627451, 0.509804 )
+
+[node name="Margin" type="MarginContainer" parent="BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 512
+custom_constants/margin_top = 32
+custom_constants/margin_left = 64
+
+[node name="Contents" type="VBoxContainer" parent="BG/Margin"]
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 862.0
+margin_bottom = 1080.0
+custom_constants/separation = 48
+script = ExtResource( 7 )
+
+[node name="Header" type="MarginContainer" parent="BG/Margin/Contents"]
+margin_right = 798.0
+margin_bottom = 70.0
+custom_constants/margin_right = -512
+custom_constants/margin_left = -64
+
+[node name="ColorRect" type="ColorRect" parent="BG/Margin/Contents/Header"]
+margin_left = -64.0
+margin_right = 1310.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 70 )
+color = Color( 0, 0.86, 1.3, 1 )
+
+[node name="Label" type="Label" parent="BG/Margin/Contents/Header/ColorRect"]
+anchor_bottom = 1.0
+margin_right = 407.0
+custom_colors/font_color = Color( 0.0901961, 0, 0.243137, 1 )
+custom_colors/font_outline_modulate = Color( 0.0901961, 0, 0.243137, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "OPTIONS"
+align = 1
+valign = 1
+
+[node name="Tabs" type="HBoxContainer" parent="BG/Margin/Contents"]
+margin_top = 118.0
+margin_right = 798.0
+margin_bottom = 168.0
+custom_constants/separation = 24
+
+[node name="GeneralTab" type="Button" parent="BG/Margin/Contents/Tabs"]
+margin_right = 250.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 250, 50 )
+disabled = true
+toggle_mode = true
+text = "General"
+
+[node name="ControlsTab" type="Button" parent="BG/Margin/Contents/Tabs"]
+margin_left = 274.0
+margin_right = 524.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 250, 50 )
+toggle_mode = true
+text = "Controls"
+
+[node name="AccessibilityTab" type="Button" parent="BG/Margin/Contents/Tabs"]
+margin_left = 548.0
+margin_right = 798.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 250, 50 )
+toggle_mode = true
+text = "Accessibility"
+
+[node name="General" type="VBoxContainer" parent="BG/Margin/Contents"]
+margin_top = 216.0
+margin_right = 798.0
+margin_bottom = 625.0
+custom_constants/separation = 32
+
+[node name="Audio" type="VBoxContainer" parent="BG/Margin/Contents/General"]
+margin_right = 798.0
+margin_bottom = 128.0
+
+[node name="Music" parent="BG/Margin/Contents/General/Audio" instance=ExtResource( 10 )]
+margin_right = 798.0
+margin_bottom = 62.0
+
+[node name="Label" parent="BG/Margin/Contents/General/Audio/Music" index="0"]
+margin_right = 798.0
+text = "Music Volume:"
+
+[node name="HBoxContainer" parent="BG/Margin/Contents/General/Audio/Music" index="1"]
+margin_right = 798.0
+
+[node name="HSlider" parent="BG/Margin/Contents/General/Audio/Music/HBoxContainer" index="0"]
+margin_right = 722.0
+
+[node name="Percent" parent="BG/Margin/Contents/General/Audio/Music/HBoxContainer" index="1"]
+margin_left = 730.0
+margin_right = 798.0
+
+[node name="Sounds" parent="BG/Margin/Contents/General/Audio" instance=ExtResource( 10 )]
+margin_top = 66.0
+margin_right = 798.0
+margin_bottom = 128.0
+
+[node name="Label" parent="BG/Margin/Contents/General/Audio/Sounds" index="0"]
+margin_right = 798.0
+text = "Sounds Volume:"
+
+[node name="HBoxContainer" parent="BG/Margin/Contents/General/Audio/Sounds" index="1"]
+margin_right = 798.0
+
+[node name="HSlider" parent="BG/Margin/Contents/General/Audio/Sounds/HBoxContainer" index="0"]
+margin_right = 722.0
+
+[node name="Percent" parent="BG/Margin/Contents/General/Audio/Sounds/HBoxContainer" index="1"]
+margin_left = 730.0
+margin_right = 798.0
+
+[node name="Resolution" parent="BG/Margin/Contents/General" instance=ExtResource( 3 )]
+margin_top = 160.0
+margin_right = 798.0
+margin_bottom = 225.0
+script = ExtResource( 4 )
+
+[node name="Label" parent="BG/Margin/Contents/General/Resolution" index="0"]
+margin_right = 798.0
+text = "Resolution:"
+
+[node name="OptionButton" parent="BG/Margin/Contents/General/Resolution" index="1"]
+margin_right = 798.0
+text = "1920x1080"
+items = [ "800x600", null, false, 0, null, "1024x768", null, false, 1, null, "1152x864", null, false, 2, null, "1176x664", null, false, 3, null, "1280x720", null, false, 4, null, "1280x800", null, false, 5, null, "1280x1024", null, false, 6, null, "1440x900", null, false, 7, null, "1600x1024", null, false, 8, null, "1920x1080", null, false, 9, null, "2048x1536", null, false, 10, null, "2560x1440", null, false, 11, null, "2560x1600", null, false, 12, null, "3840x2160", null, false, 13, null ]
+selected = 9
+
+[node name="Toggles" type="VBoxContainer" parent="BG/Margin/Contents/General"]
+margin_top = 257.0
+margin_right = 798.0
+margin_bottom = 409.0
+custom_constants/separation = 8
+
+[node name="Fullscreen" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_right = 798.0
+margin_bottom = 32.0
+text = "Fullscreen"
+script = ExtResource( 6 )
+
+[node name="VSync" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 40.0
+margin_right = 798.0
+margin_bottom = 72.0
+text = "VSync"
+script = ExtResource( 5 )
+
+[node name="Bloom" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 80.0
+margin_right = 798.0
+margin_bottom = 112.0
+text = "Bloom"
+script = ExtResource( 8 )
+
+[node name="Screenshake" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 120.0
+margin_right = 798.0
+margin_bottom = 152.0
+text = "Screenshake"
+script = ExtResource( 9 )
+
+[node name="Controls" type="VBoxContainer" parent="BG/Margin/Contents"]
+visible = false
+margin_right = 1350.0
+margin_bottom = 102.0
+custom_constants/separation = 32
+
+[node name="Accessibility" type="VBoxContainer" parent="BG/Margin/Contents"]
+visible = false
+margin_right = 1350.0
+margin_bottom = 102.0
+custom_constants/separation = 32
+
+[node name="Footer" type="VBoxContainer" parent="BG"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 33.0
+margin_top = -48.0
+margin_right = -33.0
+
+[node name="HSeparator" type="HSeparator" parent="BG/Footer"]
+margin_right = 1298.0
+margin_bottom = 4.0
+
+[node name="GameVersion" type="Label" parent="BG/Footer"]
+margin_top = 8.0
+margin_right = 1298.0
+margin_bottom = 48.0
+size_flags_vertical = 3
+text = "game version: -.-.-"
+
+[connection signal="pressed" from="BG/Margin/Contents/Tabs/GeneralTab" to="BG/Margin/Contents" method="_on_GeneralTab_pressed"]
+[connection signal="pressed" from="BG/Margin/Contents/Tabs/ControlsTab" to="BG/Margin/Contents" method="_on_ControlsTab_pressed"]
+[connection signal="pressed" from="BG/Margin/Contents/Tabs/AccessibilityTab" to="BG/Margin/Contents" method="_on_AccessibilityTab_pressed"]
+[connection signal="item_selected" from="BG/Margin/Contents/General/Resolution/OptionButton" to="BG/Margin/Contents/General/Resolution" method="_on_OptionButton_item_selected"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Fullscreen" to="BG/Margin/Contents/General/Toggles/Fullscreen" method="_on_Fullscreen_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/VSync" to="BG/Margin/Contents/General/Toggles/VSync" method="_on_VSync_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Bloom" to="BG/Margin/Contents/General/Toggles/Bloom" method="_on_Bloom_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Screenshake" to="BG/Margin/Contents/General/Toggles/Screenshake" method="_on_Screenshake_toggled"]
+
+[editable path="BG/Margin/Contents/General/Audio/Music"]
+[editable path="BG/Margin/Contents/General/Audio/Sounds"]
+[editable path="BG/Margin/Contents/General/Resolution"]

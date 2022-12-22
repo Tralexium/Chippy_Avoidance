@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=1]
+
+[node name="OptionSelectWidget" type="VBoxContainer"]
+margin_right = 691.0
+margin_bottom = 94.0
+rect_pivot_offset = Vector2( -601, -203 )
+theme = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 691.0
+margin_bottom = 29.0
+text = "Label:"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_top = 33.0
+margin_right = 691.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 0, 32 )
+text = " Item 1"
+items = [ " Item 1", null, false, 0, null, " Item 2", null, false, 1, null, " Item 3", null, false, 2, null ]
+selected = 0

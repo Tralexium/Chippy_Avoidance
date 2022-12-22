@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/UI/SliderWidget.gd" type="Script" id=2]
+
+[node name="SliderWidget" type="VBoxContainer"]
+margin_right = 541.0
+margin_bottom = 59.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 541.0
+margin_bottom = 29.0
+text = "Label:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 33.0
+margin_right = 541.0
+margin_bottom = 62.0
+custom_constants/separation = 8
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+margin_right = 465.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Percent" type="Label" parent="HBoxContainer"]
+margin_left = 473.0
+margin_right = 541.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 68, 0 )
+text = "50%"
+
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="." method="_on_HSlider_value_changed"]

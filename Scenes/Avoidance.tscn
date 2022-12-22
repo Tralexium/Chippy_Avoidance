@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Spawners/Phase2_Spawner1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Spawners/Phase1_Spawner1.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Scenes/Universal/BasicProjectile.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Scenes/Spawners/Phase8_Spawner1.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Scenes/Spawners/Phase8_Spawner2.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Scenes/WorldEnvironment.gd" type="Script" id=21]
 
 [sub_resource type="SpatialMaterial" id=3]
 params_cull_mode = 1
@@ -1508,6 +1509,7 @@ autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 7 )
+script = ExtResource( 21 )
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 autoplay = "avoidance_timeline"

@@ -1,18 +1,27 @@
 extends Node
 
-const SAVE_PATH = "user://data_config.save"
+const SAVE_PATH := "user://data_config.save"
+const GAME_VERSION := "1.0.0"
 
-var music_volume := 1.0 setget set_music_volume
-var sound_volume := 1.0 setget set_sound_volume
-var fullscreen := false setget set_fullscreen
+var music_volume := 70.0 setget set_music_volume
+var sound_volume := 100.0 setget set_sound_volume
+var resolution := Vector2(1920, 1080) setget set_resolution
+var fullscreen := true setget set_fullscreen
+var vsync := true setget set_vsync
+var bloom := true setget set_bloom
 var screen_shake := true setget set_screen_shake
+
+signal bloom_changed(is_active)
 
 
 func save_data() -> void:
 	var save_dict := {}
 	save_dict["music_volume"] = music_volume
 	save_dict["sound_volume"] = sound_volume
+	save_dict["resolution"] = resolution
 	save_dict["fullscreen"] = fullscreen
+	save_dict["vsync"] = vsync
+	save_dict["bloom"] = bloom
 	save_dict["screen_shake"] = screen_shake
 	save_dict["keyboard_controls"] = get_keyboard_dict()
 	save_dict["gamepad_controls"] = get_gamepad_dict()
@@ -28,9 +37,12 @@ func load_data() -> void:
 		file.open(SAVE_PATH, File.READ)
 		var values : Dictionary = file.get_var()
 		
-		self.music_volume = values.get("music_volume", 1.0)
-		self.sound_volume = values.get("sound_volume", 1.0)
-		self.fullscreen = values.get("fullscreen", false)
+		self.music_volume = values.get("music_volume", 70.0)
+		self.sound_volume = values.get("sound_volume", 100.0)
+		self.resolution = values.get("resolution", Vector2(1920, 1080))
+		self.fullscreen = values.get("fullscreen", true)
+		self.vsync = values.get("vsync", true)
+		self.bloom = values.get("bloom", true)
 		self.screen_shake = values.get("screen_shake", true)
 		
 		var keyboard_controls : Dictionary = values.get("keyboard_controls", {})
@@ -48,21 +60,36 @@ func load_data() -> void:
 
 func set_music_volume(value: float) -> void:
 	music_volume = value
-	SoundManager.set_music_volume(value)
+	SoundManager.set_music_volume(value / 100.0)
 
 
 func set_sound_volume(value: float) -> void:
 	sound_volume = value
-	SoundManager.set_sound_volume(value)
+	SoundManager.set_sound_volume(value / 100.0)
+
+
+func set_bloom(value: bool) -> void:
+	bloom = value
+	emit_signal("bloom_changed", value)
 
 
 func set_screen_shake(value: bool) -> void:
 	screen_shake = value
 
 
+func set_resolution(value: Vector2) -> void:
+	resolution = value
+	OS.window_size = value
+
+
 func set_fullscreen(value: bool) -> void:
 	fullscreen = value
 	OS.window_fullscreen = value
+
+
+func set_vsync(value: bool) -> void:
+	fullscreen = value
+	OS.vsync_enabled = value
 
 
 func get_action_list() -> Array:
