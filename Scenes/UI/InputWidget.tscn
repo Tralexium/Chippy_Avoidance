@@ -9,19 +9,26 @@
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 2 )
-custom_constants/separation = 24
+custom_constants/separation = 32
 script = ExtResource( 1 )
 
-[node name="Button" type="Button" parent="."]
-margin_right = 200.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 300.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 200, 50 )
+custom_constants/margin_top = 5
+custom_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="MarginContainer"]
+margin_top = 5.0
+margin_right = 300.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 300, 40 )
 text = "Action Name"
 
 [node name="Icon" type="TextureRect" parent="."]
 material = ExtResource( 4 )
-margin_left = 224.0
-margin_right = 274.0
+margin_left = 332.0
+margin_right = 382.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 texture = ExtResource( 3 )
@@ -29,11 +36,11 @@ expand = true
 
 [node name="AwaitingInput" type="Label" parent="."]
 visible = false
-margin_left = 298.0
+margin_left = 332.0
 margin_top = 10.0
-margin_right = 502.0
+margin_right = 536.0
 margin_bottom = 39.0
 text = "Select a button..."
 valign = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_Button_pressed"]

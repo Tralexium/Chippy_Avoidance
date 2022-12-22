@@ -92,7 +92,7 @@ func set_vsync(value: bool) -> void:
 	OS.vsync_enabled = value
 
 
-func get_action_list() -> Array:
+func get_configurable_actions() -> Array:
 	return [
 		"jump", "left", "right", "forward", "backward"
 	]
@@ -100,13 +100,13 @@ func get_action_list() -> Array:
 
 func get_keyboard_dict() -> Dictionary:
 	var dict := {}
-	for action in get_action_list():
+	for action in get_configurable_actions():
 		dict[action] = InputHelper.get_action_key(action)
 	return dict
 
 
 func get_gamepad_dict() -> Dictionary:
 	var dict := {}
-	for action in get_action_list():
+	for action in get_configurable_actions():
 		dict[action] = InputHelper.get_action_button(action)
 	return dict

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/UI/ScreenshakeWidget.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/UI/SliderWidget.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/UI/InputWidget.tscn" type="PackedScene" id=12]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -190,10 +191,44 @@ script = ExtResource( 9 )
 
 [node name="Controls" type="VBoxContainer" parent="BG/Margin/Contents"]
 visible = false
-margin_top = 673.0
+margin_top = 216.0
 margin_right = 798.0
-margin_bottom = 673.0
-custom_constants/separation = 32
+margin_bottom = 556.0
+custom_constants/separation = 8
+
+[node name="Jump" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+margin_right = 798.0
+margin_bottom = 50.0
+
+[node name="Left" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+margin_top = 58.0
+margin_right = 798.0
+margin_bottom = 108.0
+action_name = "left"
+
+[node name="Right" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+margin_top = 116.0
+margin_right = 798.0
+margin_bottom = 166.0
+action_name = "right"
+
+[node name="Forward" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+margin_top = 174.0
+margin_right = 798.0
+margin_bottom = 224.0
+action_name = "forward"
+
+[node name="Backward" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+margin_top = 232.0
+margin_right = 798.0
+margin_bottom = 282.0
+action_name = "backward"
+
+[node name="Restart" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+margin_top = 290.0
+margin_right = 798.0
+margin_bottom = 340.0
+action_name = "restart"
 
 [node name="Accessibility" type="VBoxContainer" parent="BG/Margin/Contents"]
 visible = false

@@ -127,7 +127,7 @@ func set_action_key(target_action: String, key: String, swap_if_taken: bool = tr
 	var clashing_action = ""
 	var clashing_event
 	if swap_if_taken:
-		for action in InputMap.get_actions():
+		for action in Config.get_configurable_actions():
 			for event in InputMap.get_action_list(action):
 				if event is InputEventKey and event.as_text() == key:
 					clashing_action = action
@@ -165,7 +165,7 @@ func set_action_button(target_action: String, button: int, swap_if_taken: bool =
 	var clashing_action = ""
 	var clashing_event
 	if swap_if_taken:
-		for action in InputMap.get_actions():
+		for action in Config.get_configurable_actions():
 			for event in InputMap.get_action_list(action):
 				if event is InputEventJoypadButton and event.button_index == button:
 					clashing_action = action

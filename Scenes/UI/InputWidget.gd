@@ -3,22 +3,27 @@ extends HBoxContainer
 export var action_name := "jump"
 
 var is_waiting_for_key: bool = false setget set_is_waiting_for_key
-onready var button: Button = $Button
+onready var button: Button = $MarginContainer/Button
 onready var icon: TextureRect = $Icon
 onready var awaiting_input: Label = $AwaitingInput
 
 
 func _ready() -> void:
 	InputHelper.connect("device_changed", self, "_on_device_changed")
+	InputHelper.connect("action_key_changed", self, "_on_action_key_changed")
+	InputHelper.connect("action_button_changed", self, "_on_action_button_changed")
 	Config.load_data()
 	update_icon(InputHelper.has_gamepad())
 	button.text = action_name
 	self.is_waiting_for_key = false
 
 
-func _unhandled_input(event) -> void:
+func _input(event) -> void:
 	if not is_waiting_for_key: return
 	
+	if event is InputEventMouseButton and event.is_pressed():
+		accept_event()
+		self.is_waiting_for_key = false
 	if event is InputEventKey and event.is_pressed():
 		accept_event()
 		InputHelper.set_action_key(action_name, event.as_text())
@@ -66,3 +71,11 @@ func _on_Button_pressed() -> void:
 
 func _on_device_changed(device: String, index: int) -> void:
 	update_icon(device != InputHelper.DEVICE_KEYBOARD)
+
+func _on_action_key_changed(_action_name: String, key: String) -> void:
+	if action_name == _action_name:
+		update_icon(false)
+
+func _on_action_button_changed(_action_name: String, button: int) -> void:
+	if action_name == _action_name:
+		update_icon(true)
