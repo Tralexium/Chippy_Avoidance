@@ -17,6 +17,9 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Globals/Globals.gd"
+Config="*res://Globals/Config.gd"
+InputHelper="*res://addons/input_helper/input_helper.gd"
+SoundManager="*res://addons/sound_manager/sound_manager.tscn"
 
 [display]
 
@@ -25,7 +28,7 @@ window/size/height=1080
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/Trail/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/Trail/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/sound_manager/plugin.cfg" )
 
 [gui]
 
