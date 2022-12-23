@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=2]
@@ -8,12 +8,19 @@
 [ext_resource path="res://Scenes/UI/ScreenMode.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/UI/OptionContents.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/UI/BloomWidget.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/UI/ScreenshakeWidget.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/UI/PlayerRing.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/UI/SliderWidget.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/UI/InputWidget.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/UI/ResetControls.gd" type="Script" id=13]
 [ext_resource path="res://Scenes/UI/AntiAliasing.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/UI/ShowBar.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/UI/Percentage.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/UI/PlayerHUD.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/UI/ShowFPS.gd" type="Script" id=18]
+[ext_resource path="res://Scenes/UI/InfiniteHP.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/UI/InfiniteJump.gd" type="Script" id=20]
+[ext_resource path="res://Scenes/UI/InfiniteItems.gd" type="Script" id=21]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -96,9 +103,10 @@ toggle_mode = true
 text = "Accessibility"
 
 [node name="General" type="VBoxContainer" parent="BG/Margin/Contents"]
+visible = false
 margin_top = 216.0
 margin_right = 798.0
-margin_bottom = 739.0
+margin_bottom = 899.0
 custom_constants/separation = 32
 
 [node name="Audio" type="VBoxContainer" parent="BG/Margin/Contents/General"]
@@ -108,6 +116,7 @@ margin_bottom = 128.0
 [node name="Music" parent="BG/Margin/Contents/General/Audio" instance=ExtResource( 10 )]
 margin_right = 798.0
 margin_bottom = 62.0
+focus_neighbour_top = NodePath("../../../Tabs/GeneralTab")
 
 [node name="Label" parent="BG/Margin/Contents/General/Audio/Music" index="0"]
 margin_right = 798.0
@@ -191,7 +200,7 @@ items = [ "Disabled", null, false, 0, null, "FXAA", null, false, 1, null, "MSAA 
 [node name="Toggles" type="VBoxContainer" parent="BG/Margin/Contents/General"]
 margin_top = 451.0
 margin_right = 798.0
-margin_bottom = 523.0
+margin_bottom = 683.0
 custom_constants/separation = 8
 
 [node name="VSync" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
@@ -207,11 +216,39 @@ margin_bottom = 72.0
 text = "Bloom"
 script = ExtResource( 8 )
 
+[node name="ShowBar" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 80.0
+margin_right = 798.0
+margin_bottom = 112.0
+text = "Progress Bar"
+script = ExtResource( 15 )
+
+[node name="Percentage" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 120.0
+margin_right = 798.0
+margin_bottom = 152.0
+text = "Show Percentage"
+script = ExtResource( 16 )
+
+[node name="PlayerHUD" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 160.0
+margin_right = 798.0
+margin_bottom = 192.0
+text = "Always Show HUD"
+script = ExtResource( 17 )
+
+[node name="ShowFPS" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+margin_top = 200.0
+margin_right = 798.0
+margin_bottom = 232.0
+text = "Show FPS"
+script = ExtResource( 18 )
+
 [node name="Controls" type="VBoxContainer" parent="BG/Margin/Contents"]
 visible = false
-margin_top = 673.0
+margin_top = 216.0
 margin_right = 798.0
-margin_bottom = 1391.0
+margin_bottom = 934.0
 custom_constants/separation = 48
 
 [node name="InputMapping" type="VBoxContainer" parent="BG/Margin/Contents/Controls"]
@@ -222,6 +259,7 @@ custom_constants/separation = 8
 [node name="Jump" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_right = 798.0
 margin_bottom = 50.0
+focus_neighbour_top = NodePath("../../../Tabs/ControlsTab")
 
 [node name="Left" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_top = 58.0
@@ -293,17 +331,87 @@ text = "Reset back to default"
 script = ExtResource( 13 )
 
 [node name="Accessibility" type="VBoxContainer" parent="BG/Margin/Contents"]
-visible = false
-margin_right = 1350.0
-margin_bottom = 102.0
+margin_top = 216.0
+margin_right = 798.0
+margin_bottom = 528.0
 custom_constants/separation = 32
 
-[node name="Screenshake" type="CheckBox" parent="BG/Margin/Contents/Accessibility"]
-margin_top = 650.0
+[node name="Slidables" type="VBoxContainer" parent="BG/Margin/Contents/Accessibility"]
 margin_right = 798.0
-margin_bottom = 682.0
-text = "Screenshake"
+margin_bottom = 128.0
+
+[node name="Screenshake" parent="BG/Margin/Contents/Accessibility/Slidables" instance=ExtResource( 10 )]
+margin_right = 798.0
+margin_bottom = 62.0
+focus_neighbour_top = NodePath("../../../Tabs/GeneralTab")
+
+[node name="Label" parent="BG/Margin/Contents/Accessibility/Slidables/Screenshake" index="0"]
+margin_right = 798.0
+text = "Screenshake:"
+
+[node name="HBoxContainer" parent="BG/Margin/Contents/Accessibility/Slidables/Screenshake" index="1"]
+margin_right = 798.0
+
+[node name="HSlider" parent="BG/Margin/Contents/Accessibility/Slidables/Screenshake/HBoxContainer" index="0"]
+margin_right = 722.0
+
+[node name="Percent" parent="BG/Margin/Contents/Accessibility/Slidables/Screenshake/HBoxContainer" index="1"]
+margin_left = 730.0
+margin_right = 798.0
+
+[node name="PointMultiplier" parent="BG/Margin/Contents/Accessibility/Slidables" instance=ExtResource( 10 )]
+margin_top = 66.0
+margin_right = 798.0
+margin_bottom = 128.0
+
+[node name="Label" parent="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier" index="0"]
+margin_right = 798.0
+text = "Point Multiplier:"
+
+[node name="HBoxContainer" parent="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier" index="1"]
+margin_right = 798.0
+
+[node name="HSlider" parent="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier/HBoxContainer" index="0"]
+margin_right = 722.0
+max_value = 200.0
+value = 100.0
+
+[node name="Percent" parent="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier/HBoxContainer" index="1"]
+margin_left = 730.0
+margin_right = 798.0
+
+[node name="Toggles" type="VBoxContainer" parent="BG/Margin/Contents/Accessibility"]
+margin_top = 160.0
+margin_right = 798.0
+margin_bottom = 312.0
+custom_constants/separation = 8
+
+[node name="PlayerRing" type="CheckBox" parent="BG/Margin/Contents/Accessibility/Toggles"]
+margin_right = 798.0
+margin_bottom = 32.0
+text = "Player Guide Ring"
 script = ExtResource( 9 )
+
+[node name="InfiniteHP" type="CheckBox" parent="BG/Margin/Contents/Accessibility/Toggles"]
+margin_top = 40.0
+margin_right = 798.0
+margin_bottom = 72.0
+text = "Infinite Health"
+script = ExtResource( 19 )
+
+[node name="InfiniteJump" type="CheckBox" parent="BG/Margin/Contents/Accessibility/Toggles"]
+margin_top = 80.0
+margin_right = 798.0
+margin_bottom = 112.0
+text = "Infinite Jump"
+script = ExtResource( 20 )
+
+[node name="InfiniteItems" type="CheckBox" parent="BG/Margin/Contents/Accessibility/Toggles"]
+margin_top = 120.0
+margin_right = 798.0
+margin_bottom = 152.0
+text = "Infinite Items"
+script = ExtResource( 21 )
 
 [node name="Footer" type="VBoxContainer" parent="BG"]
 anchor_top = 1.0
@@ -327,16 +435,29 @@ text = "game version: -.-.-"
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/GeneralTab" to="BG/Margin/Contents" method="_on_GeneralTab_pressed"]
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/ControlsTab" to="BG/Margin/Contents" method="_on_ControlsTab_pressed"]
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/AccessibilityTab" to="BG/Margin/Contents" method="_on_AccessibilityTab_pressed"]
+[connection signal="value_changed" from="BG/Margin/Contents/General/Audio/Music" to="." method="_on_Music_value_changed"]
+[connection signal="value_changed" from="BG/Margin/Contents/General/Audio/Sounds" to="." method="_on_Sounds_value_changed"]
 [connection signal="item_selected" from="BG/Margin/Contents/General/Resolution/OptionButton" to="BG/Margin/Contents/General/Resolution" method="_on_OptionButton_item_selected"]
 [connection signal="item_selected" from="BG/Margin/Contents/General/ScreenMode/OptionButton" to="BG/Margin/Contents/General/ScreenMode" method="_on_OptionButton_item_selected"]
 [connection signal="item_selected" from="BG/Margin/Contents/General/AntiAliasing/OptionButton" to="BG/Margin/Contents/General/AntiAliasing" method="_on_OptionButton_item_selected"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/VSync" to="BG/Margin/Contents/General/Toggles/VSync" method="_on_VSync_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Bloom" to="BG/Margin/Contents/General/Toggles/Bloom" method="_on_Bloom_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/ShowBar" to="BG/Margin/Contents/General/Toggles/ShowBar" method="_on_ShowBar_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Percentage" to="BG/Margin/Contents/General/Toggles/Percentage" method="_on_Percentage_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/PlayerHUD" to="BG/Margin/Contents/General/Toggles/PlayerHUD" method="_on_PlayerHUD_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/ShowFPS" to="BG/Margin/Contents/General/Toggles/ShowFPS" method="_on_ShowFPS_toggled"]
 [connection signal="pressed" from="BG/Margin/Contents/Controls/ResetControls" to="BG/Margin/Contents/Controls/ResetControls" method="_on_ResetControls_pressed"]
-[connection signal="toggled" from="BG/Margin/Contents/Accessibility/Screenshake" to="BG/Margin/Contents/Accessibility/Screenshake" method="_on_Screenshake_toggled"]
+[connection signal="value_changed" from="BG/Margin/Contents/Accessibility/Slidables/Screenshake" to="." method="_on_Screenshake_value_changed"]
+[connection signal="value_changed" from="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier" to="." method="_on_PointMultiplier_value_changed"]
+[connection signal="toggled" from="BG/Margin/Contents/Accessibility/Toggles/PlayerRing" to="BG/Margin/Contents/Accessibility/Toggles/PlayerRing" method="_on_PlayerRing_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/Accessibility/Toggles/InfiniteHP" to="BG/Margin/Contents/Accessibility/Toggles/InfiniteHP" method="_on_InfiniteHP_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/Accessibility/Toggles/InfiniteJump" to="BG/Margin/Contents/Accessibility/Toggles/InfiniteJump" method="_on_InfiniteJump_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/Accessibility/Toggles/InfiniteItems" to="BG/Margin/Contents/Accessibility/Toggles/InfiniteItems" method="_on_InfiniteItems_toggled"]
 
 [editable path="BG/Margin/Contents/General/Audio/Music"]
 [editable path="BG/Margin/Contents/General/Audio/Sounds"]
 [editable path="BG/Margin/Contents/General/Resolution"]
 [editable path="BG/Margin/Contents/General/ScreenMode"]
 [editable path="BG/Margin/Contents/General/AntiAliasing"]
+[editable path="BG/Margin/Contents/Accessibility/Slidables/Screenshake"]
+[editable path="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier"]

@@ -12,28 +12,47 @@ enum AA_MODES {
 	MSAA8X, MSAA16X
 }
 
-var music_volume := 70.0 setget set_music_volume
-var sound_volume := 100.0 setget set_sound_volume
+var music_volume := 0.7 setget set_music_volume
+var sound_volume := 1.0 setget set_sound_volume
 var resolution := Vector2(1920, 1080) setget set_resolution
+var point_multiplier := 1.0 setget set_point_multiplier
+var screen_shake := 1.0 setget set_screen_shake
 var screen_mode : int = SCREEN_MODES.FULLSCREEN setget set_screen_mode
 var aa_mode : int = AA_MODES.MSAA4X setget set_aa_mode
 var vsync := true setget set_vsync
 var bloom := true setget set_bloom
-var screen_shake := true setget set_screen_shake
+var show_bar := true setget set_show_bar
+var show_percentage := false setget set_show_percentage
+var always_show_hud := false setget set_always_show_hud
+var show_fps := false setget set_show_fps
+var player_ring := true setget set_player_ring
+var infinite_hp := false setget set_infinite_hp
+var infinite_jump := false setget set_infinite_jump
+var infinite_items := false setget set_infinite_items
 
 signal bloom_changed(is_active)
+signal show_fps_changed(is_active)
 
 
 func save_data() -> void:
 	var save_dict := {}
 	save_dict["music_volume"] = music_volume
 	save_dict["sound_volume"] = sound_volume
+	save_dict["point_multiplier"] = point_multiplier
+	save_dict["screen_shake"] = screen_shake
 	save_dict["resolution"] = resolution
 	save_dict["screen_mode"] = screen_mode
 	save_dict["aa_mode"] = aa_mode
 	save_dict["vsync"] = vsync
 	save_dict["bloom"] = bloom
-	save_dict["screen_shake"] = screen_shake
+	save_dict["show_bar"] = show_bar
+	save_dict["show_percentage"] = show_percentage
+	save_dict["always_show_hud"] = always_show_hud
+	save_dict["show_fps"] = show_fps
+	save_dict["player_ring"] = player_ring
+	save_dict["infinite_hp"] = infinite_hp
+	save_dict["infinite_jump"] = infinite_jump
+	save_dict["infinite_items"] = infinite_items
 	save_dict["keyboard_controls"] = get_keyboard_dict()
 	save_dict["gamepad_controls"] = get_gamepad_dict()
 	var file := File.new()
@@ -48,14 +67,23 @@ func load_data() -> void:
 		file.open(SAVE_PATH, File.READ)
 		var values : Dictionary = file.get_var()
 		
-		self.music_volume = values.get("music_volume", 70.0)
-		self.sound_volume = values.get("sound_volume", 100.0)
+		self.music_volume = values.get("music_volume", 0.7)
+		self.sound_volume = values.get("sound_volume", 1.0)
+		self.screen_shake = values.get("screen_shake", 1.0)
+		self.point_multiplier = values.get("point_multiplier", 1.0)
 		self.resolution = values.get("resolution", Vector2(1920, 1080))
 		self.screen_mode = values.get("screen_mode", SCREEN_MODES.FULLSCREEN)
-		self.aa_mode = values.get("screen_mode", AA_MODES.MSAA4X)
+		self.aa_mode = values.get("aa_mode", AA_MODES.MSAA4X)
 		self.vsync = values.get("vsync", true)
 		self.bloom = values.get("bloom", true)
-		self.screen_shake = values.get("screen_shake", true)
+		self.show_bar = values.get("show_bar", true)
+		self.show_percentage = values.get("show_percentage", false)
+		self.always_show_hud = values.get("always_show_hud", false)
+		self.show_fps = values.get("show_fps", false)
+		self.player_ring = values.get("player_ring", true)
+		self.infinite_hp = values.get("infinite_hp", false)
+		self.infinite_jump = values.get("infinite_jump", false)
+		self.infinite_items = values.get("infinite_items", false)
 		
 		var keyboard_controls : Dictionary = values.get("keyboard_controls", {})
 		for action in keyboard_controls:
@@ -72,12 +100,20 @@ func load_data() -> void:
 
 func set_music_volume(value: float) -> void:
 	music_volume = value
-	SoundManager.set_music_volume(value / 100.0)
+	SoundManager.set_music_volume(value)
 
 
 func set_sound_volume(value: float) -> void:
 	sound_volume = value
-	SoundManager.set_sound_volume(value / 100.0)
+	SoundManager.set_sound_volume(value)
+
+
+func set_screen_shake(value: float) -> void:
+	screen_shake = value
+
+
+func set_point_multiplier(value: float) -> void:
+	point_multiplier = value
 
 
 func set_bloom(value: bool) -> void:
@@ -85,8 +121,37 @@ func set_bloom(value: bool) -> void:
 	emit_signal("bloom_changed", value)
 
 
-func set_screen_shake(value: bool) -> void:
-	screen_shake = value
+func set_show_bar(value: bool) -> void:
+	show_bar = value
+
+
+func set_show_percentage(value: bool) -> void:
+	show_percentage = value
+
+
+func set_show_fps(value: bool) -> void:
+	show_fps = value
+	emit_signal("show_fps_changed", value)
+
+
+func set_always_show_hud(value: bool) -> void:
+	always_show_hud = value
+
+
+func set_player_ring(value: bool) -> void:
+	player_ring = value
+
+
+func set_infinite_hp(value: bool) -> void:
+	infinite_hp = value
+
+
+func set_infinite_jump(value: bool) -> void:
+	infinite_jump = value
+
+
+func set_infinite_items(value: bool) -> void:
+	infinite_items = value
 
 
 func set_resolution(value: Vector2) -> void:
