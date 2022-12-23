@@ -12,7 +12,6 @@ func _ready() -> void:
 	InputHelper.connect("device_changed", self, "_on_device_changed")
 	InputHelper.connect("action_key_changed", self, "_on_action_key_changed")
 	InputHelper.connect("action_button_changed", self, "_on_action_button_changed")
-	Config.load_data()
 	update_icon(InputHelper.has_gamepad())
 	button.text = action_name
 	self.is_waiting_for_key = false

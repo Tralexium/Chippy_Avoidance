@@ -12,7 +12,6 @@ var is_waiting_for_key: bool = false setget set_is_waiting_for_key
 
 
 func _ready() -> void:
-	Config.load_data()
 	update_label()
 	self.is_waiting_for_key = false
 

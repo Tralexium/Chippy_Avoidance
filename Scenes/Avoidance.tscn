@@ -48,6 +48,7 @@ dof_blur_far_distance = 50.0
 dof_blur_far_transition = 50.0
 glow_enabled = true
 glow_intensity = 2.0
+glow_bicubic_upscale = true
 
 [sub_resource type="Animation" id=6]
 length = 0.001
@@ -458,6 +459,18 @@ tracks/33/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 1.01063, 0 ) ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("Player:has_djump")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -1399,6 +1412,18 @@ tracks/49/keys = {
 "update": 0,
 "values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, -50, 0 ) ]
 }
+tracks/50/type = "value"
+tracks/50/path = NodePath("Player:has_djump")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/keys = {
+"times": PoolRealArray( 43.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [node name="Avoidance" type="Spatial"]
 script = ExtResource( 9 )
@@ -1450,6 +1475,7 @@ projectile = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 
 [node name="Lights" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 8 )
 spotlight_col = Color( 0.807843, 0.847059, 1, 1 )
 ground_col = Color( 0.807843, 0.847059, 1, 1 )

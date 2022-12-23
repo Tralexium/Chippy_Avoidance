@@ -11,6 +11,7 @@ export var input_buffer_dur := 0.2
 export var coyote_time_dur := 0.2
 export var lock_2d := false
 export var flying := false
+export var has_djump := false
 export var cam_follow_y := false
 
 export var hp := 3 setget set_hp
@@ -18,7 +19,6 @@ export var hp := 3 setget set_hp
 var input_vector := Vector3.ZERO
 var velocity := Vector3.ZERO
 var snap_vector := Vector3.DOWN
-var has_djump := false
 var is_dead := false
 var coyote_time := 0.0
 var input_buffer_time := 0.0
@@ -124,6 +124,7 @@ func _apply_velocity() -> void:
 	
 	# X&Z Axis
 	var XZ_input := Vector2(input_vector.x, input_vector.z)
+	print(XZ_input)
 	if XZ_input.length() != 0.0:
 		velocity.x = input_vector.x * walk_speed
 		velocity.z = input_vector.z * walk_speed

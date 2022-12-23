@@ -16,7 +16,20 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 1.15, 0.84, 0.3, 1 )
+draw_center = false
+skew = Vector2( 0.3, 0 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 1.15, 0.84, 0.3, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 1.15, 0.84, 0.3, 1 )
@@ -36,7 +49,19 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 1.15, 0.84, 0.3, 1 )
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 1.15, 0.84, 0.3, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -98,21 +123,21 @@ Button/colors/font_color_hover = Color( 0.0392157, 0, 0.101961, 1 )
 Button/colors/font_color_pressed = Color( 0.0392157, 0, 0.101961, 1 )
 Button/fonts/font = ExtResource( 1 )
 Button/styles/disabled = SubResource( 10 )
-Button/styles/focus = SubResource( 9 )
+Button/styles/focus = SubResource( 23 )
 Button/styles/hover = SubResource( 21 )
 Button/styles/normal = SubResource( 11 )
 Button/styles/pressed = SubResource( 10 )
 CheckBox/colors/font_color = Color( 0, 0.86, 1.15, 1 )
-CheckBox/colors/font_color_focus = Color( 0, 0.86, 1.15, 1 )
+CheckBox/colors/font_color_focus = Color( 1.15, 0.82, 0.3, 1 )
 CheckBox/colors/font_color_hover = Color( 1.15, 0.82, 0.3, 1 )
 CheckBox/colors/font_color_hover_pressed = Color( 1.15, 0.82, 0.3, 1 )
-CheckBox/colors/font_color_pressed = Color( 1.15, 0.82, 0.3, 1 )
+CheckBox/colors/font_color_pressed = Color( 0, 0.86, 1.15, 1 )
 CheckBox/constants/hseparation = 10
 CheckBox/fonts/font = ExtResource( 1 )
 CheckBox/icons/checked = ExtResource( 7 )
 CheckBox/icons/unchecked = ExtResource( 6 )
 CheckBox/styles/disabled = SubResource( 3 )
-CheckBox/styles/focus = SubResource( 4 )
+CheckBox/styles/focus = SubResource( 24 )
 CheckBox/styles/hover = SubResource( 5 )
 CheckBox/styles/hover_pressed = SubResource( 6 )
 CheckBox/styles/normal = SubResource( 7 )
@@ -128,6 +153,7 @@ Label/fonts/font = ExtResource( 1 )
 OptionButton/constants/arrow_margin = 7
 OptionButton/fonts/font = null
 OptionButton/icons/arrow = ExtResource( 5 )
+OptionButton/styles/focus = SubResource( 24 )
 OptionButton/styles/hover = SubResource( 15 )
 OptionButton/styles/normal = SubResource( 16 )
 OptionButton/styles/pressed = SubResource( 15 )
