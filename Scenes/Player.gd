@@ -7,7 +7,7 @@ export var flying_vel := 73.0
 export var gravity := 1.9
 export var max_fall_vel := 100.0
 export var friction := 20.0
-export var input_buffer_dur := 0.1
+export var input_buffer_dur := 0.2
 export var coyote_time_dur := 0.2
 export var lock_2d := false
 export var flying := false
@@ -73,8 +73,8 @@ func _debug() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	input_buffer_time = input_buffer_dur
-	if event.is_action_pressed("jump") and !is_on_floor():
+	if event.is_action_pressed("jump") and !is_on_floor() and !has_djump:
+		input_buffer_time = input_buffer_dur
 		buffered_input = "jump"
 
 
@@ -87,20 +87,23 @@ func _get_input() -> void:
 	if input_buffer_time <= 0.0:
 		buffered_input = ""
 	
+	var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.2)
 	input_vector = Vector3.ZERO
-	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-	input_vector.z = Input.get_action_strength("backward") - Input.get_action_strength("forward")
-	input_vector = input_vector.rotated(Vector3.UP, n_camera_pos.rotation.y).normalized()
+	input_vector.x = xy_input.x
+	input_vector.z = xy_input.y
+	input_vector = input_vector.rotated(Vector3.UP, n_camera_pos.rotation.y)
 	if lock_2d:
 		input_vector.z = 0.0
 		translation.z = lerp(translation.z, 0.0, 0.5)
-	if (Input.is_action_just_pressed("jump") or buffered_input == "jump") and (is_on_floor() or coyote_time > 0.0):
-		has_djump = true
-		input_vector.y = 1
-		coyote_time = 0.0
-	elif Input.is_action_just_pressed("jump") and has_djump:
-		has_djump = false
-		input_vector.y = 1
+	if !flying:
+		if (Input.is_action_just_pressed("jump") or buffered_input == "jump") and (is_on_floor() or coyote_time > 0.0):
+			has_djump = true
+			input_vector.y = 1
+			coyote_time = 0.0
+			buffered_input = ""
+		elif Input.is_action_just_pressed("jump") and has_djump:
+			has_djump = false
+			input_vector.y = 1
 
 
 func _apply_velocity() -> void:
@@ -133,8 +136,7 @@ func _apply_velocity() -> void:
 
 	if !flying and Input.is_action_just_released("jump") and velocity.y > 0.0:
 		velocity.y *= 0.5
-	
-	
+
 
 func _rotate_mesh(delta: float) -> void:
 	# Rotate the player mesh based on camera's orientation / movement

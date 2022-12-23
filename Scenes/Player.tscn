@@ -1816,4 +1816,9 @@ current = true
 fov = 50.0
 far = 5000.0
 
+[node name="Label" type="Label" parent="."]
+margin_right = 691.0
+margin_bottom = 29.0
+text = "Label:"
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
