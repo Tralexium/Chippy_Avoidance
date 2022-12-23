@@ -20,17 +20,18 @@ func _ready() -> void:
 
 func _input(event) -> void:
 	if not is_waiting_for_key: return
+	InputHelper.identify_current_input_device(event)
+	accept_event()
 	
 	if event is InputEventMouseButton and event.is_pressed():
-		accept_event()
 		self.is_waiting_for_key = false
 	if event is InputEventKey and event.is_pressed():
-		accept_event()
 		InputHelper.set_action_key(action_name, event.as_text())
 		self.is_waiting_for_key = false
 		update_icon(false)
 	elif event is InputEventJoypadButton and event.is_pressed():
 		InputHelper.set_action_button(action_name, event.button_index)
+		InputHelper.identify_current_input_device(event)
 		self.is_waiting_for_key = false
 		update_icon(true)
 

@@ -9,7 +9,7 @@
 [ext_resource path="res://Assets/UI/checkbox_selected_hover.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0, 0.86, 1.23, 1 )
+bg_color = Color( 0, 0.86, 1.15, 1 )
 skew = Vector2( 0.3, 0 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -19,7 +19,7 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxFlat" id=21]
-bg_color = Color( 1.34, 0.84, 0.3, 1 )
+bg_color = Color( 1.15, 0.84, 0.3, 1 )
 skew = Vector2( 0.3, 0 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -27,7 +27,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 1.34118, 0.156863, 0.34902, 1 )
+bg_color = Color( 1.15, 0.16, 0.35, 1 )
 skew = Vector2( 0.3, 0 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -47,7 +47,7 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxLine" id=22]
-color = Color( 0, 0.86, 1.23, 1 )
+color = Color( 0, 0.86, 1.15, 1 )
 thickness = 3
 
 [sub_resource type="StyleBoxEmpty" id=12]
@@ -61,14 +61,14 @@ axis_stretch_horizontal = 1
 modulate_color = Color( 1.34, 0.84, 0.3, 1 )
 
 [sub_resource type="StyleBoxFlat" id=15]
-bg_color = Color( 1.34, 0.84, 0.3, 1 )
+bg_color = Color( 1.15, 0.84, 0.3, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 1.34118, 0.156863, 0.34902, 1 )
+bg_color = Color( 1.15, 0.16, 0.35, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -79,7 +79,7 @@ corner_radius_bottom_left = 4
 [sub_resource type="ImageTexture" id=20]
 
 [sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 1.34118, 0.156863, 0.34902, 1 )
+bg_color = Color( 1.15, 0.16, 0.35, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -102,11 +102,11 @@ Button/styles/focus = SubResource( 9 )
 Button/styles/hover = SubResource( 21 )
 Button/styles/normal = SubResource( 11 )
 Button/styles/pressed = SubResource( 10 )
-CheckBox/colors/font_color = Color( 0, 0.86, 1.34, 1 )
-CheckBox/colors/font_color_focus = Color( 0, 0.86, 1.34, 1 )
-CheckBox/colors/font_color_hover = Color( 1.34, 0.82, 0.3, 1 )
-CheckBox/colors/font_color_hover_pressed = Color( 1.34, 0.82, 0.3, 1 )
-CheckBox/colors/font_color_pressed = Color( 1.34, 0.82, 0.3, 1 )
+CheckBox/colors/font_color = Color( 0, 0.86, 1.15, 1 )
+CheckBox/colors/font_color_focus = Color( 0, 0.86, 1.15, 1 )
+CheckBox/colors/font_color_hover = Color( 1.15, 0.82, 0.3, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 1.15, 0.82, 0.3, 1 )
+CheckBox/colors/font_color_pressed = Color( 1.15, 0.82, 0.3, 1 )
 CheckBox/constants/hseparation = 10
 CheckBox/fonts/font = ExtResource( 1 )
 CheckBox/icons/checked = ExtResource( 7 )

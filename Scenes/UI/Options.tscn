@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/UI/SliderWidget.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/UI/Options.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/UI/InputWidget.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/UI/ResetControls.gd" type="Script" id=13]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -51,7 +52,7 @@ margin_left = -64.0
 margin_right = 1310.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
-color = Color( 0, 0.86, 1.3, 1 )
+color = Color( 0, 0.86, 1.15, 1 )
 
 [node name="Label" type="Label" parent="BG/Margin/Contents/Header/ColorRect"]
 anchor_bottom = 1.0
@@ -94,6 +95,7 @@ toggle_mode = true
 text = "Accessibility"
 
 [node name="General" type="VBoxContainer" parent="BG/Margin/Contents"]
+visible = false
 margin_top = 216.0
 margin_right = 798.0
 margin_bottom = 625.0
@@ -190,45 +192,88 @@ text = "Screenshake"
 script = ExtResource( 9 )
 
 [node name="Controls" type="VBoxContainer" parent="BG/Margin/Contents"]
-visible = false
 margin_top = 216.0
 margin_right = 798.0
-margin_bottom = 556.0
+margin_bottom = 934.0
+custom_constants/separation = 48
+
+[node name="InputMapping" type="VBoxContainer" parent="BG/Margin/Contents/Controls"]
+margin_right = 798.0
+margin_bottom = 630.0
 custom_constants/separation = 8
 
-[node name="Jump" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+[node name="Jump" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_right = 798.0
 margin_bottom = 50.0
 
-[node name="Left" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+[node name="Left" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_top = 58.0
 margin_right = 798.0
 margin_bottom = 108.0
 action_name = "left"
 
-[node name="Right" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+[node name="Right" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_top = 116.0
 margin_right = 798.0
 margin_bottom = 166.0
 action_name = "right"
 
-[node name="Forward" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+[node name="Forward" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_top = 174.0
 margin_right = 798.0
 margin_bottom = 224.0
 action_name = "forward"
 
-[node name="Backward" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+[node name="Backward" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_top = 232.0
 margin_right = 798.0
 margin_bottom = 282.0
 action_name = "backward"
 
-[node name="Restart" parent="BG/Margin/Contents/Controls" instance=ExtResource( 12 )]
+[node name="Item1" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
 margin_top = 290.0
 margin_right = 798.0
 margin_bottom = 340.0
-action_name = "restart"
+action_name = "item 1"
+
+[node name="Item2" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
+margin_top = 348.0
+margin_right = 798.0
+margin_bottom = 398.0
+action_name = "item 2"
+
+[node name="Item3" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
+margin_top = 406.0
+margin_right = 798.0
+margin_bottom = 456.0
+action_name = "item 3"
+
+[node name="Item4" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
+margin_top = 464.0
+margin_right = 798.0
+margin_bottom = 514.0
+action_name = "item 4"
+
+[node name="QuickRestart" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
+margin_top = 522.0
+margin_right = 798.0
+margin_bottom = 572.0
+action_name = "quick restart"
+
+[node name="Escape" parent="BG/Margin/Contents/Controls/InputMapping" instance=ExtResource( 12 )]
+margin_top = 580.0
+margin_right = 798.0
+margin_bottom = 630.0
+action_name = "escape"
+
+[node name="ResetControls" type="Button" parent="BG/Margin/Contents/Controls"]
+margin_top = 678.0
+margin_right = 400.0
+margin_bottom = 718.0
+rect_min_size = Vector2( 400, 40 )
+size_flags_horizontal = 0
+text = "Reset back to default"
+script = ExtResource( 13 )
 
 [node name="Accessibility" type="VBoxContainer" parent="BG/Margin/Contents"]
 visible = false
@@ -263,6 +308,7 @@ text = "game version: -.-.-"
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/VSync" to="BG/Margin/Contents/General/Toggles/VSync" method="_on_VSync_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Bloom" to="BG/Margin/Contents/General/Toggles/Bloom" method="_on_Bloom_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Screenshake" to="BG/Margin/Contents/General/Toggles/Screenshake" method="_on_Screenshake_toggled"]
+[connection signal="pressed" from="BG/Margin/Contents/Controls/ResetControls" to="BG/Margin/Contents/Controls/ResetControls" method="_on_ResetControls_pressed"]
 
 [editable path="BG/Margin/Contents/General/Audio/Music"]
 [editable path="BG/Margin/Contents/General/Audio/Sounds"]

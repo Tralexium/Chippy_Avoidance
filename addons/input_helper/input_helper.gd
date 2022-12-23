@@ -37,6 +37,10 @@ var device_last_changed_at: int = 0
 
 
 func _input(event: InputEvent) -> void:
+	identify_current_input_device(event)
+
+
+func identify_current_input_device(event: InputEvent) -> void:
 	var next_device: String = device
 	var next_device_index: int = device_index
 	
@@ -94,8 +98,10 @@ func guess_device_name() -> String:
 func reset_all_actions() -> void:
 	InputMap.load_from_globals()
 	for action in InputMap.get_actions():
-		emit_signal("action_button_changed", action, get_action_button(action))
-		emit_signal("action_key_changed", action, get_action_key(action))
+		if guess_device_name() == DEVICE_KEYBOARD:
+			emit_signal("action_key_changed", action, get_action_key(action))
+		else:
+			emit_signal("action_button_changed", action, get_action_button(action))
 
 
 func is_valid_key(key: String) -> bool:

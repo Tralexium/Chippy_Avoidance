@@ -94,7 +94,8 @@ func set_vsync(value: bool) -> void:
 
 func get_configurable_actions() -> Array:
 	return [
-		"jump", "left", "right", "forward", "backward"
+		"jump", "left", "right", "forward", "backward", "quick restart",
+		"escape", "item 1", "item 2", "item 3", "item 4",
 	]
 
 
