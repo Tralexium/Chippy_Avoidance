@@ -4,7 +4,7 @@
 [ext_resource path="res://Resources/Materials/hazard_mat.tres" type="Material" id=2]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.57372, 0.617436, 0.0231924 )
+extents = Vector3( 0.57372, 0.617436, 0.255524 )
 
 [sub_resource type="PrismMesh" id=2]
 size = Vector3( 2, 2, 0.05 )

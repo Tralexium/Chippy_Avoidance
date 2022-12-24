@@ -67,6 +67,7 @@ func die() -> void:
 	n_mesh.rotate_y(PI)
 	n_collision_shape.set_deferred("disabled", true)
 	n_armature_animations.play("Fall")
+	SoundManager.stop_music(1.0)
 	Util.time_slowdown(0.05, 0.5)
 	yield(get_tree().create_timer(0.5 * 0.05), "timeout")
 	velocity = Vector3(80.0, 60.0, 0.0).rotated(Vector3.UP, randf() * TAU)
@@ -75,14 +76,14 @@ func die() -> void:
 	n_dust_particles.emitting = true
 	n_dust_particles.amount = 16
 	var rotate_tween = create_tween()
-	rotate_tween.tween_property(n_mesh, "rotation", Vector3(15, 6, 9), 1.0)
+	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	transition_inst.connect("tree_exited", self, "_on_transition_finished")
 	add_child(transition_inst)
 
 
 func _on_transition_finished() -> void:
-	Globals.start_avoidance()
+	get_tree().reload_current_scene()
 
 
 func _physics_process(delta: float) -> void:
@@ -216,5 +217,10 @@ func _animations() -> void:
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
+	if !Globals.god_mode:
+		self.hp -= 1
+
+
+func _on_Hitbox_body_entered(body: Node) -> void:
 	if !Globals.god_mode:
 		self.hp -= 1

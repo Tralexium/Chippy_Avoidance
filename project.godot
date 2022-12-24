@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Config="*res://Globals/Config.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
 SoundManager="*res://addons/sound_manager/sound_manager.tscn"
+AlwaysRendered="*res://Scenes/AlwaysRendered.tscn"
 Util="*res://Globals/Util.gd"
 Globals="*res://Globals/Globals.gd"
 

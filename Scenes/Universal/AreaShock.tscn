@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Universal/AreaShock.gd" type="Script" id=2]
 
 [sub_resource type="CylinderShape" id=1]
-height = 0.01
+height = 0.700807
 
 [sub_resource type="CylinderMesh" id=2]
 height = 0.01

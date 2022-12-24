@@ -60,11 +60,11 @@ func is_music_track_playing(resource_path: String) -> bool:
 
 
 func get_currently_playing_music() -> Array:
-	return music.get_current()
+	return music.get_currently_playing()
 
 
 func get_currently_playing_music_tracks() -> Array:
-	return music.get_current_tracks()
+	return music.get_currently_playing_tracks()
 
 
 func stop_music(fade_out_duration: float = 0) -> void:

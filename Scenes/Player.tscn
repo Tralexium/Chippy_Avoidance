@@ -1633,10 +1633,10 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "running_time_scale", 0, "running", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "air_blend", 0, "fall", "air_blend", 1, "jump", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "TimeScale", 0, "flip_jump", "idle_time_scale", 0, "idle", "output", 0, "in_air_state" ]
+node_connections = [ "output", 0, "in_air_state", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "running_time_scale", 0, "running", "air_blend", 0, "fall", "air_blend", 1, "jump", "TimeScale", 0, "flip_jump", "idle_time_scale", 0, "idle", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale" ]
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 0.7, 0.7, 0.7 )
+extents = Vector3( 0.8, 0.7, 0.8 )
 
 [sub_resource type="SphereShape" id=5]
 
@@ -1843,3 +1843,4 @@ fov = 50.0
 far = 5000.0
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

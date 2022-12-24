@@ -22,3 +22,7 @@ func _on_Options_go_back() -> void:
 
 func _on_StartingMenu_exit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_StartingMenu_begin_pressed() -> void:
+	get_tree().change_scene_to(Globals.AVOIDANCE)

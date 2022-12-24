@@ -1,12 +1,23 @@
 extends Spatial
 
+const EYE_BLINK := preload("res://Scenes/Universal/EyeBlinkTransition.tscn")
+
 export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44]
 
 var current_phase := 0
-onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+onready var audio_stream_player: AudioStreamPlayer
 onready var timeline: AnimationPlayer = $Timeline
 onready var player: KinematicBody = $Player
 onready var cam_path: Path = $CamPath
+
+
+func _init() -> void:
+	spawn_blink_overlay(1.25, true)
+
+
+func _ready() -> void:
+	audio_stream_player = SoundManager.play_music(preload("res://Audio/Music/aran_EPHMR.ogg"), 0.0, "Music")
+	audio_stream_player.seek(0.0)
 
 
 func _process(delta: float) -> void:
@@ -33,3 +44,10 @@ func fast_forward_phase(skip_phases: int) -> void:
 	player.stop_cam_movement()
 	audio_stream_player.seek(audio_pos)
 	timeline.seek(audio_pos, true)
+
+
+func spawn_blink_overlay(speed: float, reverse: bool) -> void:
+	var blink_inst := EYE_BLINK.instance()
+	blink_inst.speed = speed
+	blink_inst.reverse = reverse
+	add_child(blink_inst)

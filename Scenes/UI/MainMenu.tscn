@@ -142,13 +142,13 @@ far = 1000.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 5760.0
-margin_bottom = 3240.0
+margin_right = 11520.0
+margin_bottom = 6480.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 margin_left = 1918.0
-margin_right = 3838.0
-margin_bottom = 1080.0
+margin_right = 9598.0
+margin_bottom = 4320.0
 
 [node name="BloomRect" type="ColorRect" parent="UI"]
 material = ExtResource( 4 )
@@ -162,6 +162,7 @@ anims/RESET = SubResource( 1 )
 anims/move_to_main_from_options = SubResource( 3 )
 anims/move_to_options = SubResource( 2 )
 
+[connection signal="begin_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_begin_pressed"]
 [connection signal="exit_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_exit_pressed"]
 [connection signal="options_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_options_pressed"]
 [connection signal="go_back" from="UI/Options" to="." method="_on_Options_go_back"]
