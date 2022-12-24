@@ -48,5 +48,5 @@ void fragment() {
 [resource]
 shader = SubResource( 1 )
 shader_param/bloomRadius = 30.0
-shader_param/bloomThreshold = 0.6
-shader_param/bloomIntensity = 0.6
+shader_param/bloomThreshold = 0.4
+shader_param/bloomIntensity = 0.4

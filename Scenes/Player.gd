@@ -1,6 +1,7 @@
 extends KinematicBody
 
 const HITMARKER := preload("res://Scenes/PlayerHitmark.tscn")
+const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
 
 export var walk_speed := 17.0
 export var jump_vel := 35.0
@@ -45,13 +46,15 @@ func set_hp(value: int) -> void:
 	if value < hp:
 		hit_effects()
 	hp = value
-	if hp <= 0:
+	if hp <= 0 and !is_dead:
 		die()
 
 
 func hit_effects() -> void:
 	n_hitbox_shape.set_deferred("disabled", true)
-	add_child(HITMARKER.instance())
+	var hitmarker := HITMARKER.instance()
+	hitmarker.translation = $Mesh/Armature/Skeleton/Character.translation
+	add_child(hitmarker)
 
 
 func die() -> void:
@@ -65,12 +68,21 @@ func die() -> void:
 	n_collision_shape.set_deferred("disabled", true)
 	n_armature_animations.play("Fall")
 	Util.time_slowdown(0.05, 0.5)
-	yield(get_tree().create_timer(0.5), "timeout")
-	velocity = Vector3(40.0, 30.0, 0.0).rotated(Vector3.UP, randf() * TAU)
+	yield(get_tree().create_timer(0.5 * 0.05), "timeout")
+	velocity = Vector3(80.0, 60.0, 0.0).rotated(Vector3.UP, randf() * TAU)
+	if lock_2d:
+		velocity.z = 0.0
 	n_dust_particles.emitting = true
 	n_dust_particles.amount = 16
 	var rotate_tween = create_tween()
-	rotate_tween.tween_property(n_mesh, "rotation", Vector3(15, 6, 9), 2.0)
+	rotate_tween.tween_property(n_mesh, "rotation", Vector3(15, 6, 9), 1.0)
+	var transition_inst := CIRCLE_TRANSITION.instance()
+	transition_inst.connect("tree_exited", self, "_on_transition_finished")
+	add_child(transition_inst)
+
+
+func _on_transition_finished() -> void:
+	Globals.start_avoidance()
 
 
 func _physics_process(delta: float) -> void:
@@ -152,7 +164,6 @@ func _apply_velocity() -> void:
 	
 	# X&Z Axis
 	var XZ_input := Vector2(input_vector.x, input_vector.z)
-	print(XZ_input)
 	if XZ_input.length() != 0.0:
 		velocity.x = input_vector.x * walk_speed
 		velocity.z = input_vector.z * walk_speed
@@ -190,6 +201,8 @@ func stop_cam_movement() -> void:
 
 
 func _animations() -> void:
+	if is_dead:
+		return
 	n_player_animation_tree.set_airborne_state(is_on_floor())
 	var run_strength := clamp(Vector2(velocity.x, velocity.z).length() / (walk_speed * .7), 0.0, 1.0)
 	n_player_animation_tree.set_run_strength(run_strength)
@@ -203,4 +216,5 @@ func _animations() -> void:
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
-	self.hp -= 1
+	if !Globals.god_mode:
+		self.hp -= 1

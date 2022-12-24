@@ -1431,7 +1431,7 @@ script = ExtResource( 9 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5899, 0 )
 
-[node name="CameraPos" parent="Player" index="4"]
+[node name="CameraPos" parent="Player" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="PillarGround" parent="." instance=ExtResource( 16 )]
