@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Terrain/DiscoFloor.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Materials/DiscoTileMaterial.tres" type="Material" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 2 )
+size = Vector2( 5, 5 )
+
+[sub_resource type="MultiMesh" id=2]
+color_format = 2
+transform_format = 1
+custom_data_format = 2
+mesh = SubResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.513393, 1 )
+colors = PoolColorArray( 0, 0.529412, 1, 1, 0, 0.789063, 1, 1, 0, 0.529412, 1, 1 )
+
+[node name="DiscoFloor" type="MultiMeshInstance"]
+multimesh = SubResource( 2 )
+script = ExtResource( 1 )
+color_gradient = SubResource( 3 )

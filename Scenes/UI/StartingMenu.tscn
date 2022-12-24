@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=2]
@@ -8,6 +8,14 @@
 [ext_resource path="res://Assets/Blender Renders/player_head_main_menu.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/UI/StartingMenu.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/UI/SelectedButton.gd" type="Script" id=8]
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
+skew = Vector2( 0.001, 0 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0, 0.858824, 1, 1 )
+skew = Vector2( 0.001, 0 )
 
 [sub_resource type="AtlasTexture" id=22]
 flags = 6
@@ -29,22 +37,22 @@ rect_pivot_offset = Vector2( 0, 88 )
 theme = ExtResource( 2 )
 script = ExtResource( 7 )
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="Panel" parent="."]
 margin_left = 128.0
 margin_right = 548.0
 margin_bottom = 2000.0
 rect_rotation = -10.0
-color = Color( 0.0235294, 0, 0.0627451, 0.509804 )
+custom_styles/panel = SubResource( 23 )
 
-[node name="Bar" type="ColorRect" parent="BG"]
+[node name="NeonBar" type="Panel" parent="BG"]
 margin_left = 57.1333
 margin_top = 3.36795
 margin_right = 127.133
 margin_bottom = 2003.37
 rect_pivot_offset = Vector2( -686.284, 64.7349 )
-color = Color( 0, 0.86, 1.1, 1 )
+custom_styles/panel = SubResource( 24 )
 
-[node name="SelectedButton" type="Label" parent="BG/Bar"]
+[node name="SelectedButton" type="Label" parent="BG/NeonBar"]
 margin_left = 79.7388
 margin_top = 320.317
 margin_right = 480.739
@@ -57,16 +65,16 @@ valign = 1
 uppercase = true
 script = ExtResource( 8 )
 
-[node name="Bar2" type="ColorRect" parent="BG"]
+[node name="ThinBar" type="Panel" parent="BG"]
 margin_left = -68.0707
 margin_top = -34.3421
 margin_right = -52.0707
 margin_bottom = 1965.66
 rect_pivot_offset = Vector2( -686.284, 64.7349 )
-color = Color( 0.0235294, 0, 0.0627451, 0.509804 )
+custom_styles/panel = SubResource( 23 )
 
 [node name="ScrollingIcons" type="TextureRect" parent="BG"]
-self_modulate = Color( 0.0235294, 0, 0.0627451, 0.509804 )
+self_modulate = Color( 0.0235294, 0, 0.0627451, 0.784314 )
 margin_left = -46.8664
 margin_top = -16.3872
 margin_right = -3.86639
@@ -177,12 +185,16 @@ social_link = "https://discord.gg/kssrRw9BZk"
 
 [connection signal="focus_entered" from="BG/Buttons/Begin" to="." method="_on_Begin_focus_entered"]
 [connection signal="mouse_entered" from="BG/Buttons/Begin" to="." method="_on_Begin_mouse_entered"]
+[connection signal="pressed" from="BG/Buttons/Begin" to="." method="_on_Begin_pressed"]
 [connection signal="focus_entered" from="BG/Buttons/Options" to="." method="_on_Options_focus_entered"]
 [connection signal="mouse_entered" from="BG/Buttons/Options" to="." method="_on_Options_mouse_entered"]
+[connection signal="pressed" from="BG/Buttons/Options" to="." method="_on_Options_pressed"]
 [connection signal="focus_entered" from="BG/Buttons/Credits" to="." method="_on_Credits_focus_entered"]
 [connection signal="mouse_entered" from="BG/Buttons/Credits" to="." method="_on_Credits_mouse_entered"]
+[connection signal="pressed" from="BG/Buttons/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="focus_entered" from="BG/Buttons/Exit" to="." method="_on_Exit_focus_entered"]
 [connection signal="mouse_entered" from="BG/Buttons/Exit" to="." method="_on_Exit_mouse_entered"]
+[connection signal="pressed" from="BG/Buttons/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="focus_entered" from="BG/Buttons/Socials/Twitter" to="." method="_on_Twitter_focus_entered"]
 [connection signal="mouse_entered" from="BG/Buttons/Socials/Twitter" to="." method="_on_Twitter_mouse_entered"]
 [connection signal="focus_entered" from="BG/Buttons/Socials/Discord" to="." method="_on_Discord_focus_entered"]

@@ -1,0 +1,5 @@
+[gd_resource type="Gradient" format=2]
+
+[resource]
+offsets = PoolRealArray( 0, 0.328502, 0.68599, 1 )
+colors = PoolColorArray( 0.831373, 0.294118, 0.545098, 1, 0.953125, 0.808853, 0.376038, 1, 0.460568, 0.892249, 0.760721, 1, 0.831373, 0.294118, 0.545098, 1 )

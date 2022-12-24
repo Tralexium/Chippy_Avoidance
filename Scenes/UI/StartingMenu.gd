@@ -2,9 +2,17 @@ extends Control
 
 export var icon_scroll_spd := 50.0
 
+signal begin_pressed
+signal options_pressed
+signal credits_pressed
+signal exit_pressed
+
 onready var scrolling_icons: TextureRect = $BG/ScrollingIcons
+onready var selected_button: Label = $BG/NeonBar/SelectedButton
 onready var begin: Button = $BG/Buttons/Begin
-onready var selected_button: Label = $BG/Bar/SelectedButton
+onready var options: Button = $BG/Buttons/Options
+onready var credits: Button = $BG/Buttons/Credits
+onready var exit: Button = $BG/Buttons/Exit
 
 
 func change_label_text(string: String) -> void:
@@ -56,3 +64,21 @@ func _on_Discord_focus_entered() -> void:
 
 func _on_Discord_mouse_entered() -> void:
 	change_label_text("discord")
+
+
+
+func _on_Begin_pressed() -> void:
+	begin.release_focus()
+	emit_signal("begin_pressed")
+
+func _on_Options_pressed() -> void:
+	options.release_focus()
+	emit_signal("options_pressed")
+
+func _on_Credits_pressed() -> void:
+	credits.release_focus()
+	emit_signal("credits_pressed")
+
+func _on_Exit_pressed() -> void:
+	exit.release_focus()
+	emit_signal("exit_pressed")

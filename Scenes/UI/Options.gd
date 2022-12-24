@@ -1,5 +1,7 @@
 extends Control
 
+signal go_back
+
 onready var music: VBoxContainer = $BG/Margin/Contents/General/Audio/Music
 onready var sounds: VBoxContainer = $BG/Margin/Contents/General/Audio/Sounds
 onready var resolution: VBoxContainer = $BG/Margin/Contents/General/Resolution
@@ -45,12 +47,23 @@ func fetch_and_set_general_setting() -> void:
 	game_version.text = "game version: " + Config.GAME_VERSION
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		save_and_go_back()
+
+
 func focus() -> void:
 	$BG/Margin/Contents/Tabs/GeneralTab.grab_focus()
 
 
 func lose_focus() -> void:
 	get_focus_owner().release_focus()
+
+
+func save_and_go_back() -> void:
+	Config.save_data()
+	lose_focus()
+	emit_signal("go_back")
 
 
 func _on_Music_value_changed(value) -> void:
@@ -67,3 +80,7 @@ func _on_Screenshake_value_changed(value) -> void:
 
 func _on_PointMultiplier_value_changed(value) -> void:
 	Config.point_multiplier = value / 100.0
+
+
+func _on_BackToMenu_pressed() -> void:
+	save_and_go_back()

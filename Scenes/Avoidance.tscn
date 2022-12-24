@@ -1475,7 +1475,6 @@ projectile = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 
 [node name="Lights" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 8 )
 spotlight_col = Color( 0.807843, 0.847059, 1, 1 )
 ground_col = Color( 0.807843, 0.847059, 1, 1 )

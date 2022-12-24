@@ -14,6 +14,7 @@ dof_blur_far_distance = 50.0
 dof_blur_far_transition = 50.0
 glow_enabled = true
 glow_intensity = 2.0
+glow_bicubic_upscale = true
 
 [sub_resource type="DynamicFont" id=2]
 outline_size = 1

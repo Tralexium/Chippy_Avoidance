@@ -28,11 +28,19 @@ anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 11 )
 
+[node name="BackToMenu" type="Button" parent="."]
+margin_left = 38.0
+margin_top = 32.0
+margin_right = 238.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 200, 50 )
+text = "Back to Menu"
+
 [node name="BG" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 556.0
-color = Color( 0.0235294, 0, 0.0627451, 0.509804 )
+color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
 
 [node name="Margin" type="MarginContainer" parent="BG"]
 anchor_right = 1.0
@@ -432,6 +440,7 @@ margin_bottom = 48.0
 size_flags_vertical = 3
 text = "game version: -.-.-"
 
+[connection signal="pressed" from="BackToMenu" to="." method="_on_BackToMenu_pressed"]
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/GeneralTab" to="BG/Margin/Contents" method="_on_GeneralTab_pressed"]
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/ControlsTab" to="BG/Margin/Contents" method="_on_ControlsTab_pressed"]
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/AccessibilityTab" to="BG/Margin/Contents" method="_on_AccessibilityTab_pressed"]
