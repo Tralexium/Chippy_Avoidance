@@ -5,6 +5,7 @@
 
 [sub_resource type="CylinderShape" id=1]
 height = 0.700807
+radius = 0.852798
 
 [sub_resource type="CylinderMesh" id=2]
 height = 0.01

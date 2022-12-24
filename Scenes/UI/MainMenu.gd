@@ -1,5 +1,7 @@
 extends Node
 
+const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
+
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var starting_menu: Control = $UI/StartingMenu
 onready var options: Control = $UI/Options
@@ -25,4 +27,8 @@ func _on_StartingMenu_exit_pressed() -> void:
 
 
 func _on_StartingMenu_begin_pressed() -> void:
+	SoundManager.stop_music(1.5)
+	var transition_inst := CIRCLE_TRANSITION.instance()
+	add_child(transition_inst)
+	yield(transition_inst, "tree_exited")
 	get_tree().change_scene_to(Globals.AVOIDANCE)

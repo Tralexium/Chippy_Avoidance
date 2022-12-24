@@ -475,6 +475,18 @@ tracks/35/keys = {
 "transitions": PoolRealArray(  ),
 "values": [  ]
 }
+tracks/36/type = "value"
+tracks/36/path = NodePath("Player:god_mode")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "avoidance_timeline"
@@ -569,9 +581,12 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 23.56 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 23.56, 63.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [ 1.0, false ],
+"method": "spawn_blink_overlay"
+}, {
 "args": [ 1.0, false ],
 "method": "spawn_blink_overlay"
 } ]
@@ -1440,6 +1455,18 @@ tracks/51/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/52/type = "value"
+tracks/52/path = NodePath("Player:god_mode")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/keys = {
+"times": PoolRealArray( 0, 23.58, 24.44, 63.31, 64.17 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
 }
 
 [node name="Avoidance" type="Spatial"]

@@ -142,13 +142,13 @@ far = 1000.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 11520.0
-margin_bottom = 6480.0
+margin_right = 13440.0
+margin_bottom = 7560.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 margin_left = 1918.0
-margin_right = 9598.0
-margin_bottom = 4320.0
+margin_right = 11518.0
+margin_bottom = 5400.0
 
 [node name="BloomRect" type="ColorRect" parent="UI"]
 material = ExtResource( 4 )

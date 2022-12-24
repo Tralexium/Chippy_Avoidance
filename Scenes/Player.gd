@@ -16,6 +16,7 @@ export var lock_2d := false
 export var flying := false
 export var has_djump := false
 export var cam_follow_y := false
+export var god_mode := false
 
 export var hp := 1 setget set_hp
 
@@ -87,10 +88,11 @@ func _on_transition_finished() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if cam_follow_y and !is_dead:
-		n_camera_pos.translation.y = lerp(n_camera_pos.translation.y, translation.y, 0.2)
-	else:
-		n_camera_pos.translation.y = 0.0
+	if !is_dead:
+		if cam_follow_y:
+			n_camera_pos.translation.y = lerp(n_camera_pos.translation.y, translation.y, 0.2)
+		else:
+			n_camera_pos.translation.y = 0.0
 	
 	_debug()
 	_get_input()
@@ -217,10 +219,10 @@ func _animations() -> void:
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
-	if !Globals.god_mode:
+	if !Globals.god_mode or !god_mode:
 		self.hp -= 1
 
 
 func _on_Hitbox_body_entered(body: Node) -> void:
-	if !Globals.god_mode:
+	if !Globals.god_mode or !god_mode:
 		self.hp -= 1
