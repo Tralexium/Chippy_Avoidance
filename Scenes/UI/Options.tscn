@@ -103,7 +103,6 @@ toggle_mode = true
 text = "Accessibility"
 
 [node name="General" type="VBoxContainer" parent="BG/Margin/Contents"]
-visible = false
 margin_top = 216.0
 margin_right = 798.0
 margin_bottom = 899.0
@@ -331,6 +330,7 @@ text = "Reset back to default"
 script = ExtResource( 13 )
 
 [node name="Accessibility" type="VBoxContainer" parent="BG/Margin/Contents"]
+visible = false
 margin_top = 216.0
 margin_right = 798.0
 margin_bottom = 528.0

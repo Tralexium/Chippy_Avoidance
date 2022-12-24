@@ -25,7 +25,6 @@ func _ready() -> void:
 
 
 func fetch_and_set_general_setting() -> void:
-	$BG/Margin/Contents/Tabs/GeneralTab.call_deferred("grab_focus")
 	music.set_value(Config.music_volume * 100.0)
 	sounds.set_value(Config.sound_volume * 100.0)
 	screenshake.set_value(Config.screen_shake * 100.0)
@@ -44,6 +43,14 @@ func fetch_and_set_general_setting() -> void:
 	infinite_jump.pressed = Config.infinite_jump
 	infinite_items.pressed = Config.infinite_items
 	game_version.text = "game version: " + Config.GAME_VERSION
+
+
+func focus() -> void:
+	$BG/Margin/Contents/Tabs/GeneralTab.grab_focus()
+
+
+func lose_focus() -> void:
+	get_focus_owner().release_focus()
 
 
 func _on_Music_value_changed(value) -> void:

@@ -1,10 +1,10 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://Resources/Fonts/Orbitron-VariableFont_wght.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Resources/Fonts/Orbitron-Bold.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 50
-outline_size = 2
+size = 32
+outline_size = 1
 outline_color = Color( 0.0901961, 0, 0.243137, 1 )
 use_filter = true
 extra_spacing_char = 10
