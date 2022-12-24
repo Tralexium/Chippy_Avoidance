@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Universal/DustCloud.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Meshes/dust_cloud.tres" type="ArrayMesh" id=2]
+
+[node name="DustCloud" type="MeshInstance"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+mesh = ExtResource( 2 )
+script = ExtResource( 1 )

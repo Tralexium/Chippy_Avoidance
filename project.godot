@@ -20,11 +20,13 @@ Globals="*res://Globals/Globals.gd"
 Config="*res://Globals/Config.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
 SoundManager="*res://addons/sound_manager/sound_manager.tscn"
+Util="*res://Globals/Util.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
+window/size/resizable=false
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 

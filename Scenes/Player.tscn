@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -9,9 +9,25 @@
 [ext_resource path="res://Models/Eyes.material" type="Material" id=7]
 [ext_resource path="res://Models/Mask.material" type="Material" id=8]
 [ext_resource path="res://Scenes/PlayerAnimationTree.gd" type="Script" id=9]
+[ext_resource path="res://Resources/Meshes/dust_cloud.tres" type="ArrayMesh" id=10]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
+
+[sub_resource type="Curve" id=42]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=43]
+width = 100
+curve = SubResource( 42 )
+
+[sub_resource type="ParticlesMaterial" id=44]
+flag_rotate_y = true
+gravity = Vector3( 0, 15, 0 )
+angle = 193.6
+angle_random = 0.63
+scale = 0.5
+scale_curve = SubResource( 43 )
 
 [sub_resource type="ArrayMesh" id=24]
 resource_name = "player_chippy_Mesh"
@@ -1631,6 +1647,16 @@ script = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.909102, 0 )
 shape = SubResource( 1 )
+
+[node name="DustParticles" type="Particles" parent="."]
+emitting = false
+amount = 3
+lifetime = 0.3
+visibility_aabb = AABB( -56.8, -43.0614, -47.5407, 113.6, 86.1227, 95.0815 )
+local_coords = false
+draw_order = 2
+process_material = SubResource( 44 )
+draw_pass_1 = ExtResource( 10 )
 
 [node name="Mesh" type="Spatial" parent="."]
 transform = Transform( 1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0 )

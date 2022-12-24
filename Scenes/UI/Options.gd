@@ -22,10 +22,6 @@ onready var infinite_jump: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/
 onready var infinite_items: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/InfiniteItems
 
 
-func _ready() -> void:
-	fetch_and_set_general_setting()
-
-
 func fetch_and_set_general_setting() -> void:
 	music.set_value(Config.music_volume * 100.0)
 	sounds.set_value(Config.sound_volume * 100.0)

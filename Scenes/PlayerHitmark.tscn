@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/PlayerHitmark.gd" type="Script" id=1]
+[ext_resource path="res://Assets/hit_mark.png" type="Texture" id=2]
+
+[node name="PlayerHitmark" type="Sprite3D"]
+billboard = 1
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

@@ -6,6 +6,8 @@ onready var options: Control = $UI/Options
 
 
 func _ready() -> void:
+	Config.load_data()
+	options.fetch_and_set_general_setting()
 	SoundManager.play_music(preload("res://Audio/Music/Mittsies - Horizon.ogg"))
 
 
