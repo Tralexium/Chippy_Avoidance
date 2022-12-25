@@ -50,6 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func focus() -> void:
 	$BG/Margin/Contents/Tabs/GeneralTab.grab_focus()
+	$BG/Margin/Contents._on_GeneralTab_pressed()
 
 
 func lose_focus() -> void:
