@@ -1823,7 +1823,7 @@ collision_mask = 4
 shape = SubResource( 4 )
 
 [node name="ShadowGuide" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.86082, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.20029, 0 )
 
 [node name="CameraPos" type="Position3D" parent="."]
 unique_name_in_owner = true

@@ -1,7 +1,7 @@
 extends Node
 
 const SAVE_PATH := "user://data_config.save"
-const GAME_VERSION := "1.0.0"
+const GAME_VERSION := "0.1.0a"
 
 enum SCREEN_MODES {
 	FULLSCREEN, BORDERLESS, WINDOWED

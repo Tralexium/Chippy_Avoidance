@@ -2,6 +2,7 @@ extends Spatial
 
 onready var bounce_delay: Timer = $BounceDelay
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var detach_player: Area = $DetachPlayer
 
 var delayed_anim := "" 
 var has_fallen := false
@@ -11,6 +12,11 @@ func fall() -> void:
 	has_fallen = true
 	animation_player.playback_speed = 1.0
 	animation_player.play("fall")
+
+func _detach_player() -> void:
+	for player in detach_player.get_overlapping_bodies():
+		player.snap_vector = Vector3.ZERO
+		player.translation.y += 1
 
 
 func rise() -> void:

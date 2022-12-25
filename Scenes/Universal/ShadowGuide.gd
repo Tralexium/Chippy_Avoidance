@@ -15,6 +15,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if global_translation.y < 0.0:
+		set_state(STATE.NONE)
+		return
 	if is_colliding() and !hidden:
 		shadow.global_translation = get_collision_point()
 		shadow.global_translation.y = max(shadow.global_translation.y, 0.1)
@@ -24,7 +27,8 @@ func _process(delta: float) -> void:
 			set_state(STATE.SOLID)
 	else:
 		shadow.global_translation.y = 0.0
-		set_state(STATE.NONE)
+		if global_translation.y < 0.0 or hidden:
+			set_state(STATE.NONE)
 
 
 func set_state(state: int) -> void:

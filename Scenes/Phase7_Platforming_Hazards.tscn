@@ -23,13 +23,13 @@ ring_segments = 4
 y_rotation_spd = -2.0
 
 [node name="ShockwaveSpawner" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131, 0, -10 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 131, 0, 0 )
 auto_shoot = true
 auto_shoot_freq = 4.9
 ring_target_scale = 12.0
 
 [node name="ShockwaveSpawner3" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95, 0, 67 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 0, 65 )
 auto_shoot = true
 auto_shoot_freq = 4.9
 ring_target_scale = 12.0

@@ -16,11 +16,13 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	audio_stream_player = SoundManager.play_music(preload("res://Audio/Music/aran_EPHMR.ogg"), 0.0, "Music")
+	audio_stream_player = SoundManager.play_music(Globals.AVOIDANCE_MUSIC, 0.0, "Music")
 	audio_stream_player.seek(0.0)
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("escape"):
+		get_tree().change_scene_to(Globals.MAIN_MENU)
 	if !Globals.debug_mode:
 		return
 	if Input.is_action_just_pressed("dev_skip_phase_up"):

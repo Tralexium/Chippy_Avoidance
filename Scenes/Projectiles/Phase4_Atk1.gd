@@ -1,6 +1,6 @@
 extends Spatial
 
-export var acceleration := 0.4
+export var acceleration := 60.0
 export var move_dir := Vector3.RIGHT
 
 var velocity := 0.0
@@ -17,7 +17,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	trail_3d.axe = "X" if move_dir.z > 0.0 else "Z"
 	velocity += acceleration * delta
-	translation += velocity * move_dir
+	translation += velocity * move_dir * delta
 	mesh_instance.rotate_y(20.0*delta)
 
 
