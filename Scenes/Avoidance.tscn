@@ -514,13 +514,13 @@ tracks/0/keys = {
 "args": [ Vector3( 0, 0, 6 ), Vector3( -40, 0, 0 ), 3.5, 0, 7, 20.0 ],
 "method": "shift_cam"
 }, {
-"args": [ Vector3( 0, 0, 6 ), Vector3( -55, 0, 0 ), 1.0, 1, 7, 40.0 ],
+"args": [ Vector3( 0, 0, 6 ), Vector3( -55, 0, 0 ), 1.0, 1, 7, 45.0 ],
 "method": "shift_cam"
 }, {
-"args": [ Vector3( 0, 0, 6 ), Vector3( -60, 0, 0 ), 6.0, 2, 7, 45.0 ],
+"args": [ Vector3( 0, 0, 6 ), Vector3( -65, 0, 0 ), 6.0, 2, 7, 50.0 ],
 "method": "shift_cam"
 }, {
-"args": [ Vector3( 0, 0, 10 ), Vector3( -45, 0, 0 ), 5.0, 2, 7, 35.0 ],
+"args": [ Vector3( 0, 0, 10 ), Vector3( -35, 0, 0 ), 2.0, 2, 7, 35.0 ],
 "method": "shift_cam"
 }, {
 "args": [ Vector3( 0, 0, 5 ), Vector3( 70, 0, 0 ), 1.0, 2, 0, 20.0 ],
@@ -1236,10 +1236,10 @@ tracks/41/loop_wrap = true
 tracks/41/imported = false
 tracks/41/enabled = true
 tracks/41/keys = {
-"times": PoolRealArray( 47.02, 57.22, 60.2 ),
-"transitions": PoolRealArray( 1, -2, 1 ),
+"times": PoolRealArray( 47.02, 57.22, 60.2, 62.7 ),
+"transitions": PoolRealArray( 1, -2, -2, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 180, 0 ) ]
 }
 tracks/42/type = "method"
 tracks/42/path = NodePath("Spawners/Phase6_Spawner1")
@@ -1299,31 +1299,31 @@ tracks/42/keys = {
 "args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 3 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 3 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 3 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 1 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 1 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 1 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 5 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 5 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 }, {
-"args": [ 5 ],
+"args": [ 0 ],
 "method": "shoot_specific"
 } ]
 }
@@ -1389,7 +1389,7 @@ tracks/47/loop_wrap = true
 tracks/47/imported = false
 tracks/47/enabled = true
 tracks/47/keys = {
-"times": PoolRealArray( 0, 88.18, 96.86, 97.93, 101.96 ),
+"times": PoolRealArray( 0, 89.32, 96.86, 99.1, 101.96 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false, true, false ]
@@ -1401,16 +1401,22 @@ tracks/48/loop_wrap = true
 tracks/48/imported = false
 tracks/48/enabled = true
 tracks/48/keys = {
-"times": PoolRealArray( 83.18, 88.72, 97.46, 98.22, 102.41 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 83.18, 88.13, 88.72, 97.46, 97.93, 98.22, 102.41 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 360.0, 1, 5.0, false ],
+"method": "smooth_rotate_halfs"
+}, {
+"args": [ 340.0, 7, 0.5, false ],
 "method": "smooth_rotate_halfs"
 }, {
 "args": [ 1800.0, 0, 8.1, false ],
 "method": "smooth_rotate_halfs"
 }, {
 "args": [ 1755.0, 7, 0.5, true ],
+"method": "smooth_rotate_halfs"
+}, {
+"args": [ 1775.0, 7, 0.3, true ],
 "method": "smooth_rotate_halfs"
 }, {
 "args": [ 1080.0, 0, 4.7, true ],

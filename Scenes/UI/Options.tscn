@@ -187,7 +187,7 @@ text = "Screen Mode:"
 [node name="OptionButton" parent="BG/Margin/Contents/General/ScreenMode" index="1"]
 margin_right = 798.0
 text = "fullscreen"
-items = [ "fullscreen", null, false, 0, null, "borderless", null, false, 1, null, "windowed", null, false, 2, null ]
+items = [ "fullscreen", null, false, 0, null, "windowed", null, false, 1, null ]
 
 [node name="AntiAliasing" parent="BG/Margin/Contents/General" instance=ExtResource( 3 )]
 margin_top = 354.0

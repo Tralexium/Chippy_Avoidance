@@ -219,10 +219,10 @@ func _animations() -> void:
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
-	if !Globals.god_mode or !god_mode:
+	if !Globals.god_mode and !god_mode:
 		self.hp -= 1
 
 
 func _on_Hitbox_body_entered(body: Node) -> void:
-	if !Globals.god_mode or !god_mode:
+	if !Globals.god_mode and !god_mode:
 		self.hp -= 1

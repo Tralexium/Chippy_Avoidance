@@ -1,7 +1,7 @@
 extends Node
 
-var debug_mode := false
-var god_mode := false
+var debug_mode := true
+var god_mode := true
 
 const MAIN_MENU := preload("res://Scenes/UI/MainMenu.tscn")
 const AVOIDANCE := preload("res://Scenes/Avoidance.tscn")

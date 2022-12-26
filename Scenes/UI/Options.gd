@@ -2,6 +2,8 @@ extends Control
 
 signal go_back
 
+var is_present := false
+
 onready var music: VBoxContainer = $BG/Margin/Contents/General/Audio/Music
 onready var sounds: VBoxContainer = $BG/Margin/Contents/General/Audio/Sounds
 onready var resolution: VBoxContainer = $BG/Margin/Contents/General/Resolution
@@ -44,11 +46,13 @@ func fetch_and_set_general_setting() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if is_present and event.is_action_pressed("ui_cancel"):
+		is_present = false
 		save_and_go_back()
 
 
 func focus() -> void:
+	is_present = true
 	$BG/Margin/Contents/Tabs/GeneralTab.grab_focus()
 	$BG/Margin/Contents._on_GeneralTab_pressed()
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Fonts/Orbitron-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/FPSCounter.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Godmode.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/DebugLabel.gd" type="Script" id=4]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -48,13 +50,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="FPSCounter" type="Label" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -99.0
-margin_top = 4.0
-margin_right = -15.0
+margin_left = -126.0
 margin_bottom = 40.0
+grow_horizontal = 0
+custom_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 226.0
+margin_bottom = 40.0
+custom_constants/separation = 8
+
+[node name="Debug" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_top = 9.0
+margin_right = 57.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 1, 0.290196, 0.423529, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Debug"
+align = 2
+valign = 1
+script = ExtResource( 4 )
+
+[node name="Godmode" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_left = 65.0
+margin_top = 9.0
+margin_right = 157.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0.235294, 0.819608, 1, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "God-mode"
+align = 2
+valign = 1
+script = ExtResource( 3 )
+
+[node name="FPSCounter" type="Label" parent="MarginContainer/HBoxContainer"]
+margin_left = 165.0
+margin_top = 9.0
+margin_right = 226.0
+margin_bottom = 30.0
 custom_fonts/font = SubResource( 2 )
 text = "100fps"
 align = 2

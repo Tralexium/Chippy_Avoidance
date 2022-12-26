@@ -26,8 +26,8 @@ func _process(delta: float) -> void:
 		else:
 			set_state(STATE.SOLID)
 	else:
-		shadow.global_translation.y = 0.0
-		if global_translation.y < 0.0 or hidden:
+		shadow.global_translation.y = 0.1
+		if hidden:
 			set_state(STATE.NONE)
 
 

@@ -7,7 +7,7 @@ export var projectile_rows := 15
 export var projectiles_per_row := 2
 export var initial_y := 70.0
 export var projectile_y_gap := 10.0
-export var projectile_x_rand := 23.0
+export var projectile_x_rand := 28.0
 
 var is_ready := false
 

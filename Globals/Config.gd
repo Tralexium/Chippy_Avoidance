@@ -1,10 +1,10 @@
 extends Node
 
 const SAVE_PATH := "user://data_config.save"
-const GAME_VERSION := "0.1.0a"
+const GAME_VERSION := "1.0.0"
 
 enum SCREEN_MODES {
-	FULLSCREEN, BORDERLESS, WINDOWED
+	FULLSCREEN, WINDOWED
 }
 
 enum AA_MODES {
@@ -95,7 +95,8 @@ func load_data() -> void:
 		
 		file.close()
 	else:
-		save_data()
+		save_data() # creates a new save file
+		load_data() # read the default values to activate the setter functions
 
 
 func set_music_volume(value: float) -> void:
@@ -184,17 +185,9 @@ func set_screen_mode(mode: int) -> void:
 	match mode:
 		SCREEN_MODES.FULLSCREEN:
 			OS.window_fullscreen = true
-			OS.window_borderless = false
-		SCREEN_MODES.BORDERLESS:
-			OS.window_fullscreen = false
-			OS.window_borderless = true
-			OS.window_maximized = true
 		SCREEN_MODES.WINDOWED:
 			OS.window_fullscreen = false
-			OS.window_borderless = false
-			OS.window_maximized = false
 			OS.window_size = resolution
-			# Center window
 			var screen_size = OS.get_screen_size()
 			var window_size = OS.get_window_size()
 			OS.set_window_position(screen_size*0.5 - window_size*0.5)
