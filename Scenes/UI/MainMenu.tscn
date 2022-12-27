@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Terrain/DiscoFloor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Resources/Shaders/glow_shader.tres" type="Material" id=4]
-[ext_resource path="res://Scenes/UI/BloomRect.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/UI/BloomRect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/MenuSkybox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=7]
 
@@ -142,20 +141,15 @@ far = 1000.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 23040.0
-margin_bottom = 12960.0
+margin_right = 24960.0
+margin_bottom = 14040.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 margin_left = 1918.0
-margin_right = 21118.0
-margin_bottom = 10800.0
+margin_right = 23038.0
+margin_bottom = 11880.0
 
-[node name="BloomRect" type="ColorRect" parent="UI"]
-material = ExtResource( 4 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-script = ExtResource( 5 )
+[node name="BloomRect" parent="UI" instance=ExtResource( 4 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )

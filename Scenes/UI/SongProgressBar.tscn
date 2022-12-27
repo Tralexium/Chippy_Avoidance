@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Fonts/small_outline_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/UI/SongProgressBar.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0941176, 0.0862745, 0.117647, 0.588235 )
+border_color = Color( 0.513726, 0.788235, 1, 1 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="SongProgressBar" type="HBoxContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -416.0
+margin_top = 22.0
+margin_right = 416.0
+margin_bottom = 34.0
+script = ExtResource( 2 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_right = 787.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false
+
+[node name="Percent" type="Label" parent="."]
+margin_left = 791.0
+margin_right = 832.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 1 )
+text = "50%"
+valign = 1
