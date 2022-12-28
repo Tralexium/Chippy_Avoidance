@@ -14,7 +14,7 @@ onready var bloom: CheckBox = $BG/Margin/Contents/General/Toggles/Bloom
 onready var game_version: Label = $BG/Footer/GameVersion
 onready var show_bar: CheckBox = $BG/Margin/Contents/General/Toggles/ShowBar
 onready var percentage: CheckBox = $BG/Margin/Contents/General/Toggles/Percentage
-onready var player_hud: CheckBox = $BG/Margin/Contents/General/Toggles/PlayerHUD
+onready var player_hud: CheckBox = $BG/Margin/Contents/General/Toggles/ShowPlayerHUD
 onready var show_fps: CheckBox = $BG/Margin/Contents/General/Toggles/ShowFPS
 onready var screenshake: VBoxContainer = $BG/Margin/Contents/Accessibility/Slidables/Screenshake
 onready var point_multiplier: VBoxContainer = $BG/Margin/Contents/Accessibility/Slidables/PointMultiplier
@@ -36,7 +36,7 @@ func fetch_and_set_general_setting() -> void:
 	bloom.pressed = Config.bloom
 	show_bar.pressed = Config.show_bar
 	percentage.pressed = Config.show_percentage
-	player_hud.pressed = Config.always_show_hud
+	player_hud.pressed = Config.transparent_hud
 	show_fps.pressed = Config.show_fps
 	player_ring.pressed = Config.player_ring
 	infinite_hp.pressed = Config.infinite_hp

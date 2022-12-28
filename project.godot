@@ -21,6 +21,7 @@ InputHelper="*res://addons/input_helper/input_helper.gd"
 SoundManager="*res://addons/sound_manager/sound_manager.tscn"
 AlwaysRendered="*res://Scenes/AlwaysRendered.tscn"
 Util="*res://Globals/Util.gd"
+EventBus="*res://Globals/EventBus.gd"
 Globals="*res://Globals/Globals.gd"
 
 [display]

@@ -45,6 +45,7 @@ func _ready() -> void:
 
 func set_hp(value: int) -> void:
 	if value < hp:
+		EventBus.emit_signal("hp_changed", hp)
 		hit_effects()
 	hp = value
 	if hp <= 0 and !is_dead:
@@ -214,7 +215,7 @@ func _animations() -> void:
 		n_dust_particles.emitting = true
 	else:
 		n_dust_particles.emitting = false
-	if input_vector.y != 0:
+	if input_vector.y != 0 and has_djump:
 		n_player_animation_tree.flip_jump()
 
 

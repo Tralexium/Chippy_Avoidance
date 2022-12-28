@@ -12,6 +12,10 @@ enum AA_MODES {
 	MSAA8X, MSAA16X
 }
 
+enum ABILITIES {
+	SUPER_SPEED, MEGA_JUMP, SHIELD, SLO_MO
+}
+
 var music_volume := 0.7 setget set_music_volume
 var sound_volume := 1.0 setget set_sound_volume
 var resolution := Vector2(1920, 1080) setget set_resolution
@@ -23,8 +27,13 @@ var vsync := true setget set_vsync
 var bloom := true setget set_bloom
 var show_bar := true setget set_show_bar
 var show_percentage := false setget set_show_percentage
-var always_show_hud := false setget set_always_show_hud
+var transparent_hud := false setget set_transparent_hud
 var show_fps := false setget set_show_fps
+
+# Player related
+var player_max_hp := 1 setget set_player_max_hp
+var player_current_abilities := [0,0,0,0]
+var player_points := 0 setget set_player_points
 var player_ring := true setget set_player_ring
 var infinite_hp := false setget set_infinite_hp
 var infinite_jump := false setget set_infinite_jump
@@ -32,6 +41,7 @@ var infinite_items := false setget set_infinite_items
 
 signal bloom_changed(is_active)
 signal show_fps_changed(is_active)
+signal ability_used(ability_num)
 
 
 func save_data() -> void:
@@ -47,12 +57,18 @@ func save_data() -> void:
 	save_dict["bloom"] = bloom
 	save_dict["show_bar"] = show_bar
 	save_dict["show_percentage"] = show_percentage
-	save_dict["always_show_hud"] = always_show_hud
+	save_dict["transparent_hud"] = transparent_hud
 	save_dict["show_fps"] = show_fps
+	
+	# Player Related
+	save_dict["player_max_hp"] = player_max_hp
+	save_dict["player_current_abilities"] = player_current_abilities
+	save_dict["player_points"] = player_points
 	save_dict["player_ring"] = player_ring
 	save_dict["infinite_hp"] = infinite_hp
 	save_dict["infinite_jump"] = infinite_jump
 	save_dict["infinite_items"] = infinite_items
+	
 	save_dict["keyboard_controls"] = get_keyboard_dict()
 	save_dict["gamepad_controls"] = get_gamepad_dict()
 	var file := File.new()
@@ -78,8 +94,13 @@ func load_data() -> void:
 		self.bloom = values.get("bloom", true)
 		self.show_bar = values.get("show_bar", true)
 		self.show_percentage = values.get("show_percentage", false)
-		self.always_show_hud = values.get("always_show_hud", false)
+		self.transparent_hud = values.get("transparent_hud", false)
 		self.show_fps = values.get("show_fps", false)
+		
+		# Player related
+		player_current_abilities = values.get("player_current_abilities", [0,0,0,0])
+		self.player_max_hp = values.get("player_max_hp", 1)
+		self.player_points = values.get("player_points", 0)
 		self.player_ring = values.get("player_ring", true)
 		self.infinite_hp = values.get("infinite_hp", false)
 		self.infinite_jump = values.get("infinite_jump", false)
@@ -135,12 +156,26 @@ func set_show_fps(value: bool) -> void:
 	emit_signal("show_fps_changed", value)
 
 
-func set_always_show_hud(value: bool) -> void:
-	always_show_hud = value
+func set_transparent_hud(value: bool) -> void:
+	transparent_hud = value
 
 
 func set_player_ring(value: bool) -> void:
 	player_ring = value
+
+
+func set_player_max_hp(value: int) -> void:
+	player_max_hp = value
+
+
+func set_player_points(value: int) -> void:
+	player_points = value
+
+
+func set_player_ability_count(ability: int, has_used: bool) -> void:
+	player_current_abilities[ability] += -1 if has_used else 1
+	if has_used:
+		emit_signal("ability_used", ability)
 
 
 func set_infinite_hp(value: bool) -> void:
