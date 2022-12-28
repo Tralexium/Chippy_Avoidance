@@ -62,6 +62,7 @@ func hit_effects() -> void:
 func die() -> void:
 	# Do death fx here
 	is_dead = true
+	EventBus.emit_signal("avoidance_ended")
 	snap_vector = Vector3.ZERO
 	n_player_animation_tree.active = false
 	yield(get_tree(), "idle_frame")

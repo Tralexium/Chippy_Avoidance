@@ -12,12 +12,12 @@ corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=3]
 width = 100
-curve = SubResource( 4 )
+curve = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 resource_local_to_scene = true
@@ -36,7 +36,6 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
-reload_dur = 10.0
 
 [node name="Particles" type="Particles2D" parent="."]
 show_behind_parent = true

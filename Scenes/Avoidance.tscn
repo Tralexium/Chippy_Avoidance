@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Spawners/Phase2_Spawner1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Spawners/Phase1_Spawner1.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Scenes/KillPlane.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Resources/world_env.tres" type="Environment" id=23]
 [ext_resource path="res://Scenes/UI/SongProgressBar.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/UI/PlayerHUD.tscn" type="PackedScene" id=25]
 
 [sub_resource type="SpatialMaterial" id=3]
 params_cull_mode = 1
@@ -1609,6 +1610,8 @@ path_duration = 25.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="SongProgressBar" parent="CanvasLayer" instance=ExtResource( 24 )]
+
+[node name="PlayerHUD" parent="CanvasLayer" instance=ExtResource( 25 )]
 
 [node name="MusicOnlyForTimelineReference" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

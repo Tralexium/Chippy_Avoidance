@@ -1,11 +1,18 @@
 extends Control
 
 onready var opaque_dur: Timer = $OpaqueDur
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
+	EventBus.connect("avoidance_ended", self, "_slide_out")
 	EventBus.connect("hp_changed", self, "_on_hp_changed")
 	Config.connect("ability_used", self, "_on_ability_used")
+	animation_player.play("slide_in")
+
+
+func _slide_out() -> void:
+	animation_player.play_backwards("slide_in")
 
 
 func show_hud() -> void:
@@ -15,8 +22,8 @@ func show_hud() -> void:
 
 
 func fade_hud() -> void:
-	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.25, 0.5)
+	var tween = create_tween().set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "modulate:a", 0.2, 0.5)
 
 
 func _on_hp_changed(new_hp: int) -> void:

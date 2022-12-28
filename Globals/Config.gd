@@ -2,6 +2,7 @@ extends Node
 
 const SAVE_PATH := "user://data_config.save"
 const GAME_VERSION := "1.0.0"
+const SLOMO_SPD := 0.7
 
 enum SCREEN_MODES {
 	FULLSCREEN, WINDOWED
@@ -32,7 +33,11 @@ var show_fps := false setget set_show_fps
 
 # Player related
 var player_max_hp := 1 setget set_player_max_hp
-var player_current_abilities := [0,0,0,0]
+var player_current_abilities := [2, 2, 2, 2]
+var item_speed_dur := 4.0
+var item_jump_dur := 4.0
+var item_shield_dur := 4.0
+var item_slomo_dur := 2.0
 var player_points := 0 setget set_player_points
 var player_ring := true setget set_player_ring
 var infinite_hp := false setget set_infinite_hp
@@ -63,6 +68,10 @@ func save_data() -> void:
 	# Player Related
 	save_dict["player_max_hp"] = player_max_hp
 	save_dict["player_current_abilities"] = player_current_abilities
+	save_dict["item_speed_dur"] = item_speed_dur
+	save_dict["item_jump_dur"] = item_jump_dur
+	save_dict["item_shield_dur"] = item_shield_dur
+	save_dict["item_slomo_dur"] = item_slomo_dur
 	save_dict["player_points"] = player_points
 	save_dict["player_ring"] = player_ring
 	save_dict["infinite_hp"] = infinite_hp
@@ -99,6 +108,10 @@ func load_data() -> void:
 		
 		# Player related
 		player_current_abilities = values.get("player_current_abilities", [0,0,0,0])
+		item_speed_dur = values.get("item_speed_dur", 4.0)
+		item_jump_dur = values.get("item_jump_dur", 4.0)
+		item_shield_dur = values.get("item_shield_dur", 4.0)
+		item_slomo_dur = values.get("item_slomo_dur", 4.0)
 		self.player_max_hp = values.get("player_max_hp", 1)
 		self.player_points = values.get("player_points", 0)
 		self.player_ring = values.get("player_ring", true)

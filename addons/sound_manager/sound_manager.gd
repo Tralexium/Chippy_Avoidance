@@ -27,8 +27,16 @@ func set_default_sound_bus(bus: String) -> void:
 	sound_effects.bus = bus
 
 
+func get_default_sound_bus() -> int:
+	return AudioServer.get_bus_index(sound_effects.bus)
+
+
 func set_default_ui_sound_bus(bus: String) -> void:
 	ui_sound_effects.bus = bus
+
+
+func get_default_ui_sound_bus() -> int:
+	return AudioServer.get_bus_index(ui_sound_effects.bus)
 
 
 func set_music_volume(volume_between_0_and_1: float) -> void:
@@ -73,3 +81,7 @@ func stop_music(fade_out_duration: float = 0) -> void:
 
 func set_default_music_bus(bus: String) -> void:
 	music.bus = bus
+
+
+func get_default_music_bus() -> int:
+	return AudioServer.get_bus_index(music.bus)

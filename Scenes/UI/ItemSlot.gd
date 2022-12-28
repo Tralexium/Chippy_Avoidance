@@ -47,6 +47,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not Globals.can_pause:
+		return
 	if event is InputEventKey and event.is_pressed():
 		_update_button_icon(false)
 	elif event is InputEventJoypadButton and event.is_pressed():
@@ -65,7 +67,7 @@ func _flash_effect() -> void:
 	circle_reload.value = 100.0
 	button_icon.visible = false
 	particles.emitting = true
-	if ability_count > 0:
+	if ability_count > 0 or Config.infinite_items:
 		var tween := create_tween().set_parallel()
 		tween.tween_property(icon, "modulate", initial_color, reload_dur)
 		tween.tween_property(amount, "modulate", initial_color, reload_dur)

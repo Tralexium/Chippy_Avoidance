@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Fonts/small_outline_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/FPSCounter.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Godmode.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/DebugLabel.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/AlwaysRendered.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -31,11 +32,16 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
 shader_param/vignette_intensity = 0.171
-shader_param/vignette_opacity = 0.456
+shader_param/vignette_opacity = 0.584
 shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
 
 [node name="AlwaysRendered" type="CanvasLayer"]
 layer = 100
+script = ExtResource( 5 )
+
+[node name="FX" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="Vignette" type="ColorRect" parent="."]
 material = SubResource( 4 )
@@ -43,7 +49,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="DEBUG" type="MarginContainer" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -126.0
@@ -51,12 +57,12 @@ margin_bottom = 40.0
 grow_horizontal = 0
 custom_constants/margin_right = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DEBUG"]
 margin_right = 226.0
 margin_bottom = 40.0
 custom_constants/separation = 8
 
-[node name="Debug" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="Debug" type="Label" parent="DEBUG/HBoxContainer"]
 margin_top = 14.0
 margin_right = 57.0
 margin_bottom = 26.0
@@ -67,7 +73,7 @@ align = 2
 valign = 1
 script = ExtResource( 4 )
 
-[node name="Godmode" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="Godmode" type="Label" parent="DEBUG/HBoxContainer"]
 margin_left = 65.0
 margin_top = 14.0
 margin_right = 157.0
@@ -79,7 +85,7 @@ align = 2
 valign = 1
 script = ExtResource( 3 )
 
-[node name="FPSCounter" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="FPSCounter" type="Label" parent="DEBUG/HBoxContainer"]
 margin_left = 165.0
 margin_top = 14.0
 margin_right = 226.0
