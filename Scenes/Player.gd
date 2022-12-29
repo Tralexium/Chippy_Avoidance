@@ -18,6 +18,7 @@ export var lock_2d := false
 export var flying := false
 export var has_djump := false
 export var cam_follow_y := false
+export var shielded := false
 export var god_mode := false
 
 export var hp := 1 setget set_hp
@@ -46,6 +47,7 @@ onready var n_super_speed_dur: Timer = $SuperSpeedDur
 onready var n_shield_dur: Timer = $ShieldDur
 onready var n_speed_trail: ImmediateGeometry = $Mesh/Armature/SpeedTrail
 onready var n_mega_jump_part: Particles = $Mesh/MegaJumpPart
+onready var n_player_shield: MeshInstance = $Mesh/PlayerShield
 
 
 func _ready() -> void:
@@ -64,6 +66,8 @@ func _on_ability_used(ability_num: int) -> void:
 			n_super_speed_dur.start(Config.item_speed_dur)
 			n_speed_trail.show()
 		Config.ABILITIES.SHIELD:
+			shielded = true
+			n_player_shield.scale_to(2.0)
 			n_shield_dur.start(Config.item_shield_dur)
 
 
@@ -254,18 +258,18 @@ func _animations() -> void:
 	if abilities_in_use.has(Config.ABILITIES.SLO_MO):
 		col += Color("2cf894")
 	if abilities_in_use.has(Config.ABILITIES.SHIELD):
-		col += Color("2cb5f8")
+		col += Color("52f3ff")
 	var shader := n_character_mesh.material_overlay as ShaderMaterial
 	shader.set_shader_param("outline_color", col)
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
-	if !Globals.god_mode and !god_mode:
+	if !Globals.god_mode and !shielded and !god_mode:
 		self.hp -= 1
 
 
 func _on_Hitbox_body_entered(body: Node) -> void:
-	if !Globals.god_mode and !god_mode:
+	if !Globals.god_mode and !shielded and !god_mode:
 		self.hp -= 1
 
 
@@ -286,6 +290,8 @@ func _on_SuperSpeedDur_timeout() -> void:
 
 
 func _on_ShieldDur_timeout() -> void:
+	n_player_shield.scale_to(0.0)
+	shielded = false
 	_remove_ability_effects(Config.ABILITIES.SHIELD)
 
 

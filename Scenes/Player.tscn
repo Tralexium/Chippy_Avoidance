@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Resources/Shaders/spatial_outline_shader.tres" type="Material" id=11]
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=12]
 [ext_resource path="res://Resources/Materials/arrow_spatial_mat.tres" type="Material" id=13]
+[ext_resource path="res://Scenes/PlayerShield.tscn" type="PackedScene" id=14]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
@@ -1881,6 +1882,10 @@ amount = 6
 lifetime = 0.5
 process_material = SubResource( 50 )
 draw_pass_1 = SubResource( 51 )
+
+[node name="PlayerShield" parent="Mesh" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576223, 0 )
+cast_shadow = 0
 
 [node name="ArmatureAnimations" type="AnimationPlayer" parent="Mesh"]
 anims/Armature = SubResource( 26 )
