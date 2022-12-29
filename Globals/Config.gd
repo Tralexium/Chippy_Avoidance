@@ -3,6 +3,9 @@ extends Node
 const SAVE_PATH := "user://data_config.save"
 const GAME_VERSION := "1.0.0"
 const SLOMO_SPD := 0.7
+const DMG_PENALTY := 500.0
+const ITEM_PENALTY := 250.0
+const MAX_SCORE := 10000.0
 
 enum SCREEN_MODES {
 	FULLSCREEN, WINDOWED

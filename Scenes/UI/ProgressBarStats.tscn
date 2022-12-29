@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/UI/ProgressBarStats.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.160784, 0.34902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_right = 2
+border_color = Color( 1, 0.160784, 0.34902, 1 )
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[node name="ProgressBarStats" type="VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 100 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+events = [ [ 4, 0.2 ], [ 0, 0.6 ] ]
+
+[node name="Events" type="Control" parent="."]
+margin_right = 300.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Bar" type="ProgressBar" parent="."]
+margin_top = 90.0
+margin_right = 300.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 300, 10 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false
+
+[node name="EventReveal" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="EventReveal" to="." method="_on_EventReveal_timeout"]

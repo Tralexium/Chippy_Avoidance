@@ -1,0 +1,141 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/UI/no_rank.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Fonts/Orbitron-ExtraBold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Scenes/UI/RankPanel.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 0.152941, 0.352941, 1 )
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 1, 0.152941, 0.352941, 1 )
+thickness = 3
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="RankPanel" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 3 )
+custom_constants/separation = 48
+script = ExtResource( 4 )
+
+[node name="RankIcon" type="TextureRect" parent="."]
+modulate = Color( 0.576471, 0.623529, 1, 0.192157 )
+margin_right = 200.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Line" type="VSeparator" parent="."]
+margin_left = 248.0
+margin_right = 252.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 0, 20 )
+custom_styles/separator = SubResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 300.0
+margin_right = 646.0
+margin_bottom = 200.0
+custom_constants/margin_left = -24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = -24.0
+margin_right = 346.0
+margin_bottom = 200.0
+custom_constants/separation = 12
+alignment = 2
+
+[node name="TimeBonus" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 16.0
+margin_right = 370.0
+margin_bottom = 45.0
+custom_constants/separation = 8
+
+[node name="Stat" type="Label" parent="MarginContainer/VBoxContainer/TimeBonus"]
+margin_right = 149.0
+margin_bottom = 29.0
+text = "Time Bonus:"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/TimeBonus"]
+margin_left = 157.0
+margin_right = 281.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Count" type="Label" parent="MarginContainer/VBoxContainer/TimeBonus"]
+margin_left = 289.0
+margin_right = 370.0
+margin_bottom = 29.0
+text = "10000"
+
+[node name="DamagePenalty" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 57.0
+margin_right = 370.0
+margin_bottom = 86.0
+custom_constants/separation = 8
+
+[node name="Stat" type="Label" parent="MarginContainer/VBoxContainer/DamagePenalty"]
+margin_right = 206.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 1, 0.152941, 0.352941, 1 )
+text = "Damage Penalty:"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/DamagePenalty"]
+margin_left = 214.0
+margin_right = 288.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_styles/separator = SubResource( 3 )
+
+[node name="Count" type="Label" parent="MarginContainer/VBoxContainer/DamagePenalty"]
+margin_left = 296.0
+margin_right = 370.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 1, 0.152941, 0.352941, 1 )
+text = "-1000"
+
+[node name="AbilityPenalty" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 98.0
+margin_right = 370.0
+margin_bottom = 127.0
+custom_constants/separation = 8
+
+[node name="Stat" type="Label" parent="MarginContainer/VBoxContainer/AbilityPenalty"]
+margin_right = 181.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 1, 0.152941, 0.352941, 1 )
+text = "Ability Penalty:"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/AbilityPenalty"]
+margin_left = 189.0
+margin_right = 279.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+custom_styles/separator = SubResource( 3 )
+
+[node name="Count" type="Label" parent="MarginContainer/VBoxContainer/AbilityPenalty"]
+margin_left = 287.0
+margin_right = 370.0
+margin_bottom = 29.0
+custom_colors/font_color = Color( 1, 0.152941, 0.352941, 1 )
+text = "-2000"
+
+[node name="FinalScore" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 139.0
+margin_right = 370.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 370, 0 )
+custom_colors/font_color = Color( 1, 0.870588, 0.0196078, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Score: 7000"
