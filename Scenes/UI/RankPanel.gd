@@ -10,13 +10,18 @@ var target_score := 0.0
 
 
 func _ready() -> void:
-	var time_score := Config
-	time_bonus_count.text = 
+	var time_score : float = Config.MAX_SCORE * Globals.run_stats["unit_survival_time"]
+	var damage_penalty : float = Config.DMG_PENALTY * Globals.run_stats["damage_taken"]
+	var ability_penalty : float = Config.ITEM_PENALTY * Globals.run_stats["items_used"]
+	time_bonus_count.text = str(round(time_score))
+	damage_penalty_count.text = "-"+str(round(damage_penalty))
+	ability_penalty_count.text = "-"+str(round(ability_penalty))
+	target_score = max(time_score-damage_penalty-ability_penalty, 0.0)
 
 
 func start() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "score", gems_gained, 0.5)
+	tween.tween_property(self, "score", target_score, 0.5)
 
 func _process(delta: float) -> void:
-	label.text = "+"+str(round(label_num))
+	final_score.text = "Score: "+str(round(score))

@@ -6,6 +6,7 @@ const SLOMO_SPD := 0.7
 const DMG_PENALTY := 500.0
 const ITEM_PENALTY := 250.0
 const MAX_SCORE := 10000.0
+const MAX_GEMS := 2500.0
 
 enum SCREEN_MODES {
 	FULLSCREEN, WINDOWED

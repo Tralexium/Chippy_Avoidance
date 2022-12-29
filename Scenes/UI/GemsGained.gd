@@ -1,7 +1,7 @@
 extends VBoxContainer
 
-export var gems_gained := 1337.0
 var label_num := 0.0
+onready var gems_gained : float = Config.MAX_GEMS * Globals.run_stats["unit_survival_time"]
 onready var label: Label = $Label
 
 
