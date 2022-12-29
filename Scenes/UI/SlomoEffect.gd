@@ -17,3 +17,7 @@ func _speed_up_time() -> void:
 	tween.tween_property(Engine, "time_scale", 1.0, 0.5)
 	tween.tween_property(audio_stream_player, "pitch_scale", 1.0, 0.5)
 	tween.tween_callback(self, "queue_free").set_delay(1.0)
+
+
+func _exit_tree() -> void:
+	EventBus.emit_signal("slomo_finished")

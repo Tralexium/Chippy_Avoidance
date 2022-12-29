@@ -29,4 +29,4 @@ void fragment(){
 [resource]
 shader = SubResource( 1 )
 shader_param/levels = 20
-shader_param/spread = 0.05
+shader_param/spread = 0.02

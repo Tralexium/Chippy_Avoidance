@@ -4,7 +4,9 @@ const HITMARKER := preload("res://Scenes/PlayerHitmark.tscn")
 const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
 
 export var walk_speed := 17.0
+export var super_speed := 26.0
 export var jump_vel := 35.0
+export var mega_jump_vel := 50.0
 export var djump_vel := 30.0
 export var flying_vel := 73.0
 export var gravity := 120.0
@@ -27,8 +29,10 @@ var is_dead := false
 var coyote_time := 0.0
 var input_buffer_time := 0.0
 var buffered_input := ""
+var abilities_in_use := []
 
 onready var n_mesh : Spatial = $Mesh/Armature
+onready var n_character_mesh : Spatial = $Mesh/Armature/Skeleton/Character
 onready var n_player_animation_tree: AnimationTree = $Mesh/PlayerAnimationTree
 onready var n_armature_animations: AnimationPlayer = $Mesh/ArmatureAnimations
 onready var n_collision_shape: CollisionShape = $CollisionShape
@@ -37,10 +41,30 @@ onready var n_camera_pos: Position3D = $"%CameraPos"
 onready var n_shadow_guide: RayCast = $ShadowGuide
 onready var n_camera: Camera = $CameraPos/SpringArm/Camera
 onready var n_dust_particles: Particles = $DustParticles
+onready var n_mega_jump_dur: Timer = $MegaJumpDur
+onready var n_super_speed_dur: Timer = $SuperSpeedDur
+onready var n_shield_dur: Timer = $ShieldDur
+onready var n_speed_trail: ImmediateGeometry = $Mesh/Armature/SpeedTrail
+onready var n_mega_jump_part: Particles = $Mesh/MegaJumpPart
 
 
 func _ready() -> void:
-	pass
+	Config.connect("ability_used", self, "_on_ability_used")
+	EventBus.connect("slomo_finished", self, "_on_slomo_finished")
+
+
+func _on_ability_used(ability_num: int) -> void:
+	var shader := n_character_mesh.material_overlay as ShaderMaterial
+	abilities_in_use.push_back(ability_num)
+	match ability_num:
+		Config.ABILITIES.MEGA_JUMP:
+			n_mega_jump_dur.start(Config.item_jump_dur)
+			n_mega_jump_part.emitting = true
+		Config.ABILITIES.SUPER_SPEED:
+			n_super_speed_dur.start(Config.item_speed_dur)
+			n_speed_trail.show()
+		Config.ABILITIES.SHIELD:
+			n_shield_dur.start(Config.item_shield_dur)
 
 
 func set_hp(value: int) -> void:
@@ -162,7 +186,8 @@ func _apply_velocity() -> void:
 		snap_vector = Vector3.DOWN
 	if input_vector.y > 0 or flying:
 		n_shadow_guide.hidden = false
-		velocity.y = jump_vel if has_djump else djump_vel
+		var _jump_vel := mega_jump_vel if abilities_in_use.has(Config.ABILITIES.MEGA_JUMP) else jump_vel
+		velocity.y = _jump_vel if has_djump else djump_vel
 		if flying:
 			velocity.y = flying_vel
 		snap_vector = Vector3.ZERO
@@ -170,8 +195,9 @@ func _apply_velocity() -> void:
 	# X&Z Axis
 	var XZ_input := Vector2(input_vector.x, input_vector.z)
 	if XZ_input.length() != 0.0:
-		velocity.x = input_vector.x * walk_speed
-		velocity.z = input_vector.z * walk_speed
+		var _spd := super_speed if abilities_in_use.has(Config.ABILITIES.SUPER_SPEED) else walk_speed
+		velocity.x = input_vector.x * _spd
+		velocity.z = input_vector.z * _spd
 		_rotate_mesh(delta)
 	else:
 		var XZ_velocity := Vector2(velocity.x, velocity.z)
@@ -218,6 +244,19 @@ func _animations() -> void:
 		n_dust_particles.emitting = false
 	if input_vector.y != 0 and has_djump:
 		n_player_animation_tree.flip_jump()
+	
+	# Ability outline
+	var col := Color.black
+	if abilities_in_use.has(Config.ABILITIES.MEGA_JUMP):
+		col += Color("f82c57")
+	if abilities_in_use.has(Config.ABILITIES.SUPER_SPEED):
+		col += Color("f8d82c")
+	if abilities_in_use.has(Config.ABILITIES.SLO_MO):
+		col += Color("2cf894")
+	if abilities_in_use.has(Config.ABILITIES.SHIELD):
+		col += Color("2cb5f8")
+	var shader := n_character_mesh.material_overlay as ShaderMaterial
+	shader.set_shader_param("outline_color", col)
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
@@ -228,3 +267,27 @@ func _on_Hitbox_area_entered(area: Area) -> void:
 func _on_Hitbox_body_entered(body: Node) -> void:
 	if !Globals.god_mode and !god_mode:
 		self.hp -= 1
+
+
+func _remove_ability_effects(ability_num: int) -> void:
+	var index := abilities_in_use.find(ability_num)
+	if index != -1:
+		abilities_in_use.remove(index)
+
+
+func _on_MegaJumpDur_timeout() -> void:
+	n_mega_jump_part.emitting = false
+	_remove_ability_effects(Config.ABILITIES.MEGA_JUMP)
+
+
+func _on_SuperSpeedDur_timeout() -> void:
+	n_speed_trail.hide()
+	_remove_ability_effects(Config.ABILITIES.SUPER_SPEED)
+
+
+func _on_ShieldDur_timeout() -> void:
+	_remove_ability_effects(Config.ABILITIES.SHIELD)
+
+
+func _on_slomo_finished() -> void:
+	_remove_ability_effects(Config.ABILITIES.SLO_MO)

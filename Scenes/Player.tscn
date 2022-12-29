@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Scenes/PlayerAnimationTree.gd" type="Script" id=9]
 [ext_resource path="res://Resources/Meshes/dust_cloud.tres" type="ArrayMesh" id=10]
 [ext_resource path="res://Resources/Shaders/spatial_outline_shader.tres" type="Material" id=11]
+[ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=12]
+[ext_resource path="res://Resources/Materials/arrow_spatial_mat.tres" type="Material" id=13]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
@@ -168,6 +170,38 @@ bind/22/pose = Transform( -1, 0, 0, 0, 0, 1, 0, 1, 0, -0.333863, -0.839854, -0.2
 bind/23/name = "IKTarget.R"
 bind/23/bone = -1
 bind/23/pose = Transform( -1, 3.89414e-07, 0, 0, 0, -1, -3.89414e-07, -1, 0, -0.333863, -1.24221e-08, 0.122345 )
+
+[sub_resource type="SpatialMaterial" id=45]
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+
+[sub_resource type="Curve" id=46]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=47]
+colors = PoolColorArray( 1.2, 0.873438, 0.1, 1, 1, 0.309804, 0.309804, 0 )
+
+[sub_resource type="Gradient" id=48]
+offsets = PoolRealArray( 0, 0.541667, 1 )
+colors = PoolColorArray( 1, 0.0820313, 0.34021, 0, 1, 0.125, 0.291626, 1, 1, 0.702263, 0.141176, 0 )
+
+[sub_resource type="GradientTexture" id=49]
+gradient = SubResource( 48 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=50]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+gravity = Vector3( 0, 8, 0 )
+scale = 0.4
+scale_random = 0.38
+color_ramp = SubResource( 49 )
+
+[sub_resource type="QuadMesh" id=51]
+material = ExtResource( 13 )
 
 [sub_resource type="Animation" id=26]
 resource_name = "Armature"
@@ -1670,7 +1704,7 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "running_time_scale", 0, "running", "idle_time_scale", 0, "idle", "TimeScale", 0, "flip_jump", "air_blend", 0, "fall", "air_blend", 1, "jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "output", 0, "in_air_state" ]
+node_connections = [ "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "running_time_scale", 0, "running", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "air_blend", 0, "fall", "air_blend", 1, "jump", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "idle_time_scale", 0, "idle", "TimeScale", 0, "flip_jump", "output", 0, "in_air_state" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
@@ -1828,6 +1862,26 @@ material_overlay = ExtResource( 11 )
 mesh = SubResource( 24 )
 skin = SubResource( 25 )
 
+[node name="SpeedTrail" type="ImmediateGeometry" parent="Mesh/Armature"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.262734, 0 )
+visible = false
+material_override = SubResource( 45 )
+script = ExtResource( 12 )
+lifetime = 0.3
+base_width = 2.0
+width_profile = SubResource( 46 )
+color_gradient = SubResource( 47 )
+smoothing_iterations = 1
+axe = "X"
+
+[node name="MegaJumpPart" type="Particles" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908521, 0 )
+emitting = false
+amount = 6
+lifetime = 0.5
+process_material = SubResource( 50 )
+draw_pass_1 = SubResource( 51 )
+
 [node name="ArmatureAnimations" type="AnimationPlayer" parent="Mesh"]
 anims/Armature = SubResource( 26 )
 anims/Fall = SubResource( 28 )
@@ -1880,5 +1934,17 @@ current = true
 fov = 50.0
 far = 5000.0
 
+[node name="MegaJumpDur" type="Timer" parent="."]
+one_shot = true
+
+[node name="SuperSpeedDur" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShieldDur" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="MegaJumpDur" to="." method="_on_MegaJumpDur_timeout"]
+[connection signal="timeout" from="SuperSpeedDur" to="." method="_on_SuperSpeedDur_timeout"]
+[connection signal="timeout" from="ShieldDur" to="." method="_on_ShieldDur_timeout"]

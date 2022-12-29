@@ -97,9 +97,9 @@ script = ExtResource( 5 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = -96.0
+margin_top = 984.0
 margin_right = 384.0
-margin_bottom = -32.0024
+margin_bottom = 1048.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -152,10 +152,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -368.0
-margin_top = -96.0
-margin_right = -64.0
-margin_bottom = -32.0
+margin_left = 1552.0
+margin_top = 984.0
+margin_right = 1856.0
+margin_bottom = 1048.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_group_": true
