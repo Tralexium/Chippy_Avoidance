@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -203,6 +203,23 @@ color_ramp = SubResource( 49 )
 
 [sub_resource type="QuadMesh" id=51]
 material = ExtResource( 13 )
+size = Vector2( 3, 1.5 )
+
+[sub_resource type="Gradient" id=54]
+offsets = PoolRealArray( 0, 0.21673, 0.48289, 1 )
+colors = PoolColorArray( 1, 0.136719, 0.38337, 0, 1, 0.0823529, 0.341176, 0.952941, 1, 0.555664, 0.125, 1, 1, 0.960938, 0, 0 )
+
+[sub_resource type="GradientTexture" id=55]
+gradient = SubResource( 54 )
+width = 100
+
+[sub_resource type="ParticlesMaterial" id=56]
+emission_shape = 2
+emission_box_extents = Vector3( 0.5, 0.5, 0.5 )
+gravity = Vector3( 0, 16, 0 )
+scale = 0.4
+scale_random = 0.38
+color_ramp = SubResource( 55 )
 
 [sub_resource type="Animation" id=26]
 resource_name = "Armature"
@@ -1705,7 +1722,7 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "air_blend", 0, "fall", "air_blend", 1, "jump", "TimeScale", 0, "flip_jump", "idle_time_scale", 0, "idle", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "running_time_scale", 0, "running", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "output", 0, "in_air_state" ]
+node_connections = [ "output", 0, "in_air_state", "air_blend", 0, "fall", "air_blend", 1, "jump", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "TimeScale", 0, "flip_jump", "running_time_scale", 0, "running", "idle_time_scale", 0, "idle", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
@@ -1914,6 +1931,16 @@ emitting = false
 amount = 6
 lifetime = 0.5
 process_material = SubResource( 50 )
+draw_pass_1 = SubResource( 51 )
+
+[node name="DJumpPart" type="Particles" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662704, 0 )
+emitting = false
+amount = 6
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.47
+process_material = SubResource( 56 )
 draw_pass_1 = SubResource( 51 )
 
 [node name="PlayerShield" parent="Mesh" instance=ExtResource( 14 )]

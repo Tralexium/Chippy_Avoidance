@@ -237,11 +237,11 @@ margin_bottom = 152.0
 text = "Show Percentage"
 script = ExtResource( 16 )
 
-[node name="ShowPlayerHUD" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
+[node name="TransparentPlayerHUD" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
 margin_top = 160.0
 margin_right = 798.0
 margin_bottom = 192.0
-text = "Always Show HUD"
+text = "Transparent HUD"
 script = ExtResource( 17 )
 
 [node name="ShowFPS" type="CheckBox" parent="BG/Margin/Contents/General/Toggles"]
@@ -454,7 +454,7 @@ text = "game version: -.-.-"
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Bloom" to="BG/Margin/Contents/General/Toggles/Bloom" method="_on_Bloom_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/ShowBar" to="BG/Margin/Contents/General/Toggles/ShowBar" method="_on_ShowBar_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Percentage" to="BG/Margin/Contents/General/Toggles/Percentage" method="_on_Percentage_toggled"]
-[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/ShowPlayerHUD" to="BG/Margin/Contents/General/Toggles/ShowPlayerHUD" method="_on_PlayerHUD_toggled"]
+[connection signal="toggled" from="BG/Margin/Contents/General/Toggles/TransparentPlayerHUD" to="BG/Margin/Contents/General/Toggles/TransparentPlayerHUD" method="_on_PlayerHUD_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/ShowFPS" to="BG/Margin/Contents/General/Toggles/ShowFPS" method="_on_ShowFPS_toggled"]
 [connection signal="pressed" from="BG/Margin/Contents/Controls/ResetControls" to="BG/Margin/Contents/Controls/ResetControls" method="_on_ResetControls_pressed"]
 [connection signal="value_changed" from="BG/Margin/Contents/Accessibility/Slidables/Screenshake" to="." method="_on_Screenshake_value_changed"]

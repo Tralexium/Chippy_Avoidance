@@ -26,8 +26,11 @@ func _ready() -> void:
 	EventBus.connect("ability_used", self, "_on_ability_used")
 	EventBus.connect("avoidance_ended", self, "_on_avoidance_ended")
 	EventBus.connect("avoidance_restart", self, "_on_avoidance_restart")
+	var mus_bus := SoundManager.get_default_music_bus()
+	AudioServer.set_bus_effect_enabled(mus_bus, 0, false)
 	audio_stream_player = SoundManager.play_music(Globals.AVOIDANCE_MUSIC, 0.0, "Music")
 	audio_stream_player.seek(0.0)
+	audio_stream_player.pitch_scale = 1.0
 
 
 func _process(delta: float) -> void:
@@ -84,7 +87,10 @@ func _on_avoidance_ended() -> void:
 	var song_position := audio_stream_player.get_playback_position()
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	timeline.stop()
-	Globals.can_pause = true
+	var mus_bus := SoundManager.get_default_music_bus()
+	AudioServer.set_bus_effect_enabled(mus_bus, 0, true)
+	SoundManager.music.fade_volume(audio_stream_player, 0, -15, 1.0)
+	Globals.can_pause = false
 	Globals.run_stats["survival_time"] = song_position
 	Globals.run_stats["unit_survival_time"] = unit_position
 	var stats_ui := STATS_MENUS.instance()
@@ -93,6 +99,7 @@ func _on_avoidance_ended() -> void:
 
 func _on_avoidance_restart() -> void:
 	currently_restarting = true
+	create_tween().tween_property(audio_stream_player, "pitch_scale", 0.01, 0.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	transition_inst.connect("tree_exited", self, "_on_transition_finished")
 	add_child(transition_inst)

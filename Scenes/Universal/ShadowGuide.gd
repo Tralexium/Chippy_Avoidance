@@ -11,6 +11,7 @@ onready var hazard_scanner: RayCast = $HazardScanner
 
 
 func _ready() -> void:
+	visible = Config.player_ring
 	shadow.modulate = Color.transparent
 
 

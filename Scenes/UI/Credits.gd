@@ -7,7 +7,7 @@ signal go_back
 var is_showing := false
 var is_present := false
 onready var contents: Control = $AspectRatioContainer/MarginContainer/Contents
-onready var current_node := contents.get_child_count() - 1
+onready var current_node := contents.get_child_count()
 onready var fade_in_timer: Timer = $FadeIn
 onready var fade_out_timer: Timer = $FadeOut
 
@@ -22,24 +22,26 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func hide_credits() -> void:
+	fade_in_timer.stop()
 	if is_showing:
 		return
-	if current_node > 0:
-		var node := contents.get_child(current_node-1)
+	current_node -= 1
+	if current_node >= 0:
+		var node := contents.get_child(current_node)
 		var tween := create_tween()
 		tween.tween_property(node, "modulate:a", 0.0, fade_dur)
-		current_node -= 1
 		fade_out_timer.start(fade_dur)
 
 
 func fade_in_credits() -> void:
+	fade_out_timer.stop()
 	is_showing = true
 	is_present = true
+	current_node += 1
 	if current_node < contents.get_child_count():
 		var node := contents.get_child(current_node)
 		var tween := create_tween()
 		tween.tween_property(node, "modulate:a", 1.0, fade_dur)
-		current_node += 1
 		fade_in_timer.start(fade_dur)
 	else:
 		is_showing = false

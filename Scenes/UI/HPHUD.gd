@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 func eliminate_bar(new_hp: int) -> void:
 	var bars_left := health_bars.get_child_count()
-	if bars_left > 1:
+	if bars_left > 1 and not Config.infinite_hp:
 		health_bars.get_child(bars_left-1).shrink()
 		if bars_left == 2:
 			player_head_icon.texture = DEAD_ICON

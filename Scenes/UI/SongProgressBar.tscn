@@ -11,8 +11,8 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0941176, 0.0862745, 0.117647, 0.588235 )
-border_color = Color( 0.513726, 0.788235, 1, 1 )
+bg_color = Color( 0.0235294, 0.0156863, 0.054902, 0.588235 )
+border_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
@@ -28,6 +28,7 @@ margin_bottom = 34.0
 script = ExtResource( 2 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color( 0.0470588, 0.776471, 1, 1 )
 margin_right = 787.0
 margin_bottom = 12.0
 size_flags_horizontal = 3

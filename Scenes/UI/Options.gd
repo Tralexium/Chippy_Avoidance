@@ -14,7 +14,7 @@ onready var bloom: CheckBox = $BG/Margin/Contents/General/Toggles/Bloom
 onready var game_version: Label = $BG/Footer/GameVersion
 onready var show_bar: CheckBox = $BG/Margin/Contents/General/Toggles/ShowBar
 onready var percentage: CheckBox = $BG/Margin/Contents/General/Toggles/Percentage
-onready var player_hud: CheckBox = $BG/Margin/Contents/General/Toggles/ShowPlayerHUD
+onready var player_hud: CheckBox = $BG/Margin/Contents/General/Toggles/TransparentPlayerHUD
 onready var show_fps: CheckBox = $BG/Margin/Contents/General/Toggles/ShowFPS
 onready var screenshake: VBoxContainer = $BG/Margin/Contents/Accessibility/Slidables/Screenshake
 onready var point_multiplier: VBoxContainer = $BG/Margin/Contents/Accessibility/Slidables/PointMultiplier
@@ -47,7 +47,6 @@ func fetch_and_set_general_setting() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_present and event.is_action_pressed("ui_cancel"):
-		is_present = false
 		save_and_go_back()
 
 
@@ -62,6 +61,7 @@ func lose_focus() -> void:
 
 
 func save_and_go_back() -> void:
+	is_present = false
 	Config.save_data()
 	lose_focus()
 	emit_signal("go_back")

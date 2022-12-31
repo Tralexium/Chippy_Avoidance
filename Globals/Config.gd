@@ -209,6 +209,10 @@ func set_infinite_items(value: bool) -> void:
 func set_resolution(value: Vector2) -> void:
 	resolution = value
 	OS.window_size = value
+	if screen_mode == SCREEN_MODES.WINDOWED:
+		var screen_size = OS.get_screen_size()
+		var window_size = OS.get_window_size()
+		OS.set_window_position(screen_size*0.5 - window_size*0.5)
 
 
 

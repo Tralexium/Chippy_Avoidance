@@ -73,7 +73,7 @@ func shift_cam_instant(new_position: Vector3, new_rotation: Vector3, new_spring_
 func shake_cam(target_shake: float, duration: float) -> void:
 	if duration > 0.0:
 		tween = create_tween().set_trans(Tween.TRANS_LINEAR)
-		tween.tween_property(self, "screen_shake_amount", target_shake, duration)
+		tween.tween_property(self, "screen_shake_amount", target_shake * Config.screen_shake, duration)
 	else:
 		screen_shake_amount = target_shake
 

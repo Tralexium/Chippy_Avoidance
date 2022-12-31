@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Blender Renders/player_head_small.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Shaders/outline_shader.tres" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/white_circle.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/UI/PlayerHUD.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/UI/ItemSlot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/SongProgressBar.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -44,7 +45,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 64, 984 ) ]
+"values": [ Vector2( 64, 1112 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Items:rect_position")
@@ -56,7 +57,19 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1552, 984 ) ]
+"values": [ Vector2( 1552, 1112 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SongProgressBar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 544, -52 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -86,6 +99,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1568, 1119 ), Vector2( 1568, 984 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SongProgressBar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 544, -52 ), Vector2( 544, 22 ) ]
+}
 
 [node name="PlayerHUD" type="Control"]
 anchor_right = 1.0
@@ -93,13 +118,19 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 5 )
 
+[node name="SongProgressBar" parent="." instance=ExtResource( 7 )]
+margin_left = 544.0
+margin_top = -52.0
+margin_right = 1376.0
+margin_bottom = -40.0
+
 [node name="HPHUD" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = 984.0
+margin_top = 1112.0
 margin_right = 384.0
-margin_bottom = 1048.0
+margin_bottom = 1176.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -153,9 +184,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1552.0
-margin_top = 984.0
+margin_top = 1112.0
 margin_right = 1856.0
-margin_bottom = 1048.0
+margin_bottom = 1176.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_group_": true
@@ -185,5 +216,10 @@ anims/slide_in = SubResource( 6 )
 [node name="OpaqueDur" type="Timer" parent="."]
 one_shot = true
 
+[node name="SpawnDelay" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="OpaqueDur" to="." method="_on_OpaqueDur_timeout"]
+[connection signal="timeout" from="SpawnDelay" to="." method="_on_SpawnDelay_timeout"]

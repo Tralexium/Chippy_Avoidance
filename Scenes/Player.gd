@@ -50,6 +50,7 @@ onready var n_speed_trail: ImmediateGeometry = $Mesh/Armature/SpeedTrail
 onready var n_mega_jump_part: Particles = $Mesh/MegaJumpPart
 onready var n_player_shield: MeshInstance = $Mesh/PlayerShield
 onready var n_iframes_timer: Timer = $IFrames
+onready var n_djump_part: Particles = $Mesh/DJumpPart
 
 
 func _ready() -> void:
@@ -79,7 +80,7 @@ func set_hp(value: int) -> void:
 		EventBus.emit_signal("hp_changed", hp)
 		hit_effects()
 	hp = value
-	if hp <= 0 and !is_dead:
+	if hp <= 0 and !is_dead and !Config.infinite_hp:
 		die()
 
 
@@ -103,7 +104,6 @@ func die() -> void:
 	n_mesh.rotate_y(PI)
 	n_collision_shape.set_deferred("disabled", true)
 	n_armature_animations.play("Fall")
-	SoundManager.stop_music(1.0)
 	Util.time_slowdown(0.05, 0.5)
 	yield(get_tree().create_timer(0.5 * 0.05), "timeout")
 	velocity = Vector3(80.0, 60.0, 0.0).rotated(Vector3.UP, randf() * TAU)
@@ -169,9 +169,10 @@ func _get_input() -> void:
 			input_vector.y = 1
 			coyote_time = 0.0
 			buffered_input = ""
-		elif Input.is_action_just_pressed("jump") and has_djump:
+		elif Input.is_action_just_pressed("jump") and (has_djump or Config.infinite_jump):
 			has_djump = false
 			input_vector.y = 1
+			n_djump_part.emitting = true
 	Globals.run_stats["jumps"] += input_vector.y
 
 

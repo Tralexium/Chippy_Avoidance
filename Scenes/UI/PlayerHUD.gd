@@ -8,7 +8,6 @@ func _ready() -> void:
 	EventBus.connect("avoidance_ended", self, "_slide_out")
 	EventBus.connect("hp_changed", self, "_on_hp_changed")
 	EventBus.connect("ability_used", self, "_on_ability_used")
-	animation_player.play("slide_in")
 
 
 func _slide_out() -> void:
@@ -38,3 +37,6 @@ func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 
 func _on_OpaqueDur_timeout() -> void:
 	fade_hud()
+
+func _on_SpawnDelay_timeout() -> void:
+	animation_player.play("slide_in")
