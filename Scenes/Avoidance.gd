@@ -1,11 +1,14 @@
 extends Spatial
 
 const EYE_BLINK := preload("res://Scenes/Universal/EyeBlinkTransition.tscn")
+const STATS_MENUS := preload("res://Scenes/UI/StatsScreen.tscn")
+const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
 
 export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44]
 
 var current_phase := 0
 var audio_stream_player: AudioStreamPlayer
+var currently_restarting := false
 onready var timeline: AnimationPlayer = $Timeline
 onready var player: KinematicBody = $Player
 onready var cam_path: Path = $CamPath
@@ -17,7 +20,12 @@ func _init() -> void:
 
 func _ready() -> void:
 	Globals.can_pause = true
+	Globals.reset_run_stats()
 	EventBus.emit_signal("avoidance_started")
+	EventBus.connect("hp_changed", self, "_on_damage_taken")
+	EventBus.connect("ability_used", self, "_on_ability_used")
+	EventBus.connect("avoidance_ended", self, "_on_avoidance_ended")
+	EventBus.connect("avoidance_restart", self, "_on_avoidance_restart")
 	audio_stream_player = SoundManager.play_music(Globals.AVOIDANCE_MUSIC, 0.0, "Music")
 	audio_stream_player.seek(0.0)
 
@@ -31,6 +39,8 @@ func _process(delta: float) -> void:
 		fast_forward_phase(1)
 	if Input.is_action_just_pressed("dev_skip_phase_down"):
 		fast_forward_phase(-1)
+	if Input.is_action_just_pressed("quick restart"):
+		_on_avoidance_restart()
 
 
 func fast_forward_phase(skip_phases: int) -> void:
@@ -55,3 +65,38 @@ func spawn_blink_overlay(speed: float, reverse: bool) -> void:
 	blink_inst.speed = speed
 	blink_inst.reverse = reverse
 	add_child(blink_inst)
+
+
+func _on_damage_taken(new_hp: int) -> void:
+	var event : int = Globals.TIMELINE_EVENTS.DAMAGE if new_hp > 1 else Globals.TIMELINE_EVENTS.DEATH
+	var song_position := audio_stream_player.get_playback_position()
+	var unit_position := song_position / audio_stream_player.stream.get_length()
+	Globals.timeline_events.push_back([event, unit_position])
+
+
+func _on_ability_used(ability_num: int) -> void:
+	var song_position := audio_stream_player.get_playback_position()
+	var unit_position := song_position / audio_stream_player.stream.get_length()
+	Globals.timeline_events.push_back([ability_num, unit_position])
+
+
+func _on_avoidance_ended() -> void:
+	var song_position := audio_stream_player.get_playback_position()
+	var unit_position := song_position / audio_stream_player.stream.get_length()
+	timeline.stop()
+	Globals.can_pause = true
+	Globals.run_stats["survival_time"] = song_position
+	Globals.run_stats["unit_survival_time"] = unit_position
+	var stats_ui := STATS_MENUS.instance()
+	$CanvasLayer.add_child(stats_ui)
+
+
+func _on_avoidance_restart() -> void:
+	currently_restarting = true
+	var transition_inst := CIRCLE_TRANSITION.instance()
+	transition_inst.connect("tree_exited", self, "_on_transition_finished")
+	add_child(transition_inst)
+
+
+func _on_transition_finished() -> void:
+	get_tree().reload_current_scene()

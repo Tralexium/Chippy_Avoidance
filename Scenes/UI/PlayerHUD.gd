@@ -7,7 +7,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 func _ready() -> void:
 	EventBus.connect("avoidance_ended", self, "_slide_out")
 	EventBus.connect("hp_changed", self, "_on_hp_changed")
-	Config.connect("ability_used", self, "_on_ability_used")
+	EventBus.connect("ability_used", self, "_on_ability_used")
 	animation_player.play("slide_in")
 
 

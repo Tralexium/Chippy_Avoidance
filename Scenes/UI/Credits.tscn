@@ -1,0 +1,346 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/main_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Resources/Fonts/Orbitron-VariableFont_wght.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/UI/godot_logo.svg" type="Texture" id=4]
+[ext_resource path="res://Scenes/UI/Credits.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
+skew = Vector2( 0.2, 0 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0.86, 1.1, 1 )
+skew = Vector2( 0.2, 0 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+outline_size = 1
+outline_color = Color( 1, 0.160784, 0.34902, 1 )
+use_filter = true
+extra_spacing_char = 2
+font_data = ExtResource( 3 )
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 5 )
+
+[node name="BackToMenu" type="Button" parent="."]
+margin_left = 1673.0
+margin_top = 31.0
+margin_right = 1873.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 200, 50 )
+text = "Back to Menu"
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+margin_left = 420.0
+margin_right = 1500.0
+margin_bottom = 1080.0
+custom_constants/margin_top = 124
+custom_constants/margin_bottom = 124
+
+[node name="BG" type="Panel" parent="AspectRatioContainer/MarginContainer"]
+margin_top = 124.0
+margin_right = 1080.0
+margin_bottom = 956.0
+rect_pivot_offset = Vector2( -750, -124 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="Header" type="Panel" parent="AspectRatioContainer/MarginContainer/BG"]
+margin_left = 69.0
+margin_top = 36.0
+margin_right = 1149.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 0, 70 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="Credits" type="Label" parent="AspectRatioContainer/MarginContainer/BG/Header"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 0.0901961, 0, 0.243137, 1 )
+custom_colors/font_outline_modulate = Color( 0.0901961, 0, 0.243137, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "CREDITS"
+align = 1
+valign = 1
+
+[node name="Contents" type="Control" parent="AspectRatioContainer/MarginContainer"]
+margin_top = 124.0
+margin_right = 1080.0
+margin_bottom = 956.0
+
+[node name="Developers" type="Label" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 137.0
+margin_top = 152.0
+margin_right = 578.0
+margin_bottom = 216.0
+custom_colors/font_color = Color( 1, 0.160784, 0.34902, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Developers:"
+
+[node name="MainDev" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 130.0
+margin_top = 215.0
+margin_right = 1016.0
+margin_bottom = 244.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/MainDev"]
+margin_right = 196.0
+margin_bottom = 29.0
+text = "Sole Developer:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/MainDev"]
+margin_left = 204.0
+margin_right = 755.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/MainDev"]
+margin_left = 763.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Tralexium"
+
+[node name="Music" type="Label" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 115.0
+margin_top = 268.0
+margin_right = 556.0
+margin_bottom = 332.0
+custom_colors/font_color = Color( 1, 0.160784, 0.34902, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Music:"
+
+[node name="MenuSong" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 107.0
+margin_top = 327.0
+margin_right = 993.0
+margin_bottom = 356.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/MenuSong"]
+margin_right = 132.0
+margin_bottom = 29.0
+text = "Main Menu:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/MenuSong"]
+margin_left = 140.0
+margin_right = 662.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/MenuSong"]
+margin_left = 670.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Mittsies - Horizon"
+
+[node name="AvoidanceSong" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 98.0
+margin_top = 363.0
+margin_right = 984.0
+margin_bottom = 392.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/AvoidanceSong"]
+margin_right = 135.0
+margin_bottom = 29.0
+text = "Avoidance:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/AvoidanceSong"]
+margin_left = 143.0
+margin_right = 702.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/AvoidanceSong"]
+margin_left = 710.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Aran - EPHMR"
+
+[node name="SpecialThanks" type="Label" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 82.0
+margin_top = 417.0
+margin_right = 523.0
+margin_bottom = 481.0
+custom_colors/font_color = Color( 1, 0.160784, 0.34902, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Special Thanks:"
+
+[node name="InputMusicHelpers" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 74.0
+margin_top = 476.0
+margin_right = 960.0
+margin_bottom = 505.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/InputMusicHelpers"]
+margin_right = 318.0
+margin_bottom = 29.0
+text = "Input & Music Controllers:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/InputMusicHelpers"]
+margin_left = 326.0
+margin_right = 719.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/InputMusicHelpers"]
+margin_left = 727.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Nathan Hoad"
+
+[node name="InputIcons" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 66.0
+margin_top = 513.0
+margin_right = 952.0
+margin_bottom = 542.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/InputIcons"]
+margin_right = 137.0
+margin_bottom = 29.0
+text = "Input Icons:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/InputIcons"]
+margin_left = 145.0
+margin_right = 629.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/InputIcons"]
+margin_left = 637.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Mark \"GMTK\" Brown"
+
+[node name="Testing" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 60.0
+margin_top = 549.0
+margin_right = 946.0
+margin_bottom = 578.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/Testing"]
+margin_right = 97.0
+margin_bottom = 29.0
+text = "Testing:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/Testing"]
+margin_left = 105.0
+margin_right = 767.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/Testing"]
+margin_left = 775.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Smartkin"
+
+[node name="GodotShaders" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 52.0
+margin_top = 584.0
+margin_right = 938.0
+margin_bottom = 613.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/GodotShaders"]
+margin_right = 229.0
+margin_bottom = 29.0
+text = "godotshaders.com"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/GodotShaders"]
+margin_left = 237.0
+margin_right = 636.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/GodotShaders"]
+margin_left = 644.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "For the black magic"
+
+[node name="Lovey" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 47.0
+margin_top = 619.0
+margin_right = 933.0
+margin_bottom = 648.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/Lovey"]
+margin_right = 106.0
+margin_bottom = 29.0
+text = "Lovey01"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/Lovey"]
+margin_left = 114.0
+margin_right = 594.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/Lovey"]
+margin_left = 602.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Secret Santa Reciever"
+
+[node name="GodotLogo" type="TextureRect" parent="AspectRatioContainer/MarginContainer/Contents"]
+modulate = Color( 0, 0.86, 1.1, 1 )
+margin_left = -48.0
+margin_top = 662.0
+margin_right = 1002.0
+margin_bottom = 811.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="FadeIn" type="Timer" parent="."]
+one_shot = true
+
+[node name="FadeOut" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="BackToMenu" to="." method="_on_BackToMenu_pressed"]
+[connection signal="timeout" from="FadeIn" to="." method="_on_FadeIn_timeout"]
+[connection signal="timeout" from="FadeOut" to="." method="_on_FadeOut_timeout"]

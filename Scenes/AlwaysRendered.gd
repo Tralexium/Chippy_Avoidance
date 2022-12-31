@@ -4,7 +4,7 @@ const SLOMO_FX := preload("res://Scenes/UI/SlomoEffect.tscn")
 
 
 func _ready() -> void:
-	Config.connect("ability_used", self, "_on_ability_used")
+	EventBus.connect("ability_used", self, "_on_ability_used")
 
 
 func _on_ability_used(ability_num: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -1705,12 +1705,45 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "output", 0, "in_air_state", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "TimeScale", 0, "flip_jump", "idle_time_scale", 0, "idle", "running_time_scale", 0, "running", "air_blend", 0, "fall", "air_blend", 1, "jump" ]
+node_connections = [ "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "air_blend", 0, "fall", "air_blend", 1, "jump", "TimeScale", 0, "flip_jump", "idle_time_scale", 0, "idle", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "running_time_scale", 0, "running", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "output", 0, "in_air_state" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
 
 [sub_resource type="SphereShape" id=5]
+
+[sub_resource type="Animation" id=52]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Mesh:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=53]
+resource_name = "iframes"
+length = 0.1
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Mesh/Armature/Skeleton/Character:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Player" type="KinematicBody" groups=["player"]]
 collision_layer = 2
@@ -1939,6 +1972,10 @@ current = true
 fov = 50.0
 far = 5000.0
 
+[node name="IFrameAnim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 52 )
+anims/iframes = SubResource( 53 )
+
 [node name="MegaJumpDur" type="Timer" parent="."]
 one_shot = true
 
@@ -1948,8 +1985,12 @@ one_shot = true
 [node name="ShieldDur" type="Timer" parent="."]
 one_shot = true
 
+[node name="IFrames" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="timeout" from="MegaJumpDur" to="." method="_on_MegaJumpDur_timeout"]
 [connection signal="timeout" from="SuperSpeedDur" to="." method="_on_SuperSpeedDur_timeout"]
 [connection signal="timeout" from="ShieldDur" to="." method="_on_ShieldDur_timeout"]
+[connection signal="timeout" from="IFrames" to="." method="_on_IFrames_timeout"]

@@ -84,7 +84,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer/FunStats:modulate")
+tracks/6/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats/FunStats:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -94,6 +94,30 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -174,7 +198,7 @@ tracks/5/keys = {
 } ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer:modulate")
+tracks/6/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -200,7 +224,7 @@ tracks/7/keys = {
 } ]
 }
 tracks/8/type = "method"
-tracks/8/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer/GemsGained")
+tracks/8/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats/GemsGained")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -214,7 +238,7 @@ tracks/8/keys = {
 } ]
 }
 tracks/9/type = "method"
-tracks/9/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer/RankPanel")
+tracks/9/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats/RankPanel")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -226,6 +250,18 @@ tracks/9/keys = {
 "args": [  ],
 "method": "start"
 } ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="StatsScreen" type="Control"]
@@ -246,10 +282,9 @@ ratio = 1.6568
 stretch_mode = 0
 
 [node name="UIBG" type="ColorRect" parent="UISpace"]
-margin_left = -6.10352e-05
-margin_top = -39.4302
+margin_top = 154.721
 margin_right = 1920.0
-margin_bottom = 1119.43
+margin_bottom = 925.279
 color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG"]
@@ -260,6 +295,7 @@ margin_bottom = -34.5583
 custom_constants/separation = 48
 
 [node name="StatsHeader" type="ColorRect" parent="UISpace/UIBG/VBoxContainer"]
+margin_right = 1920.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
 size_flags_horizontal = 0
@@ -278,15 +314,15 @@ valign = 1
 [node name="Margin" type="MarginContainer" parent="UISpace/UIBG/VBoxContainer"]
 margin_top = 118.0
 margin_right = 1920.0
-margin_bottom = 568.0
+margin_bottom = 672.0
 custom_constants/margin_right = 256
 custom_constants/margin_left = 256
 
 [node name="HBoxContainer" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin"]
 margin_left = 256.0
 margin_right = 1664.0
-margin_bottom = 450.0
-custom_constants/separation = 96
+margin_bottom = 554.0
+custom_constants/separation = 70
 
 [node name="ProgressBar" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
@@ -316,28 +352,61 @@ size_flags_vertical = 5
 text = "END"
 valign = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer"]
-margin_top = 196.0
+[node name="Stats" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 170.0
 margin_right = 1408.0
-margin_bottom = 450.0
+margin_bottom = 424.0
 custom_constants/separation = 64
 alignment = 1
 
-[node name="RankPanel" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer" instance=ExtResource( 8 )]
+[node name="RankPanel" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats" instance=ExtResource( 8 )]
 margin_left = 17.0
 margin_right = 663.0
 margin_bottom = 254.0
 
-[node name="FunStats" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer" instance=ExtResource( 5 )]
+[node name="FunStats" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats" instance=ExtResource( 5 )]
 margin_left = 727.0
 margin_right = 1127.0
 margin_bottom = 254.0
 size_flags_horizontal = 0
 
-[node name="GemsGained" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/HBoxContainer" instance=ExtResource( 7 )]
+[node name="GemsGained" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Stats" instance=ExtResource( 7 )]
 margin_left = 1191.0
 margin_right = 1391.0
 margin_bottom = 254.0
+
+[node name="Buttons" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 494.0
+margin_right = 1408.0
+margin_bottom = 554.0
+custom_constants/separation = 80
+alignment = 1
+
+[node name="MainMenu" type="Button" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons"]
+margin_left = 174.0
+margin_right = 474.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 60 )
+size_flags_horizontal = 0
+text = "Main Menu"
+
+[node name="Retry" type="Button" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons"]
+margin_left = 554.0
+margin_right = 854.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 60 )
+size_flags_horizontal = 0
+text = "Retry"
+
+[node name="Upgrades" type="Button" parent="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons"]
+margin_left = 934.0
+margin_right = 1234.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 60 )
+size_flags_horizontal = 0
+text = "Upgrades"
 
 [node name="BloomRect" parent="." instance=ExtResource( 3 )]
 
@@ -345,3 +414,5 @@ margin_bottom = 254.0
 autoplay = "fade_in"
 anims/RESET = SubResource( 3 )
 anims/fade_in = SubResource( 4 )
+
+[connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons/Retry" to="." method="_on_Retry_pressed"]

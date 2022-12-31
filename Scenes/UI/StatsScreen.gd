@@ -15,3 +15,7 @@ func _input(event: InputEvent) -> void:
 func expand_header() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(stats_header, "rect_size:x", Config.resolution.x, 0.3)
+
+
+func _on_Retry_pressed() -> void:
+	EventBus.emit_signal("avoidance_restart")

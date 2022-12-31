@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Terrain/DiscoFloor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/UI/BloomRect.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/UI/Credits.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/MenuSkybox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=7]
 
@@ -44,6 +45,98 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( -11.7211, 38.3515, 86.67 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("UI/Credits:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1921, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "move_to_credits"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1920, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Credits:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( -1921, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector3( -11.7211, 38.3515, 86.67 ), Vector3( -40, 38.352, 86.67 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "move_to_main_from_credits"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/Credits:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1921, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector3( -40, 38.352, 86.67 ), Vector3( -11.7211, 38.3515, 86.67 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -141,22 +234,30 @@ far = 1000.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 40320.0
-margin_bottom = 22680.0
+margin_right = 44160.0
+margin_bottom = 24840.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 margin_left = 1918.0
-margin_right = 38398.0
-margin_bottom = 20520.0
+margin_right = 42238.0
+margin_bottom = 22680.0
+
+[node name="Credits" parent="UI" instance=ExtResource( 5 )]
+margin_left = -1921.0
+margin_right = -1921.0
 
 [node name="BloomRect" parent="UI" instance=ExtResource( 4 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )
+anims/move_to_credits = SubResource( 4 )
+anims/move_to_main_from_credits = SubResource( 5 )
 anims/move_to_main_from_options = SubResource( 3 )
 anims/move_to_options = SubResource( 2 )
 
 [connection signal="begin_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_begin_pressed"]
+[connection signal="credits_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_credits_pressed"]
 [connection signal="exit_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_exit_pressed"]
 [connection signal="options_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_options_pressed"]
 [connection signal="go_back" from="UI/Options" to="." method="_on_Options_go_back"]
+[connection signal="go_back" from="UI/Credits" to="." method="_on_Credits_go_back"]

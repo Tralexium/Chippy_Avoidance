@@ -6,7 +6,7 @@ const SLOMO_SPD := 0.7
 const DMG_PENALTY := 500.0
 const ITEM_PENALTY := 250.0
 const MAX_SCORE := 10000.0
-const MAX_GEMS := 2500.0
+const MAX_GEMS := 1000.0
 
 enum SCREEN_MODES {
 	FULLSCREEN, WINDOWED
@@ -36,7 +36,7 @@ var transparent_hud := false setget set_transparent_hud
 var show_fps := false setget set_show_fps
 
 # Player related
-var player_max_hp := 1 setget set_player_max_hp
+var player_max_hp := 3 setget set_player_max_hp
 var player_current_abilities := [2, 2, 2, 2]
 var item_speed_dur := 4.0
 var item_jump_dur := 4.0
@@ -50,7 +50,6 @@ var infinite_items := false setget set_infinite_items
 
 signal bloom_changed(is_active)
 signal show_fps_changed(is_active)
-signal ability_used(ability_num)
 
 
 func save_data() -> void:
@@ -192,7 +191,7 @@ func set_player_points(value: int) -> void:
 func set_player_ability_count(ability: int, has_used: bool) -> void:
 	player_current_abilities[ability] += -1 if has_used else 1
 	if has_used:
-		emit_signal("ability_used", ability)
+		EventBus.emit_signal("ability_used", ability)
 
 
 func set_infinite_hp(value: bool) -> void:

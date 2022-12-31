@@ -1,7 +1,6 @@
 extends KinematicBody
 
 const HITMARKER := preload("res://Scenes/PlayerHitmark.tscn")
-const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
 
 export var walk_speed := 17.0
 export var super_speed := 26.0
@@ -20,8 +19,8 @@ export var has_djump := false
 export var cam_follow_y := false
 export var shielded := false
 export var god_mode := false
+export var iframes_dur := 2.0
 
-export var hp := 1 setget set_hp
 
 var input_vector := Vector3.ZERO
 var velocity := Vector3.ZERO
@@ -32,10 +31,12 @@ var input_buffer_time := 0.0
 var buffered_input := ""
 var abilities_in_use := []
 
+onready var hp := Config.player_max_hp setget set_hp
 onready var n_mesh : Spatial = $Mesh/Armature
 onready var n_character_mesh : Spatial = $Mesh/Armature/Skeleton/Character
 onready var n_player_animation_tree: AnimationTree = $Mesh/PlayerAnimationTree
 onready var n_armature_animations: AnimationPlayer = $Mesh/ArmatureAnimations
+onready var n_iframe_anim: AnimationPlayer = $IFrameAnim
 onready var n_collision_shape: CollisionShape = $CollisionShape
 onready var n_hitbox_shape: CollisionShape = $Hitbox/CollisionShape
 onready var n_camera_pos: Position3D = $"%CameraPos"
@@ -48,10 +49,11 @@ onready var n_shield_dur: Timer = $ShieldDur
 onready var n_speed_trail: ImmediateGeometry = $Mesh/Armature/SpeedTrail
 onready var n_mega_jump_part: Particles = $Mesh/MegaJumpPart
 onready var n_player_shield: MeshInstance = $Mesh/PlayerShield
+onready var n_iframes_timer: Timer = $IFrames
 
 
 func _ready() -> void:
-	Config.connect("ability_used", self, "_on_ability_used")
+	EventBus.connect("ability_used", self, "_on_ability_used")
 	EventBus.connect("slomo_finished", self, "_on_slomo_finished")
 
 
@@ -72,6 +74,7 @@ func _on_ability_used(ability_num: int) -> void:
 
 
 func set_hp(value: int) -> void:
+	Globals.run_stats["damage_taken"] = Config.player_max_hp - value
 	if value < hp:
 		EventBus.emit_signal("hp_changed", hp)
 		hit_effects()
@@ -82,6 +85,8 @@ func set_hp(value: int) -> void:
 
 func hit_effects() -> void:
 	n_hitbox_shape.set_deferred("disabled", true)
+	n_iframe_anim.play("iframes")
+	n_iframes_timer.start(iframes_dur)
 	var hitmarker := HITMARKER.instance()
 	hitmarker.translation = $Mesh/Armature/Skeleton/Character.translation
 	add_child(hitmarker)
@@ -108,13 +113,6 @@ func die() -> void:
 	n_dust_particles.amount = 16
 	var rotate_tween = create_tween()
 	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
-	var transition_inst := CIRCLE_TRANSITION.instance()
-	transition_inst.connect("tree_exited", self, "_on_transition_finished")
-	add_child(transition_inst)
-
-
-func _on_transition_finished() -> void:
-	get_tree().reload_current_scene()
 
 
 func _physics_process(delta: float) -> void:
@@ -174,6 +172,7 @@ func _get_input() -> void:
 		elif Input.is_action_just_pressed("jump") and has_djump:
 			has_djump = false
 			input_vector.y = 1
+	Globals.run_stats["jumps"] += input_vector.y
 
 
 func _apply_velocity() -> void:
@@ -198,6 +197,7 @@ func _apply_velocity() -> void:
 	
 	# X&Z Axis
 	var XZ_input := Vector2(input_vector.x, input_vector.z)
+	Globals.run_stats["steps"] += XZ_input.length() / 10.0
 	if XZ_input.length() != 0.0:
 		var _spd := super_speed if abilities_in_use.has(Config.ABILITIES.SUPER_SPEED) else walk_speed
 		velocity.x = input_vector.x * _spd
@@ -297,3 +297,8 @@ func _on_ShieldDur_timeout() -> void:
 
 func _on_slomo_finished() -> void:
 	_remove_ability_effects(Config.ABILITIES.SLO_MO)
+
+
+func _on_IFrames_timeout() -> void:
+	n_hitbox_shape.set_deferred("disabled", false)
+	n_iframe_anim.stop(true)

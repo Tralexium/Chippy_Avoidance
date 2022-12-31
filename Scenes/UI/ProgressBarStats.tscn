@@ -20,7 +20,6 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 0, 100 )
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-events = [ [ 4, 0.2 ], [ 0, 0.6 ] ]
 
 [node name="Events" type="Control" parent="."]
 margin_right = 300.0
