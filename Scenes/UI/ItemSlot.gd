@@ -80,7 +80,6 @@ func _update_button_icon(has_gamepad: bool = false) -> void:
 	var current_device := InputHelper.guess_device_name()
 	if not has_gamepad or current_device == InputHelper.DEVICE_KEYBOARD:
 		var key := InputHelper.get_action_key(action)
-		print(key)
 		icon_texture = load("res://Assets/Controller & Key Prompts/Keyboard/" + key + "_Key_Light.png")
 	elif current_device == InputHelper.DEVICE_PLAYSTATION_CONTROLLER:
 		var button := InputHelper.get_action_button(action)

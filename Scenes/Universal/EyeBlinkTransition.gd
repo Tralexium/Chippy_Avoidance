@@ -11,6 +11,8 @@ func _ready() -> void:
 	color_rect.material.set_shader_param("screen_height", Config.resolution.y*10.0)
 	animation_player.playback_speed = speed
 	if reverse:
+		var shader := $ColorRect.material as ShaderMaterial
+		shader.set_shader_param("circle_size", 0.0)  # Fixes flicker when spawning right as the scene is changed
 		animation_player.play_backwards("start")
 	else:
 		animation_player.play("start")

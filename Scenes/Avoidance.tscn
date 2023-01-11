@@ -500,8 +500,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 43.1, 48.32, 52.8, 53, 64.2972, 71.0081, 85.9945 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 38.01, 43.1, 48.32, 52.8, 53, 64.2972, 71.0081, 85.9945 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ Vector3( 0, 8, 0 ), Vector3( 0, 0, 0 ), 30.0 ],
 "method": "shift_cam_instant"
@@ -522,6 +522,9 @@ tracks/0/keys = {
 "method": "shift_cam"
 }, {
 "args": [ Vector3( 0, 0, 10 ), Vector3( -35, 0, 0 ), 2.0, 2, 7, 35.0 ],
+"method": "shift_cam"
+}, {
+"args": [ Vector3( 0, 0, 7 ), Vector3( -45, 0, 0 ), 5.0, 2, 7, 50.0 ],
 "method": "shift_cam"
 }, {
 "args": [ Vector3( 0, 0, 5 ), Vector3( 70, 0, 0 ), 1.0, 2, 0, 20.0 ],
@@ -1201,7 +1204,7 @@ tracks/38/loop_wrap = true
 tracks/38/imported = false
 tracks/38/enabled = true
 tracks/38/keys = {
-"times": PoolRealArray( 0, 10.29, 43.09, 48.32 ),
+"times": PoolRealArray( 0, 10.29, 43.09, 48.37 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, false ]
@@ -1213,7 +1216,7 @@ tracks/39/loop_wrap = true
 tracks/39/imported = false
 tracks/39/enabled = true
 tracks/39/keys = {
-"times": PoolRealArray( 0, 43.09, 48.32 ),
+"times": PoolRealArray( 0, 43.09, 48.37 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]

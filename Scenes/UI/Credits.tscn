@@ -33,10 +33,10 @@ theme = ExtResource( 2 )
 script = ExtResource( 5 )
 
 [node name="BackToMenu" type="Button" parent="."]
-margin_left = 1673.0
-margin_top = 31.0
-margin_right = 1873.0
-margin_bottom = 81.0
+margin_left = 38.0
+margin_top = 32.0
+margin_right = 238.0
+margin_bottom = 82.0
 rect_min_size = Vector2( 200, 50 )
 text = "Back to Menu"
 

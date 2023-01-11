@@ -51,6 +51,8 @@ onready var n_mega_jump_part: Particles = $Mesh/MegaJumpPart
 onready var n_player_shield: MeshInstance = $Mesh/PlayerShield
 onready var n_iframes_timer: Timer = $IFrames
 onready var n_djump_part: Particles = $Mesh/DJumpPart
+onready var n_death_beams: Particles = $Mesh/DeathBeams
+onready var n_death_sparkles: Particles = $Mesh/DeathSparkles
 
 
 func _ready() -> void:
@@ -93,7 +95,10 @@ func hit_effects(new_hp: int) -> void:
 	var hitmarker := HITMARKER.instance()
 	hitmarker.translation = $Mesh/MegaJumpPart.translation
 	hitmarker.shrink_dur = 0.1 if new_hp > 0 else 0.05
-	if !abilities_in_use.has(Config.ABILITIES.SLO_MO):
+	if new_hp > 0:
+		n_camera_pos.screen_shake_amount = 1.0
+		n_camera_pos.shake_cam(0.0, 0.2)
+	if !abilities_in_use.has(Config.ABILITIES.SLO_MO) and new_hp > 0:
 		Util.time_slowdown(0.2, 0.2)
 	add_child(hitmarker)
 
@@ -101,6 +106,7 @@ func hit_effects(new_hp: int) -> void:
 func die() -> void:
 	# Do death fx here
 	is_dead = true
+	n_death_beams.emitting = true
 	EventBus.emit_signal("avoidance_ended")
 	snap_vector = Vector3.ZERO
 	n_player_animation_tree.active = false
@@ -109,13 +115,16 @@ func die() -> void:
 	n_mesh.rotate_y(PI)
 	n_collision_shape.set_deferred("disabled", true)
 	n_armature_animations.play("Fall")
-	Util.time_slowdown(0.05, 0.5)
-	yield(get_tree().create_timer(0.5 * 0.05), "timeout")
+	Util.time_slowdown(0.05, 0.6)
+	yield(get_tree().create_timer(0.6 * 0.05), "timeout")
 	velocity = Vector3(80.0, 60.0, 0.0).rotated(Vector3.UP, randf() * TAU)
 	if lock_2d:
 		velocity.z = 0.0
 	n_dust_particles.emitting = true
+	n_death_sparkles.emitting = true
 	n_dust_particles.amount = 16
+	n_camera_pos.screen_shake_amount = 5.0
+	n_camera_pos.shake_cam(0.0, 0.4)
 	var rotate_tween = create_tween()
 	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
 
@@ -132,8 +141,6 @@ func _physics_process(delta: float) -> void:
 	_apply_velocity()
 	_animations()
 	velocity = move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
-	if is_dead:
-		print(velocity)
 
 
 func _debug() -> void:

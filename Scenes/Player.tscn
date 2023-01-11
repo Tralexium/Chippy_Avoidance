@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://addons/Trail/trail_3d.gd" type="Script" id=12]
 [ext_resource path="res://Resources/Materials/arrow_spatial_mat.tres" type="Material" id=13]
 [ext_resource path="res://Scenes/PlayerShield.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/UI/faded_line.png" type="Texture" id=15]
+[ext_resource path="res://Assets/sparkle.png" type="Texture" id=16]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
@@ -220,6 +222,96 @@ gravity = Vector3( 0, 16, 0 )
 scale = 0.4
 scale_random = 0.38
 color_ramp = SubResource( 55 )
+
+[sub_resource type="Curve" id=57]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 360 ), 0.0, 0.0, 0, 0, Vector2( 1, 289.636 ), -76.5816, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=58]
+curve = SubResource( 57 )
+
+[sub_resource type="Gradient" id=59]
+offsets = PoolRealArray( 0.197719, 1 )
+colors = PoolColorArray( 1, 0.155273, 0, 1, 0.039248, 0, 0.758301, 1 )
+
+[sub_resource type="GradientTexture" id=60]
+gradient = SubResource( 59 )
+width = 100
+
+[sub_resource type="Curve" id=61]
+_data = [ Vector2( 0.0104895, 0 ), 0.0, 0.275, 0, 0, Vector2( 0.136364, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.419, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=62]
+width = 100
+curve = SubResource( 61 )
+
+[sub_resource type="ParticlesMaterial" id=63]
+gravity = Vector3( 0, 0, 0 )
+angle = 501.6
+angle_random = 1.0
+angle_curve = SubResource( 58 )
+scale = 0.7
+scale_random = 1.0
+scale_curve = SubResource( 62 )
+color_ramp = SubResource( 60 )
+
+[sub_resource type="SpatialMaterial" id=64]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+params_billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 15 )
+
+[sub_resource type="QuadMesh" id=65]
+material = SubResource( 64 )
+size = Vector2( 50, 30 )
+
+[sub_resource type="Gradient" id=66]
+offsets = PoolRealArray( 0.311787, 1 )
+colors = PoolColorArray( 1, 0.113281, 0.289932, 1, 0, 0.759766, 1, 1 )
+
+[sub_resource type="GradientTexture" id=67]
+gradient = SubResource( 66 )
+width = 100
+
+[sub_resource type="Curve" id=68]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.471, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=69]
+width = 100
+curve = SubResource( 68 )
+
+[sub_resource type="ParticlesMaterial" id=70]
+direction = Vector3( 1, 1, 1 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 1.0
+tangential_accel = 150.0
+damping = 150.0
+scale = 4.0
+scale_random = 1.0
+scale_curve = SubResource( 69 )
+color_ramp = SubResource( 67 )
+
+[sub_resource type="SpatialMaterial" id=71]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 16 )
+
+[sub_resource type="QuadMesh" id=72]
+material = SubResource( 71 )
+size = Vector2( 2, 2 )
 
 [sub_resource type="Animation" id=26]
 resource_name = "Armature"
@@ -1696,7 +1788,7 @@ animation = "Running"
 [sub_resource type="AnimationNodeTimeScale" id=22]
 
 [sub_resource type="AnimationNodeBlendTree" id=15]
-graph_offset = Vector2( -912.787, -144.8 )
+graph_offset = Vector2( -1071.41, 124 )
 nodes/TimeScale/node = SubResource( 37 )
 nodes/TimeScale/position = Vector2( -420, 600 )
 nodes/air_blend/node = SubResource( 38 )
@@ -1942,6 +2034,28 @@ one_shot = true
 explosiveness = 0.47
 process_material = SubResource( 56 )
 draw_pass_1 = SubResource( 51 )
+
+[node name="DeathBeams" type="Particles" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.788628, 0 )
+emitting = false
+amount = 4
+lifetime = 0.02
+one_shot = true
+explosiveness = 0.85
+process_material = SubResource( 63 )
+draw_pass_1 = SubResource( 65 )
+
+[node name="DeathSparkles" type="Particles" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.788628, 0 )
+emitting = false
+amount = 100
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -100, -100, -100, 200, 200, 200 )
+local_coords = false
+process_material = SubResource( 70 )
+draw_pass_1 = SubResource( 72 )
 
 [node name="PlayerShield" parent="Mesh" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576223, 0 )

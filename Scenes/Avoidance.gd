@@ -74,7 +74,7 @@ func spawn_blink_overlay(speed: float, reverse: bool) -> void:
 
 
 func _on_damage_taken(new_hp: int) -> void:
-	var event : int = Globals.TIMELINE_EVENTS.DAMAGE if new_hp > 1 else Globals.TIMELINE_EVENTS.DEATH
+	var event : int = Globals.TIMELINE_EVENTS.DAMAGE if new_hp > 0 else Globals.TIMELINE_EVENTS.DEATH
 	var song_position := audio_stream_player.get_playback_position()
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	Globals.timeline_events.push_back([event, unit_position])

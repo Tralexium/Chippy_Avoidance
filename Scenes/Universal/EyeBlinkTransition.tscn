@@ -76,6 +76,7 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
 anims/RESET = SubResource( 3 )
 anims/start = SubResource( 4 )
 

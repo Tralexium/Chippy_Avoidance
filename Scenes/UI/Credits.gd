@@ -25,31 +25,28 @@ func hide_credits() -> void:
 	fade_in_timer.stop()
 	if is_showing:
 		return
-	current_node -= 1
-	if current_node >= 0:
-		var node := contents.get_child(current_node)
-		var tween := create_tween()
-		tween.tween_property(node, "modulate:a", 0.0, fade_dur)
-		fade_out_timer.start(fade_dur)
+	current_node = 0
+	for node in contents.get_children():
+		node.modulate.a = 0.0
 
 
 func fade_in_credits() -> void:
 	fade_out_timer.stop()
 	is_showing = true
 	is_present = true
-	current_node += 1
 	if current_node < contents.get_child_count():
 		var node := contents.get_child(current_node)
 		var tween := create_tween()
 		tween.tween_property(node, "modulate:a", 1.0, fade_dur)
 		fade_in_timer.start(fade_dur)
+		current_node += 1
 	else:
 		is_showing = false
 
 
 func _go_back() -> void:
 	is_present = false
-	hide_credits()
+	fade_out_timer.start(0.5)
 	emit_signal("go_back")
 
 
