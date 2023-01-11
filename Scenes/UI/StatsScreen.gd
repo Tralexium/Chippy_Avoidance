@@ -5,6 +5,7 @@ onready var stats_header: ColorRect = $UISpace/UIBG/VBoxContainer/StatsHeader
 
 
 func _input(event: InputEvent) -> void:
+	return
 	if animation_player.is_playing() and (event.is_action_pressed("jump") or event.is_action_pressed("escape")):
 		var anim_length := animation_player.get_animation("fade_in").length
 		animation_player.advance(anim_length)

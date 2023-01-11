@@ -1,10 +1,34 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Resources/Fonts/small_outline_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scenes/FPSCounter.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Godmode.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/DebugLabel.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/AlwaysRendered.gd" type="Script" id=5]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+uniform float update_interval = .04;
+uniform float static_granularity = .001;
+uniform float noise_alpha = .025;
+
+
+float generate_random_static (in float size, in float interval, in vec2 uv){
+	float time_step = TIME - mod(TIME,interval);
+	vec2 uv_step = uv - mod(uv, size);
+	return fract(sin(dot(uv_step,vec2(12.0278*sin(time_step),15.0905)))*43758.5453);
+}
+
+void fragment() {
+	vec3 static_plot = vec3(generate_random_static(static_granularity,update_interval,UV));
+	COLOR = vec4(static_plot, noise_alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/update_interval = 0.04
+shader_param/static_granularity = 0.001
+shader_param/noise_alpha = 0.025
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -42,6 +66,12 @@ script = ExtResource( 5 )
 [node name="FX" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="Static" type="ColorRect" parent="."]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Vignette" type="ColorRect" parent="."]
 material = SubResource( 4 )

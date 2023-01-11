@@ -3,6 +3,8 @@ extends Spatial
 const EYE_BLINK := preload("res://Scenes/Universal/EyeBlinkTransition.tscn")
 const STATS_MENUS := preload("res://Scenes/UI/StatsScreen.tscn")
 const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
+const SLOMO_FX := preload("res://Scenes/UI/SlomoEffect.tscn")
+const HIT_FX := preload("res://Scenes/UI/HitFX.tscn")
 
 export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44]
 
@@ -30,10 +32,11 @@ func _ready() -> void:
 	AudioServer.set_bus_effect_enabled(mus_bus, 0, false)
 	audio_stream_player = SoundManager.play_music(Globals.AVOIDANCE_MUSIC, 0.0, "Music")
 	audio_stream_player.seek(0.0)
-	audio_stream_player.pitch_scale = 1.0
 
 
 func _process(delta: float) -> void:
+	if !currently_restarting:
+		audio_stream_player.pitch_scale = Engine.time_scale
 	if Input.is_action_just_pressed("escape"):
 		get_tree().change_scene_to(Globals.MAIN_MENU)
 	if !Globals.debug_mode:
@@ -75,12 +78,15 @@ func _on_damage_taken(new_hp: int) -> void:
 	var song_position := audio_stream_player.get_playback_position()
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	Globals.timeline_events.push_back([event, unit_position])
+	$FX.add_child(HIT_FX.instance())
 
 
 func _on_ability_used(ability_num: int) -> void:
 	var song_position := audio_stream_player.get_playback_position()
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	Globals.timeline_events.push_back([ability_num, unit_position])
+	if ability_num == Config.ABILITIES.SLO_MO:
+		$FX.add_child(SLOMO_FX.instance())
 
 
 func _on_avoidance_ended() -> void:
@@ -94,7 +100,7 @@ func _on_avoidance_ended() -> void:
 	Globals.run_stats["survival_time"] = song_position
 	Globals.run_stats["unit_survival_time"] = unit_position
 	var stats_ui := STATS_MENUS.instance()
-	$CanvasLayer.add_child(stats_ui)
+	$UI.add_child(stats_ui)
 
 
 func _on_avoidance_restart() -> void:

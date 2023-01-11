@@ -1582,9 +1582,13 @@ nodes = [ NodePath("../Player/CameraPos"), NodePath("../Lights") ]
 ease_curve = SubResource( 8 )
 path_duration = 25.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="FX" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
 
-[node name="PlayerHUD" parent="CanvasLayer" instance=ExtResource( 25 )]
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PlayerHUD" parent="UI" instance=ExtResource( 25 )]
 
 [node name="MusicOnlyForTimelineReference" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

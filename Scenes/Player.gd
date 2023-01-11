@@ -75,21 +75,26 @@ func _on_ability_used(ability_num: int) -> void:
 
 
 func set_hp(value: int) -> void:
+	if is_dead:
+		return
 	Globals.run_stats["damage_taken"] = Config.player_max_hp - value
+	EventBus.emit_signal("hp_changed", value)
 	if value < hp:
-		EventBus.emit_signal("hp_changed", value)
-		hit_effects()
+		hit_effects(value)
 	hp = value
 	if hp <= 0 and !is_dead and !Config.infinite_hp:
 		die()
 
 
-func hit_effects() -> void:
+func hit_effects(new_hp: int) -> void:
 	iframe_immunity = true
 	n_iframe_anim.play("iframes")
 	n_iframes_timer.start(iframes_dur)
 	var hitmarker := HITMARKER.instance()
-	hitmarker.translation = $Mesh/Armature/Skeleton/Character.translation
+	hitmarker.translation = $Mesh/MegaJumpPart.translation
+	hitmarker.shrink_dur = 0.1 if new_hp > 0 else 0.05
+	if !abilities_in_use.has(Config.ABILITIES.SLO_MO):
+		Util.time_slowdown(0.2, 0.2)
 	add_child(hitmarker)
 
 

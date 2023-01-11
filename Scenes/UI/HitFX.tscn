@@ -1,0 +1,169 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode blend_mix,unshaded;
+
+uniform float brightness : hint_range(-1, 1) = 0;
+uniform float contrast : hint_range(0, 3) = 1.0;
+uniform float saturation : hint_range(0, 3) = 1.0;
+
+uniform float redVal : hint_range(0, 1) = 1.0;
+uniform float greenVal : hint_range(0, 1) = 1.0;
+uniform float blueVal : hint_range(0, 1) = 1.0;
+
+uniform vec4 tint_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float tint_effect_factor : hint_range(0, 1) = 0.0;
+//---------------------------------------------
+//CONTRAST
+//---------------------------------------------
+mat4 contrastMatrix( float _contrast ){
+	float t = ( 1.0 - _contrast ) / 2.0;
+    return mat4( 
+		vec4(_contrast, 0, 0, 0),
+		vec4(0, _contrast, 0, 0),
+		vec4(0, 0, _contrast, 0),
+		vec4(t, t, t, 1));
+}
+//---------------------------------------------
+//BRIGHTNESS
+//---------------------------------------------
+mat4 brightnessMatrix( float _brightness ){
+    return mat4( vec4(1, 0, 0, 0),
+                 vec4(0, 1, 0, 0),
+                 vec4(0, 0, 1, 0),
+                 vec4(_brightness, _brightness, _brightness, 1));
+}
+//---------------------------------------------
+//SATURATION
+//---------------------------------------------
+mat4 saturationMatrix( float _saturation ){
+    vec3 luminance = vec3( 0.3086, 0.6094, 0.0820 );
+    float oneMinusSat = 1.0 - _saturation;
+	
+    vec3 red = vec3( luminance.x * oneMinusSat );
+    red+= vec3(_saturation, 0, 0)*redVal;
+    vec3 green = vec3( luminance.y * oneMinusSat );
+    green += vec3( 0,_saturation, 0 )*greenVal;
+    vec3 blue = vec3( luminance.z * oneMinusSat );
+    blue += vec3( 0, 0,_saturation )*blueVal;
+	
+    return mat4(vec4(red, 0),vec4(green,0),vec4(blue,0),vec4(0, 0, 0, 1));
+}
+
+//---------------------------------------------
+//fragment
+//---------------------------------------------
+void fragment() {
+	vec4 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	vec4 c2 = c * tint_color;
+	COLOR = brightnessMatrix( brightness ) * contrastMatrix( contrast ) *saturationMatrix( saturation ) * mix(c, c2, tint_effect_factor);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/brightness = 0.1
+shader_param/contrast = 1.3
+shader_param/saturation = 1.114
+shader_param/redVal = 1.0
+shader_param/greenVal = 1.0
+shader_param/blueVal = 1.0
+shader_param/tint_color = Color( 1, 1, 1, 1 )
+shader_param/tint_effect_factor = 0.0
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform int levels = 3;
+uniform float spread = 0.01;
+
+vec3 chromatic_slice(float t){
+	vec3 res = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+	return max(res, 0.0);
+}
+
+void fragment(){
+	vec3 sum;
+	COLOR.rgb = vec3(0);
+	vec2 offset = (UV - vec2(0.5))*vec2(1,-1);
+	for(int i = 0; i < levels; i++){
+		float t = 2.0*float(i)/float(levels-1); // range 0.0->2.0
+		vec3 slice = vec3(1.0-t, 1.0 - abs(t - 1.0), t - 1.0);
+		slice = max(slice, 0.0);
+		sum += slice;
+		vec2 slice_offset = (t-1.0)*spread*offset;
+		COLOR.rgb += slice * texture(SCREEN_TEXTURE, SCREEN_UV + slice_offset).rgb;
+	}
+	COLOR.rgb /= sum;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/levels = 20
+shader_param/spread = 0.05
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChromaticAb:material:shader_param/spread")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "start"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("ChromaticAb:material:shader_param/spread")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.707107, 1 ),
+"update": 0,
+"values": [ 0.1, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ScreenTint:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="HitFX" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScreenTint" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="ChromaticAb" type="ColorRect" parent="."]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "start"
+anims/RESET = SubResource( 5 )
+anims/start = SubResource( 6 )
