@@ -5,6 +5,8 @@ const DEAD_ICON := preload("res://Assets/Blender Renders/player_head_dead_b&w_sm
 
 var shake_amnt := 0.0
 var initial_pos := Vector2.ZERO
+onready var hp_bars := Config.player_max_hp
+onready var previous_hp := Config.player_max_hp
 onready var health_bars: HBoxContainer = $HealthBars
 onready var player_head_icon: TextureRect = $PlayerHeadIcon
 onready var black_bar: Panel = $BlackBar
@@ -13,7 +15,7 @@ onready var blood_part: Particles2D = $BloodPart
 
 func _ready() -> void:
 	EventBus.connect("hp_changed", self, "eliminate_bar")
-	for i in range(3):
+	for i in range(hp_bars):
 		health_bars.add_child(BAR.instance())
 	yield(get_tree(), "idle_frame")
 	black_bar.rect_size.x = health_bars.rect_size.x + 5
@@ -26,11 +28,16 @@ func _process(delta: float) -> void:
 
 
 func eliminate_bar(new_hp: int) -> void:
-	var bars_left := health_bars.get_child_count()
-	if bars_left > 1 and not Config.infinite_hp:
-		health_bars.get_child(bars_left-1).shrink()
-		if bars_left == 2:
-			player_head_icon.texture = DEAD_ICON
+	var loops := abs(new_hp - previous_hp)
+	previous_hp = new_hp
+	
+	for i in range(loops):
+		if hp_bars > 0 and not Config.infinite_hp:
+			health_bars.get_child(hp_bars).shrink()
+			if hp_bars == 1:
+				player_head_icon.texture = DEAD_ICON
+		hp_bars -= 1
+	
 	blood_part.emitting = true
 	shake_amnt = 15.0
 	initial_pos = rect_position

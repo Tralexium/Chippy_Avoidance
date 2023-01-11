@@ -18,7 +18,7 @@ export var flying := false
 export var has_djump := false
 export var cam_follow_y := false
 export var shielded := false
-export var god_mode := false
+export var iframe_immunity := false
 export var iframes_dur := 2.0
 
 
@@ -77,7 +77,7 @@ func _on_ability_used(ability_num: int) -> void:
 func set_hp(value: int) -> void:
 	Globals.run_stats["damage_taken"] = Config.player_max_hp - value
 	if value < hp:
-		EventBus.emit_signal("hp_changed", hp)
+		EventBus.emit_signal("hp_changed", value)
 		hit_effects()
 	hp = value
 	if hp <= 0 and !is_dead and !Config.infinite_hp:
@@ -85,7 +85,7 @@ func set_hp(value: int) -> void:
 
 
 func hit_effects() -> void:
-	n_hitbox_shape.set_deferred("disabled", true)
+	iframe_immunity = true
 	n_iframe_anim.play("iframes")
 	n_iframes_timer.start(iframes_dur)
 	var hitmarker := HITMARKER.instance()
@@ -265,13 +265,19 @@ func _animations() -> void:
 
 
 func _on_Hitbox_area_entered(area: Area) -> void:
-	if !Globals.god_mode and !shielded and !god_mode:
-		self.hp -= 1
+	if !Globals.god_mode:
+		if area.is_in_group("insta_killer"):
+			self.hp = 0
+		elif !shielded and !iframe_immunity:
+			self.hp -= 1
 
 
 func _on_Hitbox_body_entered(body: Node) -> void:
-	if !Globals.god_mode and !shielded and !god_mode:
-		self.hp -= 1
+	if !Globals.god_mode:
+		if body.is_in_group("insta_killer"):
+			self.hp = 0
+		elif !shielded and !iframe_immunity:
+			self.hp -= 1
 
 
 func _remove_ability_effects(ability_num: int) -> void:
@@ -301,5 +307,5 @@ func _on_slomo_finished() -> void:
 
 
 func _on_IFrames_timeout() -> void:
-	n_hitbox_shape.set_deferred("disabled", false)
+	iframe_immunity = false
 	n_iframe_anim.stop(true)

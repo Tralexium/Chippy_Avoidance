@@ -477,7 +477,7 @@ tracks/35/keys = {
 "values": [  ]
 }
 tracks/36/type = "value"
-tracks/36/path = NodePath("Player:god_mode")
+tracks/36/path = NodePath("Player:iframe_immunity")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/imported = false
@@ -1464,7 +1464,7 @@ tracks/51/keys = {
 "values": [ false ]
 }
 tracks/52/type = "value"
-tracks/52/path = NodePath("Player:god_mode")
+tracks/52/path = NodePath("Player:iframe_immunity")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/imported = false

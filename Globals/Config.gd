@@ -115,7 +115,7 @@ func load_data() -> void:
 		item_jump_dur = values.get("item_jump_dur", 4.0)
 		item_shield_dur = values.get("item_shield_dur", 4.0)
 		item_slomo_dur = values.get("item_slomo_dur", 4.0)
-		self.player_max_hp = values.get("player_max_hp", 1)
+		self.player_max_hp = values.get("player_max_hp", 3)
 		self.player_points = values.get("player_points", 0)
 		self.player_ring = values.get("player_ring", true)
 		self.infinite_hp = values.get("infinite_hp", false)

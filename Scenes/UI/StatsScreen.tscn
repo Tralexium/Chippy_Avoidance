@@ -296,6 +296,7 @@ margin_bottom = -34.5583
 custom_constants/separation = 48
 
 [node name="StatsHeader" type="ColorRect" parent="UISpace/UIBG/VBoxContainer"]
+margin_right = 1920.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
 size_flags_horizontal = 0
