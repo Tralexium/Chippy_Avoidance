@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -17,6 +17,11 @@
 [ext_resource path="res://Assets/UI/faded_line.png" type="Texture" id=15]
 [ext_resource path="res://Assets/sparkle.png" type="Texture" id=16]
 [ext_resource path="res://Assets/UI/up_arrow.png" type="Texture" id=17]
+[ext_resource path="res://Audio/SFX/player_step.wav" type="AudioStream" id=18]
+[ext_resource path="res://Audio/SFX/player_djump.wav" type="AudioStream" id=19]
+[ext_resource path="res://Audio/SFX/player_land_v2.wav" type="AudioStream" id=20]
+[ext_resource path="res://Audio/SFX/player_land_light.wav" type="AudioStream" id=21]
+[ext_resource path="res://Audio/SFX/player_jump.wav" type="AudioStream" id=22]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
@@ -2127,6 +2132,46 @@ current = true
 fov = 50.0
 far = 5000.0
 
+[node name="Listener" type="Listener" parent="CameraPos/SpringArm/Camera"]
+current = true
+
+[node name="StereoSFX" type="Spatial" parent="."]
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="StereoSFX"]
+stream = ExtResource( 22 )
+unit_db = 5.0
+unit_size = 40.0
+max_distance = 200.0
+bus = "Sounds"
+
+[node name="DJump" type="AudioStreamPlayer3D" parent="StereoSFX"]
+stream = ExtResource( 19 )
+unit_db = 5.0
+unit_size = 40.0
+max_distance = 200.0
+bus = "Sounds"
+
+[node name="Step" type="AudioStreamPlayer3D" parent="StereoSFX"]
+stream = ExtResource( 18 )
+unit_db = 5.0
+unit_size = 40.0
+max_distance = 200.0
+bus = "Sounds"
+
+[node name="Land" type="AudioStreamPlayer3D" parent="StereoSFX"]
+stream = ExtResource( 20 )
+unit_db = 5.0
+unit_size = 40.0
+max_distance = 200.0
+bus = "Sounds"
+
+[node name="LandLight" type="AudioStreamPlayer3D" parent="StereoSFX"]
+stream = ExtResource( 21 )
+unit_db = 5.0
+unit_size = 40.0
+max_distance = 200.0
+bus = "Sounds"
+
 [node name="IFrameAnim" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 52 )
 anims/iframes = SubResource( 53 )
@@ -2143,9 +2188,14 @@ one_shot = true
 [node name="IFrames" type="Timer" parent="."]
 one_shot = true
 
+[node name="StepSFX" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.16
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="timeout" from="MegaJumpDur" to="." method="_on_MegaJumpDur_timeout"]
 [connection signal="timeout" from="SuperSpeedDur" to="." method="_on_SuperSpeedDur_timeout"]
 [connection signal="timeout" from="ShieldDur" to="." method="_on_ShieldDur_timeout"]
 [connection signal="timeout" from="IFrames" to="." method="_on_IFrames_timeout"]
+[connection signal="timeout" from="StepSFX" to="." method="_on_StepSFX_timeout"]

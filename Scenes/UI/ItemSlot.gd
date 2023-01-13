@@ -39,6 +39,8 @@ func _ready() -> void:
 		Config.ABILITIES.SHIELD:
 			icon.texture = SHIELD
 			icon.modulate = Color("2cb5f8")
+	if ability_count == 0:
+		icon.modulate = Color.white
 	initial_color = icon.modulate
 	amount.modulate = icon.modulate
 	var mat := particles.process_material as ParticlesMaterial
