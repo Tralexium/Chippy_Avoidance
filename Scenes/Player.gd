@@ -1,6 +1,13 @@
 extends KinematicBody
 
 const HITMARKER := preload("res://Scenes/PlayerHitmark.tscn")
+const SFX_JUMP := preload("res://Audio/SFX/player_jump.wav")
+const SFX_DJUMP := preload("res://Audio/SFX/player_djump.wav")
+const SFX_LAND := preload("res://Audio/SFX/player_land.wav")
+const SFX_LAND_LIGHT := preload("res://Audio/SFX/player_land_light.wav")
+const SFX_HIT := preload("res://Audio/SFX/player_hit.wav")
+const SFX_FATAL_HIT := preload("res://Audio/SFX/player_fatal_hit.wav")
+const SFX_FATAL_LAUNCH := preload("res://Audio/SFX/player_fatal_launch.wav")
 
 export var walk_speed := 17.0
 export var super_speed := 26.0
@@ -28,6 +35,7 @@ var snap_vector := Vector3.DOWN
 var is_dead := false
 var coyote_time := 0.0
 var input_buffer_time := 0.0
+var previous_fall_spd := 0.0
 var buffered_input := ""
 var abilities_in_use := []
 
@@ -56,6 +64,7 @@ onready var n_death_sparkles: Particles = $Mesh/DeathSparkles
 
 
 func _ready() -> void:
+	
 	EventBus.connect("ability_used", self, "_on_ability_used")
 	EventBus.connect("slomo_finished", self, "_on_slomo_finished")
 
@@ -98,6 +107,7 @@ func hit_effects(new_hp: int) -> void:
 	if new_hp > 0:
 		n_camera_pos.screen_shake_amount = 1.0
 		n_camera_pos.shake_cam(0.0, 0.2)
+		SoundManager.play_sound(SFX_HIT)
 	if !abilities_in_use.has(Config.ABILITIES.SLO_MO) and new_hp > 0:
 		Util.time_slowdown(0.2, 0.2)
 	add_child(hitmarker)
@@ -108,6 +118,7 @@ func die() -> void:
 	is_dead = true
 	n_death_beams.emitting = true
 	EventBus.emit_signal("avoidance_ended")
+	SoundManager.play_sound(SFX_FATAL_HIT)
 	snap_vector = Vector3.ZERO
 	n_player_animation_tree.active = false
 	yield(get_tree(), "idle_frame")
@@ -127,6 +138,7 @@ func die() -> void:
 	n_camera_pos.shake_cam(0.0, 0.4)
 	var rotate_tween = create_tween()
 	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
+	SoundManager.play_sound(SFX_FATAL_LAUNCH)
 
 
 func _physics_process(delta: float) -> void:
@@ -181,16 +193,20 @@ func _get_input() -> void:
 			input_vector.y = 1
 			coyote_time = 0.0
 			buffered_input = ""
+			SoundManager.play_sound(SFX_JUMP)
 		elif Input.is_action_just_pressed("jump") and (has_djump or Config.infinite_jump):
 			has_djump = false
 			input_vector.y = 1
 			n_djump_part.emitting = true
+			SoundManager.play_sound(SFX_DJUMP)
 	Globals.run_stats["jumps"] += input_vector.y
 
 
 func _apply_velocity() -> void:
 	var delta := get_physics_process_delta_time()
 	
+	if velocity.y < 0.0:
+		previous_fall_spd = velocity.y
 	velocity.y = 0.0 if !is_dead and is_on_floor() else max(-max_fall_vel, velocity.y - gravity*delta)
 	
 	if is_dead:
@@ -198,6 +214,11 @@ func _apply_velocity() -> void:
 	
 	# Jump/Y Axis
 	if is_on_floor():
+		if snap_vector == Vector3.ZERO:
+			if previous_fall_spd <= -max_fall_vel / 2.0:
+				SoundManager.play_sound(SFX_LAND)
+			else:
+				SoundManager.play_sound(SFX_LAND_LIGHT)
 		n_shadow_guide.hidden = true
 		snap_vector = Vector3.DOWN
 	if input_vector.y > 0 or flying:

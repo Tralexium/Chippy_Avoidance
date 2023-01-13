@@ -30,7 +30,7 @@ shader_param/update_interval = 0.03
 shader_param/static_granularity = 0.001
 shader_param/noise_alpha = 0.02
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 
 uniform float vignette_intensity = 0.4;
@@ -54,7 +54,7 @@ void fragment(){
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+shader = SubResource( 7 )
 shader_param/vignette_intensity = 0.171
 shader_param/vignette_opacity = 0.584
 shader_param/vignette_rgb = Color( 0, 0, 0, 1 )

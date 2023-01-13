@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/PlayerShield.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/UI/faded_line.png" type="Texture" id=15]
 [ext_resource path="res://Assets/sparkle.png" type="Texture" id=16]
+[ext_resource path="res://Assets/UI/up_arrow.png" type="Texture" id=17]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
@@ -203,9 +204,18 @@ scale = 0.4
 scale_random = 0.38
 color_ramp = SubResource( 49 )
 
-[sub_resource type="QuadMesh" id=51]
-material = ExtResource( 13 )
-size = Vector2( 3, 1.5 )
+[sub_resource type="SpatialMaterial" id=73]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 17 )
+
+[sub_resource type="QuadMesh" id=74]
+material = SubResource( 73 )
 
 [sub_resource type="Gradient" id=54]
 offsets = PoolRealArray( 0, 0.21673, 0.48289, 1 )
@@ -222,6 +232,10 @@ gravity = Vector3( 0, 16, 0 )
 scale = 0.4
 scale_random = 0.38
 color_ramp = SubResource( 55 )
+
+[sub_resource type="QuadMesh" id=51]
+material = ExtResource( 13 )
+size = Vector2( 3, 1.5 )
 
 [sub_resource type="Curve" id=57]
 min_value = -360.0
@@ -1814,7 +1828,7 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "idle_time_scale", 0, "idle", "running_time_scale", 0, "running", "air_blend", 0, "fall", "air_blend", 1, "jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "TimeScale", 0, "flip_jump", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "output", 0, "in_air_state" ]
+node_connections = [ "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "idle_time_scale", 0, "idle", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "air_blend", 0, "fall", "air_blend", 1, "jump", "running_time_scale", 0, "running", "TimeScale", 0, "flip_jump", "output", 0, "in_air_state" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
@@ -2023,7 +2037,7 @@ emitting = false
 amount = 6
 lifetime = 0.5
 process_material = SubResource( 50 )
-draw_pass_1 = SubResource( 51 )
+draw_pass_1 = SubResource( 74 )
 
 [node name="DJumpPart" type="Particles" parent="Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662704, 0 )
