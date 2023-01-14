@@ -28,7 +28,7 @@ void fragment() {
 shader = SubResource( 5 )
 shader_param/update_interval = 0.03
 shader_param/static_granularity = 0.001
-shader_param/noise_alpha = 0.02
+shader_param/noise_alpha = 0.025
 
 [sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;

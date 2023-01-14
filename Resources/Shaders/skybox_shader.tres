@@ -1,10 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
 render_mode cull_front, unshaded;
 
 uniform sampler2D tex : hint_albedo;
+uniform sampler2D displacement;
 uniform float horizon_point : hint_range(0.0, 1.0) = 0.5;
 uniform float horizon_length;
 uniform float ground_horizon_length;
@@ -13,7 +14,16 @@ uniform vec4 sky_col : hint_color;
 uniform vec4 horizon_col : hint_color;
 uniform vec4 ground_col : hint_color;
 uniform vec4 pit_col : hint_color;
+uniform float height_scale = 0.5;
+uniform float wave_spd = 0.5;
 
+
+void vertex() {
+	vec2 tex_position = VERTEX.xy + (TIME*wave_spd);
+	float height = texture(displacement, tex_position).x;
+	vec3 old_vertex = VERTEX;
+	VERTEX += height * height_scale * normalize(NORMAL);
+}
 
 void fragment() {
 	vec4 _final_col = vec4(0.0);
@@ -31,6 +41,17 @@ void fragment() {
 	ALBEDO = _final_col.rgb * texture(tex, UV*vec2(1.5, .75)).rgb;
 }"
 
+[sub_resource type="OpenSimplexNoise" id=2]
+seed = 4
+period = 31.7
+persistence = 0.0
+
+[sub_resource type="NoiseTexture" id=3]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 2 )
+
 [resource]
 shader = SubResource( 1 )
 shader_param/horizon_point = 0.359
@@ -41,3 +62,6 @@ shader_param/sky_col = Color( 0.945098, 0.8, 1, 1 )
 shader_param/horizon_col = Color( 0.552941, 0.968627, 0.94902, 1 )
 shader_param/ground_col = Color( 0.505882, 0.666667, 0.917647, 1 )
 shader_param/pit_col = Color( 0.0784314, 0.0392157, 0.164706, 1 )
+shader_param/height_scale = 100.0
+shader_param/wave_spd = 0.075
+shader_param/displacement = SubResource( 3 )

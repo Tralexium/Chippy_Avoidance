@@ -105,6 +105,7 @@ func _on_avoidance_ended() -> void:
 
 func _on_avoidance_restart() -> void:
 	currently_restarting = true
+	player.shielded = true
 	create_tween().tween_property(audio_stream_player, "pitch_scale", 0.01, 0.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	transition_inst.connect("tree_exited", self, "_on_transition_finished")

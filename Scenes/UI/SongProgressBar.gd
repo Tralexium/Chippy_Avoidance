@@ -13,7 +13,6 @@ func _ready() -> void:
 	percent.visible = Config.show_percentage
 	tween = create_tween().set_parallel()
 	tween.tween_property(progress_bar, "value", 100.0, duration)
-	tween.tween_property(progress_bar, "modulate", Color("f82c57"), duration)
 
 
 func _process(delta: float) -> void:
