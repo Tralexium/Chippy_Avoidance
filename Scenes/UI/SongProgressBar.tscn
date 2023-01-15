@@ -28,7 +28,7 @@ margin_bottom = 34.0
 script = ExtResource( 2 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-modulate = Color( 0.0470588, 0.815686, 1, 1 )
+modulate = Color( 0.972549, 0.847059, 0.172549, 1 )
 margin_right = 787.0
 margin_bottom = 12.0
 size_flags_horizontal = 3

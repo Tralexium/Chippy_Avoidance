@@ -27,6 +27,7 @@ void fragment(){
 }"
 
 [resource]
+resource_local_to_scene = true
 shader = SubResource( 3 )
 shader_param/levels = 20
-shader_param/spread = 0.02
+shader_param/spread = 0.2

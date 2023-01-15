@@ -1,11 +1,13 @@
 extends Control
 
+const SLOMO_SFX := preload("res://Audio/SFX/ability_slowdown.wav")
 var audio_stream_player: AudioStreamPlayer
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	Engine.time_scale = Config.SLOMO_SPD
+	SoundManager.play_sound(SLOMO_SFX)
 	yield(get_tree().create_timer(Config.item_slomo_dur), "timeout")
 	animation_player.play("fade_out")
 

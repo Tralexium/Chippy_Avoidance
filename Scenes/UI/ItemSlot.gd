@@ -23,7 +23,7 @@ func _ready() -> void:
 	amount.text = str(ability_count)
 	if Config.infinite_items:
 		amount.visible = false
-	if ability_count == 0:
+	elif ability_count == 0:
 		circle_reload.value = 100.0
 		button_icon.visible = false
 	match ability:
