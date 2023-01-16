@@ -7,7 +7,7 @@ const SHIELD := preload("res://Assets/UI/shield_item.png")
 
 
 export(Config.ABILITIES) var ability: int
-export(Config.ABILITIES) var reload_dur := 10.0
+export var reload_dur := 10.0
 
 var initial_color : Color
 onready var action := "item " + str(ability+1)

@@ -1,17 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[sub_resource type="CylinderShape" id=1]
-height = 300.0
+[ext_resource path="res://Resources/Shaders/abstract_crystal.tres" type="Material" id=1]
+[ext_resource path="res://Resources/Meshes/round_pillar.tres" type="ArrayMesh" id=3]
 
-[sub_resource type="CylinderMesh" id=2]
-height = 300.0
+[sub_resource type="CylinderShape" id=6]
+height = 0.2
+radius = 0.97
 
 [node name="PillarGround" type="StaticBody"]
-transform = Transform( 20, 0, 0, 0, 0.2, 0, 0, 0, 20, 0, -30.0383, 0 )
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -0.0382996, 0 )
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
+shape = SubResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 2 )
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 1 )

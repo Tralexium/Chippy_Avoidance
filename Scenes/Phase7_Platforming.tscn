@@ -17,7 +17,7 @@ script = ExtResource( 3 )
 [node name="Solids" type="Position3D" parent="."]
 
 [node name="PillarGround4" parent="Solids" instance=ExtResource( 1 )]
-transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -150.038, 0 )
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -0.0379944, 0 )
 
 [node name="PathPlatformSpawner2" parent="Solids" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83, -2, -1 )
