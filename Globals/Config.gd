@@ -38,8 +38,8 @@ var show_fps := false setget set_show_fps
 # Player related
 var player_max_hp := 3 setget set_player_max_hp
 var player_current_abilities := [2, 2, 2, 2]
-var item_speed_dur := 4.0
-var item_jump_dur := 4.0
+var item_speed_dur := 6.0
+var item_jump_dur := 6.0
 var item_shield_dur := 4.0
 var item_slomo_dur := 2.0
 var player_points := 0 setget set_player_points
@@ -111,8 +111,8 @@ func load_data() -> void:
 		
 		# Player related
 		player_current_abilities = values.get("player_current_abilities", [0,0,0,0])
-		item_speed_dur = values.get("item_speed_dur", 4.0)
-		item_jump_dur = values.get("item_jump_dur", 4.0)
+		item_speed_dur = values.get("item_speed_dur", 6.0)
+		item_jump_dur = values.get("item_jump_dur", 6.0)
 		item_shield_dur = values.get("item_shield_dur", 4.0)
 		item_slomo_dur = values.get("item_slomo_dur", 4.0)
 		self.player_max_hp = values.get("player_max_hp", 3)

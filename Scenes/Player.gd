@@ -4,6 +4,10 @@ const HITMARKER := preload("res://Scenes/PlayerHitmark.tscn")
 const SFX_HIT := preload("res://Audio/SFX/player_hit.wav")
 const SFX_FATAL_HIT := preload("res://Audio/SFX/player_fatal_hit.wav")
 const SFX_FATAL_LAUNCH := preload("res://Audio/SFX/player_fatal_launch.wav")
+const SFX_ABILITY_JUMP := preload("res://Audio/SFX/ability_megajump.wav")
+const SFX_ABILITY_JUMP_EXP := preload("res://Audio/SFX/ability_megajump_expired.wav")
+const SFX_ABILITY_SPEED := preload("res://Audio/SFX/ability_speedup.wav")
+const SFX_ABILITY_SPEED_EXP := preload("res://Audio/SFX/ability_speedup_expired.wav")
 
 export var walk_speed := 17.0
 export var super_speed := 26.0
@@ -23,6 +27,7 @@ export var cam_follow_y := false
 export var shielded := false
 export var iframe_immunity := false
 export var iframes_dur := 2.0
+export var shield_iframes_dur := 1.0
 
 
 var input_vector := Vector3.ZERO
@@ -61,6 +66,7 @@ onready var n_step_sfx: Timer = $StepSFX
 # SFX
 onready var audio_jump: AudioStreamPlayer3D = $StereoSFX/Jump
 onready var audio_djump: AudioStreamPlayer3D = $StereoSFX/DJump
+onready var audio_mega_jump: AudioStreamPlayer3D = $StereoSFX/MegaJump
 onready var audio_step: AudioStreamPlayer3D = $StereoSFX/Step
 onready var audio_land: AudioStreamPlayer3D = $StereoSFX/Land
 onready var audio_land_light: AudioStreamPlayer3D = $StereoSFX/LandLight
@@ -78,9 +84,11 @@ func _on_ability_used(ability_num: int) -> void:
 		Config.ABILITIES.MEGA_JUMP:
 			n_mega_jump_dur.start(Config.item_jump_dur)
 			n_mega_jump_part.emitting = true
+			SoundManager.play_sound(SFX_ABILITY_JUMP)
 		Config.ABILITIES.SUPER_SPEED:
 			n_super_speed_dur.start(Config.item_speed_dur)
 			n_speed_trail.show()
+			SoundManager.play_sound(SFX_ABILITY_SPEED)
 		Config.ABILITIES.SHIELD:
 			shielded = true
 			n_player_shield.scale_to(2.0)
@@ -107,8 +115,7 @@ func hit_effects(new_hp: int) -> void:
 	hitmarker.translation = $Mesh/MegaJumpPart.translation
 	hitmarker.shrink_dur = 0.1 if new_hp > 0 else 0.05
 	if new_hp > 0:
-		n_camera_pos.screen_shake_amount = 1.0
-		n_camera_pos.shake_cam(0.0, 0.2)
+		n_camera_pos.shake_cam_instant(1.0, 0.2)
 		SoundManager.play_sound(SFX_HIT)
 	if !abilities_in_use.has(Config.ABILITIES.SLO_MO) and new_hp > 0:
 		Util.time_slowdown(0.2, 0.2)
@@ -137,8 +144,7 @@ func die() -> void:
 	n_dust_particles.emitting = true
 	n_death_sparkles.emitting = true
 	n_dust_particles.amount = 16
-	n_camera_pos.screen_shake_amount = 5.0
-	n_camera_pos.shake_cam(0.0, 0.4)
+	n_camera_pos.shake_cam_instant(5.0, 0.4)
 	var rotate_tween = create_tween()
 	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
 	SoundManager.play_sound(SFX_FATAL_LAUNCH)
@@ -196,7 +202,10 @@ func _get_input() -> void:
 			input_vector.y = 1
 			coyote_time = 0.0
 			buffered_input = ""
-			audio_jump.play()
+			if abilities_in_use.has(Config.ABILITIES.MEGA_JUMP):
+				audio_mega_jump.play()
+			else:
+				audio_jump.play()
 		elif Input.is_action_just_pressed("jump") and (has_djump or Config.infinite_jump):
 			has_djump = false
 			input_vector.y = 1
@@ -218,7 +227,8 @@ func _apply_velocity() -> void:
 	# Jump/Y Axis
 	if is_on_floor():
 		if snap_vector == Vector3.ZERO:
-			if previous_fall_spd <= -max_fall_vel / 2.0:
+			if previous_fall_spd <= -max_fall_vel:
+				n_camera_pos.shake_cam_instant(0.5, 0.2)
 				audio_land.play()
 			else:
 				audio_land_light.play()
@@ -307,20 +317,27 @@ func _animations() -> void:
 	shader.set_shader_param("outline_color", col)
 
 
-func _on_Hitbox_area_entered(area: Area) -> void:
+func _damage_inflicted(node: Node) -> void:
 	if !Globals.god_mode:
-		if area.is_in_group("insta_killer"):
+		if node.is_in_group("insta_killer"):
 			self.hp = 0
-		elif !shielded and !iframe_immunity:
+		elif shielded:
+			n_player_shield.fracture()
+			n_iframes_timer.start(shield_iframes_dur)
+			n_iframe_anim.play("iframes")
+			iframe_immunity = true
+			shielded = false
+			_remove_ability_effects(Config.ABILITIES.SHIELD)
+		elif !iframe_immunity:
 			self.hp -= 1
+
+
+func _on_Hitbox_area_entered(area: Area) -> void:
+	_damage_inflicted(area)
 
 
 func _on_Hitbox_body_entered(body: Node) -> void:
-	if !Globals.god_mode:
-		if body.is_in_group("insta_killer"):
-			self.hp = 0
-		elif !shielded and !iframe_immunity:
-			self.hp -= 1
+	_damage_inflicted(body)
 
 
 func _remove_ability_effects(ability_num: int) -> void:
@@ -331,17 +348,20 @@ func _remove_ability_effects(ability_num: int) -> void:
 
 func _on_MegaJumpDur_timeout() -> void:
 	n_mega_jump_part.emitting = false
+	SoundManager.play_sound(SFX_ABILITY_JUMP_EXP)
 	_remove_ability_effects(Config.ABILITIES.MEGA_JUMP)
 
 
 func _on_SuperSpeedDur_timeout() -> void:
 	n_speed_trail.hide()
+	SoundManager.play_sound(SFX_ABILITY_SPEED_EXP)
 	_remove_ability_effects(Config.ABILITIES.SUPER_SPEED)
 
 
 func _on_ShieldDur_timeout() -> void:
+	if !shielded:
+		return
 	n_player_shield.scale_to(0.0)
-	shielded = false
 	_remove_ability_effects(Config.ABILITIES.SHIELD)
 
 
@@ -357,3 +377,7 @@ func _on_IFrames_timeout() -> void:
 func _on_StepSFX_timeout() -> void:
 	audio_step.play()
 	audio_step.pitch_scale = rand_range(0.9, 1.0)
+
+
+func _on_PlayerShield_hidden() -> void:
+	shielded = false

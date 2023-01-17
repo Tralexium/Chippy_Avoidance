@@ -21,6 +21,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	Engine.time_scale = 1.0
 	Globals.can_pause = true
 	Globals.reset_run_stats()
 	EventBus.emit_signal("avoidance_started")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -19,9 +19,10 @@
 [ext_resource path="res://Assets/UI/up_arrow.png" type="Texture" id=17]
 [ext_resource path="res://Audio/SFX/player_step.wav" type="AudioStream" id=18]
 [ext_resource path="res://Audio/SFX/player_djump.wav" type="AudioStream" id=19]
-[ext_resource path="res://Audio/SFX/player_land_v2.wav" type="AudioStream" id=20]
+[ext_resource path="res://Audio/SFX/player_land_v3.wav" type="AudioStream" id=20]
 [ext_resource path="res://Audio/SFX/player_land_light.wav" type="AudioStream" id=21]
 [ext_resource path="res://Audio/SFX/player_jump.wav" type="AudioStream" id=22]
+[ext_resource path="res://Audio/SFX/player_mega_jump.wav" type="AudioStream" id=23]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.8, 0.8, 0.9 )
@@ -1833,7 +1834,7 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "TimeScale", 0, "flip_jump", "air_blend", 0, "fall", "air_blend", 1, "jump", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "idle_time_scale", 0, "idle", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "running_time_scale", 0, "running", "output", 0, "in_air_state" ]
+node_connections = [ "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "TimeScale", 0, "flip_jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "running_time_scale", 0, "running", "air_blend", 0, "fall", "air_blend", 1, "jump", "idle_time_scale", 0, "idle", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "output", 0, "in_air_state" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
@@ -2144,6 +2145,13 @@ unit_size = 40.0
 max_distance = 200.0
 bus = "Sounds"
 
+[node name="MegaJump" type="AudioStreamPlayer3D" parent="StereoSFX"]
+stream = ExtResource( 23 )
+unit_db = 5.0
+unit_size = 40.0
+max_distance = 200.0
+bus = "Sounds"
+
 [node name="DJump" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 19 )
 unit_db = 5.0
@@ -2160,8 +2168,8 @@ bus = "Sounds"
 
 [node name="Land" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 20 )
-unit_db = 5.0
-unit_size = 40.0
+unit_db = 8.0
+unit_size = 70.0
 max_distance = 200.0
 bus = "Sounds"
 
@@ -2192,6 +2200,7 @@ one_shot = true
 process_mode = 0
 wait_time = 0.16
 
+[connection signal="hidden" from="Mesh/PlayerShield" to="." method="_on_PlayerShield_hidden"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="timeout" from="MegaJumpDur" to="." method="_on_MegaJumpDur_timeout"]

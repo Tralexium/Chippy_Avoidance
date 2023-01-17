@@ -78,5 +78,11 @@ func shake_cam(target_shake: float, duration: float) -> void:
 		screen_shake_amount = target_shake
 
 
+func shake_cam_instant(shake_amount: float, duration: float) -> void:
+	screen_shake_amount = shake_amount * Config.screen_shake
+	tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(self, "screen_shake_amount", 0.0, duration)
+
+
 func _on_SpringArm_finished_camera_rotation() -> void:
 	spring_arm.transform.basis = Basis(target_quat)
