@@ -9,6 +9,9 @@ const SFX_ABILITY_JUMP_EXP := preload("res://Audio/SFX/ability_megajump_expired.
 const SFX_ABILITY_SPEED := preload("res://Audio/SFX/ability_speedup.wav")
 const SFX_ABILITY_SPEED_EXP := preload("res://Audio/SFX/ability_speedup_expired.wav")
 
+signal all_abilities_expired
+signal ability_expired(ability)
+
 export var walk_speed := 17.0
 export var super_speed := 26.0
 export var jump_vel := 35.0
@@ -28,7 +31,6 @@ export var shielded := false
 export var iframe_immunity := false
 export var iframes_dur := 2.0
 export var shield_iframes_dur := 1.0
-
 
 var input_vector := Vector3.ZERO
 var velocity := Vector3.ZERO
@@ -81,15 +83,15 @@ func _on_ability_used(ability_num: int) -> void:
 	var shader := n_character_mesh.material_overlay as ShaderMaterial
 	abilities_in_use.push_back(ability_num)
 	match ability_num:
-		Config.ABILITIES.MEGA_JUMP:
+		Globals.ABILITIES.MEGA_JUMP:
 			n_mega_jump_dur.start(Config.item_jump_dur)
 			n_mega_jump_part.emitting = true
 			SoundManager.play_sound(SFX_ABILITY_JUMP)
-		Config.ABILITIES.SUPER_SPEED:
+		Globals.ABILITIES.SUPER_SPEED:
 			n_super_speed_dur.start(Config.item_speed_dur)
 			n_speed_trail.show()
 			SoundManager.play_sound(SFX_ABILITY_SPEED)
-		Config.ABILITIES.SHIELD:
+		Globals.ABILITIES.SHIELD:
 			shielded = true
 			n_player_shield.scale_to(2.0)
 			n_shield_dur.start(Config.item_shield_dur)
@@ -117,7 +119,7 @@ func hit_effects(new_hp: int) -> void:
 	if new_hp > 0:
 		n_camera_pos.shake_cam_instant(1.0, 0.2)
 		SoundManager.play_sound(SFX_HIT)
-	if !abilities_in_use.has(Config.ABILITIES.SLO_MO) and new_hp > 0:
+	if !abilities_in_use.has(Globals.ABILITIES.SLO_MO) and new_hp > 0:
 		Util.time_slowdown(0.2, 0.2)
 	add_child(hitmarker)
 
@@ -202,7 +204,7 @@ func _get_input() -> void:
 			input_vector.y = 1
 			coyote_time = 0.0
 			buffered_input = ""
-			if abilities_in_use.has(Config.ABILITIES.MEGA_JUMP):
+			if abilities_in_use.has(Globals.ABILITIES.MEGA_JUMP):
 				audio_mega_jump.play()
 			else:
 				audio_jump.play()
@@ -236,7 +238,7 @@ func _apply_velocity() -> void:
 		snap_vector = Vector3.DOWN
 	if input_vector.y > 0 or flying:
 		n_shadow_guide.hidden = false
-		var _jump_vel := mega_jump_vel if abilities_in_use.has(Config.ABILITIES.MEGA_JUMP) else jump_vel
+		var _jump_vel := mega_jump_vel if abilities_in_use.has(Globals.ABILITIES.MEGA_JUMP) else jump_vel
 		velocity.y = _jump_vel if has_djump else djump_vel
 		if flying:
 			velocity.y = flying_vel
@@ -246,7 +248,7 @@ func _apply_velocity() -> void:
 	var XZ_input := Vector2(input_vector.x, input_vector.z)
 	Globals.run_stats["steps"] += XZ_input.length() / 10.0
 	if XZ_input.length() != 0.0:
-		var _spd := super_speed if abilities_in_use.has(Config.ABILITIES.SUPER_SPEED) else walk_speed
+		var _spd := super_speed if abilities_in_use.has(Globals.ABILITIES.SUPER_SPEED) else walk_speed
 		velocity.x = input_vector.x * _spd
 		velocity.z = input_vector.z * _spd
 		_rotate_mesh(delta)
@@ -305,13 +307,13 @@ func _animations() -> void:
 	
 	# Ability outline
 	var col := Color.black
-	if abilities_in_use.has(Config.ABILITIES.MEGA_JUMP):
+	if abilities_in_use.has(Globals.ABILITIES.MEGA_JUMP):
 		col += Color("f82c57")
-	if abilities_in_use.has(Config.ABILITIES.SUPER_SPEED):
+	if abilities_in_use.has(Globals.ABILITIES.SUPER_SPEED):
 		col += Color("f8d82c")
-	if abilities_in_use.has(Config.ABILITIES.SLO_MO):
+	if abilities_in_use.has(Globals.ABILITIES.SLO_MO):
 		col += Color("2cf894")
-	if abilities_in_use.has(Config.ABILITIES.SHIELD):
+	if abilities_in_use.has(Globals.ABILITIES.SHIELD):
 		col += Color("52f3ff")
 	var shader := n_character_mesh.material_overlay as ShaderMaterial
 	shader.set_shader_param("outline_color", col)
@@ -327,7 +329,7 @@ func _damage_inflicted(node: Node) -> void:
 			n_iframe_anim.play("iframes")
 			iframe_immunity = true
 			shielded = false
-			_remove_ability_effects(Config.ABILITIES.SHIELD)
+			_remove_ability_effects(Globals.ABILITIES.SHIELD)
 		elif !iframe_immunity:
 			self.hp -= 1
 
@@ -344,29 +346,32 @@ func _remove_ability_effects(ability_num: int) -> void:
 	var index := abilities_in_use.find(ability_num)
 	if index != -1:
 		abilities_in_use.remove(index)
+		emit_signal("ability_expired", ability_num)
+		if abilities_in_use.empty():
+			emit_signal("all_abilities_expired")
 
 
 func _on_MegaJumpDur_timeout() -> void:
 	n_mega_jump_part.emitting = false
 	SoundManager.play_sound(SFX_ABILITY_JUMP_EXP)
-	_remove_ability_effects(Config.ABILITIES.MEGA_JUMP)
+	_remove_ability_effects(Globals.ABILITIES.MEGA_JUMP)
 
 
 func _on_SuperSpeedDur_timeout() -> void:
 	n_speed_trail.hide()
 	SoundManager.play_sound(SFX_ABILITY_SPEED_EXP)
-	_remove_ability_effects(Config.ABILITIES.SUPER_SPEED)
+	_remove_ability_effects(Globals.ABILITIES.SUPER_SPEED)
 
 
 func _on_ShieldDur_timeout() -> void:
 	if !shielded:
 		return
 	n_player_shield.scale_to(0.0)
-	_remove_ability_effects(Config.ABILITIES.SHIELD)
+	_remove_ability_effects(Globals.ABILITIES.SHIELD)
 
 
 func _on_slomo_finished() -> void:
-	_remove_ability_effects(Config.ABILITIES.SLO_MO)
+	_remove_ability_effects(Globals.ABILITIES.SLO_MO)
 
 
 func _on_IFrames_timeout() -> void:

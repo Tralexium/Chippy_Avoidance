@@ -6,7 +6,7 @@ const SLOMO := preload("res://Assets/UI/slowmo_item.png")
 const SHIELD := preload("res://Assets/UI/shield_item.png")
 
 
-export(Config.ABILITIES) var ability: int
+export var ability: int
 export var reload_dur := 10.0
 
 var initial_color : Color
@@ -27,16 +27,16 @@ func _ready() -> void:
 		circle_reload.value = 100.0
 		button_icon.visible = false
 	match ability:
-		Config.ABILITIES.MEGA_JUMP:
+		Globals.ABILITIES.MEGA_JUMP:
 			icon.texture = JUMP
 			icon.modulate = Color("f82c57")
-		Config.ABILITIES.SUPER_SPEED:
+		Globals.ABILITIES.SUPER_SPEED:
 			icon.texture = SPEED
 			icon.modulate = Color("f8d82c")
-		Config.ABILITIES.SLO_MO:
+		Globals.ABILITIES.SLO_MO:
 			icon.texture = SLOMO
 			icon.modulate = Color("2cf894")
-		Config.ABILITIES.SHIELD:
+		Globals.ABILITIES.SHIELD:
 			icon.texture = SHIELD
 			icon.modulate = Color("2cb5f8")
 	if ability_count == 0:

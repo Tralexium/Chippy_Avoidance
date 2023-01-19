@@ -14,6 +14,7 @@ var currently_restarting := false
 onready var timeline: AnimationPlayer = $Timeline
 onready var player: KinematicBody = $Player
 onready var cam_path: Path = $CamPath
+onready var ability_border_fx: Control = $FX/AbilityBorderFX
 
 
 func _init() -> void:
@@ -86,8 +87,10 @@ func _on_ability_used(ability_num: int) -> void:
 	var song_position := audio_stream_player.get_playback_position()
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	Globals.timeline_events.push_back([ability_num, unit_position])
-	if ability_num == Config.ABILITIES.SLO_MO:
+	if ability_num == Globals.ABILITIES.SLO_MO:
 		$FX.add_child(SLOMO_FX.instance())
+	else:
+		ability_border_fx.enable_effect(ability_num)
 
 
 func _on_avoidance_ended() -> void:
@@ -105,8 +108,10 @@ func _on_avoidance_ended() -> void:
 
 
 func _on_avoidance_restart() -> void:
+	if currently_restarting:
+		return
 	currently_restarting = true
-	player.shielded = true
+	player.iframe_immunity = true
 	create_tween().tween_property(audio_stream_player, "pitch_scale", 0.01, 0.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	transition_inst.connect("tree_exited", self, "_on_transition_finished")
@@ -115,3 +120,11 @@ func _on_avoidance_restart() -> void:
 
 func _on_transition_finished() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_Player_all_abilities_expired() -> void:
+	ability_border_fx.fade_out()
+
+
+func _on_Player_ability_expired(ability) -> void:
+	ability_border_fx.disable_effect(ability)

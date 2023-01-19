@@ -17,10 +17,6 @@ enum AA_MODES {
 	MSAA8X, MSAA16X
 }
 
-enum ABILITIES {
-	SUPER_SPEED, MEGA_JUMP, SHIELD, SLO_MO
-}
-
 var music_volume := 0.7 setget set_music_volume
 var sound_volume := 1.0 setget set_sound_volume
 var resolution := Vector2(1920, 1080) setget set_resolution

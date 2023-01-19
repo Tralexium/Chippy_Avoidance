@@ -3,13 +3,13 @@ extends Control
 const SLOMO_SFX := preload("res://Audio/SFX/ability_slowdown.wav")
 var audio_stream_player: AudioStreamPlayer
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
 	Engine.time_scale = Config.SLOMO_SPD
 	SoundManager.play_sound(SLOMO_SFX)
-	yield(get_tree().create_timer(Config.item_slomo_dur), "timeout")
-	animation_player.play("fade_out")
+	timer.start(Config.item_slomo_dur)
 
 
 func _speed_up_time() -> void:
@@ -20,3 +20,7 @@ func _speed_up_time() -> void:
 
 func _exit_tree() -> void:
 	EventBus.emit_signal("slomo_finished")
+
+
+func _on_Timer_timeout() -> void:
+	animation_player.play("fade_out")

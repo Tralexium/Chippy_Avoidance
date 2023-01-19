@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/Spawners/Phase2_Spawner1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Spawners/Phase1_Spawner1.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scenes/WorldEnvironment.gd" type="Script" id=21]
 [ext_resource path="res://Scenes/KillPlane.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Resources/world_env.tres" type="Environment" id=23]
+[ext_resource path="res://Scenes/UI/AbilityBorderFX.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/UI/PlayerHUD.tscn" type="PackedScene" id=25]
 
 [sub_resource type="SpatialMaterial" id=3]
@@ -1588,6 +1589,8 @@ path_duration = 25.0
 [node name="FX" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 
+[node name="AbilityBorderFX" parent="FX" instance=ExtResource( 24 )]
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
 
@@ -1606,5 +1609,8 @@ autoplay = "avoidance_timeline"
 playback_process_mode = 0
 anims/RESET = SubResource( 6 )
 anims/avoidance_timeline = SubResource( 5 )
+
+[connection signal="ability_expired" from="Player" to="." method="_on_Player_ability_expired"]
+[connection signal="all_abilities_expired" from="Player" to="." method="_on_Player_all_abilities_expired"]
 
 [editable path="Player"]
