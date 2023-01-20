@@ -1,9 +1,8 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/UI/up_arrow.png" type="Texture" id=1]
-[ext_resource path="res://Assets/speed_lines.png" type="Texture" id=2]
-[ext_resource path="res://Resources/plasma_particles.tres" type="Material" id=3]
-[ext_resource path="res://Assets/trace_04_rotated.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Particles/MegaJump.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Particles/SpeedLines.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Particles/Plasma.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/UI/AbilityBorderFX.gd" type="Script" id=5]
 
 [sub_resource type="Shader" id=3]
@@ -33,102 +32,6 @@ shader = SubResource( 3 )
 shader_param/vignette_intensity = 0.6
 shader_param/vignette_opacity = 1.0
 shader_param/vignette_rgb = Color( 1, 1, 1, 1 )
-
-[sub_resource type="Gradient" id=7]
-offsets = PoolRealArray( 0, 0.471483, 1 )
-colors = PoolColorArray( 1, 0.238678, 0.0351563, 0, 1, 0.0585938, 0.814293, 1, 1, 0.839216, 0.458824, 1 )
-
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
-
-[sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0.163636 ), 0.0, -0.554877, 0, 0, Vector2( 1, 0 ), -1.91486, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=10]
-curve = SubResource( 9 )
-
-[sub_resource type="ParticlesMaterial" id=11]
-emission_shape = 2
-emission_box_extents = Vector3( 1920, 1, 1 )
-flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
-spread = 12.63
-gravity = Vector3( 0, -200, 0 )
-initial_velocity = 165.47
-initial_velocity_random = 0.73
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.5
-scale_random = 1.0
-scale_curve = SubResource( 10 )
-color = Color( 1, 1, 1, 0.14902 )
-color_ramp = SubResource( 8 )
-
-[sub_resource type="CanvasItemMaterial" id=12]
-blend_mode = 1
-particles_animation = true
-particles_anim_h_frames = 3
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id=13]
-offsets = PoolRealArray( 0, 0.646388 )
-colors = PoolColorArray( 0.0431373, 0.117647, 1, 0.337255, 1, 0.454102, 0, 1 )
-
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
-width = 100
-
-[sub_resource type="Curve" id=15]
-max_value = 2.5
-_data = [ Vector2( 0, 1.49091 ), 0.0, -0.50375, 0, 0, Vector2( 1, 2.34091 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=16]
-width = 100
-curve = SubResource( 15 )
-
-[sub_resource type="ParticlesMaterial" id=17]
-emission_shape = 2
-emission_box_extents = Vector3( 100, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 16 )
-color_ramp = SubResource( 14 )
-anim_offset = 1.0
-anim_offset_random = 1.0
-
-[sub_resource type="Shader" id=20]
-code = "// NOTE: Shader automatically converted from Godot Engine 3.5.1.stable's CanvasItemMaterial.
-
-shader_type canvas_item;
-render_mode blend_add;
-
-uniform sampler2D noise;
-uniform float strength = 0.2;
-uniform float speed = 0.2;
-
-
-void fragment() {
-	vec2 offset;
-	offset.x = texture(noise, UV + TIME*speed/2.0).r * strength;
-	offset.y = texture(noise, UV + TIME*speed).r * strength;
-	COLOR = texture(TEXTURE, UV + offset) * COLOR;
-}"
-
-[sub_resource type="OpenSimplexNoise" id=21]
-period = 77.7
-
-[sub_resource type="NoiseTexture" id=22]
-seamless = true
-noise = SubResource( 21 )
-
-[sub_resource type="ShaderMaterial" id=23]
-shader = SubResource( 20 )
-shader_param/strength = 0.2
-shader_param/speed = 0.2
-shader_param/noise = SubResource( 22 )
 
 [sub_resource type="Animation" id=5]
 length = 0.001
@@ -233,60 +136,12 @@ tracks/7/keys = {
 resource_name = "fade_out"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("MegaJump:emitting")
+tracks/0/path = NodePath("Vignette:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpeedLines:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PlasmaTop:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("PlasmaBottom:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Vignette:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
@@ -473,38 +328,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="MegaJump" type="Particles2D" parent="."]
-position = Vector2( 920, 1044 )
-emitting = false
-amount = 10
-process_material = SubResource( 11 )
-texture = ExtResource( 1 )
+[node name="MegaJump" parent="." instance=ExtResource( 1 )]
 
-[node name="SpeedLines" type="Particles2D" parent="."]
-material = SubResource( 12 )
-position = Vector2( 958, 543 )
-emitting = false
-amount = 4
-lifetime = 0.6
-process_material = SubResource( 17 )
-texture = ExtResource( 2 )
+[node name="SpeedLines" parent="." instance=ExtResource( 2 )]
 
-[node name="PlasmaTop" type="Particles2D" parent="."]
-material = SubResource( 23 )
-position = Vector2( 1061, 127 )
-emitting = false
-amount = 20
-process_material = ExtResource( 3 )
-texture = ExtResource( 4 )
+[node name="PlasmaTop" parent="." instance=ExtResource( 4 )]
 
-[node name="PlasmaBottom" type="Particles2D" parent="."]
-material = SubResource( 23 )
-position = Vector2( 965, 1198 )
-emitting = false
-amount = 20
-visibility_rect = Rect2( -200, -200, 400, 400 )
-process_material = ExtResource( 3 )
-texture = ExtResource( 4 )
+[node name="PlasmaBottom" parent="." instance=ExtResource( 4 )]
+position = Vector2( 979, 1192 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )

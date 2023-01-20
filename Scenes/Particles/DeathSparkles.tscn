@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Particles/player_death_sparkles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/sparkle.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=71]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=72]
+material = SubResource( 71 )
+size = Vector2( 2, 2 )
+
+[node name="DeathSparkles" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.788628, 0 )
+emitting = false
+amount = 100
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -100, -100, -100, 200, 200, 200 )
+local_coords = false
+process_material = ExtResource( 1 )
+draw_pass_1 = SubResource( 72 )

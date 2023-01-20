@@ -1,0 +1,16 @@
+[gd_resource type="ParticlesMaterial" load_steps=3 format=2]
+
+[sub_resource type="Curve" id=42]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=43]
+width = 100
+curve = SubResource( 42 )
+
+[resource]
+flag_rotate_y = true
+gravity = Vector3( 0, 15, 0 )
+angle = 193.6
+angle_random = 0.63
+scale = 0.5
+scale_curve = SubResource( 43 )

@@ -321,15 +321,15 @@ func _animations() -> void:
 
 func _damage_inflicted(node: Node) -> void:
 	if !Globals.god_mode:
-		if node.is_in_group("insta_killer"):
-			self.hp = 0
-		elif shielded:
+		if shielded:
 			n_player_shield.fracture()
 			n_iframes_timer.start(shield_iframes_dur)
 			n_iframe_anim.play("iframes")
 			iframe_immunity = true
 			shielded = false
 			_remove_ability_effects(Globals.ABILITIES.SHIELD)
+		if node.is_in_group("insta_killer"):
+			self.hp = 0
 		elif !iframe_immunity:
 			self.hp -= 1
 
@@ -347,19 +347,21 @@ func _remove_ability_effects(ability_num: int) -> void:
 	if index != -1:
 		abilities_in_use.remove(index)
 		emit_signal("ability_expired", ability_num)
-		if abilities_in_use.empty():
+		if abilities_in_use.empty() and ability_num != Globals.ABILITIES.SLO_MO:
 			emit_signal("all_abilities_expired")
 
 
 func _on_MegaJumpDur_timeout() -> void:
 	n_mega_jump_part.emitting = false
-	SoundManager.play_sound(SFX_ABILITY_JUMP_EXP)
+	if !is_dead:
+		SoundManager.play_sound(SFX_ABILITY_JUMP_EXP)
 	_remove_ability_effects(Globals.ABILITIES.MEGA_JUMP)
 
 
 func _on_SuperSpeedDur_timeout() -> void:
 	n_speed_trail.hide()
-	SoundManager.play_sound(SFX_ABILITY_SPEED_EXP)
+	if !is_dead:
+		SoundManager.play_sound(SFX_ABILITY_SPEED_EXP)
 	_remove_ability_effects(Globals.ABILITIES.SUPER_SPEED)
 
 

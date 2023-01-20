@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Particles/player_death_beam_particles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/UI/faded_line.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=64]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+params_billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=65]
+material = SubResource( 64 )
+size = Vector2( 50, 30 )
+
+[node name="DeathBeams" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.788628, 0 )
+emitting = false
+amount = 4
+lifetime = 0.02
+one_shot = true
+explosiveness = 0.85
+process_material = ExtResource( 1 )
+draw_pass_1 = SubResource( 65 )

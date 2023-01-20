@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Particles/border_speedlines_particles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/speed_lines.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=12]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="SpeedLines" type="Particles2D"]
+material = SubResource( 12 )
+position = Vector2( 958, 543 )
+emitting = false
+amount = 4
+lifetime = 0.6
+process_material = ExtResource( 1 )
+texture = ExtResource( 2 )

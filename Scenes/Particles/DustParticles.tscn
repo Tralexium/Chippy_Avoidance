@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Meshes/dust_cloud.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Resources/Particles/player_dust_cloud_particles.tres" type="Material" id=2]
+
+[node name="DustParticles" type="Particles"]
+emitting = false
+amount = 3
+lifetime = 0.3
+visibility_aabb = AABB( -56.8, -43.0614, -47.5407, 113.6, 86.1227, 95.0815 )
+local_coords = false
+draw_order = 2
+process_material = ExtResource( 2 )
+draw_pass_1 = ExtResource( 1 )

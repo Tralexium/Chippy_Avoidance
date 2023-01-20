@@ -13,7 +13,7 @@ var initial_color : Color
 onready var action := "item " + str(ability+1)
 onready var icon: TextureRect = $Icon
 onready var amount: Label = $Amount
-onready var particles: Particles2D = $Particles
+onready var particles: Particles2D = $HudParticles
 onready var button_icon: TextureRect = $ButtonIcon
 onready var circle_reload: TextureProgress = $CircleReload
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 		Globals.ABILITIES.SHIELD:
 			icon.texture = SHIELD
 			icon.modulate = Color("2cb5f8")
-	if ability_count == 0:
+	if ability_count == 0 and !Config.infinite_items:
 		icon.modulate = Color.white
 	initial_color = icon.modulate
 	amount.modulate = icon.modulate

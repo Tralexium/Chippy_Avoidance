@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/white_circle.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Particles/hud_particles.tres" type="Material" id=2]
+
+[node name="HudParticles" type="Particles2D"]
+show_behind_parent = true
+position = Vector2( 32, 36 )
+emitting = false
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.45
+process_material = ExtResource( 2 )
+texture = ExtResource( 1 )

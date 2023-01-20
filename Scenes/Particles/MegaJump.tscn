@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Particles/border_mega_jump_particles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/UI/up_arrow.png" type="Texture" id=2]
+
+[node name="MegaJump" type="Particles2D"]
+position = Vector2( 920, 1044 )
+emitting = false
+amount = 10
+process_material = ExtResource( 1 )
+texture = ExtResource( 2 )

@@ -1,0 +1,80 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scenes/Particles/MegaJump.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Particles/HudParticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Particles/DeathSparkles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Particles/DustParticles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Particles/DJumpPart.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Particles/DeathBeams.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Particles/MegaJumpPart.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Particles/Plasma.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Particles/SpeedLines.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Particles/TimeParticle.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/ParticlePreloader.gd" type="Script" id=11]
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+width = 100
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+resource_local_to_scene = true
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 487.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 3 )
+color = Color( 0.972549, 0.847059, 0.172549, 1 )
+
+[node name="ParticlePreloader" type="Node"]
+script = ExtResource( 11 )
+
+[node name="DeathBeams" parent="." instance=ExtResource( 6 )]
+emitting = true
+
+[node name="DeathSparkles" parent="." instance=ExtResource( 3 )]
+emitting = true
+
+[node name="DJumpPart" parent="." instance=ExtResource( 5 )]
+emitting = true
+
+[node name="DustParticles" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662704, 0 )
+emitting = true
+
+[node name="MegaJumpPart" parent="." instance=ExtResource( 7 )]
+emitting = true
+
+[node name="HudParticles" parent="." instance=ExtResource( 2 )]
+emitting = true
+process_material = SubResource( 7 )
+
+[node name="MegaJump" parent="." instance=ExtResource( 1 )]
+emitting = true
+
+[node name="Plasma" parent="." instance=ExtResource( 8 )]
+emitting = true
+
+[node name="SpeedLines" parent="." instance=ExtResource( 9 )]
+emitting = true
+
+[node name="TimeParticle" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1984, 1063 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 101
+
+[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

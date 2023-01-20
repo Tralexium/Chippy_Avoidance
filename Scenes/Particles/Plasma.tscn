@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Resources/Particles/border_shield_particles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/trace_04_rotated.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=20]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.5.1.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_add;
+
+uniform sampler2D noise;
+uniform float strength = 0.2;
+uniform float speed = 0.2;
+
+
+void fragment() {
+	vec2 offset;
+	offset.x = texture(noise, UV + TIME*speed/2.0).r * strength;
+	offset.y = texture(noise, UV + TIME*speed).r * strength;
+	COLOR = texture(TEXTURE, UV + offset) * COLOR;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=21]
+period = 77.7
+
+[sub_resource type="NoiseTexture" id=22]
+seamless = true
+noise = SubResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 20 )
+shader_param/strength = 0.2
+shader_param/speed = 0.2
+shader_param/noise = SubResource( 22 )
+
+[node name="Plasma" type="Particles2D"]
+material = SubResource( 23 )
+position = Vector2( 1061, 127 )
+emitting = false
+amount = 20
+visibility_rect = Rect2( -200, -200, 400, 400 )
+process_material = ExtResource( 1 )
+texture = ExtResource( 2 )

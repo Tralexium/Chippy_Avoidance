@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Particles/player_mega_jump_particles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/UI/up_arrow.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=73]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=74]
+material = SubResource( 73 )
+
+[node name="MegaJumpPart" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908521, 0 )
+emitting = false
+amount = 6
+lifetime = 0.5
+process_material = ExtResource( 1 )
+draw_pass_1 = SubResource( 74 )

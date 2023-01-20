@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Particles/player_double_jump_particles.tres" type="Material" id=1]
+[ext_resource path="res://Resources/Materials/arrow_spatial_mat.tres" type="Material" id=2]
+
+[sub_resource type="QuadMesh" id=51]
+material = ExtResource( 2 )
+size = Vector2( 3, 1.5 )
+
+[node name="DJumpPart" type="Particles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662704, 0 )
+emitting = false
+amount = 6
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.47
+process_material = ExtResource( 1 )
+draw_pass_1 = SubResource( 51 )
