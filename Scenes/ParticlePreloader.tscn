@@ -30,7 +30,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 3 )
 color = Color( 0.972549, 0.847059, 0.172549, 1 )
 
-[node name="ParticlePreloader" type="Node"]
+[node name="ParticlePreloader" type="Spatial"]
 script = ExtResource( 11 )
 
 [node name="DeathBeams" parent="." instance=ExtResource( 6 )]
@@ -46,28 +46,28 @@ emitting = true
 [node name="MegaJumpPart" parent="." instance=ExtResource( 7 )]
 emitting = true
 
-[node name="HudParticles" parent="." instance=ExtResource( 2 )]
-process_material = SubResource( 7 )
-
-[node name="MegaJump" parent="." instance=ExtResource( 1 )]
-emitting = true
-
-[node name="Plasma" parent="." instance=ExtResource( 8 )]
-emitting = true
-
-[node name="SpeedLines" parent="." instance=ExtResource( 9 )]
-emitting = true
-
-[node name="TimeParticle" parent="." instance=ExtResource( 10 )]
-position = Vector2( 1984, 1063 )
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="2D" type="CanvasLayer" parent="."]
 layer = 101
 
-[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
+[node name="HudParticles" parent="2D" instance=ExtResource( 2 )]
+process_material = SubResource( 7 )
+
+[node name="MegaJump" parent="2D" instance=ExtResource( 1 )]
+emitting = true
+
+[node name="Plasma" parent="2D" instance=ExtResource( 8 )]
+emitting = true
+
+[node name="SpeedLines" parent="2D" instance=ExtResource( 9 )]
+emitting = true
+
+[node name="TimeParticle" parent="2D" instance=ExtResource( 10 )]
+position = Vector2( 1984, 1063 )
+
+[node name="BlackOverlay" type="ColorRect" parent="2D"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0.996078 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
