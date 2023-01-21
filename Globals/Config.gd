@@ -27,6 +27,7 @@ var aa_mode : int = AA_MODES.MSAA4X setget set_aa_mode
 var vsync := true setget set_vsync
 var bloom := true setget set_bloom
 var show_bar := true setget set_show_bar
+var gamepad_rumble := true setget set_gamepad_rumble
 var show_percentage := false setget set_show_percentage
 var transparent_hud := false setget set_transparent_hud
 var show_fps := false setget set_show_fps
@@ -60,6 +61,7 @@ func save_data() -> void:
 	save_dict["vsync"] = vsync
 	save_dict["bloom"] = bloom
 	save_dict["show_bar"] = show_bar
+	save_dict["gamepad_rumble"] = gamepad_rumble
 	save_dict["show_percentage"] = show_percentage
 	save_dict["transparent_hud"] = transparent_hud
 	save_dict["show_fps"] = show_fps
@@ -101,6 +103,7 @@ func load_data() -> void:
 		self.vsync = values.get("vsync", true)
 		self.bloom = values.get("bloom", true)
 		self.show_bar = values.get("show_bar", true)
+		self.gamepad_rumble = values.get("gamepad_rumble", true)
 		self.show_percentage = values.get("show_percentage", false)
 		self.transparent_hud = values.get("transparent_hud", false)
 		self.show_fps = values.get("show_fps", false)
@@ -157,6 +160,10 @@ func set_bloom(value: bool) -> void:
 
 func set_show_bar(value: bool) -> void:
 	show_bar = value
+
+
+func set_gamepad_rumble(value: bool) -> void:
+	gamepad_rumble = value
 
 
 func set_show_percentage(value: bool) -> void:

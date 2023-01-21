@@ -11,7 +11,7 @@ onready var screen_mode: VBoxContainer = $BG/Margin/Contents/General/ScreenMode
 onready var anti_aliasing: VBoxContainer = $BG/Margin/Contents/General/AntiAliasing
 onready var v_sync: CheckBox = $BG/Margin/Contents/General/Toggles/VSync
 onready var bloom: CheckBox = $BG/Margin/Contents/General/Toggles/Bloom
-onready var game_version: Label = $BG/Footer/GameVersion
+onready var rumble: CheckBox = $BG/Margin/Contents/General/Toggles/Rumble
 onready var show_bar: CheckBox = $BG/Margin/Contents/General/Toggles/ShowBar
 onready var percentage: CheckBox = $BG/Margin/Contents/General/Toggles/Percentage
 onready var player_hud: CheckBox = $BG/Margin/Contents/General/Toggles/TransparentPlayerHUD
@@ -22,6 +22,7 @@ onready var player_ring: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/Pl
 onready var infinite_hp: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/InfiniteHP
 onready var infinite_jump: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/InfiniteJump
 onready var infinite_items: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/InfiniteItems
+onready var game_version: Label = $BG/Footer/GameVersion
 
 
 func fetch_and_set_general_setting() -> void:
@@ -34,6 +35,7 @@ func fetch_and_set_general_setting() -> void:
 	anti_aliasing.find_and_select(Config.aa_mode)
 	v_sync.pressed = Config.vsync
 	bloom.pressed = Config.bloom
+	rumble.pressed = Config.gamepad_rumble
 	show_bar.pressed = Config.show_bar
 	percentage.pressed = Config.show_percentage
 	player_hud.pressed = Config.transparent_hud

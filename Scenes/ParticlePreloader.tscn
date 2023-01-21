@@ -34,13 +34,10 @@ color = Color( 0.972549, 0.847059, 0.172549, 1 )
 script = ExtResource( 11 )
 
 [node name="DeathBeams" parent="." instance=ExtResource( 6 )]
-emitting = true
 
 [node name="DeathSparkles" parent="." instance=ExtResource( 3 )]
-emitting = true
 
 [node name="DJumpPart" parent="." instance=ExtResource( 5 )]
-emitting = true
 
 [node name="DustParticles" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662704, 0 )
@@ -50,7 +47,6 @@ emitting = true
 emitting = true
 
 [node name="HudParticles" parent="." instance=ExtResource( 2 )]
-emitting = true
 process_material = SubResource( 7 )
 
 [node name="MegaJump" parent="." instance=ExtResource( 1 )]

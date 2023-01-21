@@ -80,6 +80,7 @@ func _ready() -> void:
 
 
 func _on_ability_used(ability_num: int) -> void:
+	InputHelper.rumble_medium()
 	var shader := n_character_mesh.material_overlay as ShaderMaterial
 	abilities_in_use.push_back(ability_num)
 	match ability_num:
@@ -118,6 +119,7 @@ func hit_effects(new_hp: int) -> void:
 	hitmarker.shrink_dur = 0.1 if new_hp > 0 else 0.05
 	if new_hp > 0:
 		n_camera_pos.shake_cam_instant(1.0, 0.2)
+		InputHelper.rumble_medium()
 		SoundManager.play_sound(SFX_HIT)
 	if !abilities_in_use.has(Globals.ABILITIES.SLO_MO) and new_hp > 0:
 		Util.time_slowdown(0.2, 0.2)
@@ -130,6 +132,7 @@ func die() -> void:
 	n_death_beams.emitting = true
 	n_step_sfx.stop()
 	EventBus.emit_signal("avoidance_ended")
+	InputHelper.rumble_medium()
 	SoundManager.play_sound(SFX_FATAL_HIT)
 	snap_vector = Vector3.ZERO
 	n_player_animation_tree.active = false
@@ -149,6 +152,7 @@ func die() -> void:
 	n_camera_pos.shake_cam_instant(5.0, 0.4)
 	var rotate_tween = create_tween()
 	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
+	InputHelper.rumble_large()
 	SoundManager.play_sound(SFX_FATAL_LAUNCH)
 
 
@@ -191,6 +195,7 @@ func _get_input() -> void:
 		buffered_input = ""
 	
 	var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.2)
+	print(xy_input)
 	input_vector = Vector3.ZERO
 	input_vector.x = xy_input.x
 	input_vector.z = xy_input.y
@@ -206,6 +211,7 @@ func _get_input() -> void:
 			buffered_input = ""
 			if abilities_in_use.has(Globals.ABILITIES.MEGA_JUMP):
 				audio_mega_jump.play()
+				InputHelper.rumble_small()
 			else:
 				audio_jump.play()
 		elif Input.is_action_just_pressed("jump") and (has_djump or Config.infinite_jump):
@@ -213,6 +219,7 @@ func _get_input() -> void:
 			input_vector.y = 1
 			n_djump_part.emitting = true
 			audio_djump.play()
+			InputHelper.rumble_small()
 	Globals.run_stats["jumps"] += input_vector.y
 
 
@@ -232,6 +239,7 @@ func _apply_velocity() -> void:
 			if previous_fall_spd <= -max_fall_vel:
 				n_camera_pos.shake_cam_instant(0.5, 0.2)
 				audio_land.play()
+				InputHelper.rumble_medium()
 			else:
 				audio_land_light.play()
 		n_shadow_guide.hidden = true
@@ -328,6 +336,7 @@ func _damage_inflicted(node: Node) -> void:
 			iframe_immunity = true
 			shielded = false
 			_remove_ability_effects(Globals.ABILITIES.SHIELD)
+			InputHelper.rumble_medium()
 		if node.is_in_group("insta_killer"):
 			self.hp = 0
 		elif !iframe_immunity:
@@ -377,8 +386,9 @@ func _on_slomo_finished() -> void:
 
 
 func _on_IFrames_timeout() -> void:
+	n_iframe_anim.stop()
 	iframe_immunity = false
-	n_iframe_anim.stop(true)
+	n_character_mesh.visible = true
 
 
 func _on_StepSFX_timeout() -> void:
