@@ -9,8 +9,6 @@ onready var credits: Control = $UI/Credits
 
 
 func _ready() -> void:
-	Globals.can_pause = false
-	Config.load_data()
 	options.fetch_and_set_general_setting()
 	SoundManager.play_music(Globals.MAIN_MENU_MUSIC)
 	EventBus.emit_signal("main_menu_started")

@@ -1,8 +1,10 @@
 extends Control
 
+var in_upgrades := false
 onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var stats_header: ColorRect = $UISpace/UIBG/VBoxContainer/StatsHeader
-onready var buttons: HBoxContainer = $UISpace/UIBG/VBoxContainer/Margin/HBoxContainer/Buttons
+onready var stats_header: ColorRect = $"%StatsHeader"
+onready var buttons: HBoxContainer = $"%Buttons"
+
 
 
 func _input(event: InputEvent) -> void:
@@ -24,8 +26,16 @@ func _input(event: InputEvent) -> void:
 
 func expand_header() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(stats_header, "rect_size:x", Config.resolution.x, 0.3)
+	tween.tween_property(stats_header, "rect_min_size:x", Config.resolution.x, 0.3)
 
 
 func _on_Retry_pressed() -> void:
 	EventBus.emit_signal("avoidance_restart")
+
+
+func _on_Upgrades_pressed() -> void:
+	in_upgrades = !in_upgrades
+	if in_upgrades:
+		animation_player.play("goto_upgrades")
+	else:
+		animation_player.play_backwards("goto_upgrades")

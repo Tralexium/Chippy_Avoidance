@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Fonts/Orbitron-ExtraBold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Blender Renders/gem_edited.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/UI/GemTotal.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 42
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="GemTotal" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( -271, -475 )
+script = ExtResource( 3 )
+
+[node name="Gem" type="TextureRect" parent="."]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+margin_left = 104.0
+margin_top = 23.0
+margin_right = 218.0
+margin_bottom = 77.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "1337"
+align = 1

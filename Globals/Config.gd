@@ -7,6 +7,8 @@ const DMG_PENALTY := 500.0
 const ITEM_PENALTY := 250.0
 const MAX_SCORE := 10000.0
 const MAX_GEMS := 1000.0
+const MAX_HP := 10
+const MAX_ABILITIES := 3
 
 enum SCREEN_MODES {
 	FULLSCREEN, WINDOWED
@@ -16,6 +18,9 @@ enum AA_MODES {
 	DISABLED, FXAA, MSAA2X, MSAA4X,
 	MSAA8X, MSAA16X
 }
+
+var hp_costs := [0, 0, 0, 100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+var ability_costs := [100, 250, 500, 1000]
 
 var music_volume := 0.7 setget set_music_volume
 var sound_volume := 1.0 setget set_sound_volume
@@ -189,6 +194,7 @@ func set_player_max_hp(value: int) -> void:
 
 func set_player_points(value: int) -> void:
 	player_points = value
+	EventBus.emit_signal("points_changed", player_points)
 
 
 func set_player_ability_count(ability: int, has_used: bool) -> void:

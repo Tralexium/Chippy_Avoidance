@@ -1,9 +1,14 @@
 extends Node
 
+# Music
 const MAIN_MENU := preload("res://Scenes/UI/MainMenu.tscn")
 const AVOIDANCE := preload("res://Scenes/Avoidance.tscn")
 const MAIN_MENU_MUSIC := preload("res://Audio/Music/Mittsies - Horizon.ogg")
 const AVOIDANCE_MUSIC := preload("res://Audio/Music/aran_EPHMR.ogg")
+# General Sounds
+const UI_ERROR := preload("res://Audio/SFX/ui_error.wav")
+const UI_SUCCESS := preload("res://Audio/SFX/ui_success.wav")
+
 
 enum TIMELINE_EVENTS {
 	ITEM_1, ITEM_2, ITEM_3, ITEM_4,
