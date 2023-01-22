@@ -195,7 +195,6 @@ func _get_input() -> void:
 		buffered_input = ""
 	
 	var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.2)
-	print(xy_input)
 	input_vector = Vector3.ZERO
 	input_vector.x = xy_input.x
 	input_vector.z = xy_input.y

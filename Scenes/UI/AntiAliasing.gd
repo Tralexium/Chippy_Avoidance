@@ -11,6 +11,7 @@ func find_and_select(mode: int) -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
+	SoundManager.play_ui_sound(Globals.UI_OFF)
 	match option_button.get_item_text(index):
 		"Disabled":
 			Config.aa_mode = Config.AA_MODES.DISABLED
@@ -24,3 +25,7 @@ func _on_OptionButton_item_selected(index: int) -> void:
 			Config.aa_mode = Config.AA_MODES.MSAA8X
 		"MSAA 16x":
 			Config.aa_mode = Config.AA_MODES.MSAA16X
+
+
+func _on_OptionButton_pressed() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)

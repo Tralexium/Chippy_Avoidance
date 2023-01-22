@@ -11,6 +11,7 @@ func find_and_select(mode: int) -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
+	SoundManager.play_ui_sound(Globals.UI_OFF)
 	match option_button.get_item_text(index):
 		"fullscreen":
 			Config.screen_mode = Config.SCREEN_MODES.FULLSCREEN
@@ -18,3 +19,7 @@ func _on_OptionButton_item_selected(index: int) -> void:
 			Config.screen_mode = Config.SCREEN_MODES.BORDERLESS
 		"windowed":
 			Config.screen_mode = Config.SCREEN_MODES.WINDOWED
+
+
+func _on_OptionButton_pressed() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)

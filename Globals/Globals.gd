@@ -8,6 +8,10 @@ const AVOIDANCE_MUSIC := preload("res://Audio/Music/aran_EPHMR.ogg")
 # General Sounds
 const UI_ERROR := preload("res://Audio/SFX/ui_error.wav")
 const UI_SUCCESS := preload("res://Audio/SFX/ui_success.wav")
+const UI_BUTTON := preload("res://Audio/SFX/ui_button.wav")
+const UI_BACK := preload("res://Audio/SFX/ui_back.wav")
+const UI_OFF := preload("res://Audio/SFX/ui_toggle_off.wav")
+const UI_ON := preload("res://Audio/SFX/ui_toggle_on.wav")
 
 
 enum TIMELINE_EVENTS {

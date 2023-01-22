@@ -6,6 +6,7 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _on_SocialMediaButton_pressed() -> void:
 	release_focus()
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 	OS.shell_open(social_link)
 
 

@@ -390,6 +390,7 @@ margin_right = 798.0
 [node name="HSlider" parent="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier/HBoxContainer" index="0"]
 margin_right = 722.0
 max_value = 200.0
+step = 10.0
 value = 100.0
 
 [node name="Percent" parent="BG/Margin/Contents/Accessibility/Slidables/PointMultiplier/HBoxContainer" index="1"]
@@ -455,9 +456,13 @@ text = "game version: -.-.-"
 [connection signal="pressed" from="BG/Margin/Contents/Tabs/AccessibilityTab" to="BG/Margin/Contents" method="_on_AccessibilityTab_pressed"]
 [connection signal="value_changed" from="BG/Margin/Contents/General/Audio/Music" to="." method="_on_Music_value_changed"]
 [connection signal="value_changed" from="BG/Margin/Contents/General/Audio/Sounds" to="." method="_on_Sounds_value_changed"]
+[connection signal="drag_ended" from="BG/Margin/Contents/General/Audio/Sounds/HBoxContainer/HSlider" to="BG/Margin/Contents/General/Audio/Sounds" method="_on_HSlider_drag_ended"]
 [connection signal="item_selected" from="BG/Margin/Contents/General/Resolution/OptionButton" to="BG/Margin/Contents/General/Resolution" method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="BG/Margin/Contents/General/Resolution/OptionButton" to="BG/Margin/Contents/General/Resolution" method="_on_OptionButton_pressed"]
 [connection signal="item_selected" from="BG/Margin/Contents/General/ScreenMode/OptionButton" to="BG/Margin/Contents/General/ScreenMode" method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="BG/Margin/Contents/General/ScreenMode/OptionButton" to="BG/Margin/Contents/General/ScreenMode" method="_on_OptionButton_pressed"]
 [connection signal="item_selected" from="BG/Margin/Contents/General/AntiAliasing/OptionButton" to="BG/Margin/Contents/General/AntiAliasing" method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="BG/Margin/Contents/General/AntiAliasing/OptionButton" to="BG/Margin/Contents/General/AntiAliasing" method="_on_OptionButton_pressed"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/VSync" to="BG/Margin/Contents/General/Toggles/VSync" method="_on_VSync_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Bloom" to="BG/Margin/Contents/General/Toggles/Bloom" method="_on_Bloom_toggled"]
 [connection signal="toggled" from="BG/Margin/Contents/General/Toggles/Rumble" to="BG/Margin/Contents/General/Toggles/Rumble" method="_on_Rumble_toggled"]

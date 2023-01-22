@@ -70,15 +70,20 @@ func _on_Discord_mouse_entered() -> void:
 func _on_Begin_pressed() -> void:
 	begin.release_focus()
 	emit_signal("begin_pressed")
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	SoundManager.play_ui_sound(Globals.UI_SUCCESS)
 
 func _on_Options_pressed() -> void:
 	options.release_focus()
 	emit_signal("options_pressed")
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 
 func _on_Credits_pressed() -> void:
 	credits.release_focus()
 	emit_signal("credits_pressed")
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 
 func _on_Exit_pressed() -> void:
 	exit.release_focus()
 	emit_signal("exit_pressed")
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)

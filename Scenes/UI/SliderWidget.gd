@@ -16,3 +16,7 @@ func set_value(value: float) -> void:
 func _on_HSlider_value_changed(value: float) -> void:
 	emit_signal("value_changed", value)
 	set_value(value)
+
+
+func _on_HSlider_drag_ended(value_changed: bool) -> void:
+	SoundManager.play_sound(Globals.UI_ON)

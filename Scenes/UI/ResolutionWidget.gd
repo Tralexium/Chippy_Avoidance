@@ -11,5 +11,10 @@ func find_and_select(resolution: Vector2) -> void:
 
 
 func _on_OptionButton_item_selected(index: int) -> void:
+	SoundManager.play_ui_sound(Globals.UI_OFF)
 	var values : PoolRealArray = option_button.get_item_text(index).split_floats("x")
 	Config.resolution = Vector2(values[0], values[1])
+
+
+func _on_OptionButton_pressed() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)

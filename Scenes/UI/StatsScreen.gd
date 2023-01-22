@@ -30,10 +30,12 @@ func expand_header() -> void:
 
 
 func _on_Retry_pressed() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 	EventBus.emit_signal("avoidance_restart")
 
 
 func _on_Upgrades_pressed() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 	in_upgrades = !in_upgrades
 	if in_upgrades:
 		animation_player.play("goto_upgrades")

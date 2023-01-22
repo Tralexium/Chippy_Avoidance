@@ -2,6 +2,7 @@ extends VBoxContainer
 
 
 func change_tabs() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 	for tab in get_children():
 		if tab.name != "Tabs" and tab.name != "Header":
 			tab.hide()

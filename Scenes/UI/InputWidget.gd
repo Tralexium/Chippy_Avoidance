@@ -24,14 +24,17 @@ func _input(event) -> void:
 	
 	if event is InputEventMouseButton and event.is_pressed():
 		self.is_waiting_for_key = false
+		SoundManager.play_ui_sound(Globals.UI_BACK)
 	if event is InputEventKey and event.is_pressed():
 		InputHelper.set_action_key(action_name, event.as_text())
 		self.is_waiting_for_key = false
+		SoundManager.play_ui_sound(Globals.UI_ON)
 		update_icon(false)
 	elif event is InputEventJoypadButton and event.is_pressed():
 		InputHelper.set_action_button(action_name, event.button_index)
 		InputHelper.identify_current_input_device(event)
 		self.is_waiting_for_key = false
+		SoundManager.play_ui_sound(Globals.UI_ON)
 		update_icon(true)
 
 
@@ -67,6 +70,7 @@ func set_is_waiting_for_key(next_is_waiting_for_key: bool) -> void:
 
 func _on_Button_pressed() -> void:
 	self.is_waiting_for_key = true
+	SoundManager.play_ui_sound(Globals.UI_OFF)
 
 
 func _on_device_changed(device: String, index: int) -> void:

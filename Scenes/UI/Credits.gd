@@ -47,6 +47,7 @@ func fade_in_credits() -> void:
 func _go_back() -> void:
 	is_present = false
 	fade_out_timer.start(0.5)
+	SoundManager.play_ui_sound(Globals.UI_BACK)
 	emit_signal("go_back")
 
 
