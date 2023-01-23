@@ -20,3 +20,4 @@ func _on_HSlider_value_changed(value: float) -> void:
 
 func _on_HSlider_drag_ended(value_changed: bool) -> void:
 	SoundManager.play_sound(Globals.UI_ON)
+	SoundManager.play_sound(Globals.UI_ON)

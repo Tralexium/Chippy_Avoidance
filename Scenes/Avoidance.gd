@@ -30,6 +30,7 @@ func _ready() -> void:
 	EventBus.connect("ability_used", self, "_on_ability_used")
 	EventBus.connect("avoidance_ended", self, "_on_avoidance_ended")
 	EventBus.connect("avoidance_restart", self, "_on_avoidance_restart")
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var mus_bus := SoundManager.get_default_music_bus()
 	AudioServer.set_bus_effect_enabled(mus_bus, 0, false)
 	audio_stream_player = SoundManager.play_music(Globals.AVOIDANCE_MUSIC, 0.0, "Music")

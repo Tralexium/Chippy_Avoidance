@@ -19,7 +19,7 @@ enum AA_MODES {
 	MSAA8X, MSAA16X
 }
 
-var hp_costs := [0, 0, 0, 100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+var hp_costs := [0, 0, 0, 250, 500, 1000, 2500, 5000, 7500, 10000, 20000]
 var ability_costs := [100, 250, 500, 1000]
 
 var music_volume := 0.7 setget set_music_volume
@@ -98,8 +98,8 @@ func load_data() -> void:
 		file.open(SAVE_PATH, File.READ)
 		var values : Dictionary = file.get_var()
 		
-		self.music_volume = values.get("music_volume", 0.7)
-		self.sound_volume = values.get("sound_volume", 1.0)
+		self.music_volume = values.get("music_volume", 0.5)
+		self.sound_volume = values.get("sound_volume", 0.75)
 		self.screen_shake = values.get("screen_shake", 1.0)
 		self.point_multiplier = values.get("point_multiplier", 1.0)
 		self.resolution = values.get("resolution", Vector2(1920, 1080))

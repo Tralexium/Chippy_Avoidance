@@ -11,6 +11,7 @@ onready var credits: Control = $UI/Credits
 func _ready() -> void:
 	options.fetch_and_set_general_setting()
 	SoundManager.play_music(Globals.MAIN_MENU_MUSIC)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	EventBus.emit_signal("main_menu_started")
 
 

@@ -5,6 +5,8 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var stats_header: ColorRect = $"%StatsHeader"
 onready var buttons: HBoxContainer = $"%Buttons"
 
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _input(event: InputEvent) -> void:

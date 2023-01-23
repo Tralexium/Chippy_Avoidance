@@ -2,6 +2,7 @@ extends Node
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	Globals.can_pause = false
 	Config.load_data()
 
