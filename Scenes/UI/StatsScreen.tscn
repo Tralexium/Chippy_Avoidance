@@ -497,25 +497,25 @@ valign = 1
 [node name="Margin" type="MarginContainer" parent="UISpace/UIBG/VBoxContainer"]
 margin_top = 118.0
 margin_right = 1920.0
-margin_bottom = 633.0
+margin_bottom = 672.0
 custom_constants/margin_right = 140
 custom_constants/margin_left = 140
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin"]
 margin_left = 140.0
 margin_right = 1780.0
-margin_bottom = 515.0
+margin_bottom = 554.0
 custom_constants/separation = 70
 alignment = 1
 
 [node name="Main" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
-margin_right = 1408.0
+margin_right = 1640.0
 margin_bottom = 424.0
 custom_constants/separation = 70
 
 [node name="ProgressBar" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main"]
 modulate = Color( 1, 1, 1, 0 )
-margin_right = 1408.0
+margin_right = 1640.0
 margin_bottom = 100.0
 custom_constants/separation = 24
 alignment = 1
@@ -529,13 +529,13 @@ valign = 2
 
 [node name="ProgressBarStats" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main/ProgressBar" instance=ExtResource( 4 )]
 margin_left = 112.0
-margin_right = 1331.0
+margin_right = 1563.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
 [node name="End" type="Label" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main/ProgressBar"]
-margin_left = 1355.0
-margin_right = 1408.0
+margin_left = 1587.0
+margin_right = 1640.0
 margin_bottom = 100.0
 size_flags_vertical = 5
 text = "END"
@@ -544,25 +544,25 @@ valign = 2
 [node name="Stats" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 170.0
-margin_right = 1408.0
+margin_right = 1640.0
 margin_bottom = 424.0
 custom_constants/separation = 64
 alignment = 1
 
 [node name="RankPanel" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main/Stats" instance=ExtResource( 8 )]
-margin_left = 17.0
-margin_right = 663.0
+margin_left = 133.0
+margin_right = 779.0
 margin_bottom = 254.0
 
 [node name="FunStats" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main/Stats" instance=ExtResource( 5 )]
-margin_left = 727.0
-margin_right = 1127.0
+margin_left = 843.0
+margin_right = 1243.0
 margin_bottom = 254.0
 size_flags_horizontal = 0
 
 [node name="GemsGained" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main/Stats" instance=ExtResource( 7 )]
-margin_left = 1191.0
-margin_right = 1391.0
+margin_left = 1307.0
+margin_right = 1507.0
 margin_bottom = 254.0
 
 [node name="Upgrades" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
@@ -619,9 +619,9 @@ ability = 3
 [node name="Buttons" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 455.0
+margin_top = 494.0
 margin_right = 1640.0
-margin_bottom = 515.0
+margin_bottom = 554.0
 custom_constants/separation = 80
 alignment = 1
 
@@ -675,5 +675,7 @@ anims/RESET = SubResource( 3 )
 anims/fade_in = SubResource( 4 )
 anims/goto_upgrades = SubResource( 5 )
 
+[connection signal="new_best" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Main/Stats/RankPanel" to="." method="_on_RankPanel_new_best"]
+[connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons/MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons/Retry" to="." method="_on_Retry_pressed"]
 [connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons/Upgrades" to="." method="_on_Upgrades_pressed"]

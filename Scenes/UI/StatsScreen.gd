@@ -1,6 +1,7 @@
 extends Control
 
 var in_upgrades := false
+var new_highscore := false
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var stats_header: ColorRect = $"%StatsHeader"
 onready var buttons: HBoxContainer = $"%Buttons"
@@ -29,6 +30,14 @@ func _input(event: InputEvent) -> void:
 func expand_header() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(stats_header, "rect_min_size:x", Config.resolution.x, 0.3)
+	if new_highscore:
+		stats_header.color = Color("f8d82c")
+		stats_header.get_child(0).text = "NEW BEST!"
+
+
+func _on_MainMenu_pressed() -> void:
+	SoundManager.play_ui_sound(Globals.UI_BUTTON)
+	EventBus.emit_signal("goto_menu")
 
 
 func _on_Retry_pressed() -> void:
@@ -43,3 +52,7 @@ func _on_Upgrades_pressed() -> void:
 		animation_player.play("goto_upgrades")
 	else:
 		animation_player.play_backwards("goto_upgrades")
+
+
+func _on_RankPanel_new_best() -> void:
+	new_highscore = true

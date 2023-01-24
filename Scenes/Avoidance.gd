@@ -22,7 +22,6 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	Engine.time_scale = 1.0
 	Globals.can_pause = true
 	Globals.reset_run_stats()
 	EventBus.emit_signal("avoidance_started")
@@ -30,9 +29,8 @@ func _ready() -> void:
 	EventBus.connect("ability_used", self, "_on_ability_used")
 	EventBus.connect("avoidance_ended", self, "_on_avoidance_ended")
 	EventBus.connect("avoidance_restart", self, "_on_avoidance_restart")
+	EventBus.connect("goto_menu", self, "_on_goto_menu")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	var mus_bus := SoundManager.get_default_music_bus()
-	AudioServer.set_bus_effect_enabled(mus_bus, 0, false)
 	audio_stream_player = SoundManager.play_music(Globals.AVOIDANCE_MUSIC, 0.0, "Music")
 	audio_stream_player.seek(0.0)
 
@@ -108,19 +106,32 @@ func _on_avoidance_ended() -> void:
 	$UI.add_child(stats_ui)
 
 
-func _on_avoidance_restart() -> void:
+func _spawn_transition(back_to_menu: bool) -> void:
 	if currently_restarting:
 		return
 	currently_restarting = true
 	player.iframe_immunity = true
 	create_tween().tween_property(audio_stream_player, "pitch_scale", 0.01, 0.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
-	transition_inst.connect("tree_exited", self, "_on_transition_finished")
+	transition_inst.connect("tree_exited", self, "_on_transition_finished", [back_to_menu])
 	add_child(transition_inst)
 
 
-func _on_transition_finished() -> void:
-	get_tree().reload_current_scene()
+func _on_avoidance_restart() -> void:
+	_spawn_transition(false)
+
+func _on_goto_menu() -> void:
+	_spawn_transition(true)
+
+
+func _on_transition_finished(back_to_menu: bool) -> void:
+	Engine.time_scale = 1.0
+	var mus_bus := SoundManager.get_default_music_bus()
+	AudioServer.set_bus_effect_enabled(mus_bus, 0, false)
+	if back_to_menu:
+		get_tree().change_scene_to(Globals.MAIN_MENU)
+	else:
+		get_tree().reload_current_scene()
 
 
 func _on_Player_all_abilities_expired() -> void:

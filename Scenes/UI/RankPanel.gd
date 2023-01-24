@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal new_best
+
 onready var time_bonus_count: Label = $MarginContainer/VBoxContainer/TimeBonus/Count
 onready var damage_penalty_count: Label = $MarginContainer/VBoxContainer/DamagePenalty/Count
 onready var ability_penalty_count: Label = $MarginContainer/VBoxContainer/AbilityPenalty/Count
@@ -17,6 +19,10 @@ func _ready() -> void:
 	damage_penalty_count.text = "-"+str(round(damage_penalty))
 	ability_penalty_count.text = "-"+str(round(ability_penalty))
 	target_score = max(time_score-damage_penalty-ability_penalty, 0.0)
+	if target_score > Config.previous_best:
+		Config.previous_best = target_score
+		Config.save_data()
+		emit_signal("new_best")
 
 
 func start() -> void:

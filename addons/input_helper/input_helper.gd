@@ -102,6 +102,7 @@ func reset_all_actions() -> void:
 			emit_signal("action_key_changed", action, get_action_key(action))
 		else:
 			emit_signal("action_button_changed", action, get_action_button(action))
+			device = DEVICE_GENERIC  # Fixes a very niche issue when using a gamepad and keyboard
 
 
 func is_valid_key(key: String) -> bool:
