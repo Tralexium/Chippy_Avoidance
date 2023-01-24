@@ -24,6 +24,7 @@ onready var infinite_jump: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/
 onready var infinite_items: CheckBox = $BG/Margin/Contents/Accessibility/Toggles/InfiniteItems
 onready var game_version: Label = $BG/Footer/GameVersion
 onready var toggles: VBoxContainer = $BG/Margin/Contents/General/Toggles
+onready var toggles_accessibility: VBoxContainer = $BG/Margin/Contents/Accessibility/Toggles
 
 
 func fetch_and_set_general_setting() -> void:
@@ -56,6 +57,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func focus() -> void:
 	is_present = true
 	for toggle in toggles.get_children():
+		toggle.audible = true
+	for toggle in toggles_accessibility.get_children():
 		toggle.audible = true
 	$BG/Margin/Contents/Tabs/GeneralTab.grab_focus()
 	$BG/Margin/Contents._on_GeneralTab_pressed()

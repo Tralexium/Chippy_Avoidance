@@ -497,14 +497,14 @@ valign = 1
 [node name="Margin" type="MarginContainer" parent="UISpace/UIBG/VBoxContainer"]
 margin_top = 118.0
 margin_right = 1920.0
-margin_bottom = 388.0
+margin_bottom = 672.0
 custom_constants/margin_right = 256
 custom_constants/margin_left = 256
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin"]
 margin_left = 256.0
 margin_right = 1664.0
-margin_bottom = 270.0
+margin_bottom = 554.0
 custom_constants/separation = 70
 alignment = 1
 
@@ -578,9 +578,9 @@ margin_bottom = 140.0
 [node name="Buttons" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 210.0
+margin_top = 494.0
 margin_right = 1408.0
-margin_bottom = 270.0
+margin_bottom = 554.0
 custom_constants/separation = 80
 alignment = 1
 

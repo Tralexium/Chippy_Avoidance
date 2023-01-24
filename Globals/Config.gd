@@ -39,7 +39,7 @@ var show_fps := false setget set_show_fps
 
 # Player related
 var player_max_hp := 3 setget set_player_max_hp
-var player_current_abilities := [2, 2, 2, 2]
+var player_current_abilities := [0, 0, 0, 0]
 var item_speed_dur := 6.0
 var item_jump_dur := 6.0
 var item_shield_dur := 4.0
