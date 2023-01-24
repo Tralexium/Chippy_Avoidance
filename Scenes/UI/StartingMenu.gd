@@ -76,7 +76,6 @@ func _on_Begin_pressed() -> void:
 func _on_Options_pressed() -> void:
 	options.release_focus()
 	emit_signal("options_pressed")
-	SoundManager.play_ui_sound(Globals.UI_BUTTON)
 
 func _on_Credits_pressed() -> void:
 	credits.release_focus()

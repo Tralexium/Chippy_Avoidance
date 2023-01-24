@@ -497,14 +497,14 @@ valign = 1
 [node name="Margin" type="MarginContainer" parent="UISpace/UIBG/VBoxContainer"]
 margin_top = 118.0
 margin_right = 1920.0
-margin_bottom = 672.0
+margin_bottom = 633.0
 custom_constants/margin_right = 140
 custom_constants/margin_left = 140
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin"]
 margin_left = 140.0
 margin_right = 1780.0
-margin_bottom = 554.0
+margin_bottom = 515.0
 custom_constants/separation = 70
 alignment = 1
 
@@ -575,6 +575,40 @@ custom_constants/separation = 50
 margin_top = 0.0
 margin_right = 1640.0
 margin_bottom = 140.0
+focus_neighbour_left = NodePath("Upgrade")
+focus_neighbour_top = NodePath("../../Buttons/Retry")
+focus_neighbour_right = NodePath("Upgrade")
+focus_neighbour_bottom = NodePath("../Items/GridContainer/Speed/Buy")
+focus_next = NodePath("../../Buttons/Retry")
+focus_previous = NodePath("../Items/GridContainer/Speed/Buy")
+
+[node name="PlayerHeadIcon" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/UpgradeHealth" index="0"]
+margin_left = 533.0
+margin_right = 673.0
+margin_bottom = 140.0
+
+[node name="BlackBar" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/UpgradeHealth" index="1"]
+margin_left = 693.0
+margin_top = 30.0
+margin_right = 757.0
+margin_bottom = 110.0
+
+[node name="Upgrade" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/UpgradeHealth" index="2"]
+margin_left = 777.0
+margin_top = 33.0
+margin_right = 977.0
+margin_bottom = 107.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../Items/GridContainer/Speed/Buy")
+focus_next = NodePath("../../Items/GridContainer/Speed/Buy")
+focus_previous = NodePath("../../../Buttons/Retry")
+
+[node name="GemCost" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/UpgradeHealth" index="3"]
+margin_left = 997.0
+margin_right = 1106.0
+margin_bottom = 140.0
 
 [node name="Items" type="CenterContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades"]
 margin_top = 190.0
@@ -589,39 +623,71 @@ custom_constants/vseparation = 35
 custom_constants/hseparation = 70
 columns = 2
 
-[node name="ItemShopWidget" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+[node name="Speed" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 513.0
 margin_bottom = 80.0
 
-[node name="ItemShopWidget2" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+[node name="Buy" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Speed" index="2"]
+focus_neighbour_left = NodePath("../../Jump/Buy")
+focus_neighbour_top = NodePath("../../../../UpgradeHealth/Upgrade")
+focus_neighbour_right = NodePath("../../Jump/Buy")
+focus_neighbour_bottom = NodePath("../../Shield/Buy")
+focus_next = NodePath("../../Jump/Buy")
+focus_previous = NodePath("../../Slomo/Buy")
+
+[node name="Jump" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
 margin_left = 583.0
 margin_top = 0.0
 margin_right = 1096.0
 margin_bottom = 80.0
 ability = 1
 
-[node name="ItemShopWidget3" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+[node name="Buy" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Jump" index="2"]
+focus_neighbour_left = NodePath("../../Speed/Buy")
+focus_neighbour_top = NodePath("../../../../UpgradeHealth/Upgrade")
+focus_neighbour_right = NodePath("../../Speed/Buy")
+focus_neighbour_bottom = NodePath("../../Slomo/Buy")
+focus_next = NodePath("../../Shield/Buy")
+focus_previous = NodePath("../../Speed/Buy")
+
+[node name="Shield" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
 margin_left = 0.0
 margin_top = 115.0
 margin_right = 513.0
 margin_bottom = 195.0
 ability = 2
 
-[node name="ItemShopWidget4" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+[node name="Buy" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Shield" index="2"]
+focus_neighbour_left = NodePath("../../Slomo/Buy")
+focus_neighbour_top = NodePath("../../Speed/Buy")
+focus_neighbour_right = NodePath("../../Slomo/Buy")
+focus_neighbour_bottom = NodePath("../../../../../Buttons/Retry")
+focus_next = NodePath("../../Slomo/Buy")
+focus_previous = NodePath("../../Jump/Buy")
+
+[node name="Slomo" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
 margin_left = 583.0
 margin_top = 115.0
 margin_right = 1096.0
 margin_bottom = 195.0
 ability = 3
 
+[node name="Buy" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Slomo" index="2"]
+focus_neighbour_left = NodePath("../../Shield/Buy")
+focus_neighbour_top = NodePath("../../Jump/Buy")
+focus_neighbour_right = NodePath("../../Shield/Buy")
+focus_neighbour_bottom = NodePath("../../../../../Buttons/Retry")
+focus_next = NodePath("../../Speed/Buy")
+focus_previous = NodePath("../../Shield/Buy")
+
 [node name="Buttons" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 494.0
+margin_top = 455.0
 margin_right = 1640.0
-margin_bottom = 554.0
+margin_bottom = 515.0
 custom_constants/separation = 80
 alignment = 1
 
@@ -631,7 +697,6 @@ margin_right = 590.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 300, 60 )
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../Retry")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Retry")
@@ -645,7 +710,6 @@ margin_right = 970.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 300, 60 )
 focus_neighbour_left = NodePath("../MainMenu")
-focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../Upgrades")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Upgrades")
@@ -659,7 +723,6 @@ margin_right = 1350.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 300, 60 )
 focus_neighbour_left = NodePath("../Retry")
-focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
@@ -679,3 +742,9 @@ anims/goto_upgrades = SubResource( 5 )
 [connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons/MainMenu" to="." method="_on_MainMenu_pressed"]
 [connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons/Retry" to="." method="_on_Retry_pressed"]
 [connection signal="pressed" from="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons/Upgrades" to="." method="_on_Upgrades_pressed"]
+
+[editable path="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/UpgradeHealth"]
+[editable path="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Speed"]
+[editable path="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Jump"]
+[editable path="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Shield"]
+[editable path="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer/Slomo"]

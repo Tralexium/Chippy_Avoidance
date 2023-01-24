@@ -34,6 +34,10 @@ func fade_in_credits() -> void:
 	fade_out_timer.stop()
 	is_showing = true
 	is_present = true
+	_show_next_line()
+
+
+func _show_next_line() -> void:
 	if current_node < contents.get_child_count():
 		var node := contents.get_child(current_node)
 		var tween := create_tween()
@@ -56,7 +60,7 @@ func _on_BackToMenu_pressed() -> void:
 
 
 func _on_FadeIn_timeout() -> void:
-	fade_in_credits()
+	_show_next_line()
 
 
 func _on_FadeOut_timeout() -> void:

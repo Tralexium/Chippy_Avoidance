@@ -65,6 +65,7 @@ func focus() -> void:
 
 
 func lose_focus() -> void:
+	is_present = false
 	get_focus_owner().release_focus()
 
 

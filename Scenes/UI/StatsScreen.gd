@@ -22,7 +22,7 @@ func _input(event: InputEvent) -> void:
 		is_focused = button.has_focus()
 		if is_focused:
 			break
-	if Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").length() > 0.0 and !is_focused:
+	if Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").length() > 0.0 and !is_focused and !in_upgrades:
 		buttons.get_node("Retry").grab_focus()
 		accept_event()
 

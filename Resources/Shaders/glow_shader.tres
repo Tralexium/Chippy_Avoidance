@@ -24,7 +24,7 @@ vec3 GetBloomPixel(sampler2D tex, vec2 uv, vec2 texPixelSize) {
 
 vec3 GetBloom(sampler2D tex, vec2 uv, vec2 texPixelSize) {
 	vec3 bloom = vec3(0.0);
-	vec2 off = vec2(1) * texPixelSize * bloomRadius;
+	vec2 off = vec2(1.0) * texPixelSize * bloomRadius;
 	bloom += GetBloomPixel(tex, uv + off * vec2(-1, -1), texPixelSize * bloomRadius) * 0.292893;
 	bloom += GetBloomPixel(tex, uv + off * vec2(-1, 0), texPixelSize * bloomRadius) * 0.5;
 	bloom += GetBloomPixel(tex, uv + off * vec2(-1, 1), texPixelSize * bloomRadius) * 0.292893;
@@ -40,13 +40,13 @@ vec3 GetBloom(sampler2D tex, vec2 uv, vec2 texPixelSize) {
 
 void fragment() {
 	vec4 col = texture(SCREEN_TEXTURE, SCREEN_UV);
-	vec3 bloom = GetBloom(SCREEN_TEXTURE, SCREEN_UV, SCREEN_PIXEL_SIZE);
+	vec3 bloom = GetBloom(SCREEN_TEXTURE, SCREEN_UV, SCREEN_PIXEL_SIZE/15.0);
 	col.rgb += bloom * bloomIntensity;
 	COLOR = col;
 }"
 
 [resource]
 shader = SubResource( 1 )
-shader_param/bloomRadius = 30.0
+shader_param/bloomRadius = 300.0
 shader_param/bloomThreshold = 0.3
 shader_param/bloomIntensity = 0.3

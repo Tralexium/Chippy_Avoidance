@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Tutorial - Unreal_Tournament_Forgone_Rejuvenation_OC_ReMix.ogg-5376d587d2d8fedc55fabb92492b3f4e.oggstr"
+
+[deps]
+
+source_file="res://Audio/Music/Tutorial - Unreal_Tournament_Forgone_Rejuvenation_OC_ReMix.ogg"
+dest_files=[ "res://.import/Tutorial - Unreal_Tournament_Forgone_Rejuvenation_OC_ReMix.ogg-5376d587d2d8fedc55fabb92492b3f4e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
