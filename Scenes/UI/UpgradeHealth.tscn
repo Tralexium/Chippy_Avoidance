@@ -11,7 +11,7 @@ bg_color = Color( 0.0235294, 0, 0.0627451, 1 )
 skew = Vector2( 0.3, 0 )
 border_width_left = 32
 border_width_top = 8
-border_width_right = 8
+border_width_right = 32
 border_width_bottom = 8
 border_color = Color( 0.0235294, 0, 0.0627451, 1 )
 border_blend = true
@@ -34,8 +34,8 @@ __meta__ = {
 
 [node name="PlayerHeadIcon" type="TextureRect" parent="."]
 material = ExtResource( 2 )
-margin_left = 186.0
-margin_right = 326.0
+margin_left = 174.0
+margin_right = 314.0
 margin_bottom = 180.0
 rect_min_size = Vector2( 140, 140 )
 texture = ExtResource( 1 )
@@ -43,9 +43,9 @@ expand = true
 stretch_mode = 6
 
 [node name="BlackBar" type="PanelContainer" parent="."]
-margin_left = 346.0
+margin_left = 334.0
 margin_top = 50.0
-margin_right = 386.0
+margin_right = 398.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_vertical = 4
@@ -62,17 +62,17 @@ margin_bottom = 72.0
 custom_constants/separation = 32
 
 [node name="Upgrade" type="Button" parent="."]
-margin_left = 406.0
+margin_left = 418.0
 margin_top = 53.0
-margin_right = 606.0
+margin_right = 618.0
 margin_bottom = 127.0
 rect_min_size = Vector2( 200, 74 )
 size_flags_vertical = 4
 text = "Upgrade HP"
 
 [node name="GemCost" parent="." instance=ExtResource( 5 )]
-margin_left = 626.0
-margin_right = 735.0
+margin_left = 638.0
+margin_right = 747.0
 margin_bottom = 180.0
 
 [connection signal="pressed" from="Upgrade" to="." method="_on_Upgrade_pressed"]

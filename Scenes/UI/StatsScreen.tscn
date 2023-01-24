@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/UI/RankPanel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/UpgradeHealth.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/UI/GemTotal.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/UI/ItemShopWidget.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -457,10 +458,9 @@ ratio = 1.6568
 stretch_mode = 0
 
 [node name="UIBG" type="ColorRect" parent="UISpace"]
-margin_left = -6.10352e-05
-margin_top = -39.4302
+margin_top = 154.721
 margin_right = 1920.0
-margin_bottom = 1119.43
+margin_bottom = 925.279
 color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
 
 [node name="GemTotal" parent="UISpace/UIBG" instance=ExtResource( 10 )]
@@ -497,14 +497,14 @@ valign = 1
 [node name="Margin" type="MarginContainer" parent="UISpace/UIBG/VBoxContainer"]
 margin_top = 118.0
 margin_right = 1920.0
-margin_bottom = 672.0
-custom_constants/margin_right = 256
-custom_constants/margin_left = 256
+margin_bottom = 633.0
+custom_constants/margin_right = 140
+custom_constants/margin_left = 140
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin"]
-margin_left = 256.0
-margin_right = 1664.0
-margin_bottom = 554.0
+margin_left = 140.0
+margin_right = 1780.0
+margin_bottom = 515.0
 custom_constants/separation = 70
 alignment = 1
 
@@ -567,26 +567,67 @@ margin_bottom = 254.0
 
 [node name="Upgrades" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
 visible = false
-margin_right = 1408.0
-margin_bottom = 140.0
+margin_right = 1640.0
+margin_bottom = 385.0
+custom_constants/separation = 50
 
 [node name="UpgradeHealth" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades" instance=ExtResource( 9 )]
 margin_top = 0.0
-margin_right = 1408.0
+margin_right = 1640.0
 margin_bottom = 140.0
+
+[node name="Items" type="CenterContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades"]
+margin_top = 190.0
+margin_right = 1640.0
+margin_bottom = 385.0
+
+[node name="GridContainer" type="GridContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items"]
+margin_left = 272.0
+margin_right = 1368.0
+margin_bottom = 195.0
+custom_constants/vseparation = 35
+custom_constants/hseparation = 70
+columns = 2
+
+[node name="ItemShopWidget" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 513.0
+margin_bottom = 80.0
+
+[node name="ItemShopWidget2" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+margin_left = 583.0
+margin_top = 0.0
+margin_right = 1096.0
+margin_bottom = 80.0
+ability = 1
+
+[node name="ItemShopWidget3" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+margin_left = 0.0
+margin_top = 115.0
+margin_right = 513.0
+margin_bottom = 195.0
+ability = 2
+
+[node name="ItemShopWidget4" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Upgrades/Items/GridContainer" instance=ExtResource( 11 )]
+margin_left = 583.0
+margin_top = 115.0
+margin_right = 1096.0
+margin_bottom = 195.0
+ability = 3
 
 [node name="Buttons" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 494.0
-margin_right = 1408.0
-margin_bottom = 554.0
+margin_top = 455.0
+margin_right = 1640.0
+margin_bottom = 515.0
 custom_constants/separation = 80
 alignment = 1
 
 [node name="MainMenu" type="Button" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons"]
-margin_left = 174.0
-margin_right = 474.0
+margin_left = 290.0
+margin_right = 590.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 300, 60 )
 focus_neighbour_left = NodePath(".")
@@ -599,8 +640,8 @@ size_flags_horizontal = 0
 text = "Main Menu"
 
 [node name="Retry" type="Button" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons"]
-margin_left = 554.0
-margin_right = 854.0
+margin_left = 670.0
+margin_right = 970.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 300, 60 )
 focus_neighbour_left = NodePath("../MainMenu")
@@ -613,8 +654,8 @@ size_flags_horizontal = 0
 text = "Retry"
 
 [node name="Upgrades" type="Button" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer/Buttons"]
-margin_left = 934.0
-margin_right = 1234.0
+margin_left = 1050.0
+margin_right = 1350.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 300, 60 )
 focus_neighbour_left = NodePath("../Retry")

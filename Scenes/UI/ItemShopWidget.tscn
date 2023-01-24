@@ -31,7 +31,6 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
-ability = 3
 
 [node name="ItemIcon" type="TextureRect" parent="."]
 material = ExtResource( 3 )

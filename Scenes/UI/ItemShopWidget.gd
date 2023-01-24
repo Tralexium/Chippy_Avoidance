@@ -20,8 +20,6 @@ func _ready() -> void:
 	var i := 0
 	active_dots = Config.player_current_abilities[ability]
 	gem_cost.cost(Config.ability_costs[active_dots])
-	if active_dots == Config.MAX_ABILITIES:
-		_max_abilities()
 	for bar in range(Config.MAX_ABILITIES):
 		var dot_inst := DOT.instance()
 		if i < active_dots:
@@ -49,6 +47,8 @@ func _ready() -> void:
 			item_icon.modulate = Color("2cb5f8")
 			buy_button.text += "Shield"
 	dots_container.modulate = item_icon.modulate
+	if active_dots == Config.MAX_ABILITIES:
+		_max_abilities()
 
 
 func _max_abilities() -> void:
