@@ -92,6 +92,7 @@ shader_param/vignette_opacity = 0.584
 shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
 
 [node name="AlwaysRendered" type="CanvasLayer"]
+pause_mode = 2
 layer = 100
 script = ExtResource( 5 )
 

@@ -35,6 +35,20 @@ func is_playing(resource: AudioStream) -> bool:
 		return busy_players.size() > 0
 
 
+func resume(fade_in_duration: float = 0.0) -> void:
+	for player in busy_players:
+		if fade_in_duration <= 0.0:
+			fade_in_duration = 0.01
+		fade_volume(player, -80, player.volume_db, fade_in_duration, false)
+
+
+func pause(fade_out_duration: float = 0.0) -> void:
+	for player in busy_players:
+		if fade_out_duration <= 0.0:
+			fade_out_duration = 0.01
+		fade_volume(player, player.volume_db, -80, fade_out_duration, false)
+
+
 func stop(fade_out_duration: float = 0.0) -> void:
 	for player in busy_players:
 		if fade_out_duration <= 0.0:
@@ -63,7 +77,7 @@ func get_currently_playing_tracks() -> Array:
 	return tracks
 
 
-func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float, duration: float) -> AudioStreamPlayer:
+func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float, duration: float, erase_player: bool = true) -> AudioStreamPlayer:
 	# Remove any tweens that might already be on this player
 	_remove_tween(player)
 	
@@ -80,7 +94,7 @@ func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float
 		tween.interpolate_property(player, "volume_db", from_volume, to_volume, duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	
 	tweens[player] = tween
-	tween.connect("tween_all_completed", self, "_on_fade_completed", [player, tween, from_volume, to_volume, duration])
+	tween.connect("tween_all_completed", self, "_on_fade_completed", [player, tween, from_volume, to_volume, duration, erase_player])
 	tween.start()
 
 	return player
@@ -107,10 +121,11 @@ func _remove_tween(player: AudioStreamPlayer) -> void:
 ### Signals
 
 
-func _on_fade_completed(player: AudioStreamPlayer, tween: Tween, from_volume: float, to_volume: float, duration: float):
+func _on_fade_completed(player: AudioStreamPlayer, tween: Tween, from_volume: float, to_volume: float, duration: float, erase_player: bool = true):
 	_remove_tween(player)
 	
 	# If we just faded out then our player is now available
 	if to_volume <= -79.0:
 		player.stop()
-		mark_player_as_available(player)
+		if erase_player:
+			mark_player_as_available(player)

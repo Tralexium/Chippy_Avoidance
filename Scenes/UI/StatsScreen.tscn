@@ -449,7 +449,7 @@ script = ExtResource( 6 )
 [node name="BG" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0235294, 0, 0.0627451, 0.486275 )
+color = Color( 0.0235294, 0, 0.0627451, 0.666667 )
 
 [node name="UISpace" type="AspectRatioContainer" parent="."]
 anchor_right = 1.0

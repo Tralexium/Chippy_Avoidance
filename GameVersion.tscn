@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/UI/GameVersion.gd" type="Script" id=1]
+
+[node name="GameVersion" type="Label"]
+margin_top = 8.0
+margin_right = 1333.0
+margin_bottom = 37.0
+size_flags_vertical = 3
+text = "game version: -.-.-"
+script = ExtResource( 1 )
