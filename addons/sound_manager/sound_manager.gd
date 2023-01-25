@@ -23,6 +23,10 @@ func play_ui_sound(resource: AudioStream, override_bus: String = "") -> AudioStr
 	return ui_sound_effects.play(resource, override_bus)
 
 
+func stop_all_sounds() -> void:
+	sound_effects.stop_all_busy_players()
+
+
 func set_default_sound_bus(bus: String) -> void:
 	sound_effects.bus = bus
 
@@ -73,6 +77,14 @@ func get_currently_playing_music() -> Array:
 
 func get_currently_playing_music_tracks() -> Array:
 	return music.get_currently_playing_tracks()
+
+
+func resume_music(fade_out_duration: float = 0) -> void:
+	music.resume(fade_out_duration)
+
+
+func pause_music(fade_out_duration: float = 0) -> void:
+	music.pause(fade_out_duration)
 
 
 func stop_music(fade_out_duration: float = 0) -> void:

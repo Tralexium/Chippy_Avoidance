@@ -180,7 +180,7 @@ tracks/2/keys = {
 
 [node name="PauseMenu" type="CanvasLayer"]
 pause_mode = 2
-layer = 99
+layer = 98
 script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="."]
@@ -309,3 +309,5 @@ anims/disable = SubResource( 3 )
 anims/enable = SubResource( 2 )
 
 [connection signal="pressed" from="Control/UISpace/UIBG/VBoxContainer/Margin/Buttons/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="Control/UISpace/UIBG/VBoxContainer/Margin/Buttons/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="pressed" from="Control/UISpace/UIBG/VBoxContainer/Margin/Buttons/Exit" to="." method="_on_Exit_pressed"]

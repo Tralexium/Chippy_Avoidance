@@ -51,7 +51,13 @@ func increase_pool() -> void:
 	available_players.append(player)
 	player.bus = bus
 	player.connect("finished", self, "_on_player_finished", [player])
-  
+
+
+func stop_all_busy_players() -> void:
+	for player in busy_players:
+		player.stop()
+		mark_player_as_available(player)
+
 
 ### SIGNALS
 

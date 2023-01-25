@@ -52,8 +52,10 @@ func pause(fade_out_duration: float = 0.0) -> void:
 func stop(fade_out_duration: float = 0.0) -> void:
 	for player in busy_players:
 		if fade_out_duration <= 0.0:
-			fade_out_duration = 0.01
-		fade_volume(player, player.volume_db, -80, fade_out_duration)
+			player.stop()
+			mark_player_as_available(player)
+		else:
+			fade_volume(player, player.volume_db, -80, fade_out_duration)
 
 
 func is_track_playing(resource_path: String) -> bool:

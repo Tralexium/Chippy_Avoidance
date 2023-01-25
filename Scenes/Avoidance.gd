@@ -38,8 +38,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !currently_restarting:
 		audio_stream_player.pitch_scale = Engine.time_scale
-	if Input.is_action_just_pressed("escape"):
-		get_tree().change_scene_to(Globals.MAIN_MENU)
 	if !Globals.debug_mode:
 		return
 	if Input.is_action_just_pressed("dev_skip_phase_up"):
@@ -113,7 +111,7 @@ func _spawn_transition(back_to_menu: bool) -> void:
 	player.iframe_immunity = true
 	create_tween().tween_property(audio_stream_player, "pitch_scale", 0.01, 0.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
-	transition_inst.connect("tree_exited", self, "_on_transition_finished", [back_to_menu])
+	transition_inst.connect("finished", self, "_on_transition_finished", [back_to_menu])
 	add_child(transition_inst)
 
 

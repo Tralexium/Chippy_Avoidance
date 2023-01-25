@@ -1,8 +1,11 @@
 extends CanvasLayer
 
+signal finished
+
 export var reverse := false
 onready var color_rect: ColorRect = $ColorRect
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var delete: Timer = $Delete
 
 
 func _ready() -> void:
@@ -15,4 +18,9 @@ func _ready() -> void:
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	emit_signal("finished")
+	delete.start()
+
+
+func _on_Delete_timeout() -> void:
 	queue_free()

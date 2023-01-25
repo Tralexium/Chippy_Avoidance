@@ -10,6 +10,7 @@ onready var credits: Control = $UI/Credits
 
 func _ready() -> void:
 	options.fetch_and_set_general_setting()
+	Globals.can_pause = false
 	SoundManager.play_music(Globals.MAIN_MENU_MUSIC)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	EventBus.emit_signal("main_menu_started")
@@ -34,7 +35,7 @@ func _on_Credits_go_back() -> void:
 
 
 func _on_StartingMenu_exit_pressed() -> void:
-	SoundManager.stop_music(1.5)
+	SoundManager.pause_music(1.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	add_child(transition_inst)
 	yield(transition_inst, "tree_exited")
@@ -42,7 +43,7 @@ func _on_StartingMenu_exit_pressed() -> void:
 
 
 func _on_StartingMenu_begin_pressed() -> void:
-	SoundManager.stop_music(1.5)
+	SoundManager.pause_music(1.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	add_child(transition_inst)
 	yield(transition_inst, "tree_exited")
