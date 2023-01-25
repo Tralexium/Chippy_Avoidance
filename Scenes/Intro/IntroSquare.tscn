@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/UI/Intro/hidden_squares.png" type="Texture" id=1]
 [ext_resource path="res://Assets/UI/Intro/revealed_squares.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Intro/IntroSquare.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
+tracks/0/path = NodePath("Position3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,7 +19,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/path = NodePath("Position3D:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -30,7 +31,7 @@ tracks/1/keys = {
 "values": [ Vector3( -90, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("SymbolPanel:modulate")
+tracks/2/path = NodePath("Position3D/SymbolPanel:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -42,7 +43,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("LetterPanel:modulate")
+tracks/3/path = NodePath("Position3D/LetterPanel:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -58,7 +59,7 @@ tracks/3/keys = {
 resource_name = "reveal"
 length = 1.2
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
+tracks/0/path = NodePath("Position3D:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -70,7 +71,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2, 0 ), Vector3( 0, -0.5, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/path = NodePath("Position3D:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -82,7 +83,7 @@ tracks/1/keys = {
 "values": [ Vector3( -90, 0, 0 ), Vector3( 450, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("SymbolPanel:modulate")
+tracks/2/path = NodePath("Position3D/SymbolPanel:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -94,7 +95,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1.5, 1.5, 1.5, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("LetterPanel:modulate")
+tracks/3/path = NodePath("Position3D/LetterPanel:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -107,15 +108,18 @@ tracks/3/keys = {
 }
 
 [node name="IntroSquare" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Position3D" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 
-[node name="SymbolPanel" type="Sprite3D" parent="."]
+[node name="SymbolPanel" type="Sprite3D" parent="Position3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.21569e-09, 0.0450734 )
 pixel_size = 0.005
 texture = ExtResource( 1 )
 hframes = 9
 
-[node name="LetterPanel" type="Sprite3D" parent="."]
+[node name="LetterPanel" type="Sprite3D" parent="Position3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26094e-09, -0.0534032 )
 flip_v = true
 pixel_size = 0.005

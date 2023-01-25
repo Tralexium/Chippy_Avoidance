@@ -38,7 +38,7 @@ func _on_StartingMenu_exit_pressed() -> void:
 	SoundManager.pause_music(1.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	add_child(transition_inst)
-	yield(transition_inst, "tree_exited")
+	yield(transition_inst, "finished")
 	get_tree().quit()
 
 
@@ -46,7 +46,7 @@ func _on_StartingMenu_begin_pressed() -> void:
 	SoundManager.pause_music(1.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	add_child(transition_inst)
-	yield(transition_inst, "tree_exited")
+	yield(transition_inst, "finished")
 	get_tree().change_scene_to(Globals.AVOIDANCE)
 
 
