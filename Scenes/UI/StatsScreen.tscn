@@ -458,9 +458,10 @@ ratio = 1.6568
 stretch_mode = 0
 
 [node name="UIBG" type="ColorRect" parent="UISpace"]
-margin_top = 154.721
+margin_left = -6.10352e-05
+margin_top = -39.4302
 margin_right = 1920.0
-margin_bottom = 925.279
+margin_bottom = 1119.43
 color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
 
 [node name="GemTotal" parent="UISpace/UIBG" instance=ExtResource( 10 )]
@@ -497,14 +498,14 @@ valign = 1
 [node name="Margin" type="MarginContainer" parent="UISpace/UIBG/VBoxContainer"]
 margin_top = 118.0
 margin_right = 1920.0
-margin_bottom = 633.0
+margin_bottom = 672.0
 custom_constants/margin_right = 140
 custom_constants/margin_left = 140
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin"]
 margin_left = 140.0
 margin_right = 1780.0
-margin_bottom = 515.0
+margin_bottom = 554.0
 custom_constants/separation = 70
 alignment = 1
 
@@ -685,9 +686,9 @@ focus_previous = NodePath("../../Shield/Buy")
 [node name="Buttons" type="HBoxContainer" parent="UISpace/UIBG/VBoxContainer/Margin/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 455.0
+margin_top = 494.0
 margin_right = 1640.0
-margin_bottom = 515.0
+margin_bottom = 554.0
 custom_constants/separation = 80
 alignment = 1
 

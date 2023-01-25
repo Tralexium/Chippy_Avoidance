@@ -7,6 +7,7 @@ signal options_pressed
 signal credits_pressed
 signal exit_pressed
 
+var in_transition := false
 onready var scrolling_icons: TextureRect = $BG/ScrollingIcons
 onready var selected_button: Label = $BG/NeonBar/SelectedButton
 onready var begin: Button = $BG/Buttons/Begin
@@ -25,7 +26,7 @@ func _process(delta: float) -> void:
 	if get_focus_owner() != null:
 		return
 	var xy_input := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down", 0.2)
-	if xy_input.length() > 0:
+	if xy_input.length() > 0 and !in_transition:
 		begin.grab_focus()
 
 

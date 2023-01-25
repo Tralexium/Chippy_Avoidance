@@ -72,9 +72,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.787, 0, 0 )
 number = 8
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.908004, 0.289476, -0.302875, 0, 0.722917, 0.690935, 0.418963, -0.627371, 0.656411, -4.50959, 10.4761, 10.6902 )
+transform = Transform( 0.908004, 0.289476, -0.302875, 0, 0.722917, 0.690935, 0.418963, -0.627371, 0.656411, -4.90159, 10.4761, 10.2272 )
 projection = 1
-size = 28.0
+size = 24.0
 far = 450.0
 
 [node name="2D" type="CanvasLayer" parent="."]

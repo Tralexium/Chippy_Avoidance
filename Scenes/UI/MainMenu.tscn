@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/MenuSkybox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Universal/CircleTransition.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/UI/ConfirmationBox.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -235,14 +236,14 @@ far = 1000.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 7680.0
-margin_bottom = 4320.0
+margin_right = 11520.0
+margin_bottom = 6480.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 anchor_right = 0.0
 margin_left = 1918.0
 margin_right = 3838.0
-margin_bottom = 5400.0
+margin_bottom = 7560.0
 
 [node name="Credits" parent="UI" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -250,6 +251,10 @@ anchor_bottom = 0.0
 margin_left = -1921.0
 margin_right = -1.0
 margin_bottom = 1080.0
+
+[node name="ConfirmationBox" parent="UI" instance=ExtResource( 9 )]
+visible = false
+text = "Are you sure you want to exit?"
 
 [node name="BloomRect" parent="UI" instance=ExtResource( 4 )]
 
@@ -269,3 +274,4 @@ anims/move_to_options = SubResource( 2 )
 [connection signal="options_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_options_pressed"]
 [connection signal="go_back" from="UI/Options" to="." method="_on_Options_go_back"]
 [connection signal="go_back" from="UI/Credits" to="." method="_on_Credits_go_back"]
+[connection signal="answered" from="UI/ConfirmationBox" to="." method="_on_ConfirmationBox_answered"]
