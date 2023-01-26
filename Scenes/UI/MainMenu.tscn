@@ -236,14 +236,14 @@ far = 1000.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 11520.0
-margin_bottom = 6480.0
+margin_right = 13440.0
+margin_bottom = 7560.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 anchor_right = 0.0
 margin_left = 1918.0
 margin_right = 3838.0
-margin_bottom = 7560.0
+margin_bottom = 8640.0
 
 [node name="Credits" parent="UI" instance=ExtResource( 5 )]
 anchor_right = 0.0
