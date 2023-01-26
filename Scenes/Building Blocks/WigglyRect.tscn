@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Resources/Shaders/abstract_crystal.tres" type="Material" id=1]
+[ext_resource path="res://Resources/Meshes/multimesh_rectangle.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://Scenes/Building Blocks/WigglyRect.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Top:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "wiggle_loop"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Top:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 6 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[node name="WigglyRect" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Top" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/wiggle_loop = SubResource( 2 )
+
+[node name="StartDelay" type="Timer" parent="."]
+
+[connection signal="timeout" from="StartDelay" to="." method="_on_StartDelay_timeout"]

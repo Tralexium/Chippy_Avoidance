@@ -26,11 +26,11 @@
 [ext_resource path="res://Scenes/UI/AbilityBorderFX.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scenes/UI/PlayerHUD.tscn" type="PackedScene" id=25]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=10]
 params_cull_mode = 1
 
 [sub_resource type="SphereMesh" id=4]
-material = SubResource( 3 )
+material = SubResource( 10 )
 radius = 400.0
 height = 400.0
 rings = 64

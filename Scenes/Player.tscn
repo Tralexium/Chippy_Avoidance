@@ -1680,7 +1680,7 @@ nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale", "air_blend", 0, "fall", "air_blend", 1, "jump", "TimeScale", 0, "flip_jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "idle_time_scale", 0, "idle", "running_time_scale", 0, "running", "output", 0, "in_air_state" ]
+node_connections = [ "output", 0, "in_air_state", "TimeScale", 0, "flip_jump", "air_blend", 0, "fall", "air_blend", 1, "jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "idle_time_scale", 0, "idle", "running_time_scale", 0, "running", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
