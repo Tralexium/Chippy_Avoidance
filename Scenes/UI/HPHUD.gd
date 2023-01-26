@@ -2,11 +2,12 @@ extends Control
 
 const BAR := preload("res://Scenes/UI/HPBar.tscn")
 const DEAD_ICON := preload("res://Assets/Blender Renders/player_head_dead_b&w_small.png")
+const LIVE_ICON := preload("res://Assets/Blender Renders/player_head_small.png")
 
 var shake_amnt := 0.0
 var initial_pos := Vector2.ZERO
-onready var hp_bars := Config.player_max_hp
-onready var previous_hp := Config.player_max_hp
+var hp_bars := 0
+var previous_hp := 0
 onready var health_bars: HBoxContainer = $HealthBars
 onready var player_head_icon: TextureRect = $PlayerHeadIcon
 onready var black_bar: Panel = $BlackBar
@@ -15,8 +16,19 @@ onready var blood_part: Particles2D = $BloodPart
 
 func _ready() -> void:
 	EventBus.connect("hp_changed", self, "eliminate_bar")
-	for i in range(hp_bars):
+	set_bars(Config.player_max_hp)
+
+
+func set_bars(bars: int) -> void:
+	if health_bars.get_child_count() > 0:
+		for bar in health_bars.get_children():
+			if bar.name != "IconSpacing":
+				bar.queue_free()
+	player_head_icon.texture = LIVE_ICON
+	for i in range(bars):
 		health_bars.add_child(BAR.instance())
+	hp_bars = bars
+	previous_hp = bars
 	yield(get_tree(), "idle_frame")
 	black_bar.rect_size.x = health_bars.rect_size.x + 5
 

@@ -4,6 +4,7 @@ extends Node
 const INTRO := preload("res://Scenes/Intro/Intro.tscn")
 const MAIN_MENU := preload("res://Scenes/UI/MainMenu.tscn")
 const AVOIDANCE := preload("res://Scenes/Avoidance.tscn")
+const TUTORIAL := preload("res://Scenes/Tutorial.tscn")
 const MAIN_MENU_MUSIC := preload("res://Audio/Music/Mittsies - Horizon.ogg")
 const AVOIDANCE_MUSIC := preload("res://Audio/Music/aran_EPHMR.ogg")
 const TUTORIAL_MUSIC := preload("res://Audio/Music/Tutorial - Unreal_Tournament_Forgone_Rejuvenation_OC_ReMix.ogg")
@@ -14,7 +15,6 @@ const UI_BUTTON := preload("res://Audio/SFX/ui_button.wav")
 const UI_BACK := preload("res://Audio/SFX/ui_back.wav")
 const UI_OFF := preload("res://Audio/SFX/ui_toggle_off.wav")
 const UI_ON := preload("res://Audio/SFX/ui_toggle_on.wav")
-
 
 enum TIMELINE_EVENTS {
 	ITEM_1, ITEM_2, ITEM_3, ITEM_4,

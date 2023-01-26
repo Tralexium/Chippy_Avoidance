@@ -10,6 +10,10 @@ func _ready() -> void:
 	EventBus.connect("ability_used", self, "_on_ability_used")
 
 
+func slide_in() -> void:
+	animation_player.play("slide_in")
+
+
 func _slide_out() -> void:
 	animation_player.play_backwards("slide_in")
 

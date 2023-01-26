@@ -3,7 +3,7 @@ extends Position3D
 signal finished_camera_rotation
 
 export var mouse_sens := 0.3
-export var zoom_len := 2.0
+export var zoom_len := 4.0
 
 var is_2d = false
 var ease_weight := 0.0

@@ -1,6 +1,7 @@
 extends HBoxContainer
 
 export var duration := 136.0
+export var in_tutorial := false
 
 var tween : SceneTreeTween
 onready var progress_bar: ProgressBar = $ProgressBar
@@ -9,7 +10,7 @@ onready var percent: Label = $Percent
 
 func _ready() -> void:
 	EventBus.connect("avoidance_ended", self, "_on_avoidance_ended")
-	visible = Config.show_bar
+	visible = Config.show_bar and !in_tutorial
 	percent.visible = Config.show_percentage
 	tween = create_tween().set_parallel()
 	tween.tween_property(progress_bar, "value", 100.0, duration)

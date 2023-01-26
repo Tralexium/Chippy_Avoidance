@@ -3,6 +3,7 @@ extends "res://addons/sound_manager/abstract_audio_player_pool.gd"
 
 var tweens: Dictionary = {}
 var track_history: Array = []
+var last_track_pos := 0.0
 
 
 func play(resource: AudioStream, volume: float = 0.0, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
@@ -37,16 +38,17 @@ func is_playing(resource: AudioStream) -> bool:
 
 func resume(fade_in_duration: float = 0.0) -> void:
 	for player in busy_players:
+		player.play(last_track_pos)
 		if fade_in_duration <= 0.0:
 			fade_in_duration = 0.01
-		fade_volume(player, -80, player.volume_db, fade_in_duration, false)
+		fade_volume(player, player.volume_db, 0, fade_in_duration)
 
 
 func pause(fade_out_duration: float = 0.0) -> void:
 	for player in busy_players:
 		if fade_out_duration <= 0.0:
 			fade_out_duration = 0.01
-		fade_volume(player, player.volume_db, -80, fade_out_duration, false)
+		fade_volume(player, player.volume_db, -79, fade_out_duration)
 
 
 func stop(fade_out_duration: float = 0.0) -> void:
@@ -79,7 +81,7 @@ func get_currently_playing_tracks() -> Array:
 	return tracks
 
 
-func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float, duration: float, erase_player: bool = true) -> AudioStreamPlayer:
+func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float, duration: float) -> AudioStreamPlayer:
 	# Remove any tweens that might already be on this player
 	_remove_tween(player)
 	
@@ -96,7 +98,7 @@ func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float
 		tween.interpolate_property(player, "volume_db", from_volume, to_volume, duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	
 	tweens[player] = tween
-	tween.connect("tween_all_completed", self, "_on_fade_completed", [player, tween, from_volume, to_volume, duration, erase_player])
+	tween.connect("tween_all_completed", self, "_on_fade_completed", [player, tween, from_volume, to_volume, duration])
 	tween.start()
 
 	return player
@@ -123,11 +125,11 @@ func _remove_tween(player: AudioStreamPlayer) -> void:
 ### Signals
 
 
-func _on_fade_completed(player: AudioStreamPlayer, tween: Tween, from_volume: float, to_volume: float, duration: float, erase_player: bool = true):
+func _on_fade_completed(player: AudioStreamPlayer, tween: Tween, from_volume: float, to_volume: float, duration: float):
 	_remove_tween(player)
 	
 	# If we just faded out then our player is now available
-	if to_volume <= -79.0:
+	last_track_pos = player.get_playback_position()
+	if to_volume <= -80:
 		player.stop()
-		if erase_player:
-			mark_player_as_available(player)
+		mark_player_as_available(player)

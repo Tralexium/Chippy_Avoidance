@@ -1591,6 +1591,9 @@ follow_viewport_enable = true
 
 [node name="AbilityBorderFX" parent="FX" instance=ExtResource( 24 )]
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2

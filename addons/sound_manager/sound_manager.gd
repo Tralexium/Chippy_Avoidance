@@ -79,8 +79,8 @@ func get_currently_playing_music_tracks() -> Array:
 	return music.get_currently_playing_tracks()
 
 
-func resume_music(fade_out_duration: float = 0) -> void:
-	music.resume(fade_out_duration)
+func resume_music(fade_in_duration: float = 0) -> void:
+	music.resume(fade_in_duration)
 
 
 func pause_music(fade_out_duration: float = 0) -> void:

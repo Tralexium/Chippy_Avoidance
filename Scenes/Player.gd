@@ -110,6 +110,10 @@ func set_hp(value: int) -> void:
 		die()
 
 
+func set_only_hp(value: int) -> void:
+	hp = value
+
+
 func hit_effects(new_hp: int) -> void:
 	iframe_immunity = true
 	n_iframe_anim.play("iframes")
@@ -154,6 +158,17 @@ func die() -> void:
 	rotate_tween.tween_property(n_mesh, "rotation", Vector3(30, 12, 18), 2.0)
 	InputHelper.rumble_large()
 	SoundManager.play_sound(SFX_FATAL_LAUNCH)
+
+
+func revive(spawn_location: Vector3, restore_hp: int) -> void:
+	global_translation = spawn_location
+	is_dead = false
+	n_player_animation_tree.active = true
+	hp = restore_hp if restore_hp > 0 else 1
+	n_dust_particles.emitting = false
+	n_dust_particles.amount = 3
+	n_mesh.rotation = Vector3.ZERO
+	n_collision_shape.set_deferred("disabled", false)
 
 
 func _physics_process(delta: float) -> void:

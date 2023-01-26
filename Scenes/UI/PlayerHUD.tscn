@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 64, 1112 ) ]
+"values": [ Vector2( 64, 1144 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Items:rect_position")
@@ -57,7 +57,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1552, 1112 ) ]
+"values": [ Vector2( 64, 1144 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("SongProgressBar:rect_position")
@@ -85,7 +85,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 64, 1112 ), Vector2( 64, 984 ) ]
+"values": [ Vector2( 64, 1144 ), Vector2( 64, 984 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Items:rect_position")
@@ -97,7 +97,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 1568, 1119 ), Vector2( 1568, 984 ) ]
+"values": [ Vector2( 1568, 1144 ), Vector2( 1568, 984 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("SongProgressBar:rect_position")
@@ -128,9 +128,9 @@ margin_bottom = -40.0
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
-margin_top = 1112.0
+margin_top = 1144.0
 margin_right = 384.0
-margin_bottom = 1176.0
+margin_bottom = 1208.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -183,10 +183,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1552.0
-margin_top = 1112.0
-margin_right = 1856.0
-margin_bottom = 1176.0
+margin_left = 64.0
+margin_top = 1144.0
+margin_right = 368.003
+margin_bottom = 1208.0
 custom_constants/separation = 16
 __meta__ = {
 "_edit_group_": true
