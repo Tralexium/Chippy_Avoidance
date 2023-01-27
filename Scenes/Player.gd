@@ -234,6 +234,7 @@ func _get_input() -> void:
 			n_djump_part.emitting = true
 			audio_djump.play()
 			InputHelper.rumble_small()
+			EventBus.emit_signal("tutorial_phase_finished", 1)
 	Globals.run_stats["jumps"] += input_vector.y
 
 
