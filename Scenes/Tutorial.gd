@@ -9,8 +9,9 @@ export var starting_hp := 2
 
 onready var using_gamepad := InputHelper.has_gamepad()
 onready var tutorial_texts := [
-	"Welcome, feel free to move around with the {0}!".format(["joystick" if using_gamepad else "arrow keys"]),
-	"Believe it or not, you can jump up to 2 times. Try it out!",
+	"Welcome, feel free to move around using the {0}.".format(["joystick" if using_gamepad else "arrow keys"]),
+	"Believe it or not, you can jump up to 2 times. Try jumping again mid-air!",
+	"Red obstacles must be avoided at all costs. Let's put your movement skills into use.",
 ]
 
 var tutorial_phase := -1
@@ -24,6 +25,7 @@ onready var hp_hud: Control = $UI/PlayerHUD/HPHUD
 onready var player_hud: Control = $UI/PlayerHUD
 onready var info_box: Panel = $UI/InfoBox
 onready var camera_pos: Position3D = $Player/CameraPos
+onready var tutorial_phase_3: Spatial = $ObstacleSpawners/Tutorial_Phase3
 
 
 func _ready() -> void:
@@ -51,6 +53,9 @@ func _process(delta: float) -> void:
 func spawn_info_box() -> void:
 	var text : String = tutorial_texts[tutorial_phase]
 	info_box.slide_in(text)
+	match tutorial_phase:
+		2:
+			tutorial_phase_3.start()
 
 
 func info_box_complete() -> void:
@@ -64,6 +69,9 @@ func info_box_complete() -> void:
 func _on_tutorial_phase_finished(phase: int) -> void:
 	if phase == -1 or phase == tutorial_phase:
 		info_box_complete()
+		match phase:
+			1:
+				camera_pos.shift_cam(Vector3(0, 0, 6), Vector3(-40, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 45)
 
 
 func _on_ability_used(ability_num: int) -> void:
@@ -79,7 +87,10 @@ func _on_damage_taken(new_hp: int) -> void:
 
 func _on_avoidance_ended() -> void:
 	respawn_timer.start()
-	info_box.slide_out()
+	if info_box.is_visible:
+		info_box.slide_out()
+	for obstacle in get_tree().get_nodes_in_group("hazard"):
+		obstacle.expire()
 
 
 func _on_RespawnTimer_timeout() -> void:
@@ -98,7 +109,8 @@ func _on_rewind_faded_in() -> void:
 func _on_rewind_finished() -> void:
 	SoundManager.resume_music(0.3)
 	player_hud.slide_in()
-	spawn_info_box()
+	if info_box.is_visible:
+		spawn_info_box()
 
 
 func _on_NextPhase_timeout() -> void:
