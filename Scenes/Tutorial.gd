@@ -5,7 +5,7 @@ const REWIND_FX := preload("res://Scenes/RewindEffect.tscn")
 const SLOMO_FX := preload("res://Scenes/UI/SlomoEffect.tscn")
 const HIT_FX := preload("res://Scenes/UI/HitFX.tscn")
 
-export var starting_hp := 2
+export var starting_hp := 1
 
 onready var using_gamepad := InputHelper.has_gamepad()
 onready var tutorial_texts := [

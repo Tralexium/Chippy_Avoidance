@@ -3,7 +3,7 @@ extends Spatial
 
 export var speed := Vector3(12.0, 0.0, 0.0)
 export var rot_scale := 0.5
-export var lifetime := 3.6
+export var lifetime := 3.5
 export var target_scale := 1.0
 
 onready var mesh: MeshInstance = $Mesh

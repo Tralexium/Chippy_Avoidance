@@ -4,7 +4,7 @@ const SPIKEY_TUBE := preload("res://Scenes/Tutorial/Tutorial_Atk1.tscn")
 
 var wave := 0
 var finishing_wave = 3
-var center_offset := 23.0
+var center_offset := 22.0
 onready var next_wave: Timer = $NextWave
 
 

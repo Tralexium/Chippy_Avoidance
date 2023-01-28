@@ -23,7 +23,7 @@ export var max_fall_vel := 100.0
 export var friction := 20.0
 export var input_buffer_dur := 0.2
 export var coyote_time_dur := 0.2
-export var lock_2d := false
+export var lock_2d := false setget set_lock_2d
 export var flying := false
 export var has_djump := false
 export var cam_follow_y := false
@@ -96,6 +96,12 @@ func _on_ability_used(ability_num: int) -> void:
 			shielded = true
 			n_player_shield.scale_to(2.0)
 			n_shield_dur.start(Config.item_shield_dur)
+
+
+func set_lock_2d(value: bool) -> void:
+	if value != lock_2d:
+		EventBus.emit_signal("switched_projection")
+	lock_2d = value
 
 
 func set_hp(value: int) -> void:

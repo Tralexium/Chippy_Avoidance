@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Blender Renders/player_head_small.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Shaders/outline_shader.tres" type="Material" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/UI/PlayerHUD.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/UI/ItemSlot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/SongProgressBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/UI/PerspectiveIcon.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -71,6 +72,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 544, -52 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("PerspectiveIcon:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -100, 26 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "slide_in"
@@ -110,6 +123,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector2( 544, -52 ), Vector2( 544, 22 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PerspectiveIcon:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( -100, 26 ), Vector2( 32, 26 ) ]
 }
 
 [node name="PlayerHUD" type="Control"]
@@ -208,6 +233,10 @@ ability = 2
 margin_left = 240.0
 margin_right = 304.0
 ability = 3
+
+[node name="PerspectiveIcon" parent="." instance=ExtResource( 8 )]
+margin_left = -100.0
+margin_right = -36.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
