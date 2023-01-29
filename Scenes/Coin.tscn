@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Resources/Materials/gold_material.tres" type="Material" id=1]
 [ext_resource path="res://Resources/Shaders/spatial_outline_shader.tres" type="Material" id=2]
@@ -161,6 +161,30 @@ tracks/9/keys = {
 "update": 0,
 "values": [ Color( 1, 0.92549, 0.580392, 1 ) ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath(".:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("ChimeLoop:max_db")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "collected"
@@ -285,7 +309,35 @@ tracks/9/keys = {
 "values": [ Color( 1, 0.92549, 0.580392, 1 ), Color( 0.980392, 0.419608, 0.247059, 0 ) ]
 }
 
-[node name="Coin" type="Spatial"]
+[sub_resource type="Animation" id=13]
+resource_name = "shrink"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ChimeLoop:max_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, -20.0 ]
+}
+
+[node name="Coin" type="Spatial" groups=["collectable"]]
 script = ExtResource( 3 )
 
 [node name="Hitbox" type="Area" parent="."]
@@ -305,7 +357,6 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
 
 [node name="Ring" type="MeshInstance" parent="Position3D"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 material_overlay = ExtResource( 2 )
 mesh = SubResource( 2 )
 skeleton = NodePath("../..")
@@ -340,6 +391,7 @@ bus = "Sounds"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/collected = SubResource( 4 )
+anims/shrink = SubResource( 13 )
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -14,6 +14,8 @@ onready var tutorial_texts := [
 	"Try to avoid red obstacles. Let's put your movement skills into use.",
 	"When in 2D, only horizontal movement is allowed. Keep an eye on the top left corner when unsure.",
 	"Grayed out projectiles are harmless and tend to be smaller.",
+	"Coins are only for score, only go for them if wanna be a big shot!",
+	"Time for some powerups! Super Speed is handy when it comes jumping over long gaps.",
 ]
 
 var tutorial_phase := -1
@@ -30,6 +32,7 @@ onready var camera_pos: Position3D = $Player/CameraPos
 onready var tutorial_phase_3: Spatial = $ObstacleSpawners/Tutorial_Phase3
 onready var tutorial_phase_4: Spatial = $ObstacleSpawners/Tutorial_Phase4
 onready var tutorial_phase_5: Spatial = $ObstacleSpawners/Tutorial_Phase5
+onready var tutorial_phase_6: Spatial = $ObstacleSpawners/Tutorial_Phase6
 
 
 func _ready() -> void:
@@ -65,6 +68,8 @@ func spawn_info_box() -> void:
 			tutorial_phase_4.start()
 		4:
 			tutorial_phase_5.start()
+		5:
+			tutorial_phase_6.start()
 
 
 func info_box_complete() -> void:
@@ -90,8 +95,10 @@ func _on_tutorial_phase_finished(phase: int) -> void:
 				player.lock_2d = true
 			4:
 				camera_pos.switch_projection(false)
-				camera_pos.shift_cam(Vector3(0, 0, 6), Vector3(-40, 0, 0), 0.5, Tween.EASE_OUT, Tween.TRANS_CUBIC, 45)
+				camera_pos.shift_cam(Vector3(0, 0, 3), Vector3(-50, 0, 0), 0.5, Tween.EASE_OUT, Tween.TRANS_CUBIC, 50)
 				player.lock_2d = false
+			5:
+				camera_pos.shift_cam(Vector3(0, 0, 6), Vector3(-40, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 45)
 
 
 func _on_ability_used(ability_num: int) -> void:
@@ -110,6 +117,8 @@ func _on_avoidance_ended() -> void:
 	if info_box.is_visible:
 		info_box.slide_out()
 	for obstacle in get_tree().get_nodes_in_group("hazard"):
+		obstacle.shrink()
+	for obstacle in get_tree().get_nodes_in_group("collectable"):
 		obstacle.shrink()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scenes/KillPlane.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Lights.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase3.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/WorldEnvironment.gd" type="Script" id=12]
 [ext_resource path="res://Resources/tutorial_env.tres" type="Environment" id=13]
+[ext_resource path="res://Scenes/Tutorial/Tutorial_Phase6.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase4.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase5.tscn" type="PackedScene" id=16]
 
@@ -1636,6 +1637,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0 )
 [node name="Tutorial_Phase5" parent="ObstacleSpawners" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
+[node name="Tutorial_Phase6" parent="ObstacleSpawners" instance=ExtResource( 14 )]
+
 [node name="Lights" type="Spatial" parent="."]
 script = ExtResource( 2 )
 spotlight_col = Color( 0.439216, 0.827451, 1, 1 )
@@ -1702,17 +1705,27 @@ layer = 2
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
 [node name="SongProgressBar" parent="UI/PlayerHUD" index="0"]
+margin_left = -416.0
+margin_right = 416.0
 in_tutorial = true
 
+[node name="HPHUD" parent="UI/PlayerHUD" index="1"]
+margin_top = 64.0
+margin_bottom = 128.0
+
 [node name="Items" parent="UI/PlayerHUD" index="2"]
-margin_left = 1552.0
-margin_right = 1856.0
+margin_left = -368.0
+margin_top = 64.0
+margin_right = -64.0
+margin_bottom = 128.0
 
 [node name="AnimationPlayer" parent="UI/PlayerHUD" index="4"]
 anims/RESET = SubResource( 16 )
 anims/slide_in = SubResource( 17 )
 
 [node name="InfoBox" parent="UI" instance=ExtResource( 9 )]
+margin_left = -300.0
+margin_right = 300.0
 
 [node name="CircleTransition" parent="." instance=ExtResource( 10 )]
 reverse = true

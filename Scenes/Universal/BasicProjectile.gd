@@ -39,6 +39,7 @@ func set_disabled(value: bool) -> void:
 
 
 func shrink() -> void:
+	collision_shape.disabled = true
 	var tween := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(self, "scale", Vector3.ZERO, 0.5)
 	tween.tween_callback(self, "queue_free").set_delay(0.5)

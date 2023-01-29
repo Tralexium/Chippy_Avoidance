@@ -5,7 +5,7 @@ const WALL_ATK := preload("res://Scenes/Tutorial/Tutorial_Atk2.tscn")
 export var wave_dur := 1.5
 var wave := 0
 var finishing_wave = 8
-var center_offset := 22.0
+var center_offset := 25.0
 onready var next_wave: Timer = $NextWave
 
 

@@ -24,6 +24,10 @@ func _process(delta: float) -> void:
 		ring.rotation_degrees.y -= rotate_speed * delta
 
 
+func shrink() -> void:
+	animation_player.play("shrink")
+
+
 func _on_Hitbox_body_entered(body: Node) -> void:
 	if !collected:
 		collected = true
