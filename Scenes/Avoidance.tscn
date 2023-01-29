@@ -1529,6 +1529,8 @@ projectile = ExtResource( 18 )
 [node name="Phase8_Spawner2" parent="Spawners" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 
+[node name="Coins" type="Position3D" parent="."]
+
 [node name="Lights" type="Spatial" parent="."]
 script = ExtResource( 8 )
 spotlight_col = Color( 0.807843, 0.847059, 1, 1 )
@@ -1586,6 +1588,10 @@ nodes = [ NodePath("../Player/CameraPos"), NodePath("../Lights") ]
 ease_curve = SubResource( 8 )
 path_duration = 25.0
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 23 )
+script = ExtResource( 21 )
+
 [node name="FX" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
 
@@ -1603,10 +1609,6 @@ layer = 2
 [node name="MusicOnlyForTimelineReference" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -15.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 23 )
-script = ExtResource( 21 )
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 autoplay = "avoidance_timeline"

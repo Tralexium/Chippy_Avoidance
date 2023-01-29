@@ -17,3 +17,7 @@ func spawn_orb_ring(hor_position: float, hor_velocity: float) -> void:
 	ring_inst.velocity = Vector3.RIGHT * hor_velocity
 	ring_inst.y_rotation_spd = 3.0 * sign(-hor_velocity)
 	add_child(ring_inst)
+
+
+func _on_NextWave_timeout() -> void:
+	pass # Replace with function body.

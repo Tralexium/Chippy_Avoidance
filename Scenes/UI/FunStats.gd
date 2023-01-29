@@ -5,6 +5,7 @@ onready var damage_taken_count: Label = $HealthLost/Count
 onready var abilities_used_count: Label = $AbilitiesUsed/Count
 onready var jumps_count: Label = $Jumps/Count
 onready var footsteps_count: Label = $WalkDist/Count
+onready var persponal_best: Label = $PersonalBest/Count
 
 
 func _ready() -> void:
@@ -16,3 +17,4 @@ func _ready() -> void:
 	abilities_used_count.text = str(floor(Globals.run_stats["items_used"]))
 	jumps_count.text = str(floor(Globals.run_stats["jumps"]))
 	footsteps_count.text = str(floor(Globals.run_stats["steps"]))
+	persponal_best.text = str(floor(Config.previous_best))

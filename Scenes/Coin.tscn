@@ -1,7 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Resources/Materials/gold_material.tres" type="Material" id=1]
 [ext_resource path="res://Resources/Shaders/spatial_outline_shader.tres" type="Material" id=2]
+[ext_resource path="res://Scenes/Coin.gd" type="Script" id=3]
+[ext_resource path="res://Assets/sparkle.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Particles/CoinAura.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/particle aura.png" type="Texture" id=6]
+[ext_resource path="res://Audio/SFX/coin_chime_loop.wav" type="AudioStream" id=7]
+
+[sub_resource type="SphereShape" id=12]
+radius = 2.0
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "coin_Cube001"
@@ -34,7 +42,7 @@ surfaces/0 = {
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Gem:rotation_degrees")
+tracks/0/path = NodePath("Position3D/Gem:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -46,7 +54,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ring:rotation_degrees")
+tracks/1/path = NodePath("Position3D/Ring:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -56,61 +64,282 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Position3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Position3D/CoinAura:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Position3D/CollectedSpark:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Position3D/CollectedSpark:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Position3D/CollectedRing:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Position3D/CollectedRing:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Position3D/CollectedRing:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.92549, 0.580392, 1 ) ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "spin"
-length = 2.5
-loop = true
+resource_name = "collected"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Gem:rotation_degrees")
+tracks/0/path = NodePath("Position3D/Gem:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.5 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1080, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ring:rotation_degrees")
+tracks/1/path = NodePath("Position3D/Ring:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2.5 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -180, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1080, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position3D:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 3, 0 ), Vector3( 0, -2, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Position3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Position3D/CoinAura:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Position3D/CollectedSpark:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Position3D/CollectedSpark:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 2, 0, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Position3D/CollectedRing:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Position3D/CollectedRing:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1 ), Vector3( 3, 3, 1 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Position3D/CollectedRing:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.92549, 0.580392, 1 ), Color( 0.980392, 0.419608, 0.247059, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "spin001"
-length = 2.5
-tracks/0/type = "transform"
-tracks/0/path = NodePath("Ring")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, 0, 0, 0, 0, -0.0159735, 0, 0.999872, 1, 1, 1, 0.333333, 1, 0, 0, 0, 0, -0.185289, 0, 0.982684, 1, 1, 1, 0.6, 1, 0, 0, 0, 0, -0.349238, 0, 0.937034, 1, 1, 1, 0.866667, 1, 0, 0, 0, 0, -0.503071, 0, 0.864245, 1, 1, 1, 1.13333, 1, 0, 0, 0, 0, -0.642334, 0, 0.766424, 1, 1, 1, 1.4, 1, 0, 0, 0, 0, -0.762994, 0, 0.646406, 1, 1, 1, 1.66667, 1, 0, 0, 0, 0, -0.861554, 0, 0.507666, 1, 1, 1, 1.93333, 1, 0, 0, 0, 0, -0.935161, 0, 0.354222, 1, 1, 1, 2.2, 1, 0, 0, 0, 0, -0.981684, 0, 0.190518, 1, 1, 1, 2.46667, 1, 0, 0, 0, 0, -0.999773, 0, 0.0212973, 1, 1, 1, 2.5, 1, 0, 0, 0, 0, 1, 0, 7.54979e-08, 1, 1, 1 )
-
 [node name="Coin" type="Spatial"]
+script = ExtResource( 3 )
 
-[node name="Gem" type="MeshInstance" parent="."]
+[node name="Hitbox" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
+shape = SubResource( 12 )
+
+[node name="Position3D" type="Position3D" parent="."]
+
+[node name="CoinAura" parent="Position3D" instance=ExtResource( 5 )]
+
+[node name="Gem" type="MeshInstance" parent="Position3D"]
 mesh = SubResource( 1 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
 
-[node name="Ring" type="MeshInstance" parent="."]
+[node name="Ring" type="MeshInstance" parent="Position3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 material_overlay = ExtResource( 2 )
 mesh = SubResource( 2 )
+skeleton = NodePath("../..")
 material/0 = ExtResource( 1 )
 
+[node name="CollectedRing" type="Sprite3D" parent="Position3D"]
+transform = Transform( 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
+modulate = Color( 1, 0.92549, 0.580392, 1 )
+pixel_size = 0.1
+billboard = 1
+no_depth_test = true
+texture = ExtResource( 6 )
+
+[node name="CollectedSpark" type="Sprite3D" parent="Position3D"]
+visible = false
+modulate = Color( 1, 0.92549, 0.580392, 1 )
+pixel_size = 0.1
+billboard = 1
+no_depth_test = true
+texture = ExtResource( 4 )
+
+[node name="ChimeLoop" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 7 )
+unit_db = 5.0
+unit_size = 50.0
+max_db = 1.0
+autoplay = true
+max_distance = 250.0
+bus = "Sounds"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "spin"
 anims/RESET = SubResource( 3 )
-anims/spin = SubResource( 4 )
-anims/spin001 = SubResource( 5 )
+anims/collected = SubResource( 4 )
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

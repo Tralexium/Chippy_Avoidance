@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Particles/MegaJump.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Particles/HudParticles.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Particles/SpeedLines.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Particles/TimeParticle.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/ParticlePreloader.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Particles/CoinAura.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Curve" id=6]
 _data = [ Vector2( 0, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -45,6 +46,8 @@ emitting = true
 
 [node name="MegaJumpPart" parent="." instance=ExtResource( 7 )]
 emitting = true
+
+[node name="CoinAura" parent="." instance=ExtResource( 12 )]
 
 [node name="2D" type="CanvasLayer" parent="."]
 layer = 101

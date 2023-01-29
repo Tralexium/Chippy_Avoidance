@@ -80,18 +80,19 @@ margin_bottom = 29.0
 text = "1"
 
 [node name="Jumps" type="HBoxContainer" parent="."]
+visible = false
 margin_top = 159.0
 margin_right = 400.0
 margin_bottom = 188.0
 custom_constants/separation = 8
 
 [node name="Stat" type="Label" parent="Jumps"]
-margin_right = 89.0
+margin_right = 154.0
 margin_bottom = 29.0
-text = "Jumps:"
+text = "Jump Count:"
 
 [node name="HSeparator" type="HSeparator" parent="Jumps"]
-margin_left = 97.0
+margin_left = 162.0
 margin_right = 356.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
@@ -103,18 +104,18 @@ margin_bottom = 29.0
 text = "69"
 
 [node name="WalkDist" type="HBoxContainer" parent="."]
-margin_top = 212.0
+margin_top = 159.0
 margin_right = 400.0
-margin_bottom = 241.0
+margin_bottom = 188.0
 custom_constants/separation = 8
 
 [node name="Stat" type="Label" parent="WalkDist"]
-margin_right = 131.0
+margin_right = 143.0
 margin_bottom = 29.0
-text = "Footsteps:"
+text = "Step Count:"
 
 [node name="HSeparator" type="HSeparator" parent="WalkDist"]
-margin_left = 139.0
+margin_left = 151.0
 margin_right = 338.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
@@ -124,3 +125,26 @@ margin_left = 346.0
 margin_right = 400.0
 margin_bottom = 29.0
 text = "203"
+
+[node name="PersonalBest" type="HBoxContainer" parent="."]
+margin_top = 212.0
+margin_right = 400.0
+margin_bottom = 241.0
+custom_constants/separation = 8
+
+[node name="Stat" type="Label" parent="PersonalBest"]
+margin_right = 181.0
+margin_bottom = 29.0
+text = "Personal Best:"
+
+[node name="HSeparator" type="HSeparator" parent="PersonalBest"]
+margin_left = 189.0
+margin_right = 320.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Count" type="Label" parent="PersonalBest"]
+margin_left = 328.0
+margin_right = 400.0
+margin_bottom = 29.0
+text = "5000"

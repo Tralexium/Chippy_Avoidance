@@ -11,7 +11,9 @@ onready var using_gamepad := InputHelper.has_gamepad()
 onready var tutorial_texts := [
 	"Welcome, feel free to move around using the {0}.".format(["joystick" if using_gamepad else "arrow keys"]),
 	"Believe it or not, you can jump up to 2 times. Try jumping again mid-air!",
-	"Red obstacles must be avoided at all costs. Let's put your movement skills into use.",
+	"Try to avoid red obstacles. Let's put your movement skills into use.",
+	"When in 2D, only horizontal movement is allowed. Keep an eye on the top left corner when unsure.",
+	"Grayed out projectiles are harmless and tend to be smaller.",
 ]
 
 var tutorial_phase := -1
@@ -26,6 +28,8 @@ onready var player_hud: Control = $UI/PlayerHUD
 onready var info_box: Panel = $UI/InfoBox
 onready var camera_pos: Position3D = $Player/CameraPos
 onready var tutorial_phase_3: Spatial = $ObstacleSpawners/Tutorial_Phase3
+onready var tutorial_phase_4: Spatial = $ObstacleSpawners/Tutorial_Phase4
+onready var tutorial_phase_5: Spatial = $ObstacleSpawners/Tutorial_Phase5
 
 
 func _ready() -> void:
@@ -45,8 +49,9 @@ func _process(delta: float) -> void:
 	# local condition checking
 	match tutorial_phase:
 		0:
-			var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.2)
-			if xy_input.length() > 0.0:
+			var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.0)
+			var joystick_input := Input.get_vector("left_stick", "right_stick", "forward_stick", "backward_stick", 0.2)
+			if xy_input.length() + joystick_input.length() > 0.0:
 				info_box_complete()
 
 
@@ -56,6 +61,10 @@ func spawn_info_box() -> void:
 	match tutorial_phase:
 		2:
 			tutorial_phase_3.start()
+		3:
+			tutorial_phase_4.start()
+		4:
+			tutorial_phase_5.start()
 
 
 func info_box_complete() -> void:
@@ -67,11 +76,22 @@ func info_box_complete() -> void:
 # SIGNALS:
 
 func _on_tutorial_phase_finished(phase: int) -> void:
+	if !info_box.is_visible:
+		return
 	if phase == -1 or phase == tutorial_phase:
 		info_box_complete()
 		match phase:
 			1:
 				camera_pos.shift_cam(Vector3(0, 0, 6), Vector3(-40, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 45)
+			2:
+				camera_pos.switch_projection(true)
+				camera_pos.shift_cam(Vector3(0, 3, 0), Vector3(0, 0, 0), 0.5, Tween.EASE_OUT, Tween.TRANS_CUBIC, 45)
+				camera_pos.set_position_y_angle(180, 0.5)
+				player.lock_2d = true
+			4:
+				camera_pos.switch_projection(false)
+				camera_pos.shift_cam(Vector3(0, 0, 6), Vector3(-40, 0, 0), 0.5, Tween.EASE_OUT, Tween.TRANS_CUBIC, 45)
+				player.lock_2d = false
 
 
 func _on_ability_used(ability_num: int) -> void:
@@ -90,7 +110,7 @@ func _on_avoidance_ended() -> void:
 	if info_box.is_visible:
 		info_box.slide_out()
 	for obstacle in get_tree().get_nodes_in_group("hazard"):
-		obstacle.expire()
+		obstacle.shrink()
 
 
 func _on_RespawnTimer_timeout() -> void:

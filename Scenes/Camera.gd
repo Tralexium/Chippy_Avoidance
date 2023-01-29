@@ -84,5 +84,10 @@ func shake_cam_instant(shake_amount: float, duration: float) -> void:
 	tween.tween_property(self, "screen_shake_amount", 0.0, duration)
 
 
+func set_position_y_angle(degrees: float, duration: float, ease_type: int = Tween.EASE_OUT, trans_type: int = Tween.TRANS_CUBIC) -> void:
+	var tween = create_tween().set_ease(ease_type).set_trans(trans_type)
+	tween.tween_property(self, "rotation_degrees:y", degrees, duration)
+
+
 func _on_SpringArm_finished_camera_rotation() -> void:
 	spring_arm.transform.basis = Basis(target_quat)

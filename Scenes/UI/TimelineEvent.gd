@@ -14,6 +14,9 @@ func _ready() -> void:
 			icon.texture = load("res://Assets/UI/skull.png")
 		Globals.TIMELINE_EVENTS.DAMAGE:
 			icon.texture = load("res://Assets/UI/cross.png")
+		Globals.TIMELINE_EVENTS.COIN:
+			col = Color("f8d82c")
+			icon.texture = load("res://Assets/UI/coin_small.png")
 		Globals.TIMELINE_EVENTS.ITEM_1:
 			col = Color("f8d82c")
 			icon.texture = load("res://Assets/UI/speed_item.png")

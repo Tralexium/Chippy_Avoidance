@@ -215,10 +215,11 @@ func _get_input() -> void:
 	if input_buffer_time <= 0.0:
 		buffered_input = ""
 	
-	var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.2)
+	var xy_input := Input.get_vector("left", "right", "forward", "backward", 0.0)
+	var joystick_input := Input.get_vector("left_stick", "right_stick", "forward_stick", "backward_stick", 0.2)
 	input_vector = Vector3.ZERO
-	input_vector.x = xy_input.x
-	input_vector.z = xy_input.y
+	input_vector.x = xy_input.x + joystick_input.x
+	input_vector.z = xy_input.y + joystick_input.y
 	input_vector = input_vector.rotated(Vector3.UP, n_camera_pos.rotation.y)
 	if lock_2d:
 		input_vector.z = 0.0
@@ -287,7 +288,7 @@ func _apply_velocity() -> void:
 		velocity.x = friction_vel.x
 		velocity.z = friction_vel.y
 
-	if XZ_input.length() != 0.0 and is_on_floor():
+	if XZ_input.length() > 0.05 and is_on_floor():
 		if n_step_sfx.is_stopped():
 			n_step_sfx.start()
 			_on_StepSFX_timeout()
@@ -300,7 +301,7 @@ func _apply_velocity() -> void:
 
 func _rotate_mesh(delta: float) -> void:
 	# Rotate the player mesh based on camera's orientation / movement
-	if Vector2(velocity.x, velocity.z).length() > 0.0:
+	if Vector2(velocity.x, velocity.z).length() > 0.05:
 		transform = transform.orthonormalized()
 		var look_dir := Vector2(input_vector.z, input_vector.x)
 		# Convert basis to quaternion, keep in mind scale is lost

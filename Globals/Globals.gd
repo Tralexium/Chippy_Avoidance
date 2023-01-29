@@ -18,7 +18,7 @@ const UI_ON := preload("res://Audio/SFX/ui_toggle_on.wav")
 
 enum TIMELINE_EVENTS {
 	ITEM_1, ITEM_2, ITEM_3, ITEM_4,
-	DEATH, DAMAGE,
+	DEATH, DAMAGE, COIN,
 }
 
 enum ABILITIES {
@@ -37,6 +37,7 @@ var run_stats := {
 	"items_used": 0.0,
 	"jumps": 0.0,
 	"steps": 0.0,
+	"coins_collected": 0.0,
 }
 
 

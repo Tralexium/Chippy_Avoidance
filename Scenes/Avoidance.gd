@@ -28,6 +28,7 @@ func _ready() -> void:
 	EventBus.connect("hp_changed", self, "_on_damage_taken")
 	EventBus.connect("ability_used", self, "_on_ability_used")
 	EventBus.connect("avoidance_ended", self, "_on_avoidance_ended")
+	EventBus.connect("coin_collected", self, "_on_coin_collected")
 	EventBus.connect("avoidance_restart", self, "_on_avoidance_restart")
 	EventBus.connect("goto_menu", self, "_on_goto_menu")
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -78,6 +79,13 @@ func _on_damage_taken(new_hp: int) -> void:
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	Globals.timeline_events.push_back([event, unit_position])
 	$FX.add_child(HIT_FX.instance())
+
+
+func _on_coin_collected() -> void:
+	var event : int = Globals.TIMELINE_EVENTS.COIN
+	var song_position := audio_stream_player.get_playback_position()
+	var unit_position := song_position / audio_stream_player.stream.get_length()
+	Globals.timeline_events.push_back([event, unit_position])
 
 
 func _on_ability_used(ability_num: int) -> void:

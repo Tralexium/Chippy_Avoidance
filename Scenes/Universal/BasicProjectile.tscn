@@ -7,7 +7,7 @@
 
 [sub_resource type="SphereMesh" id=2]
 
-[node name="Phase5_Atk1" type="Spatial" groups=["hazard"]]
+[node name="BasicProjectile" type="Spatial" groups=["hazard"]]
 transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
 script = ExtResource( 2 )
 
@@ -19,5 +19,5 @@ collision_mask = 0
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+material_override = ExtResource( 1 )
 mesh = SubResource( 2 )
-material/0 = ExtResource( 1 )

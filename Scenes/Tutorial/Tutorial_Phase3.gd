@@ -2,6 +2,8 @@ extends Spatial
 
 const SPIKEY_TUBE := preload("res://Scenes/Tutorial/Tutorial_Atk1.tscn")
 
+var wave_dur := 4.0
+
 var wave := 0
 var finishing_wave = 3
 var center_offset := 22.0
@@ -14,12 +16,12 @@ func _ready() -> void:
 
 func start() -> void:
 	wave = 0
-	spawn_next_wave()
+	next_wave.start(1.0)
 
 
 func spawn_next_wave() -> void:
 	if wave < finishing_wave:
-		next_wave.start()
+		next_wave.start(wave_dur)
 		match wave:
 			0:
 				var tube1 := SPIKEY_TUBE.instance()

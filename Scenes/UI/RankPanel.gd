@@ -3,6 +3,7 @@ extends HBoxContainer
 signal new_best
 
 onready var time_bonus_count: Label = $MarginContainer/VBoxContainer/TimeBonus/Count
+onready var coin_bonus_count: Label = $MarginContainer/VBoxContainer/CoinBonus/Count
 onready var damage_penalty_count: Label = $MarginContainer/VBoxContainer/DamagePenalty/Count
 onready var ability_penalty_count: Label = $MarginContainer/VBoxContainer/AbilityPenalty/Count
 onready var final_score: Label = $MarginContainer/VBoxContainer/FinalScore
@@ -12,10 +13,12 @@ var target_score := 0.0
 
 
 func _ready() -> void:
-	var time_score : float = Config.MAX_SCORE * Globals.run_stats["unit_survival_time"]
+	var time_score : float = Config.MAX_TIME_SCORE * Globals.run_stats["unit_survival_time"]
+	var coin_score : float = Config.COIN_SCORE * Globals.run_stats["coins_collected"]
 	var damage_penalty : float = Config.DMG_PENALTY * Globals.run_stats["damage_taken"]
 	var ability_penalty : float = Config.ITEM_PENALTY * Globals.run_stats["items_used"]
 	time_bonus_count.text = str(round(time_score))
+	coin_bonus_count.text = str(round(coin_score))
 	damage_penalty_count.text = "-"+str(round(damage_penalty))
 	ability_penalty_count.text = "-"+str(round(ability_penalty))
 	target_score = max(time_score-damage_penalty-ability_penalty, 0.0)
