@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Scenes/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=2]
@@ -1617,7 +1617,7 @@ tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = PoolRealArray( 0, 1, 0, 8.88178e-16, 0, 0, -1.42109e-14, 0, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeTimeScale" id=37]
+[sub_resource type="AnimationNodeTimeScale" id=54]
 
 [sub_resource type="AnimationNodeBlend2" id=38]
 
@@ -1629,6 +1629,8 @@ animation = "Flip_Jump"
 
 [sub_resource type="AnimationNodeOneShot" id=36]
 fadeout_time = 0.5
+
+[sub_resource type="AnimationNodeTimeScale" id=37]
 
 [sub_resource type="AnimationNodeAnimation" id=21]
 animation = "Idle"
@@ -1654,9 +1656,9 @@ animation = "Running"
 [sub_resource type="AnimationNodeTimeScale" id=22]
 
 [sub_resource type="AnimationNodeBlendTree" id=15]
-graph_offset = Vector2( -214, 109 )
-nodes/TimeScale/node = SubResource( 37 )
-nodes/TimeScale/position = Vector2( -420, 600 )
+graph_offset = Vector2( -653, 142.55 )
+nodes/TimeScale/node = SubResource( 54 )
+nodes/TimeScale/position = Vector2( 480, 140 )
 nodes/air_blend/node = SubResource( 38 )
 nodes/air_blend/position = Vector2( -420, 340 )
 nodes/fall/node = SubResource( 40 )
@@ -1665,6 +1667,8 @@ nodes/flip_jump/node = SubResource( 39 )
 nodes/flip_jump/position = Vector2( -600, 600 )
 nodes/flip_jump_one_shot/node = SubResource( 36 )
 nodes/flip_jump_one_shot/position = Vector2( -120, 360 )
+nodes/flip_jump_time_scale/node = SubResource( 37 )
+nodes/flip_jump_time_scale/position = Vector2( -420, 600 )
 nodes/idle/node = SubResource( 21 )
 nodes/idle/position = Vector2( -660, -40 )
 nodes/idle_time_scale/node = SubResource( 23 )
@@ -1673,14 +1677,14 @@ nodes/in_air_state/node = SubResource( 34 )
 nodes/in_air_state/position = Vector2( 280, 140 )
 nodes/jump/node = SubResource( 41 )
 nodes/jump/position = Vector2( -640, 440 )
-nodes/output/position = Vector2( 540, 140 )
+nodes/output/position = Vector2( 660, 140 )
 nodes/run_blend/node = SubResource( 20 )
 nodes/run_blend/position = Vector2( -100, 20 )
 nodes/running/node = SubResource( 17 )
 nodes/running/position = Vector2( -660, 140 )
 nodes/running_time_scale/node = SubResource( 22 )
 nodes/running_time_scale/position = Vector2( -460, 140 )
-node_connections = [ "output", 0, "in_air_state", "TimeScale", 0, "flip_jump", "running_time_scale", 0, "running", "air_blend", 0, "fall", "air_blend", 1, "jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "idle_time_scale", 0, "idle", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "running_time_scale", 0, "running", "air_blend", 0, "fall", "air_blend", 1, "jump", "run_blend", 0, "idle_time_scale", "run_blend", 1, "running_time_scale", "idle_time_scale", 0, "idle", "in_air_state", 0, "run_blend", "in_air_state", 1, "flip_jump_one_shot", "flip_jump_one_shot", 0, "air_blend", "flip_jump_one_shot", 1, "flip_jump_time_scale", "flip_jump_time_scale", 0, "flip_jump", "TimeScale", 0, "in_air_state" ]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.8, 0.7, 0.8 )
@@ -1902,9 +1906,10 @@ anims/_TPose = SubResource( 33 )
 tree_root = SubResource( 15 )
 anim_player = NodePath("../ArmatureAnimations")
 active = true
-parameters/TimeScale/scale = 2.0
+parameters/TimeScale/scale = 1.0
 parameters/air_blend/blend_amount = 0.0
 parameters/flip_jump_one_shot/active = false
+parameters/flip_jump_time_scale/scale = 2.0
 parameters/idle_time_scale/scale = 0.7
 parameters/in_air_state/current = 0
 parameters/run_blend/blend_amount = 0.0
@@ -1941,6 +1946,8 @@ far = 5000.0
 
 [node name="Listener" type="Listener" parent="CameraPos/SpringArm/Camera"]
 current = true
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
 
 [node name="StereoSFX" type="Spatial" parent="."]
 
@@ -2009,6 +2016,7 @@ wait_time = 0.16
 [connection signal="hidden" from="Mesh/PlayerShield" to="." method="_on_PlayerShield_hidden"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]
 [connection signal="timeout" from="MegaJumpDur" to="." method="_on_MegaJumpDur_timeout"]
 [connection signal="timeout" from="SuperSpeedDur" to="." method="_on_SuperSpeedDur_timeout"]
 [connection signal="timeout" from="ShieldDur" to="." method="_on_ShieldDur_timeout"]

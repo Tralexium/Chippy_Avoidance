@@ -201,12 +201,6 @@ func set_player_points(value: int) -> void:
 	EventBus.emit_signal("points_changed", player_points)
 
 
-func set_player_ability_count(ability: int, has_used: bool) -> void:
-	player_current_abilities[ability] += -1 if has_used else 1
-	if has_used:
-		EventBus.emit_signal("ability_used", ability)
-
-
 func set_infinite_hp(value: bool) -> void:
 	infinite_hp = value
 

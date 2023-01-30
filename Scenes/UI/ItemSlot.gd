@@ -57,7 +57,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		_update_button_icon(true)
 	
 	if event.is_action_pressed(action) and (Config.player_current_abilities[ability] > 0 or Config.infinite_items) and circle_reload.value == 0.0:
-		Config.set_player_ability_count(ability, true)
+		if not Config.infinite_items:
+			Config.player_current_abilities[ability] -= 1
+		EventBus.emit_signal("ability_used", ability)
 		Globals.run_stats["items_used"] += 1
 		_flash_effect()
 

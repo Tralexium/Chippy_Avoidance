@@ -39,6 +39,7 @@ var is_dead := false
 var coyote_time := 0.0
 var input_buffer_time := 0.0
 var previous_fall_spd := 0.0
+var slomo_compensation := 1.0
 var buffered_input := ""
 var abilities_in_use := []
 
@@ -248,9 +249,11 @@ func _get_input() -> void:
 func _apply_velocity() -> void:
 	var delta := get_physics_process_delta_time()
 	
+	slomo_compensation = max(1.0, 2.0 - Engine.time_scale)
+	
 	if velocity.y < 0.0:
 		previous_fall_spd = velocity.y
-	velocity.y = 0.0 if !is_dead and is_on_floor() else max(-max_fall_vel, velocity.y - gravity*delta)
+	velocity.y = 0.0 if !is_dead and is_on_floor() else max(-max_fall_vel, velocity.y - (gravity*pow(slomo_compensation, 2.25)*delta))
 	
 	if is_dead:
 		return
@@ -273,30 +276,33 @@ func _apply_velocity() -> void:
 		if flying:
 			velocity.y = flying_vel
 		snap_vector = Vector3.ZERO
+		velocity.y *= min(slomo_compensation, 1.3)
+	
+	if !flying and Input.is_action_just_released("jump") and velocity.y > 0.0:
+		velocity.y *= 0.5
 	
 	# X&Z Axis
 	var XZ_input := Vector2(input_vector.x, input_vector.z)
 	Globals.run_stats["steps"] += XZ_input.length() / 10.0
-	if XZ_input.length() != 0.0:
+	if XZ_input.length() > 0.05:
 		var _spd := super_speed if abilities_in_use.has(Globals.ABILITIES.SUPER_SPEED) else walk_speed
+		_spd *= slomo_compensation
 		velocity.x = input_vector.x * _spd
 		velocity.z = input_vector.z * _spd
 		_rotate_mesh(delta)
 	else:
 		var XZ_velocity := Vector2(velocity.x, velocity.z)
-		var friction_vel := XZ_velocity.linear_interpolate(Vector2.ZERO, friction*delta)
+		var friction_vel := XZ_velocity.linear_interpolate(Vector2.ZERO, (friction*slomo_compensation)*delta)
 		velocity.x = friction_vel.x
 		velocity.z = friction_vel.y
-
+	
+	n_step_sfx.wait_time = 0.16 * Engine.time_scale
 	if XZ_input.length() > 0.05 and is_on_floor():
 		if n_step_sfx.is_stopped():
 			n_step_sfx.start()
 			_on_StepSFX_timeout()
 	else:
 		n_step_sfx.stop()
-
-	if !flying and Input.is_action_just_released("jump") and velocity.y > 0.0:
-		velocity.y *= 0.5
 
 
 func _rotate_mesh(delta: float) -> void:
@@ -308,7 +314,7 @@ func _rotate_mesh(delta: float) -> void:
 		var quat := Quat(n_mesh.transform.basis)
 		var target_quat := Quat(Vector3(0.0, look_dir.angle(), 0.0))
 		# Interpolate using spherical-linear interpolation (SLERP).
-		var lerped_quat := quat.slerp(target_quat, delta * 10.0)
+		var lerped_quat := quat.slerp(target_quat, (10.0 * slomo_compensation) * delta)
 		# Apply lerped orientation
 		n_mesh.transform.basis = Basis(lerped_quat)
 
@@ -324,6 +330,7 @@ func stop_cam_movement() -> void:
 func _animations() -> void:
 	if is_dead:
 		return
+	n_player_animation_tree.set("parameters/TimeScale/scale", slomo_compensation)
 	n_player_animation_tree.set_airborne_state(is_on_floor())
 	var run_strength := clamp(Vector2(velocity.x, velocity.z).length() / (walk_speed * .7), 0.0, 1.0)
 	n_player_animation_tree.set_run_strength(run_strength)
@@ -420,3 +427,13 @@ func _on_StepSFX_timeout() -> void:
 
 func _on_PlayerShield_hidden() -> void:
 	shielded = false
+
+
+func _on_VisibilityNotifier_screen_exited() -> void:
+	if shielded:
+		n_player_shield.fracture()
+		n_iframes_timer.start(shield_iframes_dur)
+		iframe_immunity = true
+		shielded = false
+		_remove_ability_effects(Globals.ABILITIES.SHIELD)
+	self.hp = 0

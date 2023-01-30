@@ -1620,7 +1620,7 @@ anims/_TPose = SubResource( 12 )
 [node name="CameraPos" parent="Player" index="5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="IFrameAnim" parent="Player" index="7"]
+[node name="IFrameAnim" parent="Player" index="8"]
 anims/RESET = SubResource( 13 )
 anims/iframes = SubResource( 14 )
 
@@ -1705,27 +1705,17 @@ layer = 2
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
 [node name="SongProgressBar" parent="UI/PlayerHUD" index="0"]
-margin_left = -416.0
-margin_right = 416.0
 in_tutorial = true
 
-[node name="HPHUD" parent="UI/PlayerHUD" index="1"]
-margin_top = 64.0
-margin_bottom = 128.0
-
 [node name="Items" parent="UI/PlayerHUD" index="2"]
-margin_left = -368.0
-margin_top = 64.0
-margin_right = -64.0
-margin_bottom = 128.0
+margin_left = 1552.0
+margin_right = 1856.0
 
 [node name="AnimationPlayer" parent="UI/PlayerHUD" index="4"]
 anims/RESET = SubResource( 16 )
 anims/slide_in = SubResource( 17 )
 
 [node name="InfoBox" parent="UI" instance=ExtResource( 9 )]
-margin_left = -300.0
-margin_right = 300.0
 
 [node name="CircleTransition" parent="." instance=ExtResource( 10 )]
 reverse = true
