@@ -102,6 +102,7 @@ func _on_avoidance_ended() -> void:
 	var song_position := audio_stream_player.get_playback_position()
 	var unit_position := song_position / audio_stream_player.stream.get_length()
 	timeline.stop()
+	ability_border_fx.fade_out()
 	var mus_bus := SoundManager.get_default_music_bus()
 	AudioServer.set_bus_effect_enabled(mus_bus, 0, true)
 	SoundManager.music.fade_volume(audio_stream_player, 0, -15, 1.0)
@@ -124,6 +125,7 @@ func _spawn_transition(back_to_menu: bool) -> void:
 
 
 func _on_avoidance_restart() -> void:
+	ability_border_fx.fade_out()
 	_spawn_transition(false)
 
 func _on_goto_menu() -> void:

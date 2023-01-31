@@ -142,6 +142,9 @@ func die() -> void:
 	is_dead = true
 	n_death_beams.emitting = true
 	n_step_sfx.stop()
+	n_mega_jump_dur.start(0.05)
+	n_super_speed_dur.start(0.05)
+	n_shield_dur.start(0.05)
 	EventBus.emit_signal("avoidance_ended")
 	InputHelper.rumble_medium()
 	SoundManager.play_sound(SFX_FATAL_HIT)

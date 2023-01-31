@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/KillPlane.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Lights.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase6.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase4.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase5.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Tutorial/TutorialPhaseClearArea.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Armature"
@@ -1523,6 +1524,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector3( -90, -2, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("RectangleArena:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RectangleArena:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, -2, 0 ) ]
+}
 
 [sub_resource type="Animation" id=19]
 resource_name = "phase_7"
@@ -1550,6 +1575,34 @@ tracks/1/keys = {
 "transitions": PoolRealArray( -2, 1 ),
 "update": 0,
 "values": [ Vector3( -90, -2, 0 ), Vector3( -60, -2, 0 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "phase_8"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("RectangleArena:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RectangleArena:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -2, 0 ), Vector3( 50, -2, 0 ) ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -1766,6 +1819,12 @@ light_color = Color( 0.882353, 0.47451, 1, 1 )
 light_energy = 1.5
 omni_range = 80.0
 
+[node name="TutorialPhaseClearArea" parent="RectangleArena2" instance=ExtResource( 17 )]
+phase = 6
+
+[node name="CollisionShape" parent="RectangleArena2/TutorialPhaseClearArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0 )
+
 [node name="ObstacleSpawners" type="Spatial" parent="."]
 
 [node name="Tutorial_Phase3" parent="ObstacleSpawners" instance=ExtResource( 11 )]
@@ -1796,6 +1855,7 @@ script = ExtResource( 12 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 18 )
 anims/phase_7 = SubResource( 19 )
+anims/phase_8 = SubResource( 20 )
 
 [node name="FX" type="CanvasLayer" parent="."]
 follow_viewport_enable = true
@@ -1860,4 +1920,5 @@ autostart = true
 [connection signal="timeout" from="NextPhase" to="." method="_on_NextPhase_timeout"]
 
 [editable path="Player"]
+[editable path="RectangleArena2/TutorialPhaseClearArea"]
 [editable path="UI/PlayerHUD"]

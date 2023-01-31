@@ -88,7 +88,7 @@ void fragment(){
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 7 )
 shader_param/vignette_intensity = 0.171
-shader_param/vignette_opacity = 0.584
+shader_param/vignette_opacity = 0.696
 shader_param/vignette_rgb = Color( 0, 0, 0, 1 )
 
 [node name="AlwaysRendered" type="CanvasLayer"]

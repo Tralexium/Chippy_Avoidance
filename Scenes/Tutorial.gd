@@ -106,8 +106,13 @@ func _on_tutorial_phase_finished(phase: int) -> void:
 				player.lock_2d = false
 			5:
 				animation_player.play("phase_7")
-				camera_pos.shift_cam(Vector3(30, 0, 6), Vector3(-40, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 60)
+				camera_pos.shift_cam(Vector3(30, 0, 2), Vector3(-60, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 60)
 				item_hud.get_node("SpeedItem").disabled = false
+			6:
+				animation_player.play("phase_8")
+				camera_pos.shift_cam(Vector3(60, 0, 6), Vector3(-30, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 50)
+				item_hud.get_node("SpeedItem").disabled = true
+				item_hud.get_node("JumpItem").disabled = false
 
 
 func _on_ability_used(ability_num: int) -> void:
@@ -123,6 +128,7 @@ func _on_damage_taken(new_hp: int) -> void:
 
 func _on_avoidance_ended() -> void:
 	respawn_timer.start()
+	ability_border_fx.fade_out()
 	if info_box.is_visible:
 		info_box.slide_out()
 	for obstacle in get_tree().get_nodes_in_group("hazard"):
