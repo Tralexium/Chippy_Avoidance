@@ -8,8 +8,10 @@ const SHIELD := preload("res://Assets/UI/shield_item.png")
 
 export var ability: int
 export var reload_dur := 10.0
+export var disabled := false
 
 var initial_color : Color
+var ability_count := 0
 onready var action := "item " + str(ability+1)
 onready var icon: TextureRect = $Icon
 onready var amount: Label = $Amount
@@ -19,13 +21,41 @@ onready var circle_reload: TextureProgress = $CircleReload
 
 
 func _ready() -> void:
-	var ability_count : int = Config.player_current_abilities[ability]
+	ability_count = Config.player_current_abilities[ability]
 	amount.text = str(ability_count)
-	if Config.infinite_items:
-		amount.visible = false
-	elif ability_count == 0:
+	_apply_color()
+	initial_color = icon.modulate
+	amount.modulate = icon.modulate
+	var mat := particles.process_material as ParticlesMaterial
+	mat.color = icon.modulate
+	_update_button_icon(InputHelper.has_gamepad())
+
+
+func _process(delta: float) -> void:
+	ability_count = Config.player_current_abilities[ability]
+	button_icon.visible = true if (ability_count > 0 or Config.infinite_items) and !disabled else false
+	amount.visible = false if Config.infinite_items else true
+	if disabled:
 		circle_reload.value = 100.0
-		button_icon.visible = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed():
+		_update_button_icon(false)
+	elif event is InputEventJoypadButton and event.is_pressed():
+		_update_button_icon(true)
+	if not Globals.can_pause or disabled:
+		return
+	
+	if event.is_action_pressed(action) and (ability_count > 0 or Config.infinite_items) and circle_reload.value == 0.0:
+		if !Config.infinite_items:
+			Config.player_current_abilities[ability] -= 1
+		EventBus.emit_signal("ability_used", ability)
+		Globals.run_stats["items_used"] += 1
+		_flash_effect()
+
+
+func _apply_color() -> void:
 	match ability:
 		Globals.ABILITIES.MEGA_JUMP:
 			icon.texture = JUMP
@@ -39,33 +69,11 @@ func _ready() -> void:
 		Globals.ABILITIES.SHIELD:
 			icon.texture = SHIELD
 			icon.modulate = Color("2cb5f8")
-	if ability_count == 0 and !Config.infinite_items:
+	if (ability_count == 0 and !Config.infinite_items) or disabled:
 		icon.modulate = Color.white
-	initial_color = icon.modulate
-	amount.modulate = icon.modulate
-	var mat := particles.process_material as ParticlesMaterial
-	mat.color = icon.modulate
-	_update_button_icon(InputHelper.has_gamepad())
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not Globals.can_pause:
-		return
-	if event is InputEventKey and event.is_pressed():
-		_update_button_icon(false)
-	elif event is InputEventJoypadButton and event.is_pressed():
-		_update_button_icon(true)
-	
-	if event.is_action_pressed(action) and (Config.player_current_abilities[ability] > 0 or Config.infinite_items) and circle_reload.value == 0.0:
-		if not Config.infinite_items:
-			Config.player_current_abilities[ability] -= 1
-		EventBus.emit_signal("ability_used", ability)
-		Globals.run_stats["items_used"] += 1
-		_flash_effect()
 
 
 func _flash_effect() -> void:
-	var ability_count : int = Config.player_current_abilities[ability]
 	icon.modulate = Color.white
 	amount.modulate = Color.white
 	amount.text = str(ability_count)

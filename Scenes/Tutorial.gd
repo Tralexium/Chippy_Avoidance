@@ -35,6 +35,11 @@ onready var tutorial_phase_5: Spatial = $ObstacleSpawners/Tutorial_Phase5
 onready var tutorial_phase_6: Spatial = $ObstacleSpawners/Tutorial_Phase6
 
 
+func _init() -> void:
+	Globals.can_pause = true
+	Config.infinite_items = true
+
+
 func _ready() -> void:
 	EventBus.connect("hp_changed", self, "_on_damage_taken")
 	EventBus.connect("ability_used", self, "_on_ability_used")
@@ -147,5 +152,13 @@ func _on_NextPhase_timeout() -> void:
 	if tutorial_phase < tutorial_texts.size():
 		spawn_info_box()
 	else:
-		# FINISH
+		Config.infinite_items = false
 		return
+
+
+func _on_Player_ability_expired(ability) -> void:
+	ability_border_fx.disable_effect(ability)
+
+
+func _on_Player_all_abilities_expired() -> void:
+	ability_border_fx.fade_out()

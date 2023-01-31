@@ -28,6 +28,7 @@ enum ABILITIES {
 var debug_mode := true
 var god_mode := false
 var can_pause := false
+var currently_quiting := false
 
 var timeline_events := []
 var run_stats := {
@@ -45,3 +46,8 @@ func reset_run_stats() -> void:
 	timeline_events.clear()
 	for stat in run_stats.keys():
 		run_stats[stat] = 0.0
+
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		currently_quiting = true

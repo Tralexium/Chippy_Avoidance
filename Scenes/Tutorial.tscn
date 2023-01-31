@@ -1705,17 +1705,36 @@ layer = 2
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
 [node name="SongProgressBar" parent="UI/PlayerHUD" index="0"]
+margin_left = -416.0
+margin_right = 416.0
 in_tutorial = true
 
+[node name="HPHUD" parent="UI/PlayerHUD" index="1"]
+margin_top = 64.0
+margin_bottom = 128.0
+
 [node name="Items" parent="UI/PlayerHUD" index="2"]
-margin_left = 1552.0
-margin_right = 1856.0
+margin_left = -368.0
+margin_top = 64.0
+margin_right = -64.0
+margin_bottom = 128.0
+
+[node name="JumpItem" parent="UI/PlayerHUD/Items" index="1"]
+disabled = true
+
+[node name="ShieldItem" parent="UI/PlayerHUD/Items" index="2"]
+disabled = true
+
+[node name="SlomoItem" parent="UI/PlayerHUD/Items" index="3"]
+disabled = true
 
 [node name="AnimationPlayer" parent="UI/PlayerHUD" index="4"]
 anims/RESET = SubResource( 16 )
 anims/slide_in = SubResource( 17 )
 
 [node name="InfoBox" parent="UI" instance=ExtResource( 9 )]
+margin_left = -300.0
+margin_right = 300.0
 
 [node name="CircleTransition" parent="." instance=ExtResource( 10 )]
 reverse = true
@@ -1728,6 +1747,8 @@ one_shot = true
 one_shot = true
 autostart = true
 
+[connection signal="ability_expired" from="Player" to="." method="_on_Player_ability_expired"]
+[connection signal="all_abilities_expired" from="Player" to="." method="_on_Player_all_abilities_expired"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
 [connection signal="timeout" from="NextPhase" to="." method="_on_NextPhase_timeout"]
 

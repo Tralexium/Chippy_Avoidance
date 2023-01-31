@@ -430,6 +430,8 @@ func _on_PlayerShield_hidden() -> void:
 
 
 func _on_VisibilityNotifier_screen_exited() -> void:
+	if Globals.currently_quiting:
+		return
 	if shielded:
 		n_player_shield.fracture()
 		n_iframes_timer.start(shield_iframes_dur)
