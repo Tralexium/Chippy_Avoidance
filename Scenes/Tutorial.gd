@@ -26,9 +26,11 @@ onready var respawn_timer: Timer = $RespawnTimer
 onready var next_phase_timer: Timer = $NextPhase
 onready var player: KinematicBody = $Player
 onready var hp_hud: Control = $UI/PlayerHUD/HPHUD
+onready var item_hud: HBoxContainer = $UI/PlayerHUD/Items
 onready var player_hud: Control = $UI/PlayerHUD
 onready var info_box: Panel = $UI/InfoBox
 onready var camera_pos: Position3D = $Player/CameraPos
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var tutorial_phase_3: Spatial = $ObstacleSpawners/Tutorial_Phase3
 onready var tutorial_phase_4: Spatial = $ObstacleSpawners/Tutorial_Phase4
 onready var tutorial_phase_5: Spatial = $ObstacleSpawners/Tutorial_Phase5
@@ -103,7 +105,9 @@ func _on_tutorial_phase_finished(phase: int) -> void:
 				camera_pos.shift_cam(Vector3(0, 0, 3), Vector3(-50, 0, 0), 0.5, Tween.EASE_OUT, Tween.TRANS_CUBIC, 50)
 				player.lock_2d = false
 			5:
-				camera_pos.shift_cam(Vector3(0, 0, 6), Vector3(-40, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 45)
+				animation_player.play("phase_7")
+				camera_pos.shift_cam(Vector3(30, 0, 6), Vector3(-40, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 60)
+				item_hud.get_node("SpeedItem").disabled = false
 
 
 func _on_ability_used(ability_num: int) -> void:

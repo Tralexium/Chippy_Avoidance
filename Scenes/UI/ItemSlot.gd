@@ -8,10 +8,11 @@ const SHIELD := preload("res://Assets/UI/shield_item.png")
 
 export var ability: int
 export var reload_dur := 10.0
-export var disabled := false
+export var disabled := false setget set_disabled
 
 var initial_color : Color
 var ability_count := 0
+var is_ready := false
 onready var action := "item " + str(ability+1)
 onready var icon: TextureRect = $Icon
 onready var amount: Label = $Amount
@@ -21,11 +22,11 @@ onready var circle_reload: TextureProgress = $CircleReload
 
 
 func _ready() -> void:
+	is_ready = true
 	ability_count = Config.player_current_abilities[ability]
 	amount.text = str(ability_count)
+	set_disabled(disabled)
 	_apply_color()
-	initial_color = icon.modulate
-	amount.modulate = icon.modulate
 	var mat := particles.process_material as ParticlesMaterial
 	mat.color = icon.modulate
 	_update_button_icon(InputHelper.has_gamepad())
@@ -35,8 +36,6 @@ func _process(delta: float) -> void:
 	ability_count = Config.player_current_abilities[ability]
 	button_icon.visible = true if (ability_count > 0 or Config.infinite_items) and !disabled else false
 	amount.visible = false if Config.infinite_items else true
-	if disabled:
-		circle_reload.value = 100.0
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,6 +54,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_flash_effect()
 
 
+func set_disabled(value: bool) -> void:
+	disabled = value
+	if is_ready:
+		circle_reload.value = 100.0 if disabled else 0.0
+		_apply_color()
+
+
 func _apply_color() -> void:
 	match ability:
 		Globals.ABILITIES.MEGA_JUMP:
@@ -71,6 +77,8 @@ func _apply_color() -> void:
 			icon.modulate = Color("2cb5f8")
 	if (ability_count == 0 and !Config.infinite_items) or disabled:
 		icon.modulate = Color.white
+	initial_color = icon.modulate
+	amount.modulate = icon.modulate
 
 
 func _flash_effect() -> void:

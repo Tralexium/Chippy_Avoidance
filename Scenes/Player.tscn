@@ -1954,42 +1954,42 @@ current = true
 [node name="Jump" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 22 )
 unit_db = 5.0
-unit_size = 40.0
+unit_size = 100.0
 max_distance = 250.0
 bus = "Sounds"
 
 [node name="MegaJump" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 23 )
 unit_db = 5.0
-unit_size = 40.0
+unit_size = 100.0
 max_distance = 250.0
 bus = "Sounds"
 
 [node name="DJump" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 19 )
 unit_db = 5.0
-unit_size = 40.0
+unit_size = 100.0
 max_distance = 250.0
 bus = "Sounds"
 
 [node name="Step" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 18 )
 unit_db = 5.0
-unit_size = 40.0
+unit_size = 100.0
 max_distance = 250.0
 bus = "Sounds"
 
 [node name="Land" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 20 )
 unit_db = 8.0
-unit_size = 70.0
+unit_size = 100.0
 max_distance = 250.0
 bus = "Sounds"
 
 [node name="LandLight" type="AudioStreamPlayer3D" parent="StereoSFX"]
 stream = ExtResource( 21 )
 unit_db = 5.0
-unit_size = 40.0
+unit_size = 100.0
 max_distance = 250.0
 bus = "Sounds"
 
