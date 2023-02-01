@@ -16,11 +16,15 @@ onready var tutorial_texts := [
 	"Grayed out projectiles are harmless and tend to be smaller.",
 	"Coins are only for score, only go for them if wanna be a big shot!",
 	"Time for some powerups! Super Speed is handy when it comes jumping over long gaps.",
+	"Mega Jump gives a boost to your initial jump. Use it to jump over tall obstacles.",
+	"Shield gives you hazard immunity. However, it's also quite fragile.",
+	"Slomo allows you to breeze through fast paced sections, with style!",
 ]
 
 var tutorial_phase := -1
 var currently_restarting := false
 var audio_stream_player: AudioStreamPlayer
+var respawn_pos := Vector3(0.0, 2.0, 0.0)
 onready var ability_border_fx: Control = $FX/AbilityBorderFX
 onready var respawn_timer: Timer = $RespawnTimer
 onready var next_phase_timer: Timer = $NextPhase
@@ -35,6 +39,7 @@ onready var tutorial_phase_3: Spatial = $ObstacleSpawners/Tutorial_Phase3
 onready var tutorial_phase_4: Spatial = $ObstacleSpawners/Tutorial_Phase4
 onready var tutorial_phase_5: Spatial = $ObstacleSpawners/Tutorial_Phase5
 onready var tutorial_phase_6: Spatial = $ObstacleSpawners/Tutorial_Phase6
+onready var tutorial_phase_8_9: Spatial = $ObstacleSpawners/Tutorial_Phase_8_9
 
 
 func _init() -> void:
@@ -77,6 +82,16 @@ func spawn_info_box() -> void:
 			tutorial_phase_5.start()
 		5:
 			tutorial_phase_6.start()
+		6:
+			item_hud.get_node("SpeedItem").disabled = false
+		7:
+			tutorial_phase_8_9.spawn_wall(Vector3(-25, 0, 0), Vector3(9.0, 0.0, 0.0), 7)
+			item_hud.get_node("JumpItem").disabled = false
+		8:
+			tutorial_phase_8_9.spawn_wall(Vector3(25, 0, 0), Vector3(-9.0, 0.0, 0.0), 8)
+			item_hud.get_node("ShieldItem").disabled = false
+		9:
+			item_hud.get_node("SlomoItem").disabled = false
 
 
 func info_box_complete() -> void:
@@ -91,6 +106,7 @@ func _on_tutorial_phase_finished(phase: int) -> void:
 	if !info_box.is_visible:
 		return
 	if phase == -1 or phase == tutorial_phase:
+		player.expire_all_abilities()
 		info_box_complete()
 		match phase:
 			1:
@@ -109,10 +125,14 @@ func _on_tutorial_phase_finished(phase: int) -> void:
 				camera_pos.shift_cam(Vector3(30, 0, 2), Vector3(-60, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 60)
 				item_hud.get_node("SpeedItem").disabled = false
 			6:
+				respawn_pos = Vector3(-60, 2.0, 0.0)
 				animation_player.play("phase_8")
 				camera_pos.shift_cam(Vector3(60, 0, 6), Vector3(-30, 0, 0), 2.0, Tween.EASE_IN_OUT, Tween.TRANS_CUBIC, 50)
 				item_hud.get_node("SpeedItem").disabled = true
-				item_hud.get_node("JumpItem").disabled = false
+			7:
+				item_hud.get_node("JumpItem").disabled = true
+			8:
+				item_hud.get_node("ShieldItem").disabled = true
 
 
 func _on_ability_used(ability_num: int) -> void:
@@ -146,7 +166,7 @@ func _on_RespawnTimer_timeout() -> void:
 
 
 func _on_rewind_faded_in() -> void:
-	player.revive(Vector3(0.0, 2.0, 0.0), starting_hp)
+	player.revive(respawn_pos, starting_hp)
 	hp_hud.set_bars(starting_hp)
 
 

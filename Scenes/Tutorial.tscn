@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scenes/KillPlane.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Lights.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase4.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Tutorial/Tutorial_Phase5.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Tutorial/TutorialPhaseClearArea.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Tutorial/Tutorial_Phase_8_9.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Animation" id=4]
 resource_name = "Armature"
@@ -1837,6 +1838,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 
 [node name="Tutorial_Phase6" parent="ObstacleSpawners" instance=ExtResource( 14 )]
 
+[node name="Tutorial_Phase_8_9" parent="ObstacleSpawners" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 0 )
+
 [node name="Skybox" parent="." instance=ExtResource( 3 )]
 mesh = SubResource( 15 )
 skeleton = NodePath("../..")
@@ -1869,19 +1873,11 @@ layer = 2
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
 [node name="SongProgressBar" parent="UI/PlayerHUD" index="0"]
-margin_left = -416.0
-margin_right = 416.0
 in_tutorial = true
 
-[node name="HPHUD" parent="UI/PlayerHUD" index="1"]
-margin_top = 64.0
-margin_bottom = 128.0
-
 [node name="Items" parent="UI/PlayerHUD" index="2"]
-margin_left = -368.0
-margin_top = 64.0
-margin_right = -64.0
-margin_bottom = 128.0
+margin_left = 1552.0
+margin_right = 1856.0
 
 [node name="SpeedItem" parent="UI/PlayerHUD/Items" index="0"]
 disabled = true
@@ -1900,8 +1896,6 @@ anims/RESET = SubResource( 16 )
 anims/slide_in = SubResource( 17 )
 
 [node name="InfoBox" parent="UI" instance=ExtResource( 9 )]
-margin_left = -300.0
-margin_right = 300.0
 
 [node name="CircleTransition" parent="." instance=ExtResource( 10 )]
 reverse = true

@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func set_disabled(value: bool) -> void:
 	disabled = value
 	if is_ready:
-		if disabled and tween != null:
+		if tween != null:
 			if tween.is_running():
 				tween.kill()
 		circle_reload.value = 100.0 if disabled else 0.0

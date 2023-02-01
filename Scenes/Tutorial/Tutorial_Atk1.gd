@@ -7,13 +7,14 @@ export var target_scale := 1.0
 
 onready var mesh: MeshInstance = $Mesh
 onready var collision_shape: CollisionShape = $Hitbox/CollisionShape
+onready var lifetime_timer: Timer = $Lifetime
 
 
 func _ready() -> void:
 	scale = Vector3.ZERO
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(self, "scale", Vector3.ONE * target_scale, 0.5)
-	tween.tween_callback(self, "shrink").set_delay(lifetime)
+	lifetime_timer.start(lifetime)
 
 
 func _process(delta: float) -> void:
@@ -26,3 +27,7 @@ func shrink() -> void:
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(mesh, "scale", Vector3.ZERO, 0.3)
 	tween.tween_callback(self, "queue_free").set_delay(0.3)
+
+
+func _on_Lifetime_timeout() -> void:
+	shrink()

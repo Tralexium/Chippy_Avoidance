@@ -142,9 +142,7 @@ func die() -> void:
 	is_dead = true
 	n_death_beams.emitting = true
 	n_step_sfx.stop()
-	n_mega_jump_dur.start(0.05)
-	n_super_speed_dur.start(0.05)
-	n_shield_dur.start(0.05)
+	expire_all_abilities()
 	EventBus.emit_signal("avoidance_ended")
 	InputHelper.rumble_medium()
 	SoundManager.play_sound(SFX_FATAL_HIT)
@@ -179,6 +177,12 @@ func revive(spawn_location: Vector3, restore_hp: int) -> void:
 	n_dust_particles.amount = 3
 	n_mesh.rotation = Vector3.ZERO
 	n_collision_shape.set_deferred("disabled", false)
+
+
+func expire_all_abilities() -> void:
+	n_mega_jump_dur.start(0.05)
+	n_super_speed_dur.start(0.05)
+	n_shield_dur.start(0.05)
 
 
 func _physics_process(delta: float) -> void:
@@ -386,6 +390,12 @@ func _on_Hitbox_body_entered(body: Node) -> void:
 func _remove_ability_effects(ability_num: int) -> void:
 	var index := abilities_in_use.find(ability_num)
 	if index != -1:
+		if !is_dead:
+			match ability_num:
+				Globals.ABILITIES.MEGA_JUMP:
+					SoundManager.play_sound(SFX_ABILITY_JUMP_EXP)
+				Globals.ABILITIES.SUPER_SPEED:
+					SoundManager.play_sound(SFX_ABILITY_SPEED_EXP)
 		abilities_in_use.remove(index)
 		emit_signal("ability_expired", ability_num)
 		if abilities_in_use.empty() and ability_num != Globals.ABILITIES.SLO_MO:
@@ -394,15 +404,11 @@ func _remove_ability_effects(ability_num: int) -> void:
 
 func _on_MegaJumpDur_timeout() -> void:
 	n_mega_jump_part.emitting = false
-	if !is_dead:
-		SoundManager.play_sound(SFX_ABILITY_JUMP_EXP)
 	_remove_ability_effects(Globals.ABILITIES.MEGA_JUMP)
 
 
 func _on_SuperSpeedDur_timeout() -> void:
 	n_speed_trail.hide()
-	if !is_dead:
-		SoundManager.play_sound(SFX_ABILITY_SPEED_EXP)
 	_remove_ability_effects(Globals.ABILITIES.SUPER_SPEED)
 
 

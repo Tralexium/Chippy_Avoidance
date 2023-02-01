@@ -7,6 +7,8 @@ onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
+	EventBus.connect("avoidance_ended", self, "_fade_out")
+	EventBus.connect("tutorial_phase_finished", self, "_fade_out")
 	Engine.time_scale = Config.SLOMO_SPD
 	SoundManager.play_sound(SLOMO_SFX)
 	timer.start(Config.item_slomo_dur)
@@ -22,5 +24,10 @@ func _exit_tree() -> void:
 	EventBus.emit_signal("slomo_finished")
 
 
-func _on_Timer_timeout() -> void:
+func _fade_out(phase_not_used: int = -1) -> void:
+	timer.stop()
 	animation_player.play("fade_out")
+
+
+func _on_Timer_timeout() -> void:
+	_fade_out()
