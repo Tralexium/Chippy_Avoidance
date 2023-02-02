@@ -2,21 +2,25 @@ extends Spatial
 
 export(PackedScene) var projectile: PackedScene
 export var projectile_count := 2
-export var radius := 6.0
+export var radius := 6.0 setget set_radius
 export var ring_segments := 1
-export var ring_padding := 3.0
+export var ring_padding := 3.0 setget set_ring_padding
 export var y_rotation_spd := 3.0
 export var velocity := Vector3.ZERO
 export var hitboxes_on := true setget set_hitboxes_on
+export var appear_animation := true
 
 var ring_array := []
-
+var is_ready := false
 
 func _ready() -> void:
 	$Icon.hide()
-	scale = Vector3.ZERO
-	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "scale", Vector3.ONE, 0.5)
+	is_ready = true
+	_update_radius_and_pad()
+	if appear_animation:
+		scale = Vector3.ZERO
+		var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(self, "scale", Vector3.ONE, 0.5)
 	_create_projectiles()
 
 
@@ -39,6 +43,14 @@ func _create_projectiles() -> void:
 		ring_array.push_back(inst_array)
 
 
+func set_projectiles_variable(variable: String, value) -> void:
+	for ring in ring_array:
+		for projectile in ring:
+			if !projectile:
+				continue
+			projectile.set_deferred(variable, value)
+
+
 func _process(delta: float) -> void:
 	# Despawn if no instances are left
 	if get_child_count() == 0:
@@ -53,17 +65,32 @@ func _process(delta: float) -> void:
 		rotation.x += y_rotation_spd * delta
 	else:
 		rotation.y += y_rotation_spd * delta
+
+
+func _update_radius_and_pad() -> void:
 	# Update the ring padding & radius
-#	var inst_offset = TAU / projectile_count
-#	var ring_pos = 0.0
-#	var padding := 0.0
-#	for ring in ring_array:
-#		for projectile in ring:
-#			if !projectile:
-#				continue
-#			projectile.translation = Vector3(radius+padding, 0.0, 0.0).rotated(Vector3.UP, ring_pos)
-#			ring_pos += inst_offset
-#		padding += ring_padding
+	var inst_offset = TAU / projectile_count
+	var ring_pos = 0.0
+	var padding := 0.0
+	for ring in ring_array:
+		for projectile in ring:
+			if !projectile:
+				continue
+			projectile.translation = Vector3(radius+padding, 0.0, 0.0).rotated(Vector3.UP, ring_pos)
+			ring_pos += inst_offset
+		padding += ring_padding
+
+
+func set_radius(value: float) -> void:
+	radius = value
+	if is_ready:
+		_update_radius_and_pad()
+
+
+func set_ring_padding(value: float) -> void:
+	ring_padding = value
+	if is_ready:
+		_update_radius_and_pad()
 
 
 func smooth_rotate(target_angle: float, ease_type: int, trans_type: int, duration: float) -> void:

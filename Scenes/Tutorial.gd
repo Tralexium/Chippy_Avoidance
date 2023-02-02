@@ -40,6 +40,7 @@ onready var tutorial_phase_4: Spatial = $ObstacleSpawners/Tutorial_Phase4
 onready var tutorial_phase_5: Spatial = $ObstacleSpawners/Tutorial_Phase5
 onready var tutorial_phase_6: Spatial = $ObstacleSpawners/Tutorial_Phase6
 onready var tutorial_phase_8_9: Spatial = $ObstacleSpawners/Tutorial_Phase_8_9
+onready var tutorial_final_phase: Spatial = $ObstacleSpawners/Tutorial_final_phase
 
 
 func _init() -> void:
@@ -92,6 +93,7 @@ func spawn_info_box() -> void:
 			item_hud.get_node("ShieldItem").disabled = false
 		9:
 			item_hud.get_node("SlomoItem").disabled = false
+			tutorial_final_phase.start()
 
 
 func info_box_complete() -> void:
@@ -133,6 +135,8 @@ func _on_tutorial_phase_finished(phase: int) -> void:
 				item_hud.get_node("JumpItem").disabled = true
 			8:
 				item_hud.get_node("ShieldItem").disabled = true
+			9:
+				item_hud.get_node("SlomoItem").disabled = true
 
 
 func _on_ability_used(ability_num: int) -> void:

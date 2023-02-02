@@ -1656,7 +1656,7 @@ animation = "Running"
 [sub_resource type="AnimationNodeTimeScale" id=22]
 
 [sub_resource type="AnimationNodeBlendTree" id=15]
-graph_offset = Vector2( -653, 142.55 )
+graph_offset = Vector2( -463.776, 18.2342 )
 nodes/TimeScale/node = SubResource( 54 )
 nodes/TimeScale/position = Vector2( 480, 140 )
 nodes/air_blend/node = SubResource( 38 )

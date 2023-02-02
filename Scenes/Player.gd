@@ -254,13 +254,14 @@ func _get_input() -> void:
 
 
 func _apply_velocity() -> void:
-	var delta := get_physics_process_delta_time()
+	slomo_compensation = 1.0 / Engine.time_scale
+	var delta := get_physics_process_delta_time() * slomo_compensation
 	
-	slomo_compensation = max(1.0, 2.0 - Engine.time_scale)
 	
 	if velocity.y < 0.0:
 		previous_fall_spd = velocity.y
-	velocity.y = 0.0 if !is_dead and is_on_floor() else max(-max_fall_vel, velocity.y - (gravity*pow(slomo_compensation, 2.25)*delta))
+	# The lerp fixes a small inconsistency when in slomotion
+	velocity.y = 0.0 if !is_dead and is_on_floor() else max(-max_fall_vel, velocity.y - (gravity*lerp(slomo_compensation, 1.0, 0.1))*delta)
 	
 	if is_dead:
 		return
@@ -282,8 +283,8 @@ func _apply_velocity() -> void:
 		velocity.y = _jump_vel if has_djump else djump_vel
 		if flying:
 			velocity.y = flying_vel
+		velocity.y *= slomo_compensation
 		snap_vector = Vector3.ZERO
-		velocity.y *= min(slomo_compensation, 1.3)
 	
 	if !flying and Input.is_action_just_released("jump") and velocity.y > 0.0:
 		velocity.y *= 0.5
@@ -299,7 +300,7 @@ func _apply_velocity() -> void:
 		_rotate_mesh(delta)
 	else:
 		var XZ_velocity := Vector2(velocity.x, velocity.z)
-		var friction_vel := XZ_velocity.linear_interpolate(Vector2.ZERO, (friction*slomo_compensation)*delta)
+		var friction_vel := XZ_velocity.linear_interpolate(Vector2.ZERO, friction*delta)
 		velocity.x = friction_vel.x
 		velocity.z = friction_vel.y
 	
@@ -321,7 +322,7 @@ func _rotate_mesh(delta: float) -> void:
 		var quat := Quat(n_mesh.transform.basis)
 		var target_quat := Quat(Vector3(0.0, look_dir.angle(), 0.0))
 		# Interpolate using spherical-linear interpolation (SLERP).
-		var lerped_quat := quat.slerp(target_quat, (10.0 * slomo_compensation) * delta)
+		var lerped_quat := quat.slerp(target_quat, 10.0 * (delta * slomo_compensation))
 		# Apply lerped orientation
 		n_mesh.transform.basis = Basis(lerped_quat)
 

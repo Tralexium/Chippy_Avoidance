@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Tutorial/Tutorial_final_phase.gd" type="Script" id=1]
+
+[node name="Tutorial_final_phase" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
