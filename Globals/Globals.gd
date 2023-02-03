@@ -29,6 +29,7 @@ enum ABILITIES {
 var debug_mode := true
 var god_mode := false
 var can_pause := false
+var in_tutorial := false
 var currently_quiting := false
 
 var timeline_events := []

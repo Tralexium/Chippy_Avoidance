@@ -8,6 +8,7 @@ var in_transition := false
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var resume_ring: TextureProgress = $Control/CenterContainer/ResumeRing
 onready var resume_button: Button = $Control/UISpace/UIBG/VBoxContainer/Margin/Buttons/Resume
+onready var tutorial_button: Button = $Control/UISpace/UIBG/VBoxContainer/Margin/Buttons/Tutorial
 
 
 func _ready() -> void:
@@ -23,6 +24,10 @@ func pause() -> void:
 	paused = !paused
 	if paused:
 		show()
+		if Globals.in_tutorial:
+			tutorial_button.text = "Skip Tutorial"
+		else:
+			tutorial_button.text = "Tutorial"
 		previous_time_scale = Engine.time_scale
 		Engine.time_scale = 1.0
 		animation_player.play("enable")
@@ -53,15 +58,17 @@ func _hide() -> void:
 	hide()
 
 
-func spawn_transition(back_to_menu: bool) -> void:
+func spawn_transition(scene: PackedScene) -> void:
+	for player in get_tree().get_nodes_in_group("player"):
+		player.iframe_immunity = true
 	in_transition = true
 	var transition_inst := CIRCLE_TRANSITION.instance()
-	transition_inst.connect("finished", self, "_on_transition_finished", [back_to_menu])
+	transition_inst.connect("finished", self, "_on_transition_finished", [scene])
 	transition_inst.pause_mode = Node.PAUSE_MODE_PROCESS
 	add_child(transition_inst)
 
 
-func _on_transition_finished(back_to_menu: bool) -> void:
+func _on_transition_finished(scene: PackedScene) -> void:
 	resume_instant()
 	in_transition = false
 	var mus_bus := SoundManager.get_default_music_bus()
@@ -69,10 +76,7 @@ func _on_transition_finished(back_to_menu: bool) -> void:
 	Engine.time_scale = 1.0
 	SoundManager.stop_music()
 	SoundManager.stop_all_sounds()
-	if back_to_menu:
-		get_tree().change_scene_to(Globals.MAIN_MENU)
-	else:
-		get_tree().reload_current_scene()
+	get_tree().change_scene_to(scene)
 
 
 func _on_Resume_pressed() -> void:
@@ -82,9 +86,17 @@ func _on_Resume_pressed() -> void:
 
 func _on_Retry_pressed() -> void:
 	if !in_transition:
-		spawn_transition(false)
+		spawn_transition(Globals.AVOIDANCE)
 
 
 func _on_Exit_pressed() -> void:
 	if !in_transition:
-		spawn_transition(true)
+		spawn_transition(Globals.MAIN_MENU)
+
+
+func _on_Tutorial_pressed() -> void:
+	if Globals.in_tutorial:
+		spawn_transition(Globals.AVOIDANCE)
+		Config.infinite_items = false
+	else:
+		spawn_transition(Globals.TUTORIAL)

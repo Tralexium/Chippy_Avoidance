@@ -1876,9 +1876,6 @@ layer = 2
 
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
-[node name="SongProgressBar" parent="UI/PlayerHUD" index="0"]
-in_tutorial = true
-
 [node name="Items" parent="UI/PlayerHUD" index="2"]
 margin_left = 1552.0
 margin_right = 1856.0

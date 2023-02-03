@@ -23,6 +23,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	Globals.can_pause = true
+	Globals.in_tutorial = false
 	Globals.reset_run_stats()
 	EventBus.emit_signal("avoidance_started")
 	EventBus.connect("hp_changed", self, "_on_damage_taken")

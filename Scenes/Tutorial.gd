@@ -46,6 +46,7 @@ onready var tutorial_final_phase: Spatial = $ObstacleSpawners/Tutorial_final_pha
 
 func _init() -> void:
 	Globals.can_pause = true
+	Globals.in_tutorial = true
 	Config.infinite_items = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -201,9 +202,11 @@ func _on_NextPhase_timeout() -> void:
 	if tutorial_phase < tutorial_texts.size():
 		spawn_info_box()
 	else:
+		Globals.can_pause = false
 		Config.infinite_items = false
 		SoundManager.stop_music(4.0)
 		player.die_when_outside = false
+		player.iframe_immunity = true
 		var trans := CIRCLE_TRANSITION.instance()
 		trans.connect("finished", self, "_on_finished")
 		add_child(trans)
