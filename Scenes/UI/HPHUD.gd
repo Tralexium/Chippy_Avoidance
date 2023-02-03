@@ -51,7 +51,8 @@ func eliminate_bar(new_hp: int) -> void:
 		hp_bars -= 1
 	
 	blood_part.emitting = true
-	shake_amnt = 15.0
 	initial_pos = rect_position
-	var tween = create_tween()
-	tween.tween_property(self, "shake_amnt", 0.0, 0.3)
+	if new_hp > 0:  # Avoids a crash that happens when the player is null
+		shake_amnt = 15.0
+		var tween = create_tween()
+		tween.tween_property(self, "shake_amnt", 0.0, 0.3)

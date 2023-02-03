@@ -109,6 +109,8 @@ func _on_avoidance_ended() -> void:
 	Globals.can_pause = false
 	Globals.run_stats["survival_time"] = song_position
 	Globals.run_stats["unit_survival_time"] = unit_position
+	Config.total_deaths += 1
+	Config.total_play_time += song_position
 	var stats_ui := STATS_MENUS.instance()
 	$UI.add_child(stats_ui)
 

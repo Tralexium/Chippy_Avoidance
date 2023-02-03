@@ -489,6 +489,18 @@ tracks/36/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/37/type = "value"
+tracks/37/path = NodePath("Player:die_when_outside")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "avoidance_timeline"
@@ -1478,6 +1490,18 @@ tracks/52/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false, true, false ]
+}
+tracks/53/type = "value"
+tracks/53/path = NodePath("Player:die_when_outside")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/keys = {
+"times": PoolRealArray( 43.1, 45.01, 48.1, 49 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true ]
 }
 
 [node name="Avoidance" type="Spatial"]

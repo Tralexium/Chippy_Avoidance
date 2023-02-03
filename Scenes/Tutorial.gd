@@ -4,12 +4,13 @@ const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn
 const REWIND_FX := preload("res://Scenes/RewindEffect.tscn")
 const SLOMO_FX := preload("res://Scenes/UI/SlomoEffect.tscn")
 const HIT_FX := preload("res://Scenes/UI/HitFX.tscn")
+const BUTTON_PROMPT := preload("res://Scenes/UI/ButtonPrompt.tscn")
 
 export var starting_hp := 1
 
 onready var using_gamepad := InputHelper.has_gamepad()
 onready var tutorial_texts := [
-	"Welcome, feel free to move around using the {0}.".format(["joystick" if using_gamepad else "arrow keys"]),
+	"Welcome, feel free to move around using the {0}.".format(["left joystick" if using_gamepad else "arrow keys"]),
 	"Believe it or not, you can jump up to 2 times. Try jumping again mid-air!",
 	"Try to avoid red obstacles. Let's put your movement skills into use.",
 	"When in 2D, only horizontal movement is allowed. Keep an eye on the top left corner when unsure.",
@@ -46,6 +47,7 @@ onready var tutorial_final_phase: Spatial = $ObstacleSpawners/Tutorial_final_pha
 func _init() -> void:
 	Globals.can_pause = true
 	Config.infinite_items = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
 func _ready() -> void:
@@ -71,10 +73,19 @@ func _process(delta: float) -> void:
 				info_box_complete()
 
 
+func _add_button_prompt(action_name: String) -> void:
+	var button_prompt := BUTTON_PROMPT.instance()
+	button_prompt.action_name = action_name
+	button_prompt.translation.y += 5
+	player.add_child(button_prompt)
+
+
 func spawn_info_box() -> void:
 	var text : String = tutorial_texts[tutorial_phase]
 	info_box.slide_in(text)
 	match tutorial_phase:
+		1:
+			_add_button_prompt("jump")
 		2:
 			tutorial_phase_3.start()
 		3:
@@ -85,15 +96,19 @@ func spawn_info_box() -> void:
 			tutorial_phase_6.start()
 		6:
 			item_hud.get_node("SpeedItem").disabled = false
+			_add_button_prompt("item 1")
 		7:
 			tutorial_phase_8_9.spawn_wall(Vector3(-25, 0, 0), Vector3(9.0, 0.0, 0.0), 7)
 			item_hud.get_node("JumpItem").disabled = false
+			_add_button_prompt("item 2")
 		8:
 			tutorial_phase_8_9.spawn_wall(Vector3(25, 0, 0), Vector3(-9.0, 0.0, 0.0), 8)
 			item_hud.get_node("ShieldItem").disabled = false
+			_add_button_prompt("item 3")
 		9:
 			item_hud.get_node("SlomoItem").disabled = false
 			tutorial_final_phase.start()
+			_add_button_prompt("item 4")
 
 
 func info_box_complete() -> void:
@@ -187,7 +202,15 @@ func _on_NextPhase_timeout() -> void:
 		spawn_info_box()
 	else:
 		Config.infinite_items = false
-		return
+		SoundManager.stop_music(4.0)
+		player.die_when_outside = false
+		var trans := CIRCLE_TRANSITION.instance()
+		trans.connect("finished", self, "_on_finished")
+		add_child(trans)
+
+
+func _on_finished() -> void:
+	get_tree().change_scene_to(Globals.GL_HF)
 
 
 func _on_Player_ability_expired(ability) -> void:

@@ -49,7 +49,10 @@ func _on_StartingMenu_begin_pressed() -> void:
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	add_child(transition_inst)
 	yield(transition_inst, "finished")
-	get_tree().change_scene_to(Globals.AVOIDANCE)
+	if Config.total_play_time == 0.0:
+		get_tree().change_scene_to(Globals.TUTORIAL)
+	else:
+		get_tree().change_scene_to(Globals.AVOIDANCE)
 
 
 func _on_ConfirmationBox_answered(answer) -> void:

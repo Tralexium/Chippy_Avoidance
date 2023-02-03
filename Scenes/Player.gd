@@ -23,6 +23,7 @@ export var max_fall_vel := 100.0
 export var friction := 20.0
 export var input_buffer_dur := 0.2
 export var coyote_time_dur := 0.2
+export var die_when_outside := true
 export var lock_2d := false setget set_lock_2d
 export var flying := false
 export var has_djump := false
@@ -440,7 +441,7 @@ func _on_PlayerShield_hidden() -> void:
 
 
 func _on_VisibilityNotifier_screen_exited() -> void:
-	if Globals.currently_quiting:
+	if Globals.currently_quiting or !die_when_outside:
 		return
 	if shielded:
 		n_player_shield.fracture()

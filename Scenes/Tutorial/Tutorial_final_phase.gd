@@ -19,7 +19,7 @@ func _on_avoidance_ended() -> void:
 func start() -> void:
 	yield(get_tree().create_timer(1.0), "timeout")
 	timer.start(duration)
-	var speed := 5.0
+	var speed := 4.5
 	var pos_offset := Vector3(0.0, 6.0, 0.0)
 	for i in range(2):
 		var ring_inst := RING.instance()

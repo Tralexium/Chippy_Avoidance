@@ -2,7 +2,7 @@
 
 [resource]
 background_mode = 4
-ambient_light_color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
+ambient_light_color = Color( 0.798319, 0.77703, 0.871709, 1 )
 fog_height_enabled = true
 dof_blur_far_distance = 50.0
 dof_blur_far_transition = 50.0

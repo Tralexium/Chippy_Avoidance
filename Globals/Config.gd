@@ -22,6 +22,8 @@ enum AA_MODES {
 
 var hp_costs := [0, 0, 0, 250, 500, 1000, 2500, 5000, 7500, 10000, 20000]
 var ability_costs := [100, 250, 500, 1000]
+var total_deaths := 0
+var total_play_time := 0.0
 var previous_best := 0
 
 var music_volume := 0.7 setget set_music_volume
@@ -58,6 +60,13 @@ signal show_fps_changed(is_active)
 
 func save_data() -> void:
 	var save_dict := {}
+	
+	# Score
+	save_dict["total_deaths"] = total_deaths
+	save_dict["total_play_time"] = total_play_time
+	save_dict["previous_best"] = previous_best
+	
+	# Settings
 	save_dict["music_volume"] = music_volume
 	save_dict["sound_volume"] = sound_volume
 	save_dict["point_multiplier"] = point_multiplier
@@ -85,7 +94,6 @@ func save_data() -> void:
 	save_dict["infinite_hp"] = infinite_hp
 	save_dict["infinite_jump"] = infinite_jump
 	save_dict["infinite_items"] = infinite_items
-	save_dict["previous_best"] = previous_best
 	
 	save_dict["keyboard_controls"] = get_keyboard_dict()
 	save_dict["gamepad_controls"] = get_gamepad_dict()
@@ -101,6 +109,12 @@ func load_data() -> void:
 		file.open(SAVE_PATH, File.READ)
 		var values : Dictionary = file.get_var()
 		
+		# Score
+		total_deaths = values.get("total_deaths", 0)
+		total_play_time = values.get("total_play_time", 0.0)
+		previous_best = values.get("previous_best", 0)
+		
+		# Settings
 		self.music_volume = values.get("music_volume", 0.5)
 		self.sound_volume = values.get("sound_volume", 0.75)
 		self.screen_shake = values.get("screen_shake", 1.0)
@@ -122,7 +136,6 @@ func load_data() -> void:
 		item_jump_dur = values.get("item_jump_dur", 6.0)
 		item_shield_dur = values.get("item_shield_dur", 4.0)
 		item_slomo_dur = values.get("item_slomo_dur", 4.0)
-		previous_best = values.get("previous_best", 0)
 		self.player_max_hp = values.get("player_max_hp", 3)
 		self.player_points = values.get("player_points", 0)
 		self.player_ring = values.get("player_ring", true)
