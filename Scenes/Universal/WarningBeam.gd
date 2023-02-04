@@ -1,5 +1,7 @@
 extends Sprite3D
 
+signal finished
+
 export var warning_dur := 2.0
 export var starting_scale := 4.0
 export var color := Color("ff4646")
@@ -22,8 +24,14 @@ func _process(delta: float) -> void:
 		var tween := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT).set_parallel()
 		tween.tween_property(self, "opacity", 0.6, warning_dur)
 		tween.tween_property(self, "scale:x", 0.0, warning_dur)
+		tween.tween_callback(self, "_finished").set_delay(warning_dur)
 	
 	elapsed_time += delta
 	var blink_rate : float = lerp(max_blinking_rate, min_blinking_rate, warning_dur - elapsed_time)
 	var blink_amnt := sin(elapsed_time * blink_rate) * blink_strength
 	modulate = color + Color(blink_amnt, blink_amnt, blink_amnt)
+
+
+func _finished() -> void:
+	emit_signal("finished")
+	queue_free()

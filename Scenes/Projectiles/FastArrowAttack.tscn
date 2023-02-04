@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Resources/Materials/hazard_mat.tres" type="Material" id=1]
+[ext_resource path="res://Scenes/Universal/WarningBeam.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/UI/faded_line.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Meshes/FastArrow.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://Scenes/Projectiles/FastArrowAttack.gd" type="Script" id=5]
+
+[sub_resource type="ConvexPolygonShape" id=1]
+points = PoolVector3Array( 1, -5.49257e-05, 0.399754, 0, -0.4, -0.000141144, 0, -5.49257e-05, -1.6, 0, 0.399972, -0.000141144, 0, 0.436063, 0.438904, 0.959475, 0.0251514, 0.820063, 0, -0.381832, 0.438904, -1, -5.49257e-05, 0.399754, -0.981989, 0.0251514, 0.820063, -0.000195742, 0.0271155, 1.25687 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape/MeshInstance:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape/MeshInstance:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape/MeshInstance:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "spawn"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionShape:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 360 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7 ),
+"transitions": PoolRealArray( 0.5, 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 1.5 ), Vector3( 0, 0, 0 ) ]
+}
+
+[node name="FastArrowAttack" type="KinematicBody" groups=["hazard"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
+material_override = ExtResource( 1 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("../..")
+
+[node name="WarningBeam" parent="." instance=ExtResource( 2 )]
+transform = Transform( 2, 0, 0, 0, -1.31134e-07, -1, 0, 3, -4.37114e-08, 0, 0, -9.40761 )
+billboard = 0
+texture = ExtResource( 3 )
+warning_dur = 0.6
+starting_scale = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spawn"
+anims/RESET = SubResource( 2 )
+anims/spawn = SubResource( 3 )
+
+[connection signal="finished" from="WarningBeam" to="." method="_on_WarningBeam_finished"]
