@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Universal/WarningBeam.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Projectiles/Phase2_Atk3.gd" type="Script" id=2]
@@ -11,9 +11,6 @@ radius = 1.5
 [sub_resource type="SphereMesh" id=2]
 radius = 1.5
 height = 10.0
-
-[sub_resource type="Animation" id=6]
-resource_name = "explosion"
 
 [node name="Phase2_Atk3" type="KinematicBody" groups=["hazard"]]
 collision_layer = 4
@@ -37,8 +34,5 @@ warning_dur = 1.0
 [node name="Crosshair" parent="." instance=ExtResource( 4 )]
 
 [node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/explosion = SubResource( 6 )
 
 [connection signal="camera_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_camera_exited"]

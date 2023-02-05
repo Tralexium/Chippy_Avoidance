@@ -25,4 +25,5 @@ func disable_effect(ability_num: int) -> void:
 
 
 func fade_out() -> void:
-	animation_player.play("fade_out")
+	if modulate.a > 0.0:
+		animation_player.play("fade_out")

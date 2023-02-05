@@ -29,6 +29,7 @@ func _ready() -> void:
 	button_icon.visible = true if (ability_count > 0 or Config.infinite_items) and !disabled else false
 	set_disabled(disabled)
 	_apply_color()
+	circle_reload.value = 100.0 if ability_count == 0 else 0.0
 	var mat := particles.process_material as ParticlesMaterial
 	mat.color = icon.modulate
 	_update_button_icon(InputHelper.has_gamepad())

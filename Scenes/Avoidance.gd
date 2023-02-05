@@ -3,10 +3,11 @@ extends Spatial
 const EYE_BLINK := preload("res://Scenes/Universal/EyeBlinkTransition.tscn")
 const STATS_MENUS := preload("res://Scenes/UI/StatsScreen.tscn")
 const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
+const FADE_TRANSITION := preload("res://Scenes/Universal/FadeRect.tscn")
 const SLOMO_FX := preload("res://Scenes/UI/SlomoEffect.tscn")
 const HIT_FX := preload("res://Scenes/UI/HitFX.tscn")
 
-export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44]
+export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44, 107.70]
 
 var current_phase := 0
 var audio_stream_player: AudioStreamPlayer
@@ -127,8 +128,13 @@ func _spawn_transition(back_to_menu: bool) -> void:
 	add_child(transition_inst)
 
 
+func spawn_fade_transition() -> void:
+	var fade_inst := FADE_TRANSITION.instance()
+	fade_inst.delete_on_fade = true
+	$UI.add_child(fade_inst)
+
+
 func _on_avoidance_restart() -> void:
-	ability_border_fx.fade_out()
 	_spawn_transition(false)
 
 func _on_goto_menu() -> void:

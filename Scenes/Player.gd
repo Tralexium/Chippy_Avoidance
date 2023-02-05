@@ -23,7 +23,7 @@ export var max_fall_vel := 100.0
 export var friction := 20.0
 export var input_buffer_dur := 0.2
 export var coyote_time_dur := 0.2
-export var die_when_outside := true
+export var die_when_outside := false
 export var lock_2d := false setget set_lock_2d
 export var flying := false
 export var has_djump := false
@@ -255,7 +255,7 @@ func _get_input() -> void:
 
 
 func _apply_velocity() -> void:
-	slomo_compensation = 1.0 / Engine.time_scale
+	slomo_compensation = min(2.0, 1.0 / Engine.time_scale)
 	var delta := get_physics_process_delta_time() * slomo_compensation
 	
 	
@@ -441,7 +441,7 @@ func _on_PlayerShield_hidden() -> void:
 
 
 func _on_VisibilityNotifier_screen_exited() -> void:
-	if Globals.currently_quiting or !die_when_outside or iframe_immunity:
+	if Globals.currently_quiting or !die_when_outside:
 		return
 	if shielded:
 		n_player_shield.fracture()
