@@ -4,11 +4,9 @@
 [ext_resource path="res://Scenes/Spawners/Phase9_Platforms.tscn" type="PackedScene" id=2]
 
 [node name="Phase9_Spawner1" type="Spatial"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 script = ExtResource( 1 )
 
 [node name="Phase9_Platforms" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 0.58

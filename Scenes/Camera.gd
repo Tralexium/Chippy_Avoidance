@@ -88,16 +88,16 @@ func extend_cam(new_spring_len: float, duration: float, ease_type: int = Tween.E
 
 func shake_cam(target_shake: float, duration: float) -> void:
 	if duration > 0.0:
-		tween = create_tween().set_trans(Tween.TRANS_LINEAR)
-		tween.tween_property(self, "screen_shake_amount", target_shake * Config.screen_shake, duration)
+		var shake_tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+		shake_tween.tween_property(self, "screen_shake_amount", target_shake * Config.screen_shake, duration)
 	else:
 		screen_shake_amount = target_shake
 
 
 func shake_cam_instant(shake_amount: float, duration: float) -> void:
 	screen_shake_amount = shake_amount * Config.screen_shake
-	tween = create_tween().set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(self, "screen_shake_amount", 0.0, duration)
+	var shake_tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+	shake_tween.tween_property(self, "screen_shake_amount", 0.0, duration)
 
 
 func set_position_y_angle(degrees: float, duration: float, ease_type: int = Tween.EASE_OUT, trans_type: int = Tween.TRANS_CUBIC) -> void:

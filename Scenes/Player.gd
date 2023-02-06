@@ -233,9 +233,10 @@ func _get_input() -> void:
 	if lock_2d:
 		input_vector.z = 0.0
 		translation.z = lerp(translation.z, 0.0, 0.5)
+	if is_on_floor():
+		has_djump = true
 	if !flying:
 		if (Input.is_action_just_pressed("jump") or buffered_input == "jump") and (is_on_floor() or coyote_time > 0.0):
-			has_djump = true
 			input_vector.y = 1
 			coyote_time = 0.0
 			buffered_input = ""

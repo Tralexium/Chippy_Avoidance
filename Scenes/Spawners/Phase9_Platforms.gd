@@ -19,7 +19,7 @@ func spawn() -> void:
 
 func despawn() -> void:
 	for platform in get_children():
-		queue_free()
+		platform.queue_free()
 
 
 func _process(delta: float) -> void:

@@ -643,7 +643,7 @@ tracks/0/keys = {
 "args": [ Vector3( 0, 0, 6 ), Vector3( -45, 0, 0 ), 4.0, 2, 7, 45.0 ],
 "method": "shift_cam"
 }, {
-"args": [ false ],
+"args": [ true ],
 "method": "switch_projection"
 } ]
 }
@@ -654,7 +654,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 10.29, 71.01, 86.06, 107.71 ),
+"times": PoolRealArray( 0, 10.29, 71.01, 86.06, 107.72 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ true ],
@@ -692,7 +692,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 23.56, 63.49, 107.72 ),
+"times": PoolRealArray( 23.56, 63.49, 107.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ 1.0, false ],
@@ -1272,7 +1272,7 @@ tracks/34/loop_wrap = true
 tracks/34/imported = false
 tracks/34/enabled = true
 tracks/34/keys = {
-"times": PoolRealArray( 0, 24.56, 64.33, 107.66 ),
+"times": PoolRealArray( 0, 24.56, 64.33, 107.74 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, false ]
@@ -1296,10 +1296,10 @@ tracks/36/loop_wrap = true
 tracks/36/imported = false
 tracks/36/enabled = true
 tracks/36/keys = {
-"times": PoolRealArray( 0, 33.77, 34.08, 43.6, 43.85, 88.03, 96.48, 97.85 ),
+"times": PoolRealArray( 0, 33.77, 34.08, 43.6, 43.85, 86.06, 96.48, 97.85 ),
 "transitions": PoolRealArray( 1, 2, 1, 1, 1, -2, -2, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 120, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 270, 0 ), Vector3( 0, 360, 0 ) ]
 }
 tracks/37/type = "value"
 tracks/37/path = NodePath("GridFloor:active")
@@ -1332,7 +1332,7 @@ tracks/39/loop_wrap = true
 tracks/39/imported = false
 tracks/39/enabled = true
 tracks/39/keys = {
-"times": PoolRealArray( 0, 10.29, 43.09, 48.37, 107.74 ),
+"times": PoolRealArray( 0, 10.29, 43.09, 48.37, 107.73 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, false, true ]
@@ -1708,10 +1708,10 @@ tracks/61/loop_wrap = true
 tracks/61/imported = false
 tracks/61/enabled = true
 tracks/61/keys = {
-"times": PoolRealArray( 107.08, 107.72 ),
-"transitions": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 107.08, 107.72, 108.02 ),
+"transitions": PoolRealArray( 0, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 80, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 80, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
 [node name="Avoidance" type="Spatial"]
@@ -1768,11 +1768,11 @@ projectile = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 
 [node name="Phase9_Spawner1" parent="Spawners" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 80, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80, 0 )
 
 [node name="Phase9_Platforms" parent="Spawners/Phase9_Spawner1" index="0"]
 platforms = 7
-seperation = Vector2( 25, 10 )
+seperation = Vector2( 50, 10 )
 
 [node name="Coins" type="Position3D" parent="."]
 

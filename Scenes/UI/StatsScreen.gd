@@ -17,14 +17,15 @@ func _input(event: InputEvent) -> void:
 		animation_player.advance(anim_length)
 		yield(get_tree(), "idle_frame")
 		stats_header.rect_size.x = Config.resolution.x
-	var is_focused := false
-	for button in buttons.get_children():
-		is_focused = button.has_focus()
-		if is_focused:
-			break
-	if Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").length() > 0.0 and !is_focused and !in_upgrades:
-		buttons.get_node("Retry").grab_focus()
-		accept_event()
+	if !animation_player.is_playing():
+		var is_focused := false
+		for button in buttons.get_children():
+			is_focused = button.has_focus()
+			if is_focused:
+				break
+		if Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").length() > 0.0 and !is_focused and !in_upgrades:
+			buttons.get_node("Retry").grab_focus()
+			accept_event()
 
 
 func expand_header() -> void:

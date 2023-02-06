@@ -50,7 +50,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "spawn"
-length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape:scale")
 tracks/0/interp = 1
@@ -58,10 +57,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 1, 1, 1 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 1.5, 1.5, 1.5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CollisionShape:rotation_degrees")
@@ -70,7 +69,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 360 ), Vector3( 0, 0, 0 ) ]
@@ -82,7 +81,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.6, 0.7 ),
+"times": PoolRealArray( 0, 0.9, 1 ),
 "transitions": PoolRealArray( 0.5, 0.5, 0.5 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 1.5 ), Vector3( 0, 0, 0 ) ]
@@ -94,6 +93,7 @@ collision_mask = 0
 script = ExtResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
@@ -105,7 +105,7 @@ skeleton = NodePath("../..")
 transform = Transform( 2, 0, 0, 0, -1.31134e-07, -1, 0, 3, -4.37114e-08, 0, 0, -9.40761 )
 billboard = 0
 texture = ExtResource( 3 )
-warning_dur = 0.6
+warning_dur = 0.9
 starting_scale = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
