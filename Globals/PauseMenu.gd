@@ -98,5 +98,6 @@ func _on_Tutorial_pressed() -> void:
 	if Globals.in_tutorial:
 		spawn_transition(Globals.AVOIDANCE)
 		Config.infinite_items = false
+		Config.save_data()
 	else:
 		spawn_transition(Globals.TUTORIAL)

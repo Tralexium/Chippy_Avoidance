@@ -26,10 +26,8 @@ func _ready() -> void:
 	is_ready = true
 	ability_count = Config.player_current_abilities[ability]
 	amount.text = str(ability_count)
-	button_icon.visible = true if (ability_count > 0 or Config.infinite_items) and !disabled else false
 	set_disabled(disabled)
 	_apply_color()
-	circle_reload.value = 100.0 if ability_count == 0 else 0.0
 	var mat := particles.process_material as ParticlesMaterial
 	mat.color = icon.modulate
 	_update_button_icon(InputHelper.has_gamepad())
@@ -62,7 +60,7 @@ func set_disabled(value: bool) -> void:
 		if tween != null:
 			if tween.is_running():
 				tween.kill()
-		circle_reload.value = 100.0 if disabled else 0.0
+		circle_reload.value = 0.0 if (ability_count > 0 or Config.infinite_items) and !disabled else 100.0
 		_apply_color()
 
 

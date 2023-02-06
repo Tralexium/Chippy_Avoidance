@@ -1676,7 +1676,7 @@ tracks/59/loop_wrap = true
 tracks/59/imported = false
 tracks/59/enabled = true
 tracks/59/keys = {
-"times": PoolRealArray( 109.98, 110.09, 117.72 ),
+"times": PoolRealArray( 109.98, 110.09, 115.97 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -1771,8 +1771,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80, 0 )
 
 [node name="Phase9_Platforms" parent="Spawners/Phase9_Spawner1" index="0"]
-platforms = 7
-seperation = Vector2( 50, 10 )
+platforms = 6
+seperation = Vector2( 50, 12 )
 
 [node name="Coins" type="Position3D" parent="."]
 
