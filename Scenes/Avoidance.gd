@@ -131,6 +131,7 @@ func _spawn_transition(back_to_menu: bool) -> void:
 func spawn_fade_transition() -> void:
 	var fade_inst := FADE_TRANSITION.instance()
 	fade_inst.delete_on_fade = true
+	fade_inst.fade_dur = 0.8
 	$UI.add_child(fade_inst)
 
 

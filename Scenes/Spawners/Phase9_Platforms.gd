@@ -8,9 +8,11 @@ export var seperation := Vector2(20.0, 5.0)
 
 
 func spawn() -> void:
+	if get_child_count() > 0:
+		return
 	for i in range(platforms):
 		var plat_inst := PLATFORM.instance()
-		plat_inst.translation = -seperation.y * i
+		plat_inst.translation.y = -seperation.y * i
 		plat_inst.random_pos_radius = Vector3(seperation.x if i > 0 else 0.0, 2.0, 0.0)
 		add_child(plat_inst)
 
@@ -21,4 +23,4 @@ func despawn() -> void:
 
 
 func _process(delta: float) -> void:
-	translation.y += vertical_speed * delta
+	global_translation.y += vertical_speed * delta

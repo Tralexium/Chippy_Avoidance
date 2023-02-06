@@ -571,6 +571,18 @@ tracks/43/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/44/type = "value"
+tracks/44/path = NodePath("Lights:translation")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "avoidance_timeline"
@@ -583,7 +595,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 38.01, 43.1, 48.32, 52.8, 53, 64.2972, 71.0081, 85.9945, 107.72 ),
+"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 38.01, 43.1, 48.32, 52.8, 53, 64.2972, 96.47, 99.14, 107.72 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ Vector3( 0, 8, 0 ), Vector3( 0, 0, 0 ), 30.0 ],
@@ -622,13 +634,13 @@ tracks/0/keys = {
 "args": [ Vector3( 0, 0, 9 ), Vector3( -45, 0, 0 ), 1.0, 1, 7, 55.0 ],
 "method": "shift_cam"
 }, {
-"args": [ Vector3( 0, 0, 9 ), Vector3( -40, 0, 0 ), 30.0 ],
+"args": [ Vector3( 0, 0, 0 ), Vector3( -30, 0, 0 ), 35.0 ],
 "method": "shift_cam_instant"
 }, {
-"args": [ Vector3( 0, 0, 6 ), Vector3( -60, 0, 0 ), 5.0, 2, 7, 60.0 ],
+"args": [ Vector3( 0, 0, 9 ), Vector3( -45, 0, 0 ), 2.0, 2, 7, 50.0 ],
 "method": "shift_cam"
 }, {
-"args": [ Vector3( 0, 0, 6 ), Vector3( -50, 0, 0 ), 3.0, 2, 7, 45.0 ],
+"args": [ Vector3( 0, 0, 6 ), Vector3( -45, 0, 0 ), 4.0, 2, 7, 45.0 ],
 "method": "shift_cam"
 }, {
 "args": [ false ],
@@ -642,14 +654,23 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 10.29 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 10.29, 71.01, 86.06, 107.71 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ true ],
 "method": "switch_projection"
 }, {
 "args": [  ],
 "method": "switch_projection"
+}, {
+"args": [ Vector3( -60, 0, 0 ), 5.0, 2, 7 ],
+"method": "rotate_cam"
+}, {
+"args": [ Vector3( -35, 0, 0 ), 3.0, 2, 7 ],
+"method": "rotate_cam"
+}, {
+"args": [ Vector3( 0, 80, 0 ), Vector3( 0, 0, 0 ), 45.0 ],
+"method": "shift_cam_instant"
 } ]
 }
 tracks/2/type = "value"
@@ -662,7 +683,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 24.56, 43.6, 64.3291, 107.72 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( 0, 1.5899, 0 ), Vector3( 0, 4, 0 ), Vector3( 0, 0, 0 ), Vector3( -163, 2, -95 ), Vector3( 0, 168, 0 ) ]
+"values": [ Vector3( 0, 1.5899, 0 ), Vector3( 0, 4, 0 ), Vector3( 0, 0, 0 ), Vector3( -163, 2, -95 ), Vector3( 0, 85, 0 ) ]
 }
 tracks/3/type = "method"
 tracks/3/path = NodePath(".")
@@ -1017,10 +1038,10 @@ tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"times": PoolRealArray( 0, 43.09 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 43.09, 53.13 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ false, true, false ]
 }
 tracks/17/type = "method"
 tracks/17/path = NodePath("Spawners/Phase5_Spawner1")
@@ -1204,14 +1225,20 @@ tracks/31/loop_wrap = true
 tracks/31/imported = false
 tracks/31/enabled = true
 tracks/31/keys = {
-"times": PoolRealArray( 19.81, 23.37 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 19.81, 23.37, 71.01, 86.06 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
 "args": [ 1.0, 3.5 ],
 "method": "shake_cam"
 }, {
 "args": [ 0.0, 0.0 ],
 "method": "shake_cam"
+}, {
+"args": [ 65.0, 5.0, 2, 7 ],
+"method": "extend_cam"
+}, {
+"args": [ 50.0, 3.0, 2, 7 ],
+"method": "extend_cam"
 } ]
 }
 tracks/32/type = "value"
@@ -1245,10 +1272,10 @@ tracks/34/loop_wrap = true
 tracks/34/imported = false
 tracks/34/enabled = true
 tracks/34/keys = {
-"times": PoolRealArray( 0, 24.56, 64.33 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 24.56, 64.33, 107.66 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ true, false, true, false ]
 }
 tracks/35/type = "value"
 tracks/35/path = NodePath("RectangleArena:translation")
@@ -1257,10 +1284,10 @@ tracks/35/loop_wrap = true
 tracks/35/imported = false
 tracks/35/enabled = true
 tracks/35/keys = {
-"times": PoolRealArray( 107.53, 107.72 ),
+"times": PoolRealArray( 0, 107.72 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 80, 133 ), Vector3( 0, 80, 0 ) ]
+"update": 1,
+"values": [ Vector3( 0, 0, 5000 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/36/type = "value"
 tracks/36/path = NodePath("Player/CameraPos:rotation_degrees")
@@ -1269,10 +1296,10 @@ tracks/36/loop_wrap = true
 tracks/36/imported = false
 tracks/36/enabled = true
 tracks/36/keys = {
-"times": PoolRealArray( 0, 33.77, 34.08, 43.6, 43.85 ),
-"transitions": PoolRealArray( 1, 2, 1, 1, 1 ),
+"times": PoolRealArray( 0, 33.77, 34.08, 43.6, 43.85, 88.03, 96.48, 97.85 ),
+"transitions": PoolRealArray( 1, 2, 1, 1, 1, -2, -2, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 120, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/37/type = "value"
 tracks/37/path = NodePath("GridFloor:active")
@@ -1305,7 +1332,7 @@ tracks/39/loop_wrap = true
 tracks/39/imported = false
 tracks/39/enabled = true
 tracks/39/keys = {
-"times": PoolRealArray( 0, 10.29, 43.09, 48.37, 107.72 ),
+"times": PoolRealArray( 0, 10.29, 43.09, 48.37, 107.74 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true, false, true ]
@@ -1589,10 +1616,10 @@ tracks/54/loop_wrap = true
 tracks/54/imported = false
 tracks/54/enabled = true
 tracks/54/keys = {
-"times": PoolRealArray( 0, 45.01, 48.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 45.01, 48.1, 110.17, 117.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ false, true, false, true, false ]
 }
 tracks/55/type = "value"
 tracks/55/path = NodePath("CamPath:curve")
@@ -1616,7 +1643,7 @@ tracks/56/keys = {
 "times": PoolRealArray( 109.52, 110.06 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 25.0, 7.0 ]
+"values": [ 25.0, 9.0 ]
 }
 tracks/57/type = "value"
 tracks/57/path = NodePath("RectangleArena:visible")
@@ -1625,10 +1652,10 @@ tracks/57/loop_wrap = true
 tracks/57/imported = false
 tracks/57/enabled = true
 tracks/57/keys = {
-"times": PoolRealArray( 107.53, 107.72 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.02, 107.53, 107.72 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ false, false, true ]
 }
 tracks/58/type = "value"
 tracks/58/path = NodePath("Spawners/Phase9_Spawner1/Phase9_Platforms:vertical_speed")
@@ -1639,8 +1666,8 @@ tracks/58/enabled = true
 tracks/58/keys = {
 "times": PoolRealArray( 117.72, 119 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 10 ]
+"update": 0,
+"values": [ 0, 50 ]
 }
 tracks/59/type = "value"
 tracks/59/path = NodePath("Spawners/Phase9_Spawner1:spawning")
@@ -1653,6 +1680,38 @@ tracks/59/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
+}
+tracks/60/type = "method"
+tracks/60/path = NodePath("Spawners/Phase9_Spawner1/Phase9_Platforms")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/keys = {
+"times": PoolRealArray( 107.26, 107.72, 121.04 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "despawn"
+}, {
+"args": [  ],
+"method": "spawn"
+}, {
+"args": [  ],
+"method": "despawn"
+} ]
+}
+tracks/61/type = "value"
+tracks/61/path = NodePath("Lights:translation")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/keys = {
+"times": PoolRealArray( 107.08, 107.72 ),
+"transitions": PoolRealArray( 0, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 80, 0 ) ]
 }
 
 [node name="Avoidance" type="Spatial"]
@@ -1709,7 +1768,11 @@ projectile = ExtResource( 18 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
 
 [node name="Phase9_Spawner1" parent="Spawners" instance=ExtResource( 26 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 165, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 80, 0 )
+
+[node name="Phase9_Platforms" parent="Spawners/Phase9_Spawner1" index="0"]
+platforms = 7
+seperation = Vector2( 25, 10 )
 
 [node name="Coins" type="Position3D" parent="."]
 
@@ -1766,7 +1829,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -38, 0 )
 
 [node name="CamPath" parent="." instance=ExtResource( 15 )]
 curve = ExtResource( 29 )
-nodes = [ NodePath("../Player/CameraPos"), NodePath("../Lights") ]
+nodes = [ NodePath("../Player/CameraPos/SpringArm"), NodePath("../Lights") ]
 ease_curve = SubResource( 8 )
 path_duration = 25.0
 

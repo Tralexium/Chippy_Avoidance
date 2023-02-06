@@ -8,7 +8,6 @@ export var spawn_radius = 10.0
 
 var is_ready := false
 onready var spawn_timer: Timer = $SpawnTimer
-onready var phase_9_platforms: Spatial = $Phase9_Platforms
 
 
 func _ready() -> void:
@@ -21,10 +20,8 @@ func set_spawning(value: bool) -> void:
 		return
 	if value:
 		start()
-		phase_9_platforms.spawn()
 	else:
 		spawn_timer.stop()
-		phase_9_platforms.despawn()
 
 
 func set_spawn_dur(duration: float) -> void:

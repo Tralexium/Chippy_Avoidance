@@ -2,6 +2,6 @@
 
 [resource]
 _data = {
-"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 165, 0, 0, 0, 0, 0, 0, 0, 0, 70, 0 ),
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0 ),
 "tilts": PoolRealArray( 0, 0 )
 }

@@ -53,7 +53,7 @@ func switch_projection(ortho: bool = false) -> void:
 
 func shift_cam(new_position: Vector3, new_rotation: Vector3, duration: float, ease_type: int = Tween.EASE_OUT, trans_type: int = Tween.TRANS_CUBIC, new_spring_len: float = 8.0) -> void:
 	# Convert basis to quaternion, keep in mind scale is lost
-	init_quat = Quat(Quat(spring_arm.transform.basis))
+	init_quat = Quat(Quat(spring_arm.transform.basis.orthonormalized()))
 	target_quat = Quat(Vector3(deg2rad(new_rotation.x), deg2rad(new_rotation.y), deg2rad(new_rotation.z)))
 	ease_weight = 0.0
 	
@@ -68,6 +68,22 @@ func shift_cam_instant(new_position: Vector3, new_rotation: Vector3, new_spring_
 	spring_arm.translation = new_position
 	spring_arm.rotation_degrees = new_rotation
 	spring_arm.spring_length = new_spring_len
+
+
+func rotate_cam(new_rotation: Vector3, duration: float, ease_type: int = Tween.EASE_OUT, trans_type: int = Tween.TRANS_CUBIC) -> void:
+	# Convert basis to quaternion, keep in mind scale is lost
+	init_quat = Quat(Quat(spring_arm.transform.basis.orthonormalized()))
+	target_quat = Quat(Vector3(deg2rad(new_rotation.x), deg2rad(new_rotation.y), deg2rad(new_rotation.z)))
+	ease_weight = 0.0
+	
+	tween = create_tween().set_ease(ease_type).set_trans(trans_type).set_parallel()
+	tween.tween_property(self, "ease_weight", 1.0, duration)
+	tween.tween_callback(self, "emit_signal", ["finished_camera_rotation"]).set_delay(duration)
+
+
+func extend_cam(new_spring_len: float, duration: float, ease_type: int = Tween.EASE_OUT, trans_type: int = Tween.TRANS_CUBIC) -> void:
+	tween = create_tween().set_ease(ease_type).set_trans(trans_type)
+	tween.tween_property(spring_arm, "spring_length", new_spring_len, duration)
 
 
 func shake_cam(target_shake: float, duration: float) -> void:

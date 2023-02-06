@@ -8,6 +8,10 @@ export var delete_on_fade := false
 onready var color_rect: ColorRect = $ColorRect
 
 
+func _ready() -> void:
+	fade()
+
+
 func fade() -> void:
 	var tween := create_tween()
 	if color_rect.color.a == 0.0:

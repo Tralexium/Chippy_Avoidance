@@ -13,10 +13,6 @@ onready var godot_logo: Sprite = $"2D/GodotLogo"
 onready var gamepad_disclaimer: VBoxContainer = $"2D/GamepadDisclaimer"
 
 
-func _ready() -> void:
-	fade_rect.fade()
-
-
 func reveal_square() -> void:
 	if revealed_squares < square_count:
 		squares.get_child(revealed_squares).reveal()

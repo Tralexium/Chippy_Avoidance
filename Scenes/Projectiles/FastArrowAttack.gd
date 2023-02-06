@@ -16,8 +16,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if velocity.length() > 0.0:
-		var velocity = move_and_slide(velocity)
+	if velocity.length() > 0.0 and !is_shrinking:
+		velocity = move_and_slide(velocity)
 		distance_traveled += velocity.length()
 		rotation.z += rotation_spd * delta
 		if distance_traveled >= travel_dist:
