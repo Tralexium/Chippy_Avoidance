@@ -102,11 +102,10 @@ mesh = ExtResource( 4 )
 skeleton = NodePath("../..")
 
 [node name="WarningBeam" parent="." instance=ExtResource( 2 )]
-transform = Transform( 3, 0, 0, 0, -2.18557e-07, -1, 0, 5, -4.37114e-08, 0, 0, -15.3958 )
+transform = Transform( 4, 0, 0, 0, -3.0598e-07, -1, 0, 7, -4.37114e-08, 0, 0, -20.505 )
 billboard = 0
 texture = ExtResource( 3 )
 warning_dur = 0.9
-starting_scale = 3.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spawn"

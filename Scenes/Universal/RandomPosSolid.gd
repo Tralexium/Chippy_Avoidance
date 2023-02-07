@@ -1,6 +1,7 @@
 extends StaticBody
 
 export var random_pos_radius := Vector3(12.0, 0.0, 0.0)
+export var scale_range := Vector2(5.0, 9.0)
 
 
 func _ready() -> void:
@@ -8,4 +9,4 @@ func _ready() -> void:
 						   randf() * random_pos_radius.y - random_pos_radius.y/2, \
 						   randf() * random_pos_radius.z - random_pos_radius.z/2)
 	rotation_degrees.y = randf() * TAU
-	scale = Vector3.ONE * rand_range(5.0, 9.0)
+	scale = Vector3.ONE * rand_range(scale_range.x, scale_range.y)

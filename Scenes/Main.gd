@@ -10,4 +10,4 @@ func _ready() -> void:
 
 func _on_ParticlePreloader_all_loaded() -> void:
 	VisualServer.set_default_clear_color(Color.black)
-	get_tree().change_scene_to(Globals.MAIN_MENU)
+	get_tree().change_scene_to(Globals.AVOIDANCE)

@@ -14,6 +14,8 @@ func spawn() -> void:
 		var plat_inst := PLATFORM.instance()
 		plat_inst.translation.y = -seperation.y * i
 		plat_inst.random_pos_radius = Vector3(seperation.x if i > 0 else 0.0, 2.0, 0.0)
+		if i == 0:
+			plat_inst.scale_range = Vector2(10.0, 10.0)
 		add_child(plat_inst)
 
 

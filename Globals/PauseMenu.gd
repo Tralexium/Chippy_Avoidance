@@ -34,6 +34,7 @@ func pause() -> void:
 		resume_button.grab_focus()
 		get_tree().paused = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		SoundManager.pause_music()
 	else:
 		animation_player.play("disable")
 
