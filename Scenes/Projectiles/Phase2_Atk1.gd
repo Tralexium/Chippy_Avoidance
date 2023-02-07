@@ -8,7 +8,7 @@ onready var mesh_instance: MeshInstance = $MeshInstance
 func _ready() -> void:
 	mesh_instance.scale = Vector3.ZERO
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	tween.tween_property(mesh_instance, "scale", Vector3.ONE, 0.5)
+	tween.tween_property(mesh_instance, "scale", Vector3.ONE * 1.5, 0.5)
 
 
 func _process(delta: float) -> void:

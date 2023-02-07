@@ -271,7 +271,7 @@ func _apply_velocity() -> void:
 	# Jump/Y Axis
 	if is_on_floor():
 		if snap_vector == Vector3.ZERO:
-			if previous_fall_spd <= -max_fall_vel:
+			if previous_fall_spd <= -max_fall_vel+1.0:
 				n_camera_pos.shake_cam_instant(1.0, 0.3)
 				audio_land.play()
 				InputHelper.rumble_medium()
