@@ -7,7 +7,7 @@ const FADE_TRANSITION := preload("res://Scenes/Universal/FadeRect.tscn")
 const SLOMO_FX := preload("res://Scenes/UI/SlomoEffect.tscn")
 const HIT_FX := preload("res://Scenes/UI/HitFX.tscn")
 
-export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44, 107.5]
+export var phase_time_stamps := [0.0, 10.2, 24.5, 32.8, 43.0, 52.5, 63.5, 82.44, 107.5, 118.0]
 
 var current_phase := 0
 var audio_stream_player: AudioStreamPlayer
