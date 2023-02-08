@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=2]
@@ -9,6 +9,34 @@
 [ext_resource path="res://Scenes/UI/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Universal/CircleTransition.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/UI/ConfirmationBox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/game_logo_hollow.png" type="Texture" id=10]
+
+[sub_resource type="Animation" id=6]
+resource_name = "Intro"
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.287175, 1 ),
+"update": 0,
+"values": [ Vector2( -1000, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GameLogo:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.258816, 1 ),
+"update": 0,
+"values": [ Vector3( -13.069, 10, 2.724 ), Vector3( -13.0689, -34.7601, 2.72442 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -22,7 +50,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [ Vector2( -1000, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("UI/Options:rect_position")
@@ -59,6 +87,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -1921, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GameLogo:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( -13.069, 10, 2.724 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -228,22 +268,28 @@ script = ExtResource( 7 )
 
 [node name="MenuSkybox" parent="." instance=ExtResource( 6 )]
 
+[node name="GameLogo" type="Sprite3D" parent="."]
+transform = Transform( 0.981829, -0.0860246, 0.16915, 0.0462939, 0.972998, 0.226124, -0.184035, -0.214185, 0.9593, 81.9575, 36.9123, -105.494 )
+modulate = Color( 0.00784314, 0, 0.152941, 0.87451 )
+pixel_size = 0.19
+texture = ExtResource( 10 )
+
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.987513, 0.0644484, -0.143754, 0, 0.912493, 0.409092, 0.15754, -0.403984, 0.901098, -11.7211, 38.3515, 86.67 )
+transform = Transform( 0.987513, 0.0644484, -0.143754, -0.014782, 0.946373, 0.322737, 0.156845, -0.316582, 0.935508, -11.7211, 38.3515, 86.67 )
 current = true
 far = 1000.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
-margin_right = 55680.0
-margin_bottom = 31320.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 
 [node name="Options" parent="UI" instance=ExtResource( 2 )]
 anchor_right = 0.0
 margin_left = 1918.0
 margin_right = 3838.0
-margin_bottom = 32400.0
+margin_bottom = 1080.0
 
 [node name="Credits" parent="UI" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -262,6 +308,8 @@ text = "Are you sure you want to exit?"
 reverse = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Intro"
+anims/Intro = SubResource( 6 )
 anims/RESET = SubResource( 1 )
 anims/move_to_credits = SubResource( 4 )
 anims/move_to_main_from_credits = SubResource( 5 )

@@ -36,13 +36,13 @@ void fragment() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/horizon_point = 0.504
-shader_param/horizon_length = 0.343
-shader_param/ground_horizon_length = 0.232
+shader_param/horizon_point = 0.51
+shader_param/horizon_length = 0.493
+shader_param/ground_horizon_length = 0.253
 shader_param/horizon_blend_length = 0.062
 shader_param/grid_velocity = Vector2( 0, -0.05 )
 shader_param/sky_col = Color( 0.0862745, 0.0196078, 0.196078, 1 )
-shader_param/horizon_col = Color( 0.0509804, 0.337255, 0.509804, 1 )
-shader_param/ground_horizon_col = Color( 0.588235, 0.176471, 0.341176, 1 )
+shader_param/horizon_col = Color( 0.0509804, 0.25098, 0.509804, 1 )
+shader_param/ground_horizon_col = Color( 0.478431, 0.105882, 0.392157, 1 )
 shader_param/ground_col = Color( 0.0862745, 0.0196078, 0.196078, 1 )
 shader_param/tex = ExtResource( 1 )
