@@ -2,6 +2,7 @@ extends HBoxContainer
 
 signal new_best
 
+onready var no_rank_icon: TextureRect = $NoRankIcon
 onready var time_bonus_count: Label = $MarginContainer/VBoxContainer/TimeBonus/Count
 onready var coin_bonus_count: Label = $MarginContainer/VBoxContainer/CoinBonus/Count
 onready var damage_penalty_count: Label = $MarginContainer/VBoxContainer/DamagePenalty/Count
@@ -24,7 +25,7 @@ func _ready() -> void:
 	target_score = max(time_score-damage_penalty-ability_penalty, 0.0)
 	if target_score > Config.previous_best:
 		Config.previous_best = target_score
-		Config.save_data()
+		
 		emit_signal("new_best")
 
 

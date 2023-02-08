@@ -645,8 +645,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 38.01, 43.1, 48.32, 52.8, 53, 64.2972, 96.47, 99.14, 102.99, 104.21, 107.6, 107.72, 118.26 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 3.1, 10.29, 19.81, 24.56, 27.01, 33.77, 38.01, 43.1, 48.32, 52.8, 53, 64.2972, 96.47, 99.14, 102.99, 104.21, 107.6, 107.72, 118.26, 119.16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [ Vector3( 0, 8, 0 ), Vector3( 0, 0, 0 ), 30.0 ],
 "method": "shift_cam_instant"
@@ -707,6 +707,9 @@ tracks/0/keys = {
 }, {
 "args": [ Vector3( 0, 0, 6 ), Vector3( -50, 0, 0 ), 0.3, 1, 7, 60.0 ],
 "method": "shift_cam"
+}, {
+"args": [ 1.0, 0.3 ],
+"method": "shake_cam_instant"
 } ]
 }
 tracks/1/type = "method"
@@ -1817,7 +1820,7 @@ tracks/64/keys = {
 "times": PoolRealArray( 119.76, 122.04, 122.81, 122.87, 123.3, 123.33, 123.61, 123.64, 123.9, 124.01, 124.22 ),
 "transitions": PoolRealArray( 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1 ),
 "update": 0,
-"values": [ 0.6, 0.6, 0.0, -4.0, 0.0, 3.0, 0.0, -3.0, 0.0, 0.0, 0.8 ]
+"values": [ 0.6, 0.6, 0.0, -4.0, 0.0, 2.0, 0.0, -2.0, 0.0, 0.0, 0.8 ]
 }
 tracks/65/type = "value"
 tracks/65/path = NodePath("Spawners/Phase10_Spawner1:spin_speed")
