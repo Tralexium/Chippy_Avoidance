@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/UI/no_rank_dead.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Fonts/Orbitron-ExtraBold.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/UI/RankIcon.gd" type="Script" id=7]
 [ext_resource path="res://Assets/sparkle.png" type="Texture" id=8]
 [ext_resource path="res://Assets/particle aura.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/UI/NoRankIcon.gd" type="Script" id=10]
 
 [sub_resource type="CanvasItemMaterial" id=6]
 blend_mode = 1
@@ -54,7 +55,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4, 0.438872, 1.8 ),
 "transitions": PoolRealArray( 1, 0, 0.450626, 0 ),
 "update": 0,
-"values": [ 0.0, 1.0, 0.2, 1.0 ]
+"values": [ 0.0, 1.0, 0.0, 1.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:material:shader_param/shine_size")
@@ -99,9 +100,10 @@ rect_min_size = Vector2( 200, 200 )
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
+script = ExtResource( 10 )
 
 [node name="RankIcon" type="TextureRect" parent="NoRankIcon"]
-modulate = Color( 0, 1, 0.788235, 1 )
+modulate = Color( 1, 1, 1, 0 )
 material = ExtResource( 5 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -118,6 +120,18 @@ expand = true
 stretch_mode = 6
 script = ExtResource( 7 )
 
+[node name="BackdropLight" type="TextureRect" parent="NoRankIcon/RankIcon"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+show_behind_parent = true
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 125, 125 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
 [node name="Circle" type="TextureRect" parent="NoRankIcon/RankIcon"]
 material = SubResource( 6 )
 anchor_right = 1.0
@@ -131,13 +145,14 @@ stretch_mode = 6
 material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_scale = Vector2( 1.5, 1.5 )
+rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 125, 125 )
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NoRankIcon/RankIcon"]
+autoplay = "shine"
 anims/RESET = SubResource( 4 )
 anims/shine = SubResource( 5 )
 

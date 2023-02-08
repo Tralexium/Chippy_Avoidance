@@ -21,6 +21,13 @@ const SFX := [
 	preload("res://Audio/SFX/rank_C.wav"),
 ]
 
+const RANK_COLOR := [
+	Color("ffde05"),
+	Color("ff275a"),
+	Color("00ffc9"),
+	Color("00dcff"),
+]
+
 onready var circle: TextureRect = $Circle
 onready var spark: TextureRect = $Spark
 
@@ -31,15 +38,16 @@ func appear(score: int) -> void:
 	for min_score in rank_min_scores:
 		if score >= min_score:
 			texture = RANK_TEXTURES[i]
+			modulate = RANK_COLOR[i]
 			SoundManager.play_ui_sound(SFX[i])
 			break
 		i += 1
 	rect_scale = Vector2.ONE * 2.0
-	self_modulate.a = 0.0
+	modulate.a = 0.0
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel()
-	tween.tween_property(self, "rect_scale", Vector2.ONE, 0.5)
-	tween.tween_property(self, "self_modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(circle, "self_modulate:a", 0.0, 0.5)
-	tween.tween_property(circle, "rect_scale", Vector2.ONE * 3.0, 0.5)
-	tween.tween_property(spark, "self_modulate:a", 0.0, 0.5)
-	tween.tween_property(spark, "rect_scale", Vector2(2.5, 0.0), 0.4)
+	tween.tween_property(self, "rect_scale", Vector2.ONE, 0.3)
+	tween.tween_property(self, "modulate:a", 1.0, 0.2).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(circle, "self_modulate:a", 0.0, 2.0)
+	tween.tween_property(circle, "rect_scale", Vector2.ONE * 3.0, 1.5)
+	tween.tween_property(spark, "self_modulate:a", 0.0, 2.0)
+	tween.tween_property(spark, "rect_scale", Vector2(3.0, 0.0), 1.5)
