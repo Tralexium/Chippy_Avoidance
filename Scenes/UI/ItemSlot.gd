@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	ability_count = Config.player_current_abilities[ability]
+	amount.text = str(ability_count)
 	amount.visible = false if (ability_count == 0 or Config.infinite_items) else true
 
 
@@ -87,7 +88,6 @@ func _apply_color() -> void:
 func _flash_effect() -> void:
 	icon.modulate = Color.white
 	amount.modulate = Color.white
-	amount.text = str(ability_count)
 	circle_reload.value = 100.0
 	button_icon.visible = false
 	particles.emitting = true

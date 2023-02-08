@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Resources/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Resources/Fonts/header_font.tres" type="DynamicFont" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/UI/UpgradeHealth.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/UI/GemTotal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/UI/ItemShopWidget.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/UI/TimeAndDeath.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -206,6 +207,18 @@ tracks/15/keys = {
 "update": 0,
 "values": [ Vector2( -385, -133 ) ]
 }
+tracks/16/type = "value"
+tracks/16/path = NodePath("UISpace/UIBG/TimeAndDeath:rect_position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1711, -112 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "fade_in"
@@ -350,6 +363,18 @@ tracks/10/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("UISpace/UIBG/TimeAndDeath:rect_position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 2100, -112 ), Vector2( 2100, -112 ), Vector2( 1711, -112 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "goto_upgrades"
@@ -458,10 +483,9 @@ ratio = 1.6568
 stretch_mode = 0
 
 [node name="UIBG" type="ColorRect" parent="UISpace"]
-margin_left = -6.10352e-05
-margin_top = -39.4302
+margin_top = 154.721
 margin_right = 1920.0
-margin_bottom = 1119.43
+margin_bottom = 925.279
 color = Color( 0.0235294, 0, 0.0627451, 0.784314 )
 
 [node name="GemTotal" parent="UISpace/UIBG" instance=ExtResource( 10 )]
@@ -469,6 +493,14 @@ margin_left = -385.0
 margin_top = -133.0
 margin_right = -131.0
 margin_bottom = -20.0
+
+[node name="TimeAndDeath" parent="UISpace/UIBG" instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 1711.0
+margin_top = -112.0
+margin_right = 1879.0
+margin_bottom = -40.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UISpace/UIBG"]
 anchor_right = 1.0

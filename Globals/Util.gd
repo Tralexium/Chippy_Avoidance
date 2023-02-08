@@ -28,7 +28,7 @@ func time_slowdown(time_scale: float, duration: float) -> void:
 	Engine.time_scale = time_scale
 	slowdown_timer.start(time_scale * duration)
 
-func time_convert(time_in_sec):
+func time_convert(time_in_sec: int) -> String:
 	var seconds = time_in_sec%60
 	var minutes = (time_in_sec/60)%60
 	var hours = (time_in_sec/60)/60
