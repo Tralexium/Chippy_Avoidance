@@ -25,6 +25,7 @@ var ability_costs := [100, 250, 500, 1000]
 var total_deaths := 0
 var total_play_time := 0.0
 var previous_best := 0
+var game_beaten := false
 
 var music_volume := 0.7 setget set_music_volume
 var sound_volume := 1.0 setget set_sound_volume
@@ -65,6 +66,7 @@ func save_data() -> void:
 	save_dict["total_deaths"] = total_deaths
 	save_dict["total_play_time"] = total_play_time
 	save_dict["previous_best"] = previous_best
+	save_dict["game_beaten"] = game_beaten
 	
 	# Settings
 	save_dict["music_volume"] = music_volume
@@ -113,6 +115,7 @@ func load_data() -> void:
 		total_deaths = values.get("total_deaths", 0)
 		total_play_time = values.get("total_play_time", 0.0)
 		previous_best = values.get("previous_best", 0)
+		game_beaten = values.get("game_beaten", false)
 		
 		# Settings
 		self.music_volume = values.get("music_volume", 0.5)

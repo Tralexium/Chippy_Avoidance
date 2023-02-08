@@ -1,5 +1,7 @@
 extends TextureRect
 
+export var mute := false
+export var automatic := false
 export var rank_min_scores := [
 	20000,
 	15000,
@@ -30,7 +32,16 @@ const RANK_COLOR := [
 
 onready var circle: TextureRect = $Circle
 onready var spark: TextureRect = $Spark
+onready var backdrop_light: TextureRect = $BackdropLight
 
+
+func _ready() -> void:
+	if automatic:
+		if Config.game_beaten or true:
+			appear(Config.previous_best)
+			backdrop_light.modulate.a = 0.0
+		else:
+			modulate.a = 0.0
 
 
 func appear(score: int) -> void:
@@ -39,7 +50,8 @@ func appear(score: int) -> void:
 		if score >= min_score:
 			texture = RANK_TEXTURES[i]
 			modulate = RANK_COLOR[i]
-			SoundManager.play_ui_sound(SFX[i])
+			if !mute:
+				SoundManager.play_ui_sound(SFX[i])
 			break
 		i += 1
 	rect_scale = Vector2.ONE * 2.0

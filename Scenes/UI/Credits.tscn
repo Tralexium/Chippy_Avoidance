@@ -182,20 +182,47 @@ margin_right = 886.0
 margin_bottom = 29.0
 text = "Aran - EPHMR"
 
+[node name="TutorialSong" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
+margin_left = 98.0
+margin_top = 384.0
+margin_right = 984.0
+margin_bottom = 413.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Role" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/TutorialSong"]
+margin_right = 101.0
+margin_bottom = 29.0
+text = "Tutorial:"
+
+[node name="Line" type="HSeparator" parent="AspectRatioContainer/MarginContainer/Contents/TutorialSong"]
+margin_left = 109.0
+margin_right = 458.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="AspectRatioContainer/MarginContainer/Contents/TutorialSong"]
+margin_left = 466.0
+margin_right = 886.0
+margin_bottom = 29.0
+text = "Phrakture - Forgone Rejuvenation"
+
 [node name="SpecialThanks" type="Label" parent="AspectRatioContainer/MarginContainer/Contents"]
-margin_left = 90.0
-margin_top = 404.0
-margin_right = 531.0
-margin_bottom = 468.0
+margin_left = 77.0
+margin_top = 438.0
+margin_right = 518.0
+margin_bottom = 502.0
 custom_colors/font_color = Color( 1, 0.160784, 0.34902, 1 )
 custom_fonts/font = SubResource( 3 )
 text = "Special Thanks:"
 
 [node name="InputMusicHelpers" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
-margin_left = 82.0
-margin_top = 463.0
-margin_right = 968.0
-margin_bottom = 492.0
+margin_left = 69.0
+margin_top = 497.0
+margin_right = 955.0
+margin_bottom = 526.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_group_": true
@@ -219,10 +246,10 @@ margin_bottom = 29.0
 text = "Nathan Hoad"
 
 [node name="InputIcons" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
-margin_left = 74.0
-margin_top = 500.0
-margin_right = 960.0
-margin_bottom = 529.0
+margin_left = 61.0
+margin_top = 534.0
+margin_right = 947.0
+margin_bottom = 563.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_group_": true
@@ -246,10 +273,10 @@ margin_bottom = 29.0
 text = "Mark \"GMTK\" Brown"
 
 [node name="Testing" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
-margin_left = 68.0
-margin_top = 536.0
-margin_right = 954.0
-margin_bottom = 565.0
+margin_left = 55.0
+margin_top = 570.0
+margin_right = 941.0
+margin_bottom = 599.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_group_": true
@@ -273,10 +300,10 @@ margin_bottom = 29.0
 text = "Smartkin"
 
 [node name="GodotShaders" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
-margin_left = 60.0
-margin_top = 571.0
-margin_right = 946.0
-margin_bottom = 600.0
+margin_left = 47.0
+margin_top = 605.0
+margin_right = 933.0
+margin_bottom = 634.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_group_": true
@@ -300,10 +327,10 @@ margin_bottom = 29.0
 text = "For the black magic"
 
 [node name="Lovey" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/Contents"]
-margin_left = 55.0
-margin_top = 606.0
-margin_right = 941.0
-margin_bottom = 635.0
+margin_left = 42.0
+margin_top = 640.0
+margin_right = 928.0
+margin_bottom = 669.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_group_": true
@@ -329,7 +356,7 @@ text = "Secret Santa Reciever"
 [node name="GodotLogo" type="TextureRect" parent="AspectRatioContainer/MarginContainer/Contents"]
 modulate = Color( 0, 0.86, 1.1, 1 )
 margin_left = -48.0
-margin_top = 662.0
+margin_top = 682.0
 margin_right = 1002.0
 margin_bottom = 811.0
 texture = ExtResource( 4 )

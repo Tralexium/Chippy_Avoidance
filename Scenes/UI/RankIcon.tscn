@@ -1,0 +1,138 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/sparkle.png" type="Texture" id=1]
+[ext_resource path="res://Assets/particle aura.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Shaders/shine_shader.tres" type="Material" id=3]
+[ext_resource path="res://Assets/UI/rank_B.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/UI/RankIcon.gd" type="Script" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/shine_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/shine_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.15 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shine"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/shine_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.438872, 1.8 ),
+"transitions": PoolRealArray( 1, 0, 0.450626, 0 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/shine_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.3, 0.05 ]
+}
+
+[node name="RankIcon" type="TextureRect"]
+modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 250, 250 )
+rect_pivot_offset = Vector2( 125, 125 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 5 )
+
+[node name="BackdropLight" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+show_behind_parent = true
+material = SubResource( 6 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 125, 125 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Circle" type="TextureRect" parent="."]
+material = SubResource( 6 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
+rect_pivot_offset = Vector2( 125, 125 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Spark" type="TextureRect" parent="."]
+material = SubResource( 6 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 125, 125 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "shine"
+anims/RESET = SubResource( 4 )
+anims/shine = SubResource( 5 )
