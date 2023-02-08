@@ -393,5 +393,9 @@ anims/RESET = SubResource( 3 )
 anims/collected = SubResource( 4 )
 anims/shrink = SubResource( 13 )
 
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
