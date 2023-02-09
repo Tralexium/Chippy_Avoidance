@@ -5,9 +5,9 @@ const GAME_VERSION := "1.0.0"
 const SLOMO_SPD := 0.5
 const DMG_PENALTY := 500.0
 const ITEM_PENALTY := 250.0
-const MAX_TIME_SCORE := 10000.0
+const MAX_TIME_SCORE := 7500.0
 const MAX_GEMS := 1000.0
-const COIN_SCORE := 1000.0
+const COIN_SCORE := 500.0
 const MAX_HP := 10
 const MAX_ABILITIES := 3
 

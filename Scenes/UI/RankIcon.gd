@@ -3,9 +3,9 @@ extends TextureRect
 export var mute := false
 export var automatic := false
 export var rank_min_scores := [
-	20000,
-	15000,
-	8000,
+	10000,
+	8500,
+	5000,
 	0,
 ]
 

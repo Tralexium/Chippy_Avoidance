@@ -16,7 +16,7 @@
 [sub_resource type="Animation" id=6]
 resource_name = "Intro"
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/path = NodePath("UI/RectSize/StartingMenu:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -43,7 +43,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/path = NodePath("UI/RectSize/StartingMenu:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -55,7 +55,7 @@ tracks/0/keys = {
 "values": [ Vector2( -1000, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UI/Options:rect_position")
+tracks/1/path = NodePath("UI/RectSize/Options:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -79,7 +79,7 @@ tracks/2/keys = {
 "values": [ Vector3( -11.7211, 38.3515, 86.67 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("UI/Credits:rect_position")
+tracks/3/path = NodePath("UI/RectSize/Credits:rect_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -107,7 +107,7 @@ tracks/4/keys = {
 resource_name = "move_to_credits"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/path = NodePath("UI/RectSize/StartingMenu:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -119,7 +119,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 1920, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UI/Credits:rect_position")
+tracks/1/path = NodePath("UI/RectSize/Credits:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -147,7 +147,7 @@ tracks/2/keys = {
 resource_name = "move_to_main_from_credits"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/path = NodePath("UI/RectSize/StartingMenu:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -159,7 +159,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1920, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UI/Credits:rect_position")
+tracks/1/path = NodePath("UI/RectSize/Credits:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -187,7 +187,7 @@ tracks/2/keys = {
 resource_name = "move_to_main_from_options"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/path = NodePath("UI/RectSize/StartingMenu:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -199,7 +199,7 @@ tracks/0/keys = {
 "values": [ Vector2( -1904, 0 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UI/Options:rect_position")
+tracks/1/path = NodePath("UI/RectSize/Options:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -227,7 +227,7 @@ tracks/2/keys = {
 resource_name = "move_to_options"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/StartingMenu:rect_position")
+tracks/0/path = NodePath("UI/RectSize/StartingMenu:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -239,7 +239,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -1904, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UI/Options:rect_position")
+tracks/1/path = NodePath("UI/RectSize/Options:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -283,13 +283,17 @@ far = 1000.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="StartingMenu" parent="UI" instance=ExtResource( 1 )]
+[node name="RectSize" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StartingMenu" parent="UI/RectSize" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = -1000.0
 margin_right = -1000.0
 
-[node name="RankIcon" parent="UI/StartingMenu" instance=ExtResource( 12 )]
+[node name="RankIcon" parent="UI/RectSize/StartingMenu" instance=ExtResource( 12 )]
 margin_left = 30.0
 margin_top = 817.0
 margin_right = 180.0
@@ -299,30 +303,32 @@ rect_pivot_offset = Vector2( 75, 75 )
 mute = true
 automatic = true
 
-[node name="TimeAndDeath" parent="UI/StartingMenu" instance=ExtResource( 11 )]
+[node name="TimeAndDeath" parent="UI/RectSize/StartingMenu" instance=ExtResource( 11 )]
 margin_left = 24.0
 margin_top = 986.0
 margin_right = 192.0
 margin_bottom = 1058.0
 
-[node name="Options" parent="UI" instance=ExtResource( 2 )]
+[node name="Options" parent="UI/RectSize" instance=ExtResource( 2 )]
 anchor_right = 0.0
 margin_left = 1918.0
 margin_right = 3838.0
-margin_bottom = 6480.0
+margin_bottom = 2160.0
 
-[node name="Credits" parent="UI" instance=ExtResource( 5 )]
+[node name="Credits" parent="UI/RectSize" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = -1921.0
 margin_right = -1.0
 margin_bottom = 1080.0
 
-[node name="ConfirmationBox" parent="UI" instance=ExtResource( 9 )]
+[node name="ConfirmationBox" parent="UI/RectSize" instance=ExtResource( 9 )]
 visible = false
+margin_right = 1880.0
+margin_bottom = 1040.0
 text = "Are you sure you want to exit?"
 
-[node name="BloomRect" parent="UI" instance=ExtResource( 4 )]
+[node name="BloomRect" parent="UI/RectSize" instance=ExtResource( 4 )]
 
 [node name="CircleTransition" parent="." instance=ExtResource( 8 )]
 reverse = true
@@ -336,10 +342,10 @@ anims/move_to_main_from_credits = SubResource( 5 )
 anims/move_to_main_from_options = SubResource( 3 )
 anims/move_to_options = SubResource( 2 )
 
-[connection signal="begin_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_begin_pressed"]
-[connection signal="credits_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_credits_pressed"]
-[connection signal="exit_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_exit_pressed"]
-[connection signal="options_pressed" from="UI/StartingMenu" to="." method="_on_StartingMenu_options_pressed"]
-[connection signal="go_back" from="UI/Options" to="." method="_on_Options_go_back"]
-[connection signal="go_back" from="UI/Credits" to="." method="_on_Credits_go_back"]
-[connection signal="answered" from="UI/ConfirmationBox" to="." method="_on_ConfirmationBox_answered"]
+[connection signal="begin_pressed" from="UI/RectSize/StartingMenu" to="." method="_on_StartingMenu_begin_pressed"]
+[connection signal="credits_pressed" from="UI/RectSize/StartingMenu" to="." method="_on_StartingMenu_credits_pressed"]
+[connection signal="exit_pressed" from="UI/RectSize/StartingMenu" to="." method="_on_StartingMenu_exit_pressed"]
+[connection signal="options_pressed" from="UI/RectSize/StartingMenu" to="." method="_on_StartingMenu_options_pressed"]
+[connection signal="go_back" from="UI/RectSize/Options" to="." method="_on_Options_go_back"]
+[connection signal="go_back" from="UI/RectSize/Credits" to="." method="_on_Credits_go_back"]
+[connection signal="answered" from="UI/RectSize/ConfirmationBox" to="." method="_on_ConfirmationBox_answered"]

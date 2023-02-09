@@ -26,5 +26,5 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/shine_color = Color( 1, 1, 1, 0.658824 )
 shader_param/shine_progress = 0.0
-shader_param/shine_size = 0.3
+shader_param/shine_size = 0.15
 shader_param/shine_angle = 45.0

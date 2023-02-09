@@ -3,10 +3,10 @@ extends Node
 const CIRCLE_TRANSITION := preload("res://Scenes/Universal/CircleTransition.tscn")
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var starting_menu: Control = $UI/StartingMenu
-onready var options: Control = $UI/Options
-onready var credits: Control = $UI/Credits
-onready var confirmation_box: CenterContainer = $UI/ConfirmationBox
+onready var starting_menu: Control = $UI/RectSize/StartingMenu
+onready var options: Control = $UI/RectSize/Options
+onready var credits: Control = $UI/RectSize/Credits
+onready var confirmation_box: CenterContainer = $UI/RectSize/ConfirmationBox
 
 
 func _ready() -> void:
