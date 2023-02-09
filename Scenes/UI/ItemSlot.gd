@@ -34,7 +34,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	ability_count = Config.player_current_abilities[ability]
 	amount.text = str(ability_count)
 	amount.visible = false if (ability_count == 0 or Config.infinite_items) else true
 
@@ -50,6 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(action) and (ability_count > 0 or Config.infinite_items) and button_icon.visible:
 		if !Config.infinite_items:
 			Config.player_current_abilities[ability] -= 1
+			ability_count -= 1
 		EventBus.emit_signal("ability_used", ability)
 		Globals.run_stats["items_used"] += 1
 		_flash_effect()

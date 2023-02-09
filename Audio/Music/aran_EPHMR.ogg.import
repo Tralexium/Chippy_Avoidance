@@ -11,5 +11,5 @@ dest_files=[ "res://.import/aran_EPHMR.ogg-ba127537a689b2808717b790e8623a6f.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

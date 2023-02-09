@@ -6,6 +6,7 @@ export var travel_dist := 100.0
 export var look_at_pos := Vector3.ZERO setget set_look_at_pos
 export var rotation_axis := Vector3(0, 0, 1)
 export var is_2d := false
+export var use_global_space := true
 
 var velocity := Vector3.ZERO
 var distance_traveled := 0.0
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 func set_look_at_pos(value: Vector3) -> void:
 	look_at_pos = value
-	if is_ready:
+	if is_ready and use_global_space:
 		look_at(look_at_pos, Vector3.UP)
 
 
@@ -46,4 +47,7 @@ func shrink() -> void:
 
 
 func _on_WarningBeam_finished() -> void:
-	velocity = global_translation.direction_to(look_at_pos) * travel_spd
+	if use_global_space:
+		velocity = global_translation.direction_to(look_at_pos) * travel_spd
+	else:
+		velocity = look_at_pos.rotated(Vector3.UP, global_rotation.y - PI/2) * travel_spd

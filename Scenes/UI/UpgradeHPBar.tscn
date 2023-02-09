@@ -69,7 +69,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 0.145098, 0.345098, 0.356863 ) ]
+"values": [ Color( 1, 0.145098, 0.345098, 0.156863 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Line:emitting")
@@ -148,11 +148,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.00138778, 0.5, 1.00139 ),
 "transitions": PoolRealArray( 0.5, 2, 1 ),
 "update": 0,
-"values": [ Color( 1, 0.145098, 0.345098, 0.207843 ), Color( 1, 0.72549, 0.145098, 0.368627 ), Color( 1, 0.145098, 0.345098, 0.207843 ) ]
+"values": [ Color( 1, 0.145098, 0.345098, 0.156863 ), Color( 1, 0.72549, 0.145098, 0.313726 ), Color( 1, 0.145098, 0.345098, 0.156863 ) ]
 }
 
 [node name="UpgradeHPBar" type="Panel"]
-self_modulate = Color( 1, 0.145098, 0.345098, 0.356863 )
+self_modulate = Color( 1, 0.145098, 0.345098, 0.156863 )
 margin_right = 50.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 50, 0 )
