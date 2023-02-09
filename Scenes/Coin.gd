@@ -24,8 +24,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	translation += velocity * delta
 	if !collected:
+		translation += velocity * delta
 		gem.rotation_degrees.y += rotate_speed * delta
 		ring.rotation_degrees.y -= rotate_speed * delta
 

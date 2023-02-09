@@ -309,7 +309,7 @@ margin_bottom = 1058.0
 anchor_right = 0.0
 margin_left = 1918.0
 margin_right = 3838.0
-margin_bottom = 4320.0
+margin_bottom = 6480.0
 
 [node name="Credits" parent="UI" instance=ExtResource( 5 )]
 anchor_right = 0.0

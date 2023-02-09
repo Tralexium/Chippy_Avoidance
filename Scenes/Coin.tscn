@@ -308,6 +308,18 @@ tracks/9/keys = {
 "update": 0,
 "values": [ Color( 1, 0.92549, 0.580392, 1 ), Color( 0.980392, 0.419608, 0.247059, 0 ) ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath(".:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "shrink"

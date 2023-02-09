@@ -122,6 +122,7 @@ func _spawn_transition(back_to_menu: bool) -> void:
 		return
 	currently_restarting = true
 	player.iframe_immunity = true
+	player.die_when_outside = false
 	create_tween().tween_property(audio_stream_player, "pitch_scale", 0.01, 0.5)
 	var transition_inst := CIRCLE_TRANSITION.instance()
 	transition_inst.connect("finished", self, "_on_transition_finished", [back_to_menu])

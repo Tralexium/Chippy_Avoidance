@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/Spawners/Phase2_Spawner1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Spawners/Phase1_Spawner1.tscn" type="PackedScene" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://Resources/Paths/path_1.tres" type="Curve3D" id=29]
 [ext_resource path="res://Scenes/Spawners/Phase9_Spawner2.tscn" type="PackedScene" id=30]
 [ext_resource path="res://Scenes/Spawners/Phase10_Spawner1.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/CoinSpawner.tscn" type="PackedScene" id=32]
 
 [sub_resource type="SpatialMaterial" id=10]
 params_cull_mode = 1
@@ -850,49 +851,72 @@ tracks/4/keys = {
 "method": "restore_fallen_pillars"
 } ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Spawners/Phase1_Spawner1:spawning")
+tracks/5/type = "method"
+tracks/5/path = NodePath("CoinSpawner")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.66, 2.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
+"times": PoolRealArray( 5.41, 38.02, 48.3, 112.01 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ [ Vector3( 10, 35, 0 ), Vector3( -10, 35, 0 ) ], Vector3( 0, -10, 0 ), 3.0 ],
+"method": "spawn_coin_random_spot"
+}, {
+"args": [ [ Vector3( -9, 5, -9 ), Vector3( -9, 5, 9 ), Vector3( 9, 5, -9 ) ], Vector3( 0, 0, 0 ), 5.0 ],
+"method": "spawn_coin_random_spot"
+}, {
+"args": [ Vector3( 8, 0, 8 ), Vector3( 0, 50, 0 ), Vector3( 0, 0, 0 ), 5.0 ],
+"method": "spawn_coin_random_offset"
+}, {
+"args": [ Vector3( 12, 0, 0 ), Vector3( 0, 30, 0 ), Vector3( 0, 7, 0 ), 4.0 ],
+"method": "spawn_coin_random_offset"
+} ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Spawners/Phase2_Spawner1:enabled")
+tracks/6/path = NodePath("Spawners/Phase1_Spawner1:spawning")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 10.29, 23.9, 97.46, 107.73 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.66, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false, true, false ]
+"values": [ false, true, false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Spawners/Phase2_Spawner1:rotation_degrees")
+tracks/7/path = NodePath("Spawners/Phase2_Spawner1:enabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 10.29, 11.65, 14.04, 15.07, 16.23, 17.44, 17.74, 18.03, 18.34, 18.64, 19.4, 19.81, 97.46, 97.93, 98.21, 102.65, 104.72 ),
-"transitions": PoolRealArray( 0.5, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 2, 0, 0, 0.5, 1, 0.5, 0.5 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 720, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 450, 0 ), Vector3( 0, 540, 0 ), Vector3( 0, 630, 0 ), Vector3( 0, 720, 0 ), Vector3( 0, 1080, 0 ), Vector3( 0, 900, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+"times": PoolRealArray( 0, 10.29, 23.9, 97.46, 107.73 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
 }
-tracks/8/type = "method"
-tracks/8/path = NodePath("Spawners/Phase2_Spawner1")
+tracks/8/type = "value"
+tracks/8/path = NodePath("Spawners/Phase2_Spawner1:rotation_degrees")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
+"times": PoolRealArray( 10.29, 11.65, 14.04, 15.07, 16.23, 17.44, 17.74, 18.03, 18.34, 18.64, 19.4, 19.81, 97.46, 97.93, 98.21, 102.65, 104.72 ),
+"transitions": PoolRealArray( 0.5, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 2, 0, 0, 0.5, 1, 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 720, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 450, 0 ), Vector3( 0, 540, 0 ), Vector3( 0, 630, 0 ), Vector3( 0, 720, 0 ), Vector3( 0, 1080, 0 ), Vector3( 0, 900, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath("Spawners/Phase2_Spawner1")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 12.69, 13.69, 13.84, 14.04, 15.07, 15.66, 16.23, 16.85, 17.44, 17.74, 18.03, 18.34, 18.64, 19.81, 102.99, 103.42, 103.55, 103.87, 104.31, 104.44, 104.76, 105.06, 105.36, 105.65, 105.95, 106.25, 106.54 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -978,13 +1002,13 @@ tracks/8/keys = {
 "method": "shoot"
 } ]
 }
-tracks/9/type = "method"
-tracks/9/path = NodePath("Spawners/Phase2_Spawner1")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
+tracks/10/type = "method"
+tracks/10/path = NodePath("Spawners/Phase2_Spawner1")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 19.81 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -992,25 +1016,25 @@ tracks/9/keys = {
 "method": "start_reverse_shooting"
 } ]
 }
-tracks/10/type = "value"
-tracks/10/path = NodePath("Spawners/Phase2_Spawner1:rotation_spd")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0, 19.81, 97.46, 98.22, 102, 102.65 ),
-"transitions": PoolRealArray( 0, 0, 0, 0, 1, 1 ),
-"update": 0,
-"values": [ 1.5, 14.0, 0.0, -8.0, -8.0, -3.0 ]
-}
-tracks/11/type = "method"
-tracks/11/path = NodePath("Spawners/Phase2_Spawner2")
+tracks/11/type = "value"
+tracks/11/path = NodePath("Spawners/Phase2_Spawner1:rotation_spd")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
+"times": PoolRealArray( 0, 19.81, 97.46, 98.22, 102, 102.65 ),
+"transitions": PoolRealArray( 0, 0, 0, 0, 1, 1 ),
+"update": 0,
+"values": [ 1.5, 14.0, 0.0, -8.0, -8.0, -3.0 ]
+}
+tracks/12/type = "method"
+tracks/12/path = NodePath("Spawners/Phase2_Spawner2")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
 "times": PoolRealArray( 18.81, 20, 21.2, 21.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
@@ -1027,36 +1051,36 @@ tracks/11/keys = {
 "method": "spawn_projectile"
 } ]
 }
-tracks/12/type = "method"
-tracks/12/path = NodePath("Spawners/Phase1_Spawner1")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 3.1, 4.3, 5.5, 6.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"values": [ {
-"args": [ 5, 6.0, 8.0, 2.0, 0.05, false ],
-"method": "spawn_row"
-}, {
-"args": [ 5, -6.0, 8.0, 2.0, 0.05, true ],
-"method": "spawn_row"
-}, {
-"args": [ 5, 6.0, 8.0, 2.0, 0.05, false ],
-"method": "spawn_row"
-}, {
-"args": [ 5, -6.0, 8.0, 2.0, 0.05, true ],
-"method": "spawn_row"
-} ]
-}
 tracks/13/type = "method"
-tracks/13/path = NodePath("Spawners/Phase1_Spawner2")
+tracks/13/path = NodePath("Spawners/Phase1_Spawner1")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
+"times": PoolRealArray( 3.1, 4.3, 5.5, 6.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 4, 6.0, 10.0, 2.0, 0.05, false ],
+"method": "spawn_row"
+}, {
+"args": [ 4, -6.0, 10.0, 2.0, 0.05, true ],
+"method": "spawn_row"
+}, {
+"args": [ 4, 6.0, 10.0, 2.0, 0.05, false ],
+"method": "spawn_row"
+}, {
+"args": [ 4, -6.0, 10.0, 2.0, 0.05, true ],
+"method": "spawn_row"
+} ]
+}
+tracks/14/type = "method"
+tracks/14/path = NodePath("Spawners/Phase1_Spawner2")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
 "times": PoolRealArray( 3.83, 6.24 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -1067,13 +1091,13 @@ tracks/13/keys = {
 "method": "spawn_orb_ring"
 } ]
 }
-tracks/14/type = "method"
-tracks/14/path = NodePath("Spawners/Phase3_Spawner1")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
+tracks/15/type = "method"
+tracks/15/path = NodePath("Spawners/Phase3_Spawner1")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
 "times": PoolRealArray( 32.88, 33.18, 33.48 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
@@ -1087,37 +1111,37 @@ tracks/14/keys = {
 "method": "shrink_cubes"
 } ]
 }
-tracks/15/type = "value"
-tracks/15/path = NodePath("Spawners/Phase4_Spawner1:enabled")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"times": PoolRealArray( 0, 34.09, 42 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
 tracks/16/type = "value"
-tracks/16/path = NodePath("Spawners/Phase5_Spawner1:enabled")
+tracks/16/path = NodePath("Spawners/Phase4_Spawner1:enabled")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"times": PoolRealArray( 0, 43.09, 53.13 ),
+"times": PoolRealArray( 0, 34.09, 42 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
 }
-tracks/17/type = "method"
-tracks/17/path = NodePath("Spawners/Phase5_Spawner1")
+tracks/17/type = "value"
+tracks/17/path = NodePath("Spawners/Phase5_Spawner1:enabled")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
 tracks/17/enabled = true
 tracks/17/keys = {
+"times": PoolRealArray( 0, 43.09, 53.13 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/18/type = "method"
+tracks/18/path = NodePath("Spawners/Phase5_Spawner1")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
 "times": PoolRealArray( 48.6 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -1125,37 +1149,37 @@ tracks/17/keys = {
 "method": "move_projectiles"
 } ]
 }
-tracks/18/type = "value"
-tracks/18/path = NodePath("Spawners/Phase6_Spawner1:enabled")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
-"times": PoolRealArray( 0, 47.02, 64.37 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
 tracks/19/type = "value"
-tracks/19/path = NodePath("Spawners/Phase8_Spawner1:spinners")
+tracks/19/path = NodePath("Spawners/Phase6_Spawner1:enabled")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/imported = false
 tracks/19/enabled = true
 tracks/19/keys = {
-"times": PoolRealArray( 0, 82.7, 96.86, 97.19, 97.33, 97.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 47.02, 64.37 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [ false, true, false ]
 }
-tracks/20/type = "method"
-tracks/20/path = NodePath("Spawners/Phase8_Spawner2")
+tracks/20/type = "value"
+tracks/20/path = NodePath("Spawners/Phase8_Spawner1:spinners")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/imported = false
 tracks/20/enabled = true
 tracks/20/keys = {
+"times": PoolRealArray( 0, 82.7, 96.86, 97.19, 97.33, 97.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/21/type = "method"
+tracks/21/path = NodePath("Spawners/Phase8_Spawner2")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
 "times": PoolRealArray( 87.52, 95.86 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -1166,133 +1190,133 @@ tracks/20/keys = {
 "method": "stop"
 } ]
 }
-tracks/21/type = "value"
-tracks/21/path = NodePath("WorldEnvironment:environment:ambient_light_color")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/keys = {
-"times": PoolRealArray( 0, 0.75, 5.6, 10.24, 10.29, 10.64, 12.69, 14.36, 18.64, 18.95, 24.56, 25.58, 43.09, 44.11, 44.31, 45.27, 45.34, 46.3, 46.53, 47.33, 47.37, 48.55, 48.6, 49.3, 49.38, 50.47, 50.56, 51.12, 51.16, 51.72, 51.89, 52.53, 53.07, 53.1, 54.3, 57.22, 57.79, 57.84, 58.5, 58.72, 59.38, 60.2, 60.78, 60.8, 61.38, 61.4, 61.98, 62, 63.81, 64.41, 64.94, 64.96, 66.66, 73.26, 73.28, 73.89, 74.45, 74.47, 75.08, 79.19, 79.22, 79.83, 83.77, 83.97, 84.58, 86.34, 86.84, 86.96, 87.46, 87.55, 87.81, 87.84, 88.1, 88.13, 88.68, 88.72, 89.89, 97.89, 97.93, 99.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0.0980392, 0.0980392, 0.0980392, 1 ), Color( 0.745098, 0.52549, 0.988235, 1 ), Color( 0.188235, 0.290196, 0.823529, 1 ), Color( 0.188235, 0.823529, 0.6, 1 ), Color( 0.74902, 1, 0.913725, 1 ), Color( 0.415686, 0.694118, 0.756863, 1 ), Color( 0.533333, 0.615686, 0.964706, 1 ), Color( 0.407843, 0.294118, 0.741176, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.509804, 0.490196, 0.811765, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.0980392, 0.0862745, 0.254902, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.188235, 0.290196, 0.823529, 1 ), Color( 0.74902, 1, 0.913725, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.870588, 0.831373, 0.705882, 1 ), Color( 0.74902, 1, 0.913725, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.478431, 0.34902, 0.592157, 1 ), Color( 1, 0.956863, 0.74902, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.85098, 0.686275, 0.403922, 1 ), Color( 0.74902, 0.960784, 1, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.627451, 0.317647, 0.768627, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.360784, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.282353, 0.360784, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ) ]
-}
 tracks/22/type = "value"
-tracks/22/path = NodePath("Skybox:sky_col")
+tracks/22/path = NodePath("WorldEnvironment:environment:ambient_light_color")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/imported = false
 tracks/22/enabled = true
 tracks/22/keys = {
-"times": PoolRealArray( 0, 0.75, 5.6, 6, 8.5, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 24.56, 25.58, 43.09, 44.11, 44.3125, 44.59, 44.77, 44.91, 44.99, 45.27, 45.34, 45.64, 45.8, 45.91, 45.96, 46.1, 46.18, 46.44, 46.53, 46.92, 46.99, 47.1, 47.15, 47.29, 47.37, 47.67, 47.72, 47.99, 48.32, 48.55, 64.94, 64.96, 66.66, 83.77 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0 ),
+"times": PoolRealArray( 0, 0.75, 5.6, 10.24, 10.29, 10.64, 12.69, 14.36, 18.64, 18.95, 24.56, 25.58, 43.09, 44.11, 44.31, 45.27, 45.34, 46.3, 46.53, 47.33, 47.37, 48.55, 48.6, 49.3, 49.38, 50.47, 50.56, 51.12, 51.16, 51.72, 51.89, 52.53, 53.07, 53.1, 54.3, 57.22, 57.79, 57.84, 58.5, 58.72, 59.38, 60.2, 60.78, 60.8, 61.38, 61.4, 61.98, 62, 63.81, 64.41, 64.94, 64.96, 66.66, 73.26, 73.28, 73.89, 74.45, 74.47, 75.08, 79.19, 79.22, 79.83, 83.77, 83.97, 84.58, 86.34, 86.84, 86.96, 87.46, 87.55, 87.81, 87.84, 88.1, 88.13, 88.68, 88.72, 89.89, 97.89, 97.93, 99.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.8, 0.964706, 0.392157, 1 ), Color( 0.843137, 0.45098, 0.87451, 1 ), Color( 0.945098, 0.8, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.976471, 1, 0.8, 1 ), Color( 0.196078, 0.560784, 0.756863, 1 ), Color( 0.996078, 0.992157, 1, 1 ), Color( 0.945098, 0.8, 1, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.843137, 0.635294, 0.94902, 1 ), Color( 0.843137, 0.635294, 0.94902, 1 ), Color( 0.843137, 0.635294, 0.94902, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.733333, 0.439216, 0.933333, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.733333, 0.439216, 0.933333, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.733333, 0.439216, 0.933333, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.945098, 0.8, 1, 1 ), Color( 0.996078, 0.992157, 1, 1 ), Color( 0.843137, 0.45098, 0.87451, 1 ), Color( 0.843137, 0.45098, 0.87451, 1 ) ]
+"values": [ Color( 0.0980392, 0.0980392, 0.0980392, 1 ), Color( 0.745098, 0.52549, 0.988235, 1 ), Color( 0.188235, 0.290196, 0.823529, 1 ), Color( 0.188235, 0.823529, 0.6, 1 ), Color( 0.74902, 1, 0.913725, 1 ), Color( 0.415686, 0.694118, 0.756863, 1 ), Color( 0.533333, 0.615686, 0.964706, 1 ), Color( 0.407843, 0.294118, 0.741176, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.509804, 0.490196, 0.811765, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.831373, 0.941176, 1, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 1, 0.976471, 0.831373, 1 ), Color( 0.647059, 0.627451, 0.901961, 1 ), Color( 0.0980392, 0.0862745, 0.254902, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.8, 0.47451, 0.811765, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.188235, 0.290196, 0.823529, 1 ), Color( 0.74902, 1, 0.913725, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.870588, 0.831373, 0.705882, 1 ), Color( 0.74902, 1, 0.913725, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.478431, 0.34902, 0.592157, 1 ), Color( 1, 0.956863, 0.74902, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.85098, 0.686275, 0.403922, 1 ), Color( 0.74902, 0.960784, 1, 1 ), Color( 0.870588, 0.705882, 0.862745, 1 ), Color( 0.627451, 0.317647, 0.768627, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.360784, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ), Color( 0.282353, 0.360784, 0.788235, 1 ), Color( 0.768627, 1, 0.74902, 1 ), Color( 0.282353, 0.698039, 0.788235, 1 ) ]
 }
 tracks/23/type = "value"
-tracks/23/path = NodePath("Skybox:horizon_col")
+tracks/23/path = NodePath("Skybox:sky_col")
 tracks/23/interp = 1
 tracks/23/loop_wrap = true
 tracks/23/imported = false
 tracks/23/enabled = true
 tracks/23/keys = {
-"times": PoolRealArray( 0, 0.75, 5.6, 6, 7.7, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 24.56, 25.58, 33.77, 34.08, 34.7, 43.09, 44.11, 53.1, 62, 63.81, 64.41, 64.94, 64.96, 66.66, 83.77 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0 ),
+"times": PoolRealArray( 0, 0.75, 5.6, 6, 8.5, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 24.56, 25.58, 43.09, 44.11, 44.3125, 44.59, 44.77, 44.91, 44.99, 45.27, 45.34, 45.64, 45.8, 45.91, 45.96, 46.1, 46.18, 46.44, 46.53, 46.92, 46.99, 47.1, 47.15, 47.29, 47.37, 47.67, 47.72, 47.99, 48.32, 48.55, 64.94, 64.96, 66.66, 83.77 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0 ),
 "update": 0,
-"values": [ Color( 0.945098, 0.8, 1, 1 ), Color( 0.258824, 0.631373, 0.929412, 1 ), Color( 0.552941, 0.968627, 0.94902, 1 ), Color( 0.552941, 0.968627, 0.568627, 1 ), Color( 0.839216, 0.552941, 0.968627, 1 ), Color( 0.219608, 0.145098, 0.564706, 1 ), Color( 0.823529, 1, 0.992157, 1 ), Color( 0.552941, 0.968627, 0.94902, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.835294, 0.917647, 0.372549, 1 ), Color( 0.372549, 0.917647, 0.815686, 1 ), Color( 0.372549, 0.584314, 0.917647, 1 ), Color( 0.698039, 0.968627, 0.490196, 1 ), Color( 0.372549, 0.917647, 0.815686, 1 ), Color( 0.835294, 0.917647, 0.372549, 1 ), Color( 0.372549, 0.917647, 0.815686, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.552941, 0.968627, 0.94902, 1 ), Color( 0.823529, 1, 0.992157, 1 ), Color( 0.611765, 0.8, 0.952941, 1 ), Color( 0.611765, 0.8, 0.952941, 1 ) ]
+"values": [ Color( 0.8, 0.964706, 0.392157, 1 ), Color( 0.843137, 0.45098, 0.87451, 1 ), Color( 0.945098, 0.8, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.976471, 1, 0.8, 1 ), Color( 0.196078, 0.560784, 0.756863, 1 ), Color( 0.996078, 0.992157, 1, 1 ), Color( 0.945098, 0.8, 1, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.301961, 0.85098, 0.529412, 1 ), Color( 0.996078, 1, 0.568627, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.843137, 0.635294, 0.94902, 1 ), Color( 0.843137, 0.635294, 0.94902, 1 ), Color( 0.843137, 0.635294, 0.94902, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.733333, 0.439216, 0.933333, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.733333, 0.439216, 0.933333, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.733333, 0.439216, 0.933333, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.231373, 0.509804, 0.839216, 1 ), Color( 0.27451, 0.317647, 0.780392, 1 ), Color( 0.945098, 0.8, 1, 1 ), Color( 0.996078, 0.992157, 1, 1 ), Color( 0.843137, 0.45098, 0.87451, 1 ), Color( 0.843137, 0.45098, 0.87451, 1 ) ]
 }
 tracks/24/type = "value"
-tracks/24/path = NodePath("Skybox:ground_col")
+tracks/24/path = NodePath("Skybox:horizon_col")
 tracks/24/interp = 1
 tracks/24/loop_wrap = true
 tracks/24/imported = false
 tracks/24/enabled = true
 tracks/24/keys = {
-"times": PoolRealArray( 0, 0.75, 5.6, 6, 9, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 22.79, 23.14, 24.56, 25.58, 33.77, 34.08, 34.7, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.07, 53.1, 54.3, 62, 63.81, 64.41, 64.94, 64.96, 66.66, 83.77, 83.97, 87.5, 88.65, 88.72, 96.47, 97.62, 97.94, 99.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0 ),
+"times": PoolRealArray( 0, 0.75, 5.6, 6, 7.7, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 24.56, 25.58, 33.77, 34.08, 34.7, 43.09, 44.11, 53.1, 62, 63.81, 64.41, 64.94, 64.96, 66.66, 83.77 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0 ),
 "update": 0,
-"values": [ Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.219608, 0.25098, 0.592157, 1 ), Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.392157, 0.298039, 0.843137, 1 ), Color( 0.219608, 0.145098, 0.564706, 1 ), Color( 0.831373, 0.898039, 1, 1 ), Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.180392, 0.847059, 0.768627, 1 ), Color( 0.180392, 0.360784, 0.847059, 1 ), Color( 0.133333, 0.054902, 0.356863, 1 ), Color( 0.180392, 0.847059, 0.454902, 1 ), Color( 0.180392, 0.360784, 0.847059, 1 ), Color( 0.180392, 0.847059, 0.768627, 1 ), Color( 0.898039, 0.482353, 0.85098, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.85098, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.372549, 0.192157, 0.815686, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.372549, 0.192157, 0.815686, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.372549, 0.192157, 0.815686, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.0980392, 0.0862745, 0.254902, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.741176, 0.352941, 0.345098, 1 ), Color( 1, 0.937255, 0.831373, 1 ), Color( 0.956863, 0.682353, 0.254902, 1 ), Color( 0.956863, 0.682353, 0.254902, 1 ), Color( 0.815686, 0.921569, 0.435294, 1 ), Color( 0.113725, 0.537255, 0.580392, 1 ), Color( 0.956863, 0.388235, 0.254902, 1 ), Color( 0.956863, 0.831373, 0.254902, 1 ), Color( 0.956863, 0.388235, 0.254902, 1 ), Color( 0.317647, 0.882353, 0.644118, 1 ), Color( 0.952941, 0.956863, 0.521569, 1 ), Color( 0.317647, 0.882353, 0.644118, 1 ) ]
+"values": [ Color( 0.945098, 0.8, 1, 1 ), Color( 0.258824, 0.631373, 0.929412, 1 ), Color( 0.552941, 0.968627, 0.94902, 1 ), Color( 0.552941, 0.968627, 0.568627, 1 ), Color( 0.839216, 0.552941, 0.968627, 1 ), Color( 0.219608, 0.145098, 0.564706, 1 ), Color( 0.823529, 1, 0.992157, 1 ), Color( 0.552941, 0.968627, 0.94902, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.992157, 0.47451, 0.898039, 1 ), Color( 0.894118, 0.698039, 0.772549, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.835294, 0.917647, 0.372549, 1 ), Color( 0.372549, 0.917647, 0.815686, 1 ), Color( 0.372549, 0.584314, 0.917647, 1 ), Color( 0.698039, 0.968627, 0.490196, 1 ), Color( 0.372549, 0.917647, 0.815686, 1 ), Color( 0.835294, 0.917647, 0.372549, 1 ), Color( 0.372549, 0.917647, 0.815686, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.552941, 0.968627, 0.94902, 1 ), Color( 0.823529, 1, 0.992157, 1 ), Color( 0.611765, 0.8, 0.952941, 1 ), Color( 0.611765, 0.8, 0.952941, 1 ) ]
 }
 tracks/25/type = "value"
-tracks/25/path = NodePath("Skybox:pit_col")
+tracks/25/path = NodePath("Skybox:ground_col")
 tracks/25/interp = 1
 tracks/25/loop_wrap = true
 tracks/25/imported = false
 tracks/25/enabled = true
 tracks/25/keys = {
-"times": PoolRealArray( 0, 5.6, 6, 9, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 19.81, 20.16, 21.01, 21.36, 22.2, 22.55, 22.79, 23.14, 64.41, 64.94, 64.96, 66.66, 83.77, 83.97, 88.68 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0, 1, 1, 0, 1, 1 ),
+"times": PoolRealArray( 0, 0.75, 5.6, 6, 9, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 22.79, 23.14, 24.56, 25.58, 33.77, 34.08, 34.7, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.07, 53.1, 54.3, 62, 63.81, 64.41, 64.94, 64.96, 66.66, 83.77, 83.97, 87.5, 88.65, 88.72, 96.47, 97.62, 97.94, 99.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0 ),
 "update": 0,
-"values": [ Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.305882, 0.054902, 0.313726, 1 ), Color( 0.909804, 0.513726, 0.580392, 1 ), Color( 0.560784, 0.278431, 0.87451, 1 ), Color( 0.560784, 0.278431, 0.87451, 1 ), Color( 0.286275, 0.172549, 0.74902, 1 ), Color( 0.12549, 0.0352941, 0.247059, 1 ) ]
+"values": [ Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.219608, 0.25098, 0.592157, 1 ), Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.392157, 0.298039, 0.843137, 1 ), Color( 0.219608, 0.145098, 0.564706, 1 ), Color( 0.831373, 0.898039, 1, 1 ), Color( 0.505882, 0.666667, 0.917647, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.196078, 0.207843, 0.901961, 1 ), Color( 0.329412, 0.286275, 0.835294, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.180392, 0.847059, 0.768627, 1 ), Color( 0.180392, 0.360784, 0.847059, 1 ), Color( 0.133333, 0.054902, 0.356863, 1 ), Color( 0.180392, 0.847059, 0.454902, 1 ), Color( 0.180392, 0.360784, 0.847059, 1 ), Color( 0.180392, 0.847059, 0.768627, 1 ), Color( 0.898039, 0.482353, 0.85098, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.85098, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.372549, 0.192157, 0.815686, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.372549, 0.192157, 0.815686, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.372549, 0.192157, 0.815686, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.0980392, 0.0862745, 0.254902, 1 ), Color( 1, 0.741176, 0.509804, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.898039, 0.482353, 0.764706, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.741176, 0.352941, 0.345098, 1 ), Color( 1, 0.937255, 0.831373, 1 ), Color( 0.956863, 0.682353, 0.254902, 1 ), Color( 0.956863, 0.682353, 0.254902, 1 ), Color( 0.815686, 0.921569, 0.435294, 1 ), Color( 0.113725, 0.537255, 0.580392, 1 ), Color( 0.956863, 0.388235, 0.254902, 1 ), Color( 0.956863, 0.831373, 0.254902, 1 ), Color( 0.956863, 0.388235, 0.254902, 1 ), Color( 0.317647, 0.882353, 0.644118, 1 ), Color( 0.952941, 0.956863, 0.521569, 1 ), Color( 0.317647, 0.882353, 0.644118, 1 ) ]
 }
 tracks/26/type = "value"
-tracks/26/path = NodePath("Lights:spotlight_col")
+tracks/26/path = NodePath("Skybox:pit_col")
 tracks/26/interp = 1
 tracks/26/loop_wrap = true
 tracks/26/imported = false
 tracks/26/enabled = true
 tracks/26/keys = {
-"times": PoolRealArray( 0, 13.84, 14.04, 14.36, 15.07, 15.39, 15.66, 15.98, 16.25, 16.57, 16.85, 17.17, 17.44, 17.74, 18.04, 18.34, 18.64, 18.95, 19.81, 20.98, 21.01, 22.18, 22.2, 22.77, 22.79, 23.37, 24.56, 25.58, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.07, 53.1, 53.64, 53.7, 54.24, 54.3, 54.84, 54.9, 55.44, 55.5, 56.04, 56.1, 56.64, 56.7, 57.02, 57.22, 57.79, 57.84, 58.06, 58.27, 58.5, 58.72, 59.01, 59.23, 59.46, 59.68, 59.9, 59.91, 60.38, 60.4, 60.58, 60.6, 60.78, 60.8, 60.98, 61, 61.18, 61.2, 61.38, 61.4, 61.58, 61.6, 61.78, 61.8, 61.98, 62, 62.18, 62.2, 62.38, 62.4, 63.81, 64.41, 64.94, 64.96, 87, 88.68, 88.72, 89.32, 89.92, 90.52, 91.11, 91.71, 92.31, 92.91, 93.5, 94.1, 94.67, 95.27, 95.86, 96.46 ),
-"transitions": PoolRealArray( 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 ),
+"times": PoolRealArray( 0, 5.6, 6, 9, 10.24, 10.29, 10.64, 14.36, 15.07, 15.39, 16.25, 16.57, 17.44, 17.74, 18.04, 18.34, 18.64, 19.79, 19.81, 20.16, 21.01, 21.36, 22.2, 22.55, 22.79, 23.14, 64.41, 64.94, 64.96, 66.66, 83.77, 83.97, 88.68 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0, 1, 1, 0, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.807843, 0.847059, 1, 1 ), Color( 0.333333, 1, 0.858824, 1 ), Color( 1, 0.6, 0.94902, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.666667, 1, 0.984314, 1 ), Color( 0.596078, 0.792157, 1, 1 ), Color( 0.666667, 1, 0.984314, 1 ), Color( 0.596078, 0.792157, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.596078, 0.792157, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.27451, 0.309804, 0.6, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.533333, 0.313726, 0.760784, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.741176, 0.352941, 0.345098, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.952941, 0.65098, 0.411765, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ) ]
+"values": [ Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.0784314, 0.0392157, 0.164706, 1 ), Color( 0.305882, 0.054902, 0.313726, 1 ), Color( 0.909804, 0.513726, 0.580392, 1 ), Color( 0.560784, 0.278431, 0.87451, 1 ), Color( 0.560784, 0.278431, 0.87451, 1 ), Color( 0.286275, 0.172549, 0.74902, 1 ), Color( 0.12549, 0.0352941, 0.247059, 1 ) ]
 }
 tracks/27/type = "value"
-tracks/27/path = NodePath("Lights:ground_col")
+tracks/27/path = NodePath("Lights:spotlight_col")
 tracks/27/interp = 1
 tracks/27/loop_wrap = true
 tracks/27/imported = false
 tracks/27/enabled = true
 tracks/27/keys = {
-"times": PoolRealArray( 0, 10.24, 10.29, 10.64, 12.69, 13.04, 13.69, 13.84, 14.04, 14.36, 15.07, 15.39, 15.66, 15.98, 16.25, 16.57, 16.85, 17.17, 17.74, 18.04, 18.34, 18.63, 18.64, 18.95, 19.8, 19.81, 20.98, 21.01, 22.18, 22.2, 22.77, 22.79, 23.37, 24.56, 25.58, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.07, 53.1, 53.64, 53.7, 54.24, 54.3, 54.84, 54.9, 55.44, 55.5, 56.04, 56.1, 56.64, 56.88, 57.17, 57.22, 57.79, 58.06, 58.27, 58.5, 58.71, 58.72, 59, 59.01, 59.23, 59.46, 59.68, 59.91, 60.38, 60.4, 60.58, 60.6, 60.78, 60.8, 60.98, 61, 61.18, 61.2, 61.38, 61.4, 61.58, 61.6, 61.78, 61.8, 61.98, 62, 62.18, 62.2, 62.38, 62.4, 63.81, 64.41, 64.94, 64.96, 87, 88.68, 89.32, 89.92, 90.52, 91.11, 91.71, 92.31, 92.91, 93.5, 94.1, 94.67, 95.27, 95.86, 96.46, 97.03 ),
-"transitions": PoolRealArray( 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 ),
+"times": PoolRealArray( 0, 13.84, 14.04, 14.36, 15.07, 15.39, 15.66, 15.98, 16.25, 16.57, 16.85, 17.17, 17.44, 17.74, 18.04, 18.34, 18.64, 18.95, 19.81, 20.98, 21.01, 22.18, 22.2, 22.77, 22.79, 23.37, 24.56, 25.58, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.07, 53.1, 53.64, 53.7, 54.24, 54.3, 54.84, 54.9, 55.44, 55.5, 56.04, 56.1, 56.64, 56.7, 57.02, 57.22, 57.79, 57.84, 58.06, 58.27, 58.5, 58.72, 59.01, 59.23, 59.46, 59.68, 59.9, 59.91, 60.38, 60.4, 60.58, 60.6, 60.78, 60.8, 60.98, 61, 61.18, 61.2, 61.38, 61.4, 61.58, 61.6, 61.78, 61.8, 61.98, 62, 62.18, 62.2, 62.38, 62.4, 63.81, 64.41, 64.94, 64.96, 87, 88.68, 88.72, 89.32, 89.92, 90.52, 91.11, 91.71, 92.31, 92.91, 93.5, 94.1, 94.67, 95.27, 95.86, 96.46 ),
+"transitions": PoolRealArray( 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 ),
 "update": 0,
-"values": [ Color( 0.807843, 0.847059, 1, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.952941, 0.65098, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.952941, 0.65098, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.952941, 0.65098, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.6, 0.94902, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 1, 0.768627, 0.666667, 1 ), Color( 0.45098, 0.870588, 0.34902, 1 ), Color( 1, 0.768627, 0.666667, 1 ), Color( 0.45098, 0.870588, 0.34902, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.921569, 0.670588, 0.235294, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 0.713726, 0.282353, 0.168627, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.313726, 0.760784, 0.647059, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.611765, 0.137255, 0.458824, 1 ), Color( 0.870588, 0.470588, 0.741176, 1 ), Color( 0.870588, 0.470588, 0.741176, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ) ]
+"values": [ Color( 0.807843, 0.847059, 1, 1 ), Color( 0.333333, 1, 0.858824, 1 ), Color( 1, 0.6, 0.94902, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.666667, 1, 0.984314, 1 ), Color( 0.596078, 0.792157, 1, 1 ), Color( 0.666667, 1, 0.984314, 1 ), Color( 0.596078, 0.792157, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.596078, 0.792157, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.898039, 0.94902, 1, 1 ), Color( 0.708236, 0.850421, 1, 1 ), Color( 0.27451, 0.309804, 0.6, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.533333, 0.313726, 0.760784, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.933333, 0.968627, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.321569, 0.917647, 0.862745, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.741176, 0.352941, 0.345098, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 1, 0.972549, 0.698039, 1 ), Color( 0.952941, 0.65098, 0.411765, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.411765, 0.776471, 0.952941, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ) ]
 }
 tracks/28/type = "value"
-tracks/28/path = NodePath("Lights:energy")
+tracks/28/path = NodePath("Lights:ground_col")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/imported = false
 tracks/28/enabled = true
 tracks/28/keys = {
-"times": PoolRealArray( 0, 0.75, 1.7, 5.2, 5.6, 6, 10.29, 10.64, 12.69, 13.04, 13.69, 13.82, 13.84, 14.02, 14.04, 14.36, 15.07, 15.2, 15.66, 15.79, 16.25, 16.38, 16.85, 16.98, 17.44, 17.57, 17.74, 17.87, 18.04, 18.17, 18.34, 18.47, 18.64, 18.77, 19.81, 19.94, 21.01, 21.14, 22.2, 22.33, 22.79, 22.92, 24.56, 25.58, 34.08, 34.7, 42, 43.06, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.1, 53.64, 53.7, 54.24, 54.3, 54.84, 54.9, 55.44, 55.5, 56.04, 56.1, 56.64, 56.7, 56.86, 56.88, 57.19, 57.22, 57.76, 57.84, 58.04, 58.06, 58.25, 58.27, 58.48, 58.5, 58.63, 58.72, 58.99, 59.01, 59.21, 59.23, 59.44, 59.46, 59.66, 59.68, 59.89, 59.91, 60.38, 60.4, 60.58, 60.6, 60.78, 60.8, 60.98, 61, 61.18, 61.2, 61.38, 61.4, 61.58, 61.6, 61.78, 61.8, 61.98, 62, 62.18, 62.2, 62.38, 62.4, 63.81, 64.41, 64.94, 64.96, 65.75, 73.28, 73.78, 74.47, 74.97, 79.22, 79.72, 83.97, 84.47, 86.34, 86.84, 86.96, 87.46, 87.55, 87.81, 87.84, 88.1, 88.13, 88.39, 88.72, 89.9 ),
-"transitions": PoolRealArray( 2.37841, 0.535887, 1, 1, 1, 1, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0 ),
+"times": PoolRealArray( 0, 10.24, 10.29, 10.64, 12.69, 13.04, 13.69, 13.84, 14.04, 14.36, 15.07, 15.39, 15.66, 15.98, 16.25, 16.57, 16.85, 17.17, 17.74, 18.04, 18.34, 18.63, 18.64, 18.95, 19.8, 19.81, 20.98, 21.01, 22.18, 22.2, 22.77, 22.79, 23.37, 24.56, 25.58, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.07, 53.1, 53.64, 53.7, 54.24, 54.3, 54.84, 54.9, 55.44, 55.5, 56.04, 56.1, 56.64, 56.88, 57.17, 57.22, 57.79, 58.06, 58.27, 58.5, 58.71, 58.72, 59, 59.01, 59.23, 59.46, 59.68, 59.91, 60.38, 60.4, 60.58, 60.6, 60.78, 60.8, 60.98, 61, 61.18, 61.2, 61.38, 61.4, 61.58, 61.6, 61.78, 61.8, 61.98, 62, 62.18, 62.2, 62.38, 62.4, 63.81, 64.41, 64.94, 64.96, 87, 88.68, 89.32, 89.92, 90.52, 91.11, 91.71, 92.31, 92.91, 93.5, 94.1, 94.67, 95.27, 95.86, 96.46, 97.03 ),
+"transitions": PoolRealArray( 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0 ),
 "update": 0,
-"values": [ 0.0, 2.0, 1.5, 1.5, 2.0, 0.5, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 3.0, 1.2, 3.0, 1.2, 3.0, 1.2, 3.0, 1.2, 3.0, 1.6, 3.0, 1.6, 1.6, 0.2, 3.0, 1.5, 4.0, 1.2, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 0.0, 0.0, 1.5, 3.0, 0.7, 1.5, 1.2, 3.0, 1.2, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 2.0 ]
+"values": [ Color( 0.807843, 0.847059, 1, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.952941, 0.65098, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.952941, 0.65098, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.952941, 0.65098, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 1, 0.6, 0.94902, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.807843, 0.847059, 1, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.992157, 0.105882, 0.415686, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 1, 0.768627, 0.666667, 1 ), Color( 0.45098, 0.870588, 0.34902, 1 ), Color( 1, 0.768627, 0.666667, 1 ), Color( 0.45098, 0.870588, 0.34902, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.921569, 0.670588, 0.235294, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 1, 0.760784, 0.760784, 1 ), Color( 0.950701, 0.70409, 0.430477, 1 ), Color( 0.713726, 0.282353, 0.168627, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.313726, 0.760784, 0.647059, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 1, 0.623529, 0.705882, 1 ), Color( 0.952941, 0.286275, 0.427451, 1 ), Color( 0.835294, 0.917647, 1, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.105882, 0.0196078, 0.156863, 1 ), Color( 0.611765, 0.137255, 0.458824, 1 ), Color( 0.870588, 0.470588, 0.741176, 1 ), Color( 0.870588, 0.470588, 0.741176, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ), Color( 0.721569, 0.337255, 0.933333, 1 ), Color( 0.470588, 0.870588, 0.694118, 1 ) ]
 }
 tracks/29/type = "value"
-tracks/29/path = NodePath("Lights:rotation_degrees")
+tracks/29/path = NodePath("Lights:energy")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/imported = false
 tracks/29/enabled = true
 tracks/29/keys = {
+"times": PoolRealArray( 0, 0.75, 1.7, 5.2, 5.6, 6, 10.29, 10.64, 12.69, 13.04, 13.69, 13.82, 13.84, 14.02, 14.04, 14.36, 15.07, 15.2, 15.66, 15.79, 16.25, 16.38, 16.85, 16.98, 17.44, 17.57, 17.74, 17.87, 18.04, 18.17, 18.34, 18.47, 18.64, 18.77, 19.81, 19.94, 21.01, 21.14, 22.2, 22.33, 22.79, 22.92, 24.56, 25.58, 34.08, 34.7, 42, 43.06, 43.09, 44.11, 48.6, 49.3, 49.38, 49.49, 49.51, 50, 50.56, 50.68, 50.7, 51.14, 51.16, 51.51, 51.74, 51.87, 51.89, 52.17, 52.18, 52.53, 53.1, 53.64, 53.7, 54.24, 54.3, 54.84, 54.9, 55.44, 55.5, 56.04, 56.1, 56.64, 56.7, 56.86, 56.88, 57.19, 57.22, 57.76, 57.84, 58.04, 58.06, 58.25, 58.27, 58.48, 58.5, 58.63, 58.72, 58.99, 59.01, 59.21, 59.23, 59.44, 59.46, 59.66, 59.68, 59.89, 59.91, 60.38, 60.4, 60.58, 60.6, 60.78, 60.8, 60.98, 61, 61.18, 61.2, 61.38, 61.4, 61.58, 61.6, 61.78, 61.8, 61.98, 62, 62.18, 62.2, 62.38, 62.4, 63.81, 64.41, 64.94, 64.96, 65.75, 73.28, 73.78, 74.47, 74.97, 79.22, 79.72, 83.97, 84.47, 86.34, 86.84, 86.96, 87.46, 87.55, 87.81, 87.84, 88.1, 88.13, 88.39, 88.72, 89.9 ),
+"transitions": PoolRealArray( 2.37841, 0.535887, 1, 1, 1, 1, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0 ),
+"update": 0,
+"values": [ 0.0, 2.0, 1.5, 1.5, 2.0, 0.5, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 2.0, 1.2, 3.0, 1.2, 3.0, 1.2, 3.0, 1.2, 3.0, 1.2, 3.0, 1.6, 3.0, 1.6, 1.6, 0.2, 3.0, 1.5, 4.0, 1.2, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 0.0, 0.0, 1.5, 3.0, 0.7, 1.5, 1.2, 3.0, 1.2, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 1.5, 3.0, 2.0 ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("Lights:rotation_degrees")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
 "times": PoolRealArray( 10.29, 11.64, 12.69, 14.02, 14.04, 15.05, 15.07, 15.64, 15.66, 16.23, 16.25, 16.83, 16.85, 17.42, 17.44, 17.74, 18.04, 18.34, 18.64, 19.4, 19.81, 23.37, 24.56, 25.58, 43.09, 44.11, 83.97, 85.24, 86.34, 86.96, 87.55, 87.84, 88.13, 88.39, 88.72, 96.86 ),
 "transitions": PoolRealArray( 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0.5, 0, 0.5, 0.5, 2, 2, 0, 1, 0, 1, 0, 0.5, 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0, 0.5, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, -180, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 540, 0 ), Vector3( 0, 1080, 0 ), Vector3( 0, 900, 0 ), Vector3( 0, -900, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ), Vector3( 0, 540, 0 ), Vector3( 0, 720, 0 ), Vector3( 0, 810, 0 ), Vector3( 0, 900, 0 ), Vector3( 0, 990, 0 ), Vector3( 0, 1080, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, -900, 0 ) ]
 }
-tracks/30/type = "value"
-tracks/30/path = NodePath("MusicOnlyForTimelineReference:playing")
-tracks/30/interp = 1
-tracks/30/loop_wrap = true
-tracks/30/imported = false
-tracks/30/enabled = false
-tracks/30/keys = {
+tracks/31/type = "value"
+tracks/31/path = NodePath("MusicOnlyForTimelineReference:playing")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = false
+tracks/31/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
 }
-tracks/31/type = "method"
-tracks/31/path = NodePath("Player/CameraPos")
-tracks/31/interp = 1
-tracks/31/loop_wrap = true
-tracks/31/imported = false
-tracks/31/enabled = true
-tracks/31/keys = {
+tracks/32/type = "method"
+tracks/32/path = NodePath("Player/CameraPos")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
 "times": PoolRealArray( 19.81, 23.37, 71.01, 86.06 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
@@ -1309,145 +1333,145 @@ tracks/31/keys = {
 "method": "extend_cam"
 } ]
 }
-tracks/32/type = "value"
-tracks/32/path = NodePath("Spawners/Phase3_Spawner1:enabled")
-tracks/32/interp = 1
-tracks/32/loop_wrap = true
-tracks/32/imported = false
-tracks/32/enabled = true
-tracks/32/keys = {
-"times": PoolRealArray( 0, 24.86, 32.87 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
 tracks/33/type = "value"
-tracks/33/path = NodePath("PillarGround/CollisionShape:disabled")
+tracks/33/path = NodePath("Spawners/Phase3_Spawner1:enabled")
 tracks/33/interp = 1
 tracks/33/loop_wrap = true
 tracks/33/imported = false
 tracks/33/enabled = true
 tracks/33/keys = {
-"times": PoolRealArray( 0, 24.56, 64.33 ),
+"times": PoolRealArray( 0, 24.86, 32.87 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
 }
 tracks/34/type = "value"
-tracks/34/path = NodePath("PillarGround:visible")
+tracks/34/path = NodePath("PillarGround/CollisionShape:disabled")
 tracks/34/interp = 1
 tracks/34/loop_wrap = true
 tracks/34/imported = false
 tracks/34/enabled = true
 tracks/34/keys = {
-"times": PoolRealArray( 0, 24.56, 64.33, 107.74 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 24.56, 64.33 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false ]
+"values": [ false, true, false ]
 }
 tracks/35/type = "value"
-tracks/35/path = NodePath("RectangleArena:translation")
+tracks/35/path = NodePath("PillarGround:visible")
 tracks/35/interp = 1
 tracks/35/loop_wrap = true
 tracks/35/imported = false
 tracks/35/enabled = true
 tracks/35/keys = {
-"times": PoolRealArray( 0, 107.72 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 24.56, 64.33, 107.74 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector3( 0, 0, 5000 ), Vector3( 0, 0, 0 ) ]
+"values": [ true, false, true, false ]
 }
 tracks/36/type = "value"
-tracks/36/path = NodePath("Player/CameraPos:rotation_degrees")
+tracks/36/path = NodePath("RectangleArena:translation")
 tracks/36/interp = 1
 tracks/36/loop_wrap = true
 tracks/36/imported = false
 tracks/36/enabled = true
 tracks/36/keys = {
-"times": PoolRealArray( 0, 33.77, 34.08, 43.6, 43.85, 86.06, 96.48, 97.85 ),
-"transitions": PoolRealArray( 1, 2, 1, 1, 1, -2, -2, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 270, 0 ), Vector3( 0, 360, 0 ) ]
+"times": PoolRealArray( 0, 107.72 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector3( 0, 0, 5000 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/37/type = "value"
-tracks/37/path = NodePath("GridFloor:active")
+tracks/37/path = NodePath("Player/CameraPos:rotation_degrees")
 tracks/37/interp = 1
 tracks/37/loop_wrap = true
 tracks/37/imported = false
 tracks/37/enabled = true
 tracks/37/keys = {
-"times": PoolRealArray( 0, 24.56, 64.3291 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
+"times": PoolRealArray( 0, 33.77, 34.08, 43.6, 43.85, 86.06, 96.48, 97.85 ),
+"transitions": PoolRealArray( 1, 2, 1, 1, 1, -2, -2, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 45, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 270, 0 ), Vector3( 0, 360, 0 ) ]
 }
 tracks/38/type = "value"
-tracks/38/path = NodePath("Spawners/Phase2_Spawner1:orb_center_distance")
+tracks/38/path = NodePath("GridFloor:active")
 tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/imported = false
 tracks/38/enabled = true
 tracks/38/keys = {
-"times": PoolRealArray( 10.29, 97.46 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 24.56, 64.3291 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 24.0, 24.0 ]
+"values": [ false, true, false ]
 }
 tracks/39/type = "value"
-tracks/39/path = NodePath("Player:lock_2d")
+tracks/39/path = NodePath("Spawners/Phase2_Spawner1:orb_center_distance")
 tracks/39/interp = 1
 tracks/39/loop_wrap = true
 tracks/39/imported = false
 tracks/39/enabled = true
 tracks/39/keys = {
-"times": PoolRealArray( 0, 10.29, 43.09, 48.37, 107.73, 118.26 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 10.29, 97.46 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true, false, true, false ]
+"values": [ 24.0, 24.0 ]
 }
 tracks/40/type = "value"
-tracks/40/path = NodePath("Player:flying")
+tracks/40/path = NodePath("Player:lock_2d")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/imported = false
 tracks/40/enabled = true
 tracks/40/keys = {
-"times": PoolRealArray( 0, 43.09, 48.37 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 10.29, 43.09, 48.37, 107.73, 118.26 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false ]
+"values": [ true, false, true, false, true, false ]
 }
 tracks/41/type = "value"
-tracks/41/path = NodePath("Player:cam_follow_y")
+tracks/41/path = NodePath("Player:flying")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
 tracks/41/imported = false
 tracks/41/enabled = true
 tracks/41/keys = {
-"times": PoolRealArray( 0, 43.6, 53.1 ),
+"times": PoolRealArray( 0, 43.09, 48.37 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
 }
 tracks/42/type = "value"
-tracks/42/path = NodePath("Spawners/Phase6_Spawner1:rotation_degrees")
+tracks/42/path = NodePath("Player:cam_follow_y")
 tracks/42/interp = 1
 tracks/42/loop_wrap = true
 tracks/42/imported = false
 tracks/42/enabled = true
 tracks/42/keys = {
-"times": PoolRealArray( 47.02, 57.22, 60.2 ),
-"transitions": PoolRealArray( 1, -2, 0 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+"times": PoolRealArray( 0, 43.6, 53.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
-tracks/43/type = "method"
-tracks/43/path = NodePath("Spawners/Phase6_Spawner1")
+tracks/43/type = "value"
+tracks/43/path = NodePath("Spawners/Phase6_Spawner1:rotation_degrees")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/imported = false
 tracks/43/enabled = true
 tracks/43/keys = {
+"times": PoolRealArray( 47.02, 57.22, 60.2 ),
+"transitions": PoolRealArray( 1, -2, 0 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/44/type = "method"
+tracks/44/path = NodePath("Spawners/Phase6_Spawner1")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
 "times": PoolRealArray( 53.1, 53.7, 54.3, 54.9, 55.5, 56.1, 56.7, 56.88, 57.22, 58, 58.23, 58.46, 58.69, 60.2, 60.4, 60.6, 60.8, 61, 61.2, 61.4, 61.6, 61.8, 62, 62.2, 62.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -1527,25 +1551,25 @@ tracks/43/keys = {
 "method": "shoot_specific"
 } ]
 }
-tracks/44/type = "value"
-tracks/44/path = NodePath("Phase7_Platforming:translation")
-tracks/44/interp = 1
-tracks/44/loop_wrap = true
-tracks/44/imported = false
-tracks/44/enabled = true
-tracks/44/keys = {
-"times": PoolRealArray( 0, 64.3291, 86.37, 89.88 ),
-"transitions": PoolRealArray( 0, 0, 2, 1 ),
-"update": 0,
-"values": [ Vector3( -163, -700, -95 ), Vector3( -163, 0, -95 ), Vector3( -163, 0, -95 ), Vector3( -163, -700, -95 ) ]
-}
-tracks/45/type = "method"
-tracks/45/path = NodePath("CamPath")
+tracks/45/type = "value"
+tracks/45/path = NodePath("Phase7_Platforming:translation")
 tracks/45/interp = 1
 tracks/45/loop_wrap = true
 tracks/45/imported = false
 tracks/45/enabled = true
 tracks/45/keys = {
+"times": PoolRealArray( 0, 64.3291, 86.37, 89.88 ),
+"transitions": PoolRealArray( 0, 0, 2, 1 ),
+"update": 0,
+"values": [ Vector3( -163, -700, -95 ), Vector3( -163, 0, -95 ), Vector3( -163, 0, -95 ), Vector3( -163, -700, -95 ) ]
+}
+tracks/46/type = "method"
+tracks/46/path = NodePath("CamPath")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/keys = {
 "times": PoolRealArray( 64.33, 110.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -1556,25 +1580,25 @@ tracks/45/keys = {
 "method": "start"
 } ]
 }
-tracks/46/type = "value"
-tracks/46/path = NodePath("Phase7_Platforming:visible")
-tracks/46/interp = 1
-tracks/46/loop_wrap = true
-tracks/46/imported = false
-tracks/46/enabled = true
-tracks/46/keys = {
-"times": PoolRealArray( 0, 64.32, 89.88 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/47/type = "method"
-tracks/47/path = NodePath("Phase7_Platforming")
+tracks/47/type = "value"
+tracks/47/path = NodePath("Phase7_Platforming:visible")
 tracks/47/interp = 1
 tracks/47/loop_wrap = true
 tracks/47/imported = false
 tracks/47/enabled = true
 tracks/47/keys = {
+"times": PoolRealArray( 0, 64.32, 89.88 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/48/type = "method"
+tracks/48/path = NodePath("Phase7_Platforming")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/keys = {
 "times": PoolRealArray( 64.32, 89.8851 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -1585,25 +1609,25 @@ tracks/47/keys = {
 "method": "remove_hazards"
 } ]
 }
-tracks/48/type = "value"
-tracks/48/path = NodePath("Spawners/Phase8_Spawner1:hitboxes_on")
-tracks/48/interp = 1
-tracks/48/loop_wrap = true
-tracks/48/imported = false
-tracks/48/enabled = true
-tracks/48/keys = {
-"times": PoolRealArray( 0, 89.32, 96.86, 99.1, 101.96 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false, true, false ]
-}
-tracks/49/type = "method"
-tracks/49/path = NodePath("Spawners/Phase8_Spawner1")
+tracks/49/type = "value"
+tracks/49/path = NodePath("Spawners/Phase8_Spawner1:hitboxes_on")
 tracks/49/interp = 1
 tracks/49/loop_wrap = true
 tracks/49/imported = false
 tracks/49/enabled = true
 tracks/49/keys = {
+"times": PoolRealArray( 0, 89.32, 96.86, 99.1, 101.96 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false ]
+}
+tracks/50/type = "method"
+tracks/50/path = NodePath("Spawners/Phase8_Spawner1")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/keys = {
 "times": PoolRealArray( 83.18, 88.13, 88.72, 97.46, 97.93, 98.22, 102.41, 107.72 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "values": [ {
@@ -1632,80 +1656,68 @@ tracks/49/keys = {
 "method": "shrink_all"
 } ]
 }
-tracks/50/type = "value"
-tracks/50/path = NodePath("Spawners/Phase2_Spawner1:bouncy")
-tracks/50/interp = 1
-tracks/50/loop_wrap = true
-tracks/50/imported = false
-tracks/50/enabled = true
-tracks/50/keys = {
-"times": PoolRealArray( 0, 97.45 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, false ]
-}
 tracks/51/type = "value"
-tracks/51/path = NodePath("Spawners/Phase6_Spawner1:translation")
+tracks/51/path = NodePath("Spawners/Phase2_Spawner1:bouncy")
 tracks/51/interp = 1
 tracks/51/loop_wrap = true
 tracks/51/imported = false
 tracks/51/enabled = true
 tracks/51/keys = {
-"times": PoolRealArray( 0, 62.7, 64.77 ),
-"transitions": PoolRealArray( 1, 2.54912, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, -50, 0 ) ]
+"times": PoolRealArray( 0, 97.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
 }
 tracks/52/type = "value"
-tracks/52/path = NodePath("Player:has_djump")
+tracks/52/path = NodePath("Spawners/Phase6_Spawner1:translation")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/imported = false
 tracks/52/enabled = true
 tracks/52/keys = {
-"times": PoolRealArray( 43.1 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"times": PoolRealArray( 0, 62.7, 64.77 ),
+"transitions": PoolRealArray( 1, 2.54912, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, -50, 0 ) ]
 }
 tracks/53/type = "value"
-tracks/53/path = NodePath("Player:iframe_immunity")
+tracks/53/path = NodePath("Player:has_djump")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/imported = false
 tracks/53/enabled = true
 tracks/53/keys = {
-"times": PoolRealArray( 0, 23.58, 24.44, 63.5, 64.36 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 43.1 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false, true, false, true, false ]
+"values": [ false ]
 }
 tracks/54/type = "value"
-tracks/54/path = NodePath("Player:die_when_outside")
+tracks/54/path = NodePath("Player:iframe_immunity")
 tracks/54/interp = 1
 tracks/54/loop_wrap = true
 tracks/54/imported = false
 tracks/54/enabled = true
 tracks/54/keys = {
-"times": PoolRealArray( 0, 45.01, 48.1, 110.17, 117.99 ),
+"times": PoolRealArray( 0, 23.58, 24.44, 63.5, 64.36 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false, true, false ]
 }
 tracks/55/type = "value"
-tracks/55/path = NodePath("CamPath:curve")
+tracks/55/path = NodePath("Player:die_when_outside")
 tracks/55/interp = 1
 tracks/55/loop_wrap = true
 tracks/55/imported = false
 tracks/55/enabled = true
 tracks/55/keys = {
-"times": PoolRealArray( 109.52, 110.06 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 45.01, 48.1, 110.17, 117.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 29 ), ExtResource( 28 ) ]
+"values": [ false, true, false, true, false ]
 }
 tracks/56/type = "value"
-tracks/56/path = NodePath("CamPath:path_duration")
+tracks/56/path = NodePath("CamPath:curve")
 tracks/56/interp = 1
 tracks/56/loop_wrap = true
 tracks/56/imported = false
@@ -1713,52 +1725,64 @@ tracks/56/enabled = true
 tracks/56/keys = {
 "times": PoolRealArray( 109.52, 110.06 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 25.0, 8.0 ]
+"update": 1,
+"values": [ ExtResource( 29 ), ExtResource( 28 ) ]
 }
 tracks/57/type = "value"
-tracks/57/path = NodePath("RectangleArena:visible")
+tracks/57/path = NodePath("CamPath:path_duration")
 tracks/57/interp = 1
 tracks/57/loop_wrap = true
 tracks/57/imported = false
 tracks/57/enabled = true
 tracks/57/keys = {
-"times": PoolRealArray( 0.02, 107.53, 107.72 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, false, true ]
+"times": PoolRealArray( 109.52, 110.06 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 25.0, 8.0 ]
 }
 tracks/58/type = "value"
-tracks/58/path = NodePath("Spawners/Phase9_Spawner1/Phase9_Platforms:vertical_speed")
+tracks/58/path = NodePath("RectangleArena:visible")
 tracks/58/interp = 1
 tracks/58/loop_wrap = true
 tracks/58/imported = false
 tracks/58/enabled = true
 tracks/58/keys = {
-"times": PoolRealArray( 117.72, 119 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 50 ]
+"times": PoolRealArray( 0.02, 107.53, 107.72 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
 }
 tracks/59/type = "value"
-tracks/59/path = NodePath("Spawners/Phase9_Spawner1:spawning")
+tracks/59/path = NodePath("Spawners/Phase9_Spawner1/Phase9_Platforms:vertical_speed")
 tracks/59/interp = 1
 tracks/59/loop_wrap = true
 tracks/59/imported = false
 tracks/59/enabled = true
 tracks/59/keys = {
-"times": PoolRealArray( 109.98, 110.09, 115.97 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
+"times": PoolRealArray( 117.72, 119 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 50 ]
 }
-tracks/60/type = "method"
-tracks/60/path = NodePath("Spawners/Phase9_Spawner1/Phase9_Platforms")
+tracks/60/type = "value"
+tracks/60/path = NodePath("Spawners/Phase9_Spawner1:spawning")
 tracks/60/interp = 1
 tracks/60/loop_wrap = true
 tracks/60/imported = false
 tracks/60/enabled = true
 tracks/60/keys = {
+"times": PoolRealArray( 109.98, 110.09, 115.97 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/61/type = "method"
+tracks/61/path = NodePath("Spawners/Phase9_Spawner1/Phase9_Platforms")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/keys = {
 "times": PoolRealArray( 107.26, 107.72, 121.04 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
@@ -1772,25 +1796,25 @@ tracks/60/keys = {
 "method": "despawn"
 } ]
 }
-tracks/61/type = "value"
-tracks/61/path = NodePath("Lights:translation")
-tracks/61/interp = 1
-tracks/61/loop_wrap = true
-tracks/61/imported = false
-tracks/61/enabled = true
-tracks/61/keys = {
-"times": PoolRealArray( 107.08, 107.72, 108.02 ),
-"transitions": PoolRealArray( 0, 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 80, 0 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/62/type = "method"
-tracks/62/path = NodePath("Spawners/Phase9_Spawner2")
+tracks/62/type = "value"
+tracks/62/path = NodePath("Lights:translation")
 tracks/62/interp = 1
 tracks/62/loop_wrap = true
 tracks/62/imported = false
 tracks/62/enabled = true
 tracks/62/keys = {
+"times": PoolRealArray( 107.08, 107.72, 108.02 ),
+"transitions": PoolRealArray( 0, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 80, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/63/type = "method"
+tracks/63/path = NodePath("Spawners/Phase9_Spawner2")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/keys = {
 "times": PoolRealArray( 118.26 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -1798,49 +1822,49 @@ tracks/62/keys = {
 "method": "spawn_ring"
 } ]
 }
-tracks/63/type = "value"
-tracks/63/path = NodePath("Spawners/Phase10_Spawner1:spawning")
-tracks/63/interp = 1
-tracks/63/loop_wrap = true
-tracks/63/imported = false
-tracks/63/enabled = true
-tracks/63/keys = {
-"times": PoolRealArray( 119.7, 119.76, 122.04 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
 tracks/64/type = "value"
-tracks/64/path = NodePath("Spawners/Phase10_Spawner1:shrink_amnt")
+tracks/64/path = NodePath("Spawners/Phase10_Spawner1:spawning")
 tracks/64/interp = 1
 tracks/64/loop_wrap = true
 tracks/64/imported = false
 tracks/64/enabled = true
 tracks/64/keys = {
-"times": PoolRealArray( 119.76, 122.04, 122.81, 122.87, 123.3, 123.33, 123.61, 123.64, 123.9, 124.01, 124.22 ),
-"transitions": PoolRealArray( 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1 ),
-"update": 0,
-"values": [ 0.6, 0.6, 0.0, -4.0, 0.0, 2.0, 0.0, -2.0, 0.0, 0.0, 0.8 ]
+"times": PoolRealArray( 119.7, 119.76, 122.04 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
 tracks/65/type = "value"
-tracks/65/path = NodePath("Spawners/Phase10_Spawner1:spin_speed")
+tracks/65/path = NodePath("Spawners/Phase10_Spawner1:shrink_amnt")
 tracks/65/interp = 1
 tracks/65/loop_wrap = true
 tracks/65/imported = false
 tracks/65/enabled = true
 tracks/65/keys = {
-"times": PoolRealArray( 119.76, 122.04, 122.81, 123.9, 123.92, 124.04, 124.06, 124.31 ),
-"transitions": PoolRealArray( 1, 1, 1, 0, 1, 0, 1, 1 ),
+"times": PoolRealArray( 119.76, 122.04, 122.81, 122.87, 123.3, 123.33, 123.61, 123.64, 123.9, 124.01, 124.22 ),
+"transitions": PoolRealArray( 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1 ),
 "update": 0,
-"values": [ 3.0, 2.0, 0.0, 0.0, -30.0, 0.0, 30.0, 2.0 ]
+"values": [ 0.6, 0.6, 0.0, -4.0, 0.0, 2.0, 0.0, -2.0, 0.0, 0.0, 0.8 ]
 }
 tracks/66/type = "value"
-tracks/66/path = NodePath("Spawners/Phase10_Spawner1:disabled")
+tracks/66/path = NodePath("Spawners/Phase10_Spawner1:spin_speed")
 tracks/66/interp = 1
 tracks/66/loop_wrap = true
 tracks/66/imported = false
 tracks/66/enabled = true
 tracks/66/keys = {
+"times": PoolRealArray( 119.76, 122.04, 122.81, 123.9, 123.92, 124.04, 124.06, 124.31 ),
+"transitions": PoolRealArray( 1, 1, 1, 0, 1, 0, 1, 1 ),
+"update": 0,
+"values": [ 3.0, 2.0, 0.0, 0.0, -30.0, 0.0, 30.0, 2.0 ]
+}
+tracks/67/type = "value"
+tracks/67/path = NodePath("Spawners/Phase10_Spawner1:disabled")
+tracks/67/interp = 1
+tracks/67/loop_wrap = true
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/keys = {
 "times": PoolRealArray( 122.81, 122.87, 123.33 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
@@ -1905,7 +1929,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80, 0 )
 
 [node name="Phase9_Platforms" parent="Spawners/Phase9_Spawner1" index="0"]
 platforms = 6
-seperation = Vector2( 50, 12 )
+seperation = Vector2( 25, 12 )
 
 [node name="Phase9_Spawner2" parent="Spawners" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
@@ -1913,8 +1937,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
 [node name="Phase10_Spawner1" parent="Spawners" instance=ExtResource( 31 )]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 3, 0 )
 spin_speed = 1.0
-
-[node name="Coins" type="Position3D" parent="."]
 
 [node name="Lights" type="Spatial" parent="."]
 script = ExtResource( 8 )
@@ -1955,6 +1977,8 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60, -16
 light_color = Color( 0.807843, 0.847059, 1, 1 )
 light_energy = 1.162
 omni_range = 80.0
+
+[node name="CoinSpawner" parent="." instance=ExtResource( 32 )]
 
 [node name="Skybox" parent="." instance=ExtResource( 4 )]
 mesh = SubResource( 4 )
