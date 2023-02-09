@@ -2,12 +2,12 @@ extends Spatial
 
 const SPIKEY_TUBE := preload("res://Scenes/Tutorial/Tutorial_Atk1.tscn")
 
-export var roll_speed := 30.0
+export var roll_speed := 35.0
 
 var wave_dur := 0.6
 var wave := 0
 var finishing_wave = 3
-var center_offset := 30.0
+var center_offset := 40.0
 var lifetime := 1.2
 onready var next_wave: Timer = $NextWave
 
