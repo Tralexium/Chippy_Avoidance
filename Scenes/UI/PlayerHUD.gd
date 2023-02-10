@@ -1,21 +1,26 @@
 extends Control
 
+var is_visible := true
 onready var opaque_dur: Timer = $OpaqueDur
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
-	EventBus.connect("avoidance_ended", self, "_slide_out")
+	EventBus.connect("avoidance_ended", self, "slide_out")
 	EventBus.connect("hp_changed", self, "_on_hp_changed")
 	EventBus.connect("ability_used", self, "_on_ability_used")
 
 
 func slide_in() -> void:
-	animation_player.play("slide_in")
+	if !is_visible:
+		is_visible = true
+		animation_player.play("slide_in")
 
 
-func _slide_out() -> void:
-	animation_player.play_backwards("slide_in")
+func slide_out() -> void:
+	if is_visible:
+		is_visible = false
+		animation_player.play_backwards("slide_in")
 
 
 func show_hud() -> void:
