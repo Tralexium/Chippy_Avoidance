@@ -24,6 +24,7 @@ export var friction := 20.0
 export var input_buffer_dur := 0.2
 export var coyote_time_dur := 0.2
 export var die_when_outside := false
+export var frozen := false
 export var lock_2d := false setget set_lock_2d
 export var flying := false
 export var has_djump := false
@@ -107,7 +108,7 @@ func set_lock_2d(value: bool) -> void:
 
 
 func set_hp(value: int) -> void:
-	if is_dead:
+	if is_dead or not visible:
 		return
 	Globals.run_stats["damage_taken"] = Config.player_max_hp - value
 	EventBus.emit_signal("hp_changed", value)
@@ -144,6 +145,9 @@ func die() -> void:
 	n_death_beams.emitting = true
 	n_step_sfx.stop()
 	expire_all_abilities()
+	if not Globals.in_tutorial:
+		Config.total_deaths += 1
+		Globals.run_stats["beaten"] = false
 	EventBus.emit_signal("avoidance_ended")
 	InputHelper.rumble_medium()
 	SoundManager.play_sound(SFX_FATAL_HIT)
@@ -214,7 +218,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _get_input() -> void:
-	if is_dead:
+	if is_dead or frozen:
 		return
 	var delta = get_physics_process_delta_time()
 	coyote_time = max(0.0, coyote_time - delta)
@@ -271,7 +275,7 @@ func _apply_velocity() -> void:
 	# Jump/Y Axis
 	if is_on_floor():
 		if snap_vector == Vector3.ZERO:
-			if previous_fall_spd <= -max_fall_vel+1.0:
+			if previous_fall_spd <= -max_fall_vel+5.0:
 				n_camera_pos.shake_cam_instant(1.0, 0.3)
 				audio_land.play()
 				InputHelper.rumble_medium()

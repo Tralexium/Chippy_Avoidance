@@ -4,6 +4,7 @@ signal finished_camera_rotation
 
 export var mouse_sens := 0.3
 export var zoom_len := 4.0
+export var auto_rotate_speed := 0.0
 
 var is_2d = false
 var ease_weight := 0.0
@@ -21,6 +22,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	camera.size = spring_arm.spring_length
+	if auto_rotate_speed != 0.0:
+		spring_arm.rotation.y += deg2rad(auto_rotate_speed) * delta
 	if tween != null and tween.is_running():
 		spring_arm.transform.basis = Basis(init_quat.slerp(target_quat.normalized(), ease_weight))
 	if screen_shake_amount > 0.0:

@@ -34,7 +34,7 @@ var currently_quiting := false
 
 var timeline_events := []
 var run_stats := {
-	"beaten": false,
+	"beaten": true,
 	"survival_time": 0.0,
 	"unit_survival_time": 0.0,
 	"damage_taken": 0.0,
@@ -48,7 +48,7 @@ var run_stats := {
 func reset_run_stats() -> void:
 	timeline_events.clear()
 	for stat in run_stats.keys():
-		run_stats[stat] = false if stat == "beaten" else 0.0
+		run_stats[stat] = true if stat == "beaten" else 0.0
 
 
 func _notification(what):

@@ -313,7 +313,7 @@ margin_bottom = 1058.0
 anchor_right = 0.0
 margin_left = 1918.0
 margin_right = 3838.0
-margin_bottom = 3240.0
+margin_bottom = 4320.0
 
 [node name="Credits" parent="UI/RectSize" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -324,8 +324,6 @@ margin_bottom = 1080.0
 
 [node name="ConfirmationBox" parent="UI/RectSize" instance=ExtResource( 9 )]
 visible = false
-margin_right = 1880.0
-margin_bottom = 1040.0
 text = "Are you sure you want to exit?"
 
 [node name="BloomRect" parent="UI/RectSize" instance=ExtResource( 4 )]

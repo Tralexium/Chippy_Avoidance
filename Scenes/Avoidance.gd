@@ -111,7 +111,6 @@ func _on_avoidance_ended() -> void:
 	Globals.can_pause = false
 	Globals.run_stats["survival_time"] = song_position
 	Globals.run_stats["unit_survival_time"] = unit_position
-	Config.total_deaths += 1
 	Config.total_play_time += song_position
 	var stats_ui := STATS_MENUS.instance()
 	$UI.add_child(stats_ui)
@@ -159,3 +158,8 @@ func _on_Player_all_abilities_expired() -> void:
 
 func _on_Player_ability_expired(ability) -> void:
 	ability_border_fx.disable_effect(ability)
+
+
+func _on_Timeline_animation_finished(anim_name: String) -> void:
+	if Globals.run_stats["beaten"]:
+		EventBus.emit_signal("avoidance_ended")
