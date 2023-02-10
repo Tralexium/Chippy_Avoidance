@@ -26,7 +26,7 @@ enum ABILITIES {
 	SUPER_SPEED, MEGA_JUMP, SHIELD, SLO_MO
 }
 
-var debug_mode := true
+var debug_mode := false
 var god_mode := false
 var can_pause := false
 var in_tutorial := false

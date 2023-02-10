@@ -126,6 +126,7 @@ custom_constants/margin_right = 8
 margin_right = 226.0
 margin_bottom = 40.0
 custom_constants/separation = 8
+alignment = 2
 
 [node name="Debug" type="Label" parent="DEBUG/HBoxContainer"]
 margin_top = 14.0

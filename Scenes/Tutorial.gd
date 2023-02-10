@@ -213,6 +213,7 @@ func _on_NextPhase_timeout() -> void:
 
 
 func _on_finished() -> void:
+	Globals.in_tutorial = false
 	get_tree().change_scene_to(Globals.GL_HF)
 
 

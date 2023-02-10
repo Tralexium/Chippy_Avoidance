@@ -2074,7 +2074,7 @@ tracks/72/loop_wrap = true
 tracks/72/imported = false
 tracks/72/enabled = true
 tracks/72/keys = {
-"times": PoolRealArray( 133.89, 134.68 ),
+"times": PoolRealArray( 133.88, 134.73 ),
 "transitions": PoolRealArray( 0.148651, 1 ),
 "update": 0,
 "values": [ Vector2( 1920, 1080 ), Vector2( 1000, 600 ) ]
@@ -2086,7 +2086,7 @@ tracks/73/loop_wrap = true
 tracks/73/imported = false
 tracks/73/enabled = true
 tracks/73/keys = {
-"times": PoolRealArray( 133.88, 134.91 ),
+"times": PoolRealArray( 133.88, 135.33 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -2310,8 +2310,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ColorLogo" type="TextureRect" parent="UI/GameLogoEnding"]
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_left = 460.0
+margin_top = 240.0
+margin_right = 1460.0
+margin_bottom = 840.0
 rect_min_size = Vector2( 1920, 1080 )
 texture = ExtResource( 36 )
 expand = true

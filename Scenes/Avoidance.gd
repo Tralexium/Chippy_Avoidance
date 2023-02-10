@@ -132,7 +132,7 @@ func spawn_fade_transition() -> void:
 	var fade_inst := FADE_TRANSITION.instance()
 	fade_inst.delete_on_fade = true
 	fade_inst.fade_dur = 1.4
-	$UI.add_child(fade_inst)
+	$FX.add_child(fade_inst)
 
 
 func _on_avoidance_restart() -> void:
@@ -163,3 +163,4 @@ func _on_Player_ability_expired(ability) -> void:
 func _on_Timeline_animation_finished(anim_name: String) -> void:
 	if Globals.run_stats["beaten"]:
 		EventBus.emit_signal("avoidance_ended")
+		Config.game_beaten = true

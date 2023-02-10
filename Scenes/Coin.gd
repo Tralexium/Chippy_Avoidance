@@ -31,7 +31,8 @@ func _process(delta: float) -> void:
 
 
 func shrink() -> void:
-	animation_player.play("shrink")
+	if !collected:
+		animation_player.play("shrink")
 
 
 func _on_Hitbox_body_entered(body: Node) -> void:

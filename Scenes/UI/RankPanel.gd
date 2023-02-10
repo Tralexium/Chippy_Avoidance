@@ -24,7 +24,7 @@ func _ready() -> void:
 	coin_bonus_count.text = str(round(coin_score))
 	damage_penalty_count.text = "-"+str(round(damage_penalty))
 	ability_penalty_count.text = "-"+str(round(ability_penalty))
-	target_score = max(time_score-damage_penalty-ability_penalty, 0.0)
+	target_score = max(time_score+coin_score-damage_penalty-ability_penalty, 0.0)
 	if Globals.run_stats["beaten"]:
 		no_rank_icon.texture = NO_RANK_TEX
 	if target_score > Config.previous_best:

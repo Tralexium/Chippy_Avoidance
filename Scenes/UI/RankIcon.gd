@@ -37,7 +37,7 @@ onready var backdrop_light: TextureRect = $BackdropLight
 
 func _ready() -> void:
 	if automatic:
-		if Config.game_beaten or true:
+		if Config.game_beaten:
 			appear(Config.previous_best)
 			backdrop_light.modulate.a = 0.0
 		else:

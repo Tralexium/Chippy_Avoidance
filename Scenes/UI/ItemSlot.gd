@@ -62,6 +62,7 @@ func set_disabled(value: bool) -> void:
 			if tween.is_running():
 				tween.kill()
 		circle_reload.value = 0.0 if (ability_count > 0 or Config.infinite_items) and !disabled else 100.0
+		button_icon.visible = true if circle_reload.value == 0.0 else false
 		_apply_color()
 
 
