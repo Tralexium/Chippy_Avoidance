@@ -191,7 +191,7 @@ func get_keyboard_icon(action: String) -> StreamTexture:
 	var texture := StreamTexture.new()
 	var key := get_action_key(action)
 	if key != "":
-		texture.load("res://Assets/Controller & Key Prompts/Keyboard/" + key + "_Key_Light.png")
+		texture = load("res://Assets/Controller & Key Prompts/Keyboard/" + key + "_Key_Light.png")
 	return texture
 
 
