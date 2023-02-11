@@ -100,15 +100,11 @@ func _flash_effect() -> void:
 
 
 func _update_button_icon(has_gamepad: bool = false) -> void:
-	var icon_texture : StreamTexture
 	var current_device := InputHelper.guess_device_name()
 	if not has_gamepad or current_device == InputHelper.DEVICE_KEYBOARD:
-		var key := InputHelper.get_action_key(action)
-		icon_texture = load("res://Assets/Controller & Key Prompts/Keyboard/" + key + "_Key_Light.png")
-	elif current_device == InputHelper.DEVICE_PLAYSTATION_CONTROLLER:
-		var button := InputHelper.get_action_button(action)
-		icon_texture = InputHelper.SONY_GAMEPAD_TEXTURES[button]
-	button_icon.texture = icon_texture
+		button_icon.texture = InputHelper.get_keyboard_icon(action)
+	else:
+		button_icon.texture = InputHelper.get_gamepad_icon(action)
 
 
 func _on_CircleReload_value_changed(value: float) -> void:

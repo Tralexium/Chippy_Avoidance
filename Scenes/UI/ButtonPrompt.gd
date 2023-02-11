@@ -7,15 +7,11 @@ func _ready() -> void:
 	scale = Vector3.ZERO
 	var tween := create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "scale", Vector3.ONE, 0.7)
-	var icon_texture : StreamTexture
 	var current_device := InputHelper.guess_device_name()
 	if current_device == InputHelper.DEVICE_KEYBOARD:
-		var key := InputHelper.get_action_key(action_name)
-		icon_texture = load("res://Assets/Controller & Key Prompts/Keyboard/" + key + "_Key_Light.png")
+		texture = InputHelper.get_keyboard_icon(action_name)
 	else:
-		var button := InputHelper.get_action_button(action_name)
-		icon_texture = InputHelper.SONY_GAMEPAD_TEXTURES[button]
-	texture = icon_texture
+		texture = InputHelper.get_gamepad_icon(action_name)
 
 
 func _process(delta: float) -> void:

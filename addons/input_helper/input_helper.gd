@@ -29,6 +29,25 @@ const SONY_GAMEPAD_TEXTURES = {
 	JOY_SELECT: preload("res://Assets/Controller & Key Prompts/PS4/PS4_Share.png"),
 }
 
+const XBOX_GAMEPAD_TEXTURES = {
+	JOY_XBOX_B: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_B.png"),
+	JOY_XBOX_A: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_A.png"),
+	JOY_XBOX_X: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_X.png"),
+	JOY_XBOX_Y: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Y.png"),
+	JOY_DPAD_DOWN: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Dpad_Down.png"),
+	JOY_DPAD_LEFT: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Dpad_Left.png"),
+	JOY_DPAD_RIGHT: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Dpad_Right.png"),
+	JOY_DPAD_UP: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Dpad_Up.png"),
+	JOY_L: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_LB.png"),
+	JOY_L2: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_LT.png"),
+	JOY_L3: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Left_Stick_Click.png"),
+	JOY_R: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_RB.png"),
+	JOY_R2: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_RT.png"),
+	JOY_R3: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Right_Stick_Click.png"),
+	JOY_START: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Menu.png"),
+	JOY_SELECT: preload("res://Assets/Controller & Key Prompts/Xbox One/XboxOne_Windows.png"),
+}
+
 var deadzone: float = 0.2
 
 var device: String = DEVICE_GENERIC
@@ -165,6 +184,27 @@ func get_action_button(action: String) -> int:
 		if event is InputEventJoypadButton:
 			return event.button_index
 	return -1
+
+
+func get_keyboard_icon(action: String) -> StreamTexture:
+	# Get the first button input
+	var texture := StreamTexture.new()
+	var key := get_action_key(action)
+	if key != "":
+		texture.load("res://Assets/Controller & Key Prompts/Keyboard/" + key + "_Key_Light.png")
+	return texture
+
+
+func get_gamepad_icon(action: String) -> StreamTexture:
+	# Get the first button input
+	var texture := StreamTexture.new()
+	var button := get_action_button(action)
+	if button != -1:
+		if device == DEVICE_PLAYSTATION_CONTROLLER:
+			texture = SONY_GAMEPAD_TEXTURES[button]
+		else:
+			texture = XBOX_GAMEPAD_TEXTURES[button]
+	return texture
 
 
 func set_action_button(target_action: String, button: int, swap_if_taken: bool = true) -> int:
