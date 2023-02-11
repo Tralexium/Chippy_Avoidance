@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Ephmr Avoidance"
+config/name="Chippy"
 run/main_scene="res://Scenes/Main.tscn"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )

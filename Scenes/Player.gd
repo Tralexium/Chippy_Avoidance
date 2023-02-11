@@ -115,7 +115,7 @@ func set_hp(value: int) -> void:
 	if value < hp:
 		hit_effects(value)
 	hp = value
-	if hp <= 0 and !is_dead and !Config.infinite_hp:
+	if hp <= 0 and !is_dead:
 		die()
 
 

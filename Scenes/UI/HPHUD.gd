@@ -4,6 +4,8 @@ const BAR := preload("res://Scenes/UI/HPBar.tscn")
 const DEAD_ICON := preload("res://Assets/Blender Renders/player_head_dead_b&w_small.png")
 const LIVE_ICON := preload("res://Assets/Blender Renders/player_head_small.png")
 
+export var y_slide := 0.0
+
 var shake_amnt := 0.0
 var initial_pos := Vector2.ZERO
 var hp_bars := 0
@@ -12,6 +14,10 @@ onready var health_bars: HBoxContainer = $HealthBars
 onready var player_head_icon: TextureRect = $PlayerHeadIcon
 onready var black_bar: Panel = $BlackBar
 onready var blood_part: Particles2D = $BloodPart
+
+
+#func _init() -> void:
+#	rect_position.y += 64
 
 
 func _ready() -> void:
@@ -34,6 +40,7 @@ func set_bars(bars: int) -> void:
 
 
 func _process(delta: float) -> void:
+#	rect_position.y = 1080 + y_slide
 	if shake_amnt > 0.0:
 		rect_position.x = initial_pos.x + rand_range(-shake_amnt, shake_amnt)
 		rect_position.y = initial_pos.y + rand_range(-shake_amnt, shake_amnt)

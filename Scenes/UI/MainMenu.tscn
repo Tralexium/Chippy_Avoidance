@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/UI/StartingMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/UI/Options.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/game_logo_hollow.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/UI/TimeAndDeath.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/UI/RankIcon.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/UI/RectSize.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=6]
 resource_name = "Intro"
@@ -52,7 +53,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -1000, 0 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("UI/RectSize/Options:rect_position")
@@ -64,7 +65,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1918, 0 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Camera:translation")
@@ -101,6 +102,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( -13.069, 10, 2.724 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("UI/RectSize/Options:rect_size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1080 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("UI/RectSize/StartingMenu:rect_size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 1080 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -286,34 +311,39 @@ far = 1000.0
 [node name="RectSize" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 13 )
 
 [node name="StartingMenu" parent="UI/RectSize" instance=ExtResource( 1 )]
 anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -1000.0
-margin_right = -1000.0
+margin_right = 1920.0
+rect_min_size = Vector2( 1920, 1080 )
 
 [node name="RankIcon" parent="UI/RectSize/StartingMenu" instance=ExtResource( 12 )]
-margin_left = 30.0
-margin_top = 817.0
-margin_right = 180.0
-margin_bottom = 967.0
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_left = 34.0
+margin_top = -265.0
+margin_right = 184.0
+margin_bottom = -115.0
 rect_min_size = Vector2( 150, 150 )
 rect_pivot_offset = Vector2( 75, 75 )
 mute = true
 automatic = true
 
 [node name="TimeAndDeath" parent="UI/RectSize/StartingMenu" instance=ExtResource( 11 )]
-margin_left = 24.0
-margin_top = 986.0
-margin_right = 192.0
-margin_bottom = 1058.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 27.0
+margin_top = -95.0
+margin_right = 195.0
+margin_bottom = -23.0
 
 [node name="Options" parent="UI/RectSize" instance=ExtResource( 2 )]
-anchor_right = 0.0
-margin_left = 1918.0
-margin_right = 3838.0
-margin_bottom = 6480.0
+anchor_left = 1.0
+margin_left = -1920.0
+rect_min_size = Vector2( 1920, 1080 )
 
 [node name="Credits" parent="UI/RectSize" instance=ExtResource( 5 )]
 anchor_right = 0.0
@@ -321,6 +351,7 @@ anchor_bottom = 0.0
 margin_left = -1921.0
 margin_right = -1.0
 margin_bottom = 1080.0
+rect_min_size = Vector2( 1920, 1080 )
 
 [node name="ConfirmationBox" parent="UI/RectSize" instance=ExtResource( 9 )]
 visible = false

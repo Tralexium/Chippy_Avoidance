@@ -11,19 +11,18 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="ConfirmationBox" type="CenterContainer"]
+[node name="ConfirmationBox" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0235294, 0, 0.0627451, 0.666667 )
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
-script = ExtResource( 2 )
 
-[node name="BG" type="ColorRect" parent="."]
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_min_size = Vector2( 1920, 1080 )
-color = Color( 0.0235294, 0, 0.0627451, 0.666667 )
-
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="CenterContainer"]
 margin_left = 610.0
 margin_top = 315.0
 margin_right = 1310.0
@@ -31,7 +30,7 @@ margin_bottom = 765.0
 rect_min_size = Vector2( 700, 450 )
 custom_styles/panel = SubResource( 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 64
@@ -42,13 +41,13 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Contents" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="Contents" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer"]
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 636.0
 margin_bottom = 386.0
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/Contents"]
+[node name="Label" type="Label" parent="CenterContainer/Panel/MarginContainer/Contents"]
 margin_right = 572.0
 margin_bottom = 258.0
 size_flags_vertical = 3
@@ -56,13 +55,13 @@ text = "Does text go here?"
 align = 1
 valign = 1
 
-[node name="Buttons" type="HBoxContainer" parent="Panel/MarginContainer/Contents"]
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/Panel/MarginContainer/Contents"]
 margin_top = 262.0
 margin_right = 572.0
 margin_bottom = 322.0
 custom_constants/separation = 133
 
-[node name="Yes" type="Button" parent="Panel/MarginContainer/Contents/Buttons"]
+[node name="Yes" type="Button" parent="CenterContainer/Panel/MarginContainer/Contents/Buttons"]
 margin_right = 180.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 180, 60 )
@@ -72,7 +71,7 @@ focus_neighbour_right = NodePath("../No")
 focus_neighbour_bottom = NodePath(".")
 text = "YES"
 
-[node name="No" type="Button" parent="Panel/MarginContainer/Contents/Buttons"]
+[node name="No" type="Button" parent="CenterContainer/Panel/MarginContainer/Contents/Buttons"]
 margin_left = 313.0
 margin_right = 493.0
 margin_bottom = 60.0
@@ -83,5 +82,5 @@ focus_neighbour_right = NodePath("../Yes")
 focus_neighbour_bottom = NodePath(".")
 text = "NO"
 
-[connection signal="pressed" from="Panel/MarginContainer/Contents/Buttons/Yes" to="." method="_on_Yes_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/Contents/Buttons/No" to="." method="_on_No_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/Contents/Buttons/Yes" to="." method="_on_Yes_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/Contents/Buttons/No" to="." method="_on_No_pressed"]

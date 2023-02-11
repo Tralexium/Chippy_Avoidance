@@ -79,10 +79,12 @@ far = 450.0
 
 [node name="2D" type="CanvasLayer" parent="."]
 
-[node name="GodotLogo" type="Sprite" parent="2D"]
-position = Vector2( 960, 544 )
-scale = Vector2( 0.811594, 0.811594 )
+[node name="GodotLogo" type="TextureRect" parent="2D"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 4 )
+expand = true
+stretch_mode = 4
 
 [node name="GamepadDisclaimer" parent="2D" instance=ExtResource( 5 )]
 visible = false

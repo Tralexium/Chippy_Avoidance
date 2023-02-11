@@ -2310,10 +2310,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ColorLogo" type="TextureRect" parent="UI/GameLogoEnding"]
-margin_left = 460.0
-margin_top = 240.0
-margin_right = 1460.0
-margin_bottom = 840.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 rect_min_size = Vector2( 1920, 1080 )
 texture = ExtResource( 36 )
 expand = true

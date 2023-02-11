@@ -6,11 +6,12 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var starting_menu: Control = $UI/RectSize/StartingMenu
 onready var options: Control = $UI/RectSize/Options
 onready var credits: Control = $UI/RectSize/Credits
-onready var confirmation_box: CenterContainer = $UI/RectSize/ConfirmationBox
+onready var confirmation_box: ColorRect = $UI/RectSize/ConfirmationBox
 
 
 func _ready() -> void:
 	options.fetch_and_set_general_setting()
+	options.rect_position.x = 5000
 	Globals.can_pause = false
 	SoundManager.play_music(Globals.MAIN_MENU_MUSIC)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

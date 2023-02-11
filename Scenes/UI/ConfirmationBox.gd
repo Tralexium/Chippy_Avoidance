@@ -1,10 +1,10 @@
-extends CenterContainer
+extends ColorRect
 
 signal answered(answer)
 
 export var text := ""
-onready var yes_button: Button = $Panel/MarginContainer/Contents/Buttons/Yes
-onready var label: Label = $Panel/MarginContainer/Contents/Label
+onready var yes_button: Button = $CenterContainer/Panel/MarginContainer/Contents/Buttons/Yes
+onready var label: Label = $CenterContainer/Panel/MarginContainer/Contents/Label
 
 
 func _ready() -> void:

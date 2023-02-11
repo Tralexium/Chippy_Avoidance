@@ -41,14 +41,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !currently_restarting:
 		audio_stream_player.pitch_scale = Engine.time_scale
+	if Input.is_action_just_pressed("quick restart"):
+		_on_avoidance_restart()
 	if !Globals.debug_mode:
 		return
 	if Input.is_action_just_pressed("dev_skip_phase_up"):
 		fast_forward_phase(1)
 	if Input.is_action_just_pressed("dev_skip_phase_down"):
 		fast_forward_phase(-1)
-	if Input.is_action_just_pressed("quick restart"):
-		_on_avoidance_restart()
 
 
 func fast_forward_phase(skip_phases: int) -> void:

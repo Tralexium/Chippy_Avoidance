@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 		var anim_length := animation_player.get_animation("fade_in").length
 		animation_player.advance(anim_length)
 		yield(get_tree(), "idle_frame")
-		stats_header.rect_size.x = Config.resolution.x
+		stats_header.rect_size.x = 1920.0
 	if !animation_player.is_playing():
 		var is_focused := false
 		for button in buttons.get_children():
@@ -30,7 +30,7 @@ func _input(event: InputEvent) -> void:
 
 func expand_header() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(stats_header, "rect_min_size:x", Config.resolution.x, 0.3)
+	tween.tween_property(stats_header, "rect_min_size:x", 1920.0, 0.3)
 	if new_highscore:
 		stats_header.color = Color("f8d82c")
 		stats_header.get_child(0).text = "NEW BEST!"

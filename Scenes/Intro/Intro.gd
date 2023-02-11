@@ -9,7 +9,7 @@ onready var square_count := squares.get_child_count()
 onready var reveal_gap: Timer = $RevealGap
 onready var fade_rect: CanvasLayer = $FadeRect
 onready var made_by: Sprite3D = $MadeBy
-onready var godot_logo: Sprite = $"2D/GodotLogo"
+onready var godot_logo: TextureRect = $"2D/GodotLogo"
 onready var gamepad_disclaimer: VBoxContainer = $"2D/GamepadDisclaimer"
 
 
