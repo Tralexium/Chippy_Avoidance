@@ -92,6 +92,8 @@ func _on_Retry_pressed() -> void:
 
 func _on_Exit_pressed() -> void:
 	if !in_transition:
+		if Globals.in_tutorial:
+			Config.infinite_items = false
 		spawn_transition(Globals.MAIN_MENU)
 
 
@@ -99,6 +101,6 @@ func _on_Tutorial_pressed() -> void:
 	if Globals.in_tutorial:
 		spawn_transition(Globals.AVOIDANCE)
 		Config.infinite_items = false
-		Config.save_data()
+		Globals.in_tutorial = false
 	else:
 		spawn_transition(Globals.TUTORIAL)

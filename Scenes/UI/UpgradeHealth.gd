@@ -34,6 +34,7 @@ func _max_hp() -> void:
 func _on_Upgrade_pressed() -> void:
 	if active_bars == Config.MAX_HP or Config.player_points < Config.hp_costs[active_bars]:
 		SoundManager.play_ui_sound(Globals.UI_ERROR)
+		InputHelper.rumble_small()
 		return
 	active_bars += 1
 	Config.player_max_hp = active_bars

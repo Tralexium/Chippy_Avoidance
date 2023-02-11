@@ -38,9 +38,9 @@ var input_vector := Vector3.ZERO
 var velocity := Vector3.ZERO
 var snap_vector := Vector3.DOWN
 var is_dead := false
+var large_fall := false
 var coyote_time := 0.0
 var input_buffer_time := 0.0
-var previous_fall_spd := 0.0
 var slomo_compensation := 1.0
 var buffered_input := ""
 var abilities_in_use := []
@@ -68,6 +68,7 @@ onready var n_djump_part: Particles = $Mesh/DJumpPart
 onready var n_death_beams: Particles = $Mesh/DeathBeams
 onready var n_death_sparkles: Particles = $Mesh/DeathSparkles
 onready var n_step_sfx: Timer = $StepSFX
+onready var n_large_fall_timer: Timer = $LargeFall
 # SFX
 onready var audio_jump: AudioStreamPlayer3D = $StereoSFX/Jump
 onready var audio_djump: AudioStreamPlayer3D = $StereoSFX/DJump
@@ -115,7 +116,7 @@ func set_hp(value: int) -> void:
 	if value < hp:
 		hit_effects(value)
 	hp = value
-	if hp <= 0 and !is_dead:
+	if hp <= 0 and !is_dead and (!Config.infinite_hp or Globals.in_tutorial):
 		die()
 
 
@@ -130,11 +131,12 @@ func hit_effects(new_hp: int) -> void:
 	var hitmarker := HITMARKER.instance()
 	hitmarker.translation = $Mesh/MegaJumpPart.translation
 	hitmarker.shrink_dur = 0.1 if new_hp > 0 else 0.05
-	if new_hp > 0:
+	if new_hp > 0 or Config.infinite_hp:
 		n_camera_pos.shake_cam_instant(1.0, 0.2)
 		InputHelper.rumble_medium()
-		SoundManager.play_sound(SFX_HIT)
-	if !abilities_in_use.has(Globals.ABILITIES.SLO_MO) and new_hp > 0:
+		if !is_dead:
+			SoundManager.play_sound(SFX_HIT)
+	if !abilities_in_use.has(Globals.ABILITIES.SLO_MO) and (new_hp > 0 or Config.infinite_hp):
 		Util.time_slowdown(0.2, 0.2)
 	add_child(hitmarker)
 
@@ -263,9 +265,6 @@ func _apply_velocity() -> void:
 	slomo_compensation = min(2.0, 1.0 / Engine.time_scale)
 	var delta := get_physics_process_delta_time() * slomo_compensation
 	
-	
-	if velocity.y < 0.0:
-		previous_fall_spd = velocity.y
 	# The lerp fixes a small inconsistency when in slomotion
 	velocity.y = 0.0 if !is_dead and is_on_floor() else max(-max_fall_vel, velocity.y - (gravity*lerp(slomo_compensation, 1.0, 0.1))*delta)
 	
@@ -275,7 +274,7 @@ func _apply_velocity() -> void:
 	# Jump/Y Axis
 	if is_on_floor():
 		if snap_vector == Vector3.ZERO:
-			if previous_fall_spd <= -max_fall_vel+5.0:
+			if large_fall:
 				n_camera_pos.shake_cam_instant(1.0, 0.3)
 				audio_land.play()
 				InputHelper.rumble_medium()
@@ -283,7 +282,11 @@ func _apply_velocity() -> void:
 				audio_land_light.play()
 		n_shadow_guide.hidden = true
 		snap_vector = Vector3.DOWN
+		large_fall = false
+		n_large_fall_timer.stop()
 	if input_vector.y > 0 or flying:
+		if n_large_fall_timer.is_stopped():
+			n_large_fall_timer.start()
 		n_shadow_guide.hidden = false
 		var _jump_vel := mega_jump_vel if abilities_in_use.has(Globals.ABILITIES.MEGA_JUMP) else jump_vel
 		velocity.y = _jump_vel if has_djump else djump_vel
@@ -382,6 +385,8 @@ func _damage_inflicted(node: Node) -> void:
 			InputHelper.rumble_medium()
 		if node.is_in_group("insta_killer"):
 			self.hp = 0
+			if !is_dead:
+				die()
 		elif !iframe_immunity:
 			self.hp -= 1
 
@@ -455,3 +460,9 @@ func _on_VisibilityNotifier_screen_exited() -> void:
 		shielded = false
 		_remove_ability_effects(Globals.ABILITIES.SHIELD)
 	self.hp = 0
+	if !is_dead:
+		die()
+
+
+func _on_LargeFall_timeout() -> void:
+	large_fall = true

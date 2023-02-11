@@ -60,6 +60,7 @@ func _max_abilities() -> void:
 func _on_Buy_pressed() -> void:
 	if active_dots == Config.MAX_ABILITIES or Config.player_points < Config.ability_costs[active_dots]:
 		SoundManager.play_ui_sound(Globals.UI_ERROR)
+		InputHelper.rumble_small()
 		return
 	active_dots += 1
 	Config.player_current_abilities[ability] = active_dots

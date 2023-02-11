@@ -1877,11 +1877,18 @@ layer = 2
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
 [node name="HPHUD" parent="UI/PlayerHUD" index="1"]
-margin_bottom = 1208.0
+margin_top = 1144.0
+margin_bottom = 2252.0
 
 [node name="Items" parent="UI/PlayerHUD" index="2"]
 margin_left = 1552.0
+margin_top = 1144.0
 margin_right = 1856.0
+margin_bottom = 1208.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": true
+}
 
 [node name="SpeedItem" parent="UI/PlayerHUD/Items" index="0"]
 disabled = true

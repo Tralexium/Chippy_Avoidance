@@ -1858,10 +1858,10 @@ tracks/55/loop_wrap = true
 tracks/55/imported = false
 tracks/55/enabled = true
 tracks/55/keys = {
-"times": PoolRealArray( 0, 45.01, 48.1, 107.77, 117.99 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 45.01, 48.1, 64.44, 64.49, 83.97, 107.77, 117.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ false, true, false, true, false ]
+"values": [ false, true, false, false, true, false, true, false ]
 }
 tracks/56/type = "value"
 tracks/56/path = NodePath("CamPath:curve")
