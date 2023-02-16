@@ -108,7 +108,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("PlasmaBottom:emitting")
+tracks/6/path = NodePath("BottomAnchor/PlasmaBottom:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -184,7 +184,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("PlasmaBottom:emitting")
+tracks/4/path = NodePath("BottomAnchor/PlasmaBottom:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -288,7 +288,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("PlasmaBottom:emitting")
+tracks/3/path = NodePath("BottomAnchor/PlasmaBottom:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -394,8 +394,17 @@ mouse_filter = 2
 
 [node name="PlasmaTop" parent="." instance=ExtResource( 4 )]
 
-[node name="PlasmaBottom" parent="." instance=ExtResource( 4 )]
-position = Vector2( 979, 1192 )
+[node name="BottomAnchor" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+
+[node name="PlasmaBottom" parent="BottomAnchor" instance=ExtResource( 4 )]
+position = Vector2( -15, 152 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )

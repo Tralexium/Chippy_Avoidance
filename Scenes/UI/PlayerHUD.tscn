@@ -36,6 +36,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id=5]
+resource_name = "RESET"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("HPHUD:rect_position")
@@ -360,7 +361,7 @@ anchor_bottom = 1.0
 margin_left = 64.0
 margin_top = 100.0
 margin_right = 384.0
-margin_bottom = 13060.0
+margin_bottom = 26020.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -417,7 +418,7 @@ anchor_bottom = 1.0
 margin_left = -352.0
 margin_top = 100.0
 margin_right = -48.0
-margin_bottom = 11089.6
+margin_bottom = 27289.6
 custom_constants/separation = 16
 script = ExtResource( 9 )
 __meta__ = {

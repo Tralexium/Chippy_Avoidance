@@ -1,6 +1,7 @@
 extends Control
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var plasma_bottom: Particles2D = $BottomAnchor/PlasmaBottom
 
 
 func enable_effect(ability_num: int) -> void:
@@ -20,7 +21,7 @@ func disable_effect(ability_num: int) -> void:
 		Globals.ABILITIES.SUPER_SPEED:
 			$SpeedLines.emitting = false
 		Globals.ABILITIES.SHIELD:
-			$PlasmaBottom.emitting = false
+			plasma_bottom.emitting = false
 			$PlasmaTop.emitting = false
 
 

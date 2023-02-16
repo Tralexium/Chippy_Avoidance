@@ -142,6 +142,8 @@ func hit_effects(new_hp: int) -> void:
 
 
 func die() -> void:
+	if is_dead or not visible:
+		return
 	# Do death fx here
 	is_dead = true
 	n_death_beams.emitting = true
@@ -160,8 +162,9 @@ func die() -> void:
 	n_mesh.rotate_y(PI)
 	n_collision_shape.set_deferred("disabled", true)
 	n_armature_animations.play("Fall")
-	Util.time_slowdown(0.05, 0.6)
-	yield(get_tree().create_timer(0.6 * 0.05), "timeout")
+	var slomo_dur := 0.8 if Engine.get_frames_per_second() <= 65 else 0.6
+	Util.time_slowdown(0.05, slomo_dur)
+	yield(get_tree().create_timer(slomo_dur * 0.05), "timeout")
 	velocity = Vector3(80.0, 60.0, 0.0).rotated(Vector3.UP, randf() * TAU)
 	if lock_2d:
 		velocity.z = 0.0

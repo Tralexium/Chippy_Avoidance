@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/KillPlane.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Lights.gd" type="Script" id=2]
@@ -1607,109 +1607,6 @@ tracks/1/keys = {
 "values": [ Vector3( 0, -2, 0 ), Vector3( 50, -2, 0 ) ]
 }
 
-[sub_resource type="Animation" id=16]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("HPHUD:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 64, 1144 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Items:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1552, 1144 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SongProgressBar:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 544, -52 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("PerspectiveIcon:rect_position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -100, 26 ) ]
-}
-
-[sub_resource type="Animation" id=17]
-resource_name = "slide_in"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("HPHUD:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( 64, 1144 ), Vector2( 64, 984 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Items:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( 1568, 1151 ), Vector2( 1568, 984 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SongProgressBar:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( 544, -52 ), Vector2( 544, 22 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("PerspectiveIcon:rect_position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( -100, 26 ), Vector2( 32, 26 ) ]
-}
-
 [node name="Tutorial" type="Spatial"]
 script = ExtResource( 6 )
 
@@ -1877,14 +1774,10 @@ layer = 2
 [node name="PlayerHUD" parent="UI" instance=ExtResource( 8 )]
 
 [node name="HPHUD" parent="UI/PlayerHUD" index="1"]
-margin_top = 1144.0
-margin_bottom = 2252.0
+margin_bottom = 5384.0
 
 [node name="Items" parent="UI/PlayerHUD" index="2"]
-margin_left = 1552.0
-margin_top = 1144.0
-margin_right = 1856.0
-margin_bottom = 1208.0
+margin_bottom = 5564.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": true
@@ -1901,10 +1794,6 @@ disabled = true
 
 [node name="SlomoItem" parent="UI/PlayerHUD/Items" index="3"]
 disabled = true
-
-[node name="AnimationPlayer" parent="UI/PlayerHUD" index="4"]
-anims/RESET = SubResource( 16 )
-anims/slide_in = SubResource( 17 )
 
 [node name="InfoBox" parent="UI" instance=ExtResource( 9 )]
 
