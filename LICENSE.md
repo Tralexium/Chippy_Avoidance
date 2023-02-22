@@ -13,7 +13,9 @@ furnished to do so, subject to the following conditions:
 copies or substantial portions of the Software.
 
 - None of the featured songs will be present or redistributed, as the rights belong to 
-their respective owners.
+their respective owners. (not present in the master branch)
+
+- The slomo/slowdown ability sound must not be used as it belongs to Artoon. (not present in the master branch)
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
