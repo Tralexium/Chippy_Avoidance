@@ -10,3 +10,5 @@ export_presets.cfg
 .mono/
 data_*/
 Audio/Music/
+Audio/SFX/ability_slowdown.wav
+Audio/SFX/ability_slowdown.wav.import
