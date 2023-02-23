@@ -9,12 +9,8 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-- The above copyright notice and this permission notice shall be included in all
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-- Audio files that are present in the Itch.io version of this game shall NOT be used,
-modified, or redistributed. As such, these files have been omitted from the 
-main branch.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
